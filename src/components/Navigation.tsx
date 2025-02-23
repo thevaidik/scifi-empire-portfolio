@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Star, Rocket, Tool, BookOpen } from "lucide-react";
+import { Star, Rocket, Wrench, BookOpen } from "lucide-react";
 
 const Navigation = () => {
   const [activeSection, setActiveSection] = useState("home");
@@ -19,7 +19,7 @@ const Navigation = () => {
     { id: "home", Icon: Star, label: "Home" },
     { id: "projects", Icon: Rocket, label: "Projects" },
     { id: "blog", Icon: BookOpen, label: "Blog" },
-    { id: "tools", Icon: Tool, label: "Tools" },
+    { id: "tools", Icon: Wrench, label: "Tools" },
   ];
 
   return (

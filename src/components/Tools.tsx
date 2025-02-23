@@ -1,6 +1,6 @@
 
 import { motion } from "framer-motion";
-import { Tool } from "lucide-react";
+import { Wrench } from "lucide-react";
 
 const toolsData = [
   {
@@ -48,7 +48,7 @@ const Tools = () => {
             >
               <div className="p-6 rounded-xl bg-scifi-dark/50 border border-scifi-light/10 backdrop-blur-lg hover:border-scifi-primary/50 transition-all duration-300">
                 <div className="w-12 h-12 rounded-full bg-scifi-primary/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <Tool className="w-6 h-6 text-scifi-primary" />
+                  <Wrench className="w-6 h-6 text-scifi-primary" />
                 </div>
                 
                 <h3 className="text-xl font-semibold text-white mb-2">{tool.name}</h3>
