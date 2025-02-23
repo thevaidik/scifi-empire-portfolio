@@ -1,6 +1,6 @@
 
 import { motion } from "framer-motion";
-import { Code, Brain, Cpu } from "lucide-react";
+import { Code, Brain, Cpu, Plane, Evolution } from "lucide-react";
 
 const interestData = [
   {
@@ -17,6 +17,16 @@ const interestData = [
     title: "Robotics with Swift Embedded",
     description: "Building intelligent robotic systems using Swift for embedded systems",
     icon: Cpu,
+  },
+  {
+    title: "Aviation",
+    description: "Passion for flight and aerospace technology",
+    icon: Plane,
+  },
+  {
+    title: "Human Evolution",
+    description: "Understanding our past to shape our future",
+    icon: Brain,
   },
 ];
 
