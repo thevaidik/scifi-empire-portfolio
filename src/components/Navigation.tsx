@@ -1,10 +1,10 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Star, Rocket, Wrench, BookOpen } from "lucide-react";
+import { Star, Rocket, Wrench, BookOpen, Building2 } from "lucide-react";
 
 const Navigation = () => {
-  const [activeSection, setActiveSection] = useState("home");
+  const [activeSection, setActiveSection] = useState("about");
   const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
@@ -16,9 +16,9 @@ const Navigation = () => {
   }, []);
 
   const navItems = [
-    { id: "home", Icon: Star, label: "Home" },
+    { id: "about", Icon: Star, label: "About" },
     { id: "projects", Icon: Rocket, label: "Projects" },
-    { id: "blog", Icon: BookOpen, label: "Blog" },
+    { id: "companies", Icon: Building2, label: "Companies" },
     { id: "tools", Icon: Wrench, label: "Tools" },
   ];
 

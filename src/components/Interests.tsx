@@ -1,6 +1,6 @@
 
 import { motion } from "framer-motion";
-import { Code, Brain, Cpu, Plane, Evolution } from "lucide-react";
+import { Code, Brain, Cpu, Plane } from "lucide-react";
 
 const interestData = [
   {
