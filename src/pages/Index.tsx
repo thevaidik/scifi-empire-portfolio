@@ -8,6 +8,7 @@ import Projects from "@/components/Projects";
 import Blog from "@/components/Blog";
 import SocialLinks from "@/components/SocialLinks";
 import Companies from "@/components/Companies";
+import EarthBackground from "@/components/EarthBackground";
 import { motion } from "framer-motion";
 
 const Index = () => {
@@ -24,8 +25,9 @@ const Index = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="bg-scifi-dark text-white overflow-hidden"
+      className="bg-transparent text-white overflow-hidden relative"
     >
+      <EarthBackground />
       <Navigation />
       <Hero />
       <Interests />
@@ -36,7 +38,7 @@ const Index = () => {
       <Companies />
       
       {/* Action Buttons Section - Now at the very bottom */}
-      <section className="py-20 bg-gradient-to-b from-scifi-dark to-black">
+      <section className="py-20 bg-gradient-to-b from-transparent to-black/80">
         <div className="container mx-auto px-4 max-w-2xl">
           <div className="space-y-4">
             <a
