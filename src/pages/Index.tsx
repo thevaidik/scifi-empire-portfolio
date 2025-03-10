@@ -35,7 +35,7 @@ const Index = () => {
       <SocialLinks />
       <Companies />
       
-      {/* Action Buttons Section */}
+      {/* Action Buttons Section - Now at the very bottom */}
       <section className="py-20 bg-gradient-to-b from-scifi-dark to-black">
         <div className="container mx-auto px-4 max-w-2xl">
           <div className="space-y-4">
