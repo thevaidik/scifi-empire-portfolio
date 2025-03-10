@@ -4,54 +4,84 @@ import { motion } from "framer-motion";
 const Hero = () => {
   return (
     <section id="about" className="py-20 flex items-center justify-center relative overflow-hidden">
-      {/* Enhanced 3D Planet Grid Background - Made smaller */}
+      {/* Grid Earth Pattern Background */}
       <div className="absolute inset-0 bg-scifi-dark">
         <div className="absolute inset-0">
-          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-            {/* Core planet sphere with grid pattern - Reduced size */}
-            <div className="w-[400px] h-[400px] rounded-full bg-gradient-to-br from-scifi-primary/30 to-transparent relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-t from-scifi-dark via-transparent to-scifi-primary/20" />
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,_var(--tw-gradient-stops))] from-scifi-primary/40 via-transparent to-transparent" />
-              
-              {/* Grid pattern overlay */}
-              <div className="absolute inset-0 grid grid-cols-12 grid-rows-12">
-                {[...Array(144)].map((_, i) => (
-                  <div 
-                    key={i} 
-                    className="border border-scifi-primary/10 flex items-center justify-center"
-                    style={{
-                      opacity: Math.random() * 0.5 + 0.1,
-                      transform: `rotateX(${Math.random() * 10}deg) rotateY(${Math.random() * 10}deg)`
-                    }}
-                  />
-                ))}
-              </div>
-              
-              {/* Atmospheric glow */}
-              <div className="absolute -inset-4 bg-scifi-primary/5 blur-2xl animate-pulse" />
-              
-              {/* Additional grid details */}
-              <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0dGVybiBpZD0iZ3JpZCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48cGF0aCBkPSJNIDQwIDAgTCAwIDAgMCA0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDE1OSwgMTU4LCAxNjEsIDAuMSkiIHN0cm9rZS13aWR0aD0iMSIvPjwvcGF0dGVybj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')] opacity-30" />
+          {/* Wave-like Grid Earth Pattern */}
+          <div className="absolute left-0 top-0 w-full h-full overflow-hidden">
+            {/* Main grid pattern */}
+            <div className="absolute w-full h-full grid grid-cols-[repeat(40,1fr)] grid-rows-[repeat(40,1fr)]">
+              {[...Array(1600)].map((_, i) => (
+                <motion.div
+                  key={i}
+                  className="border border-scifi-primary/10 flex items-center justify-center"
+                  animate={{
+                    opacity: [
+                      0.1 + Math.random() * 0.2,
+                      0.2 + Math.random() * 0.3,
+                      0.1 + Math.random() * 0.2
+                    ],
+                    z: [
+                      Math.sin((i % 40) / 5) * 20,
+                      Math.sin((i % 40) / 5 + 1) * 20,
+                      Math.sin((i % 40) / 5) * 20
+                    ]
+                  }}
+                  transition={{
+                    repeat: Infinity,
+                    duration: 3 + Math.random() * 2,
+                    ease: "easeInOut"
+                  }}
+                  style={{
+                    transformStyle: "preserve-3d",
+                    transform: `translateZ(${Math.sin((i % 40) / 5 + (Math.floor(i / 40) / 5)) * 20}px)`
+                  }}
+                />
+              ))}
             </div>
-            
-            {/* Orbital rings with grid patterns - Reduced size */}
-            <div className="absolute inset-0 animate-[spin_20s_linear_infinite]">
-              <div className="absolute inset-[-30px] border border-scifi-primary/10 rounded-full grid grid-cols-20 overflow-hidden">
-                {[...Array(20)].map((_, i) => (
-                  <div key={i} className="border-r border-scifi-primary/10 h-full"></div>
-                ))}
-              </div>
-              <div className="absolute inset-[-60px] border border-scifi-primary/5 rounded-full grid grid-cols-30 overflow-hidden">
-                {[...Array(30)].map((_, i) => (
-                  <div key={i} className="border-r border-scifi-primary/5 h-full"></div>
-                ))}
-              </div>
-              <div className="absolute inset-[-90px] border border-scifi-primary/3 rounded-full grid grid-cols-40 overflow-hidden">
-                {[...Array(40)].map((_, i) => (
-                  <div key={i} className="border-r border-scifi-primary/3 h-full"></div>
-                ))}
-              </div>
+
+            {/* Subtle wave overlay */}
+            <div className="absolute w-full h-full">
+              {[...Array(5)].map((_, i) => (
+                <motion.div
+                  key={i}
+                  className="absolute inset-0 border-t border-scifi-primary/5"
+                  animate={{
+                    y: [i * 50, (i * 50) + 30, i * 50]
+                  }}
+                  transition={{
+                    repeat: Infinity,
+                    duration: 4 + i,
+                    ease: "easeInOut"
+                  }}
+                />
+              ))}
             </div>
+
+            {/* Horizontal wave lines */}
+            <div className="absolute w-full h-full">
+              {[...Array(5)].map((_, i) => (
+                <motion.div
+                  key={i}
+                  className="absolute inset-0 border-l border-scifi-primary/5"
+                  animate={{
+                    x: [i * 50, (i * 50) + 30, i * 50]
+                  }}
+                  transition={{
+                    repeat: Infinity,
+                    duration: 3 + i,
+                    ease: "easeInOut"
+                  }}
+                />
+              ))}
+            </div>
+
+            {/* Atmospheric glow */}
+            <motion.div 
+              className="absolute inset-0 bg-scifi-primary/5 blur-2xl"
+              animate={{ opacity: [0.2, 0.5, 0.2] }}
+              transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+            />
           </div>
         </div>
       </div>
