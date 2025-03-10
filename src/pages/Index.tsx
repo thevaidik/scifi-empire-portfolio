@@ -6,7 +6,8 @@ import Interests from "@/components/Interests";
 import OpenSource from "@/components/OpenSource";
 import Projects from "@/components/Projects";
 import Blog from "@/components/Blog";
-import Tools from "@/components/Tools";
+import SocialLinks from "@/components/SocialLinks";
+import Companies from "@/components/Companies";
 import { motion } from "framer-motion";
 
 const Index = () => {
@@ -31,7 +32,8 @@ const Index = () => {
       <OpenSource />
       <Projects />
       <Blog />
-      <Tools />
+      <SocialLinks />
+      <Companies />
       
       {/* Action Buttons Section */}
       <section className="py-20 bg-gradient-to-b from-scifi-dark to-black">
