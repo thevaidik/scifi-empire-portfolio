@@ -14,16 +14,16 @@ const Hero = () => {
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ delay: 0.2 }}
-          className="space-y-6 bg-scifi-accent/20 backdrop-blur-lg rounded-xl p-8 border border-scifi-primary/20"
+          className="space-y-6 bg-[#C4C5C6]/20 backdrop-blur-lg rounded-xl p-8 border border-[#B8B9BA]/30"
         >
-          <h1 className="text-5xl md:text-7xl font-bold text-white">
+          <h1 className="text-5xl md:text-7xl font-bold text-[#333]">
             Hey, Vaidik here
-            <div className="text-2xl md:text-3xl font-light mt-4 text-scifi-primary">
+            <div className="text-2xl md:text-3xl font-light mt-4 text-[#666]">
               "perception is reality"
             </div>
           </h1>
           
-          <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto">
+          <p className="text-lg md:text-xl text-[#555] max-w-2xl mx-auto">
             Normally I do development for Apple platforms (iOS, macOS, etc)
           </p>
         </motion.div>
@@ -33,7 +33,7 @@ const Hero = () => {
         <motion.div
           animate={{ y: [0, -10, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
-          className="text-white/50 text-sm"
+          className="text-[#666] text-sm"
         >
           Scroll to explore
         </motion.div>
