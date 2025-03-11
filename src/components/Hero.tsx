@@ -14,7 +14,7 @@ const Hero = () => {
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ delay: 0.2 }}
-          className="space-y-6 bg-black/20 backdrop-blur-lg rounded-xl p-8 border border-scifi-primary/10"
+          className="space-y-6 bg-scifi-accent/20 backdrop-blur-lg rounded-xl p-8 border border-scifi-primary/20"
         >
           <h1 className="text-5xl md:text-7xl font-bold text-white">
             Hey, Vaidik here

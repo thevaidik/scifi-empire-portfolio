@@ -65,11 +65,11 @@ const SocialLinks = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className={`group flex flex-col items-center justify-center p-8 rounded-xl bg-black/30 backdrop-blur-sm border-2 ${link.color} hover:border-transparent transition-all duration-300 relative overflow-hidden`}
+              className={`group flex flex-col items-center justify-center p-8 rounded-xl bg-scifi-secondary/30 backdrop-blur-sm border-2 ${link.color} hover:border-transparent transition-all duration-300 relative overflow-hidden`}
             >
               <div className={`absolute inset-0 -z-10 opacity-0 ${link.hoverColor} transition-all duration-500 group-hover:opacity-20`}></div>
               
-              <div className="p-4 rounded-full bg-black/50 border border-scifi-primary/20 mb-4 group-hover:scale-110 transition-transform duration-300">
+              <div className="p-4 rounded-full bg-scifi-secondary/50 border border-scifi-primary/20 mb-4 group-hover:scale-110 transition-transform duration-300">
                 {link.icon}
               </div>
               

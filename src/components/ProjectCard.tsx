@@ -13,7 +13,7 @@ const ProjectCard = ({ title, description, image, tags, link }: ProjectCardProps
   return (
     <motion.div
       whileHover={{ y: -10 }}
-      className="group relative overflow-hidden rounded-xl bg-scifi-dark/50 backdrop-blur-lg border border-scifi-light/10"
+      className="group relative overflow-hidden rounded-xl bg-scifi-secondary/40 backdrop-blur-lg border border-scifi-light/10"
     >
       <div className="aspect-video overflow-hidden">
         <img
@@ -31,7 +31,7 @@ const ProjectCard = ({ title, description, image, tags, link }: ProjectCardProps
           {tags.map((tag) => (
             <span
               key={tag}
-              className="px-3 py-1 text-xs rounded-full bg-scifi-primary/20 text-scifi-primary"
+              className="px-3 py-1 text-xs rounded-full bg-scifi-primary/20 text-scifi-accent"
             >
               {tag}
             </span>

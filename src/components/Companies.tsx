@@ -60,7 +60,7 @@ const Companies = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="bg-black/30 backdrop-blur-sm border border-scifi-primary/10 rounded-lg p-6 hover:border-scifi-primary/30 transition-all duration-300"
+              className="bg-scifi-secondary/30 backdrop-blur-sm border border-scifi-primary/10 rounded-lg p-6 hover:border-scifi-primary/30 transition-all duration-300"
             >
               <div className="text-scifi-primary/70 text-sm font-mono mb-2">{company.field}</div>
               <h3 className="text-xl font-bold mb-3 text-white">{company.name}</h3>

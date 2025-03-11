@@ -5,8 +5,8 @@ const EarthBackground = () => {
   return (
     <div className="fixed inset-0 -z-10 bg-[#1E1F21]">
       <div className="absolute inset-0 flex items-center justify-center">
-        {/* Large Earth Globe Container */}
-        <div className="relative w-[150vh] h-[150vh] -mt-[20vh]">
+        {/* Large Earth Globe Container - slightly smaller */}
+        <div className="relative w-[130vh] h-[130vh] -mt-[15vh]">
           {/* Dark Earth Base */}
           <div className="absolute inset-0 bg-[#403E43] rounded-full opacity-70"></div>
           

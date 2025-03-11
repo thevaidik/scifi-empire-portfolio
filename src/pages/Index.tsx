@@ -37,8 +37,8 @@ const Index = () => {
       <SocialLinks />
       <Companies />
       
-      {/* Action Buttons Section - Now at the very bottom */}
-      <section className="py-20 bg-gradient-to-b from-transparent to-black/80">
+      {/* Action Buttons Section */}
+      <section className="py-20 bg-gradient-to-b from-transparent to-scifi-secondary/30">
         <div className="container mx-auto px-4 max-w-2xl">
           <div className="space-y-4">
             <a
@@ -49,7 +49,7 @@ const Index = () => {
             </a>
             <a
               href="#companies"
-              className="block w-full px-8 py-4 rounded-lg bg-scifi-dark/50 border border-scifi-light/20 text-white hover:bg-scifi-dark/70 transition-all duration-300 text-center"
+              className="block w-full px-8 py-4 rounded-lg bg-scifi-secondary/40 border border-scifi-light/20 text-white hover:bg-scifi-secondary/60 transition-all duration-300 text-center"
             >
               Interesting Companies
             </a>
