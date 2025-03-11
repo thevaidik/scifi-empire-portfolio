@@ -27,8 +27,8 @@ export default {
         scifi: {
           primary: "#9F9EA1",
           secondary: "#8E9196",
-          accent: "#aaadb0",
-          dark: "#222222",
+          accent: "#C8C8C9",
+          dark: "#403E43",
           light: "#F1F1F1",
         },
         primary: {
