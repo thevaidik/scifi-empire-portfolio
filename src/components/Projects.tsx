@@ -28,7 +28,7 @@ const projectsData = [
 
 const Projects = () => {
   return (
-    <section id="projects" className="min-h-screen py-20 bg-scifi-dark relative">
+    <section id="projects" className="min-h-screen py-20 bg-transparent relative">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

@@ -32,7 +32,7 @@ const interestData = [
 
 const Interests = () => {
   return (
-    <section className="min-h-screen py-20 bg-gradient-to-b from-black to-scifi-dark relative">
+    <section className="min-h-screen py-20 bg-gradient-to-b from-transparent to-transparent relative">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -56,7 +56,7 @@ const Interests = () => {
               transition={{ delay: index * 0.2 }}
               className="group"
             >
-              <div className="p-8 rounded-xl bg-gradient-to-br from-scifi-dark/80 to-black/50 backdrop-blur-lg border border-scifi-light/10 hover:border-scifi-primary/50 transition-all duration-300">
+              <div className="p-8 rounded-xl bg-black/30 backdrop-blur-lg border border-scifi-light/10 hover:border-scifi-primary/50 transition-all duration-300">
                 <div className="w-16 h-16 rounded-full bg-scifi-primary/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                   <interest.icon className="w-8 h-8 text-scifi-primary" />
                 </div>

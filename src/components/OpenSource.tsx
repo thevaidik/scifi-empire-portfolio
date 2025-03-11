@@ -21,7 +21,7 @@ const openSourceProjects = [
 
 const OpenSource = () => {
   return (
-    <section className="py-20 bg-scifi-dark relative">
+    <section className="py-20 bg-transparent relative">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -46,7 +46,7 @@ const OpenSource = () => {
               transition={{ delay: index * 0.2 }}
               className="group"
             >
-              <div className="p-6 rounded-xl bg-gradient-to-br from-black/80 to-scifi-dark/50 border border-scifi-light/10 hover:border-scifi-primary/50 transition-all duration-300">
+              <div className="p-6 rounded-xl bg-black/40 backdrop-blur-lg border border-scifi-light/10 hover:border-scifi-primary/50 transition-all duration-300">
                 <div className="flex items-center justify-between mb-4">
                   <Github className="w-6 h-6 text-scifi-primary" />
                   <div className="flex items-center space-x-4">
