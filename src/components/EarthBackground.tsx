@@ -4,11 +4,11 @@ import { motion } from "framer-motion";
 const EarthBackground = () => {
   return (
     <div className="fixed inset-0 -z-10 bg-scifi-dark">
-      <div className="absolute inset-0">
-        {/* Earth with Night Lights Pattern */}
-        <div className="absolute left-0 top-0 w-full h-full overflow-hidden">
+      <div className="absolute inset-0 flex items-center justify-center">
+        {/* Large Earth Globe Container */}
+        <div className="relative w-[150vh] h-[150vh] -mt-[20vh]">
           {/* Dark Earth Base */}
-          <div className="absolute inset-0 bg-[#221F26] rounded-full opacity-70 max-w-3xl max-h-3xl mx-auto my-auto"></div>
+          <div className="absolute inset-0 bg-[#221F26] rounded-full opacity-70"></div>
           
           {/* City lights - North America */}
           <motion.div 
@@ -45,7 +45,7 @@ const EarthBackground = () => {
             transition={{ repeat: Infinity, duration: 3.2, ease: "easeInOut" }}
           />
           
-          {/* Grid pattern overlay for continents */}
+          {/* Grid pattern overlay */}
           <div className="absolute inset-0">
             <div className="absolute inset-0 grid grid-cols-[repeat(30,1fr)] grid-rows-[repeat(30,1fr)] opacity-30">
               {[...Array(900)].map((_, i) => (
@@ -71,7 +71,7 @@ const EarthBackground = () => {
           
           {/* Atmospheric glow */}
           <motion.div 
-            className="absolute inset-0 bg-[#1EAEDB]/5 blur-3xl max-w-4xl max-h-4xl mx-auto my-auto rounded-full"
+            className="absolute inset-0 bg-[#1EAEDB]/5 blur-3xl rounded-full"
             animate={{ 
               opacity: [0.2, 0.4, 0.2],
               scale: [1, 1.05, 1]
@@ -83,9 +83,9 @@ const EarthBackground = () => {
             }}
           />
           
-          {/* Subtle atmospheric rings */}
+          {/* Atmospheric rings */}
           <motion.div 
-            className="absolute inset-0 border-2 border-[#0FA0CE]/10 rounded-full max-w-[70%] max-h-[70%] mx-auto my-auto"
+            className="absolute inset-0 border-2 border-[#0FA0CE]/10 rounded-full"
             animate={{ 
               rotate: 360,
               scale: [1, 1.02, 1]
@@ -105,7 +105,7 @@ const EarthBackground = () => {
           />
           
           <motion.div 
-            className="absolute inset-0 border border-[#0FA0CE]/5 rounded-full max-w-[80%] max-h-[80%] mx-auto my-auto"
+            className="absolute inset-0 border border-[#0FA0CE]/5 rounded-full"
             animate={{ 
               rotate: 360,
               scale: [1, 1.01, 1]
