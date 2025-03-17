@@ -4,19 +4,19 @@ const EarthBackground = () => {
   return (
     <div className="fixed inset-0 -z-10 bg-[#2A2A2C]">
       <div className="absolute inset-0 flex items-center justify-center">
-        {/* Smaller Earth Globe Container */}
-        <div className="relative w-[110vh] h-[110vh] -mt-[15vh]">
-          {/* Titanium Earth Base */}
-          <div className="absolute inset-0 bg-[#7A7A7C] rounded-full opacity-70"></div>
+        {/* Earth Globe Container - Increased size and adjusted position */}
+        <div className="relative w-[120vh] h-[120vh] -mt-[10vh]">
+          {/* Titanium Earth Base - Darkened slightly for better contrast */}
+          <div className="absolute inset-0 bg-[#5A5A5C] rounded-full opacity-70"></div>
           
           {/* City lights - Titanium tones */}
           <motion.div 
-            className="absolute top-[25%] left-[25%] w-[20%] h-[15%] bg-[#9B9B9D]/40 blur-xl rounded-full"
+            className="absolute top-[25%] left-[25%] w-[20%] h-[15%] bg-[#8B8B8D]/40 blur-xl rounded-full"
             animate={{ opacity: [0.3, 0.5, 0.3] }}
             transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
           />
           
-          {/* Keep the other motion divs with adjusted colors */}
+          {/* Other motion divs with adjusted colors for better visibility */}
           <motion.div 
             className="absolute top-[20%] left-[55%] w-[10%] h-[10%] bg-[#A8A8AA]/40 blur-xl rounded-full"
             animate={{ opacity: [0.4, 0.6, 0.4] }}
@@ -41,13 +41,13 @@ const EarthBackground = () => {
             transition={{ repeat: Infinity, duration: 3.2, ease: "easeInOut" }}
           />
           
-          {/* Grid pattern overlay */}
+          {/* Grid pattern overlay - Enhanced visibility */}
           <div className="absolute inset-0">
-            <div className="absolute inset-0 grid grid-cols-[repeat(30,1fr)] grid-rows-[repeat(30,1fr)] opacity-30">
+            <div className="absolute inset-0 grid grid-cols-[repeat(30,1fr)] grid-rows-[repeat(30,1fr)] opacity-40">
               {[...Array(900)].map((_, i) => (
                 <motion.div
                   key={i}
-                  className="border border-[#B4B4B6]/20"
+                  className="border border-[#C4C4C6]/20"
                   animate={{
                     opacity: [
                       0.1 + Math.random() * 0.2,
@@ -65,9 +65,9 @@ const EarthBackground = () => {
             </div>
           </div>
           
-          {/* Atmospheric glow */}
+          {/* Atmospheric glow - Enhanced visibility */}
           <motion.div 
-            className="absolute inset-0 bg-[#8D8D8F]/15 blur-3xl rounded-full"
+            className="absolute inset-0 bg-[#8D8D8F]/20 blur-3xl rounded-full"
             animate={{ 
               opacity: [0.2, 0.4, 0.2],
               scale: [1, 1.05, 1]
@@ -79,9 +79,9 @@ const EarthBackground = () => {
             }}
           />
           
-          {/* Atmospheric rings with titanium colors */}
+          {/* Atmospheric rings with more visible titanium colors */}
           <motion.div 
-            className="absolute inset-0 border-2 border-[#A8A8AA]/30 rounded-full"
+            className="absolute inset-0 border-2 border-[#B8B8BA]/40 rounded-full"
             animate={{ 
               rotate: 360,
               scale: [1, 1.02, 1]
@@ -101,7 +101,7 @@ const EarthBackground = () => {
           />
           
           <motion.div 
-            className="absolute inset-0 border border-[#8D8D8F]/25 rounded-full"
+            className="absolute inset-0 border border-[#A8A8AA]/35 rounded-full"
             animate={{ 
               rotate: 360,
               scale: [1, 1.01, 1]
@@ -115,6 +115,27 @@ const EarthBackground = () => {
               scale: {
                 repeat: Infinity, 
                 duration: 10, 
+                ease: "easeInOut"
+              }
+            }}
+          />
+          
+          {/* Additional visible ring */}
+          <motion.div 
+            className="absolute inset-0 border-4 border-[#C8C8CA]/20 rounded-full"
+            animate={{ 
+              rotate: -360,
+              scale: [0.97, 0.99, 0.97]
+            }}
+            transition={{ 
+              rotate: {
+                repeat: Infinity, 
+                duration: 95, 
+                ease: "linear"
+              },
+              scale: {
+                repeat: Infinity, 
+                duration: 12, 
                 ease: "easeInOut"
               }
             }}
