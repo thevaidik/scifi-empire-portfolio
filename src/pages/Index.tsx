@@ -38,18 +38,18 @@ const Index = () => {
       <Companies />
       
       {/* Action Buttons Section */}
-      <section className="py-20 bg-gradient-to-b from-transparent to-[#A9AAAB]/30">
+      <section className="py-20 bg-gradient-to-b from-transparent to-[#A9AAAB]/40">
         <div className="container mx-auto px-4 max-w-2xl">
           <div className="space-y-4">
             <a
               href="#tools"
-              className="block w-full px-8 py-4 rounded-lg bg-[#B8B9BA]/20 border border-[#9F9EA1]/50 text-[#333] hover:bg-[#B8B9BA]/30 transition-all duration-300 text-center"
+              className="block w-full px-8 py-4 rounded-lg bg-[#8E9196]/50 border border-[#9F9EA1]/50 text-[#333] hover:bg-[#8E9196]/70 transition-all duration-300 text-center font-medium shadow-sm"
             >
               Explore My Tools
             </a>
             <a
               href="#companies"
-              className="block w-full px-8 py-4 rounded-lg bg-[#A9AAAB]/40 border border-[#D1D2D4]/20 text-[#333] hover:bg-[#A9AAAB]/60 transition-all duration-300 text-center"
+              className="block w-full px-8 py-4 rounded-lg bg-[#9F9EA1]/60 border border-[#8A898C]/40 text-[#333] hover:bg-[#9F9EA1]/80 transition-all duration-300 text-center font-medium shadow-sm"
             >
               Interesting Companies
             </a>
