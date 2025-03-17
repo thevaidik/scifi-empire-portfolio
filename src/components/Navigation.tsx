@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Star, Rocket, Wrench, BookOpen, Building2 } from "lucide-react";
+import { Star, Rocket, Wrench, Building2 } from "lucide-react";
 
 const Navigation = () => {
   const [activeSection, setActiveSection] = useState("about");
@@ -27,7 +27,7 @@ const Navigation = () => {
       <motion.div
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        className="bg-scifi-secondary/30 backdrop-blur-lg rounded-full px-6 py-3 border border-scifi-light/20"
+        className="bg-[#222222]/80 backdrop-blur-lg rounded-full px-6 py-3 border border-[#444444]/50 shadow-lg"
       >
         <ul className="flex space-x-8">
           {navItems.map(({ id, Icon, label }) => (
@@ -36,8 +36,8 @@ const Navigation = () => {
                 href={`#${id}`}
                 className={`flex items-center space-x-2 text-sm transition-colors ${
                   activeSection === id
-                    ? "text-scifi-accent"
-                    : "text-white/70 hover:text-white"
+                    ? "text-[#C8C8C9] font-medium"
+                    : "text-white/80 hover:text-white"
                 }`}
                 onClick={(e) => {
                   e.preventDefault();

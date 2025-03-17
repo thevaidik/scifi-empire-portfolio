@@ -25,7 +25,7 @@ const Index = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="bg-transparent text-[#333] overflow-hidden relative"
+      className="bg-[#181818] text-white overflow-hidden relative"
     >
       <EarthBackground />
       <Navigation />
@@ -38,18 +38,18 @@ const Index = () => {
       <Companies />
       
       {/* Action Buttons Section */}
-      <section className="py-20 bg-gradient-to-b from-transparent to-[#A9AAAB]/40">
+      <section className="py-20 bg-gradient-to-b from-transparent to-[#333333]/70">
         <div className="container mx-auto px-4 max-w-2xl">
           <div className="space-y-4">
             <a
               href="#tools"
-              className="block w-full px-8 py-4 rounded-lg bg-[#8E9196]/50 border border-[#9F9EA1]/50 text-[#333] hover:bg-[#8E9196]/70 transition-all duration-300 text-center font-medium shadow-sm"
+              className="block w-full px-8 py-4 rounded-lg bg-[#404040]/80 border border-[#555555]/80 text-white hover:bg-[#505050] transition-all duration-300 text-center font-medium shadow-md"
             >
               Explore My Tools
             </a>
             <a
               href="#companies"
-              className="block w-full px-8 py-4 rounded-lg bg-[#9F9EA1]/60 border border-[#8A898C]/40 text-[#333] hover:bg-[#9F9EA1]/80 transition-all duration-300 text-center font-medium shadow-sm"
+              className="block w-full px-8 py-4 rounded-lg bg-[#505050]/80 border border-[#666666]/60 text-white hover:bg-[#606060] transition-all duration-300 text-center font-medium shadow-md"
             >
               Interesting Companies
             </a>
