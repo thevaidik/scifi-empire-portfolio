@@ -14,16 +14,16 @@ const Hero = () => {
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ delay: 0.2 }}
-          className="space-y-6 bg-[#222222]/70 backdrop-blur-lg rounded-xl p-8 border border-[#444444]/50 shadow-lg"
+          className="space-y-6 bg-[#333335]/80 backdrop-blur-lg rounded-xl p-8 border border-[#777779]/50 shadow-lg"
         >
           <h1 className="text-5xl md:text-7xl font-bold text-white">
             Hey, Vaidik here
-            <div className="text-2xl md:text-3xl font-light mt-4 text-[#C8C8C9]">
+            <div className="text-2xl md:text-3xl font-light mt-4 text-[#B8B8BA]">
               "perception is reality"
             </div>
           </h1>
           
-          <p className="text-lg md:text-xl text-[#E0E0E0] max-w-2xl mx-auto">
+          <p className="text-lg md:text-xl text-[#E0E0E2] max-w-2xl mx-auto">
             Normally I do development for Apple platforms (iOS, macOS, etc)
           </p>
         </motion.div>

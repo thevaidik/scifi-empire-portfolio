@@ -46,10 +46,10 @@ const Companies = () => {
           className="text-center mb-12"
         >
           <h2 className="text-4xl font-bold mb-4 text-white">Interesting Companies</h2>
-          <p className="text-scifi-primary/80 max-w-2xl mx-auto">
+          <p className="text-[#B8B8BA] max-w-2xl mx-auto">
             Organizations pushing the boundaries of what's possible
           </p>
-          <div className="h-1 w-20 bg-scifi-primary/50 mx-auto mt-6 rounded-full"></div>
+          <div className="h-1 w-20 bg-[#A8A8AA]/50 mx-auto mt-6 rounded-full"></div>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -60,11 +60,11 @@ const Companies = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="bg-scifi-secondary/30 backdrop-blur-sm border border-scifi-primary/10 rounded-lg p-6 hover:border-scifi-primary/30 transition-all duration-300"
+              className="bg-[#404042]/70 backdrop-blur-sm border border-[#777779]/30 rounded-lg p-6 hover:border-[#A8A8AA]/50 transition-all duration-300"
             >
-              <div className="text-scifi-primary/70 text-sm font-mono mb-2">{company.field}</div>
+              <div className="text-[#A8A8AA] text-sm font-mono mb-2">{company.field}</div>
               <h3 className="text-xl font-bold mb-3 text-white">{company.name}</h3>
-              <p className="text-white/70">{company.description}</p>
+              <p className="text-[#D0D0D2]">{company.description}</p>
             </motion.div>
           ))}
         </div>

@@ -30,7 +30,7 @@ const OpenSource = () => {
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Open Source Work</h2>
-          <p className="text-white/70 max-w-2xl mx-auto">
+          <p className="text-[#B8B8BA] max-w-2xl mx-auto">
             Contributing to the future of technology through open collaboration
           </p>
         </motion.div>
@@ -46,21 +46,21 @@ const OpenSource = () => {
               transition={{ delay: index * 0.2 }}
               className="group"
             >
-              <div className="p-6 rounded-xl bg-scifi-secondary/30 backdrop-blur-lg border border-scifi-light/10 hover:border-scifi-primary/50 transition-all duration-300">
+              <div className="p-6 rounded-xl bg-[#454547]/70 backdrop-blur-lg border border-[#777779]/30 hover:border-[#A8A8AA]/50 transition-all duration-300">
                 <div className="flex items-center justify-between mb-4">
-                  <Github className="w-6 h-6 text-scifi-primary" />
+                  <Github className="w-6 h-6 text-[#A8A8AA]" />
                   <div className="flex items-center space-x-4">
-                    <span className="text-white/70">
+                    <span className="text-[#B8B8BA]">
                       ★ {project.stars}
                     </span>
-                    <span className="text-white/70">
+                    <span className="text-[#B8B8BA]">
                       ⑂ {project.forks}
                     </span>
                   </div>
                 </div>
                 
                 <h3 className="text-xl font-semibold text-white mb-2">{project.title}</h3>
-                <p className="text-white/70">{project.description}</p>
+                <p className="text-[#D0D0D2]">{project.description}</p>
               </div>
             </motion.a>
           ))}

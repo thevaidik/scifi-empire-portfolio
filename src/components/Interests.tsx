@@ -41,7 +41,7 @@ const Interests = () => {
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Fields of Interest</h2>
-          <p className="text-white/70 max-w-2xl mx-auto">
+          <p className="text-[#B8B8BA] max-w-2xl mx-auto">
             Exploring the intersection of consciousness, technology, and artificial intelligence
           </p>
         </motion.div>
@@ -56,13 +56,13 @@ const Interests = () => {
               transition={{ delay: index * 0.2 }}
               className="group"
             >
-              <div className="p-8 rounded-xl bg-scifi-secondary/20 backdrop-blur-lg border border-scifi-light/10 hover:border-scifi-primary/50 transition-all duration-300">
-                <div className="w-16 h-16 rounded-full bg-scifi-primary/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                  <interest.icon className="w-8 h-8 text-scifi-primary" />
+              <div className="p-8 rounded-xl bg-[#404042]/70 backdrop-blur-lg border border-[#777779]/30 hover:border-[#A8A8AA]/50 transition-all duration-300">
+                <div className="w-16 h-16 rounded-full bg-[#777779]/30 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                  <interest.icon className="w-8 h-8 text-[#D0D0D2]" />
                 </div>
                 
                 <h3 className="text-xl font-semibold text-white mb-4">{interest.title}</h3>
-                <p className="text-white/70">{interest.description}</p>
+                <p className="text-[#B8B8BA]">{interest.description}</p>
               </div>
             </motion.div>
           ))}

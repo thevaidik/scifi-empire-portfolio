@@ -13,7 +13,7 @@ const ProjectCard = ({ title, description, image, tags, link }: ProjectCardProps
   return (
     <motion.div
       whileHover={{ y: -10 }}
-      className="group relative overflow-hidden rounded-xl bg-scifi-secondary/40 backdrop-blur-lg border border-scifi-light/10"
+      className="group relative overflow-hidden rounded-xl bg-[#505052]/70 backdrop-blur-lg border border-[#777779]/30"
     >
       <div className="aspect-video overflow-hidden">
         <img
@@ -25,13 +25,13 @@ const ProjectCard = ({ title, description, image, tags, link }: ProjectCardProps
       
       <div className="p-6">
         <h3 className="text-xl font-semibold mb-2 text-white">{title}</h3>
-        <p className="text-white/70 mb-4">{description}</p>
+        <p className="text-[#D0D0D2] mb-4">{description}</p>
         
         <div className="flex flex-wrap gap-2 mb-4">
           {tags.map((tag) => (
             <span
               key={tag}
-              className="px-3 py-1 text-xs rounded-full bg-scifi-primary/20 text-scifi-accent"
+              className="px-3 py-1 text-xs rounded-full bg-[#777779]/30 text-[#E0E0E2]"
             >
               {tag}
             </span>
@@ -40,7 +40,7 @@ const ProjectCard = ({ title, description, image, tags, link }: ProjectCardProps
         
         <a
           href={link}
-          className="inline-flex items-center text-scifi-primary hover:text-scifi-accent transition-colors"
+          className="inline-flex items-center text-[#A8A8AA] hover:text-white transition-colors"
         >
           View Project
           <svg
