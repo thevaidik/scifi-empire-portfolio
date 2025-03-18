@@ -4,6 +4,9 @@ import { motion } from "framer-motion";
 const EarthBackground = () => {
   return (
     <div className="fixed inset-0 -z-10">
+      {/* Dark gradient around the globe */}
+      <div className="absolute inset-0 bg-gradient-radial from-transparent via-[#222222]/70 to-[#111111]/90"></div>
+      
       <div className="absolute inset-0 flex items-center justify-center">
         {/* Earth Globe Container - Increased size and adjusted position */}
         <div className="relative w-[120vh] h-[120vh] -mt-[10vh]">
