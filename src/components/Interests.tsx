@@ -56,7 +56,7 @@ const Interests = () => {
               transition={{ delay: index * 0.2 }}
               className="group"
             >
-              <div className="p-8 rounded-xl bg-[#404042]/70 backdrop-blur-lg border border-[#777779]/30 hover:border-[#A8A8AA]/50 transition-all duration-300">
+              <div className="p-8 rounded-xl bg-[#404042]/50 backdrop-blur-lg border border-[#777779]/30 hover:border-[#A8A8AA]/50 transition-all duration-300">
                 <div className="w-16 h-16 rounded-full bg-[#777779]/30 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                   <interest.icon className="w-8 h-8 text-[#D0D0D2]" />
                 </div>
