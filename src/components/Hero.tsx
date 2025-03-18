@@ -14,7 +14,7 @@ const Hero = () => {
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ delay: 0.2 }}
-          className="space-y-6 bg-[#333335]/50 backdrop-blur-lg rounded-xl p-8 border border-[#777779]/30 shadow-lg"
+          className="space-y-6 bg-[#333335]/70 backdrop-blur-lg rounded-xl p-8 border border-[#777779]/30 shadow-lg"
         >
           <h1 className="text-5xl md:text-7xl font-bold text-white">
             Hey, Vaidik here
@@ -33,7 +33,7 @@ const Hero = () => {
         <motion.div
           animate={{ y: [0, -10, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
-          className="text-white text-sm font-medium"
+          className="text-white text-sm font-medium bg-[#333335]/50 backdrop-blur-md px-4 py-2 rounded-full"
         >
           Scroll to explore
         </motion.div>

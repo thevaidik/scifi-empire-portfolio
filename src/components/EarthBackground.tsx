@@ -1,8 +1,9 @@
+
 import { motion } from "framer-motion";
 
 const EarthBackground = () => {
   return (
-    <div className="fixed inset-0 -z-10 bg-[#2A2A2C]">
+    <div className="fixed inset-0 -z-10">
       <div className="absolute inset-0 flex items-center justify-center">
         {/* Earth Globe Container - Increased size and adjusted position */}
         <div className="relative w-[120vh] h-[120vh] -mt-[10vh]">
