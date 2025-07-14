@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Star, Rocket, Wrench, Globe } from "lucide-react";
+import { Star, Rocket, Globe, Users } from "lucide-react";
 
 const Navigation = () => {
   const [activeSection, setActiveSection] = useState("about");
@@ -18,7 +18,7 @@ const Navigation = () => {
   const navItems = [
     { id: "about", Icon: Star, label: "About", path: "/" },
     { id: "projects", Icon: Rocket, label: "Projects", path: "/#projects" },
-    { id: "tools", Icon: Wrench, label: "Tools", path: "/#tools" },
+    { id: "social", Icon: Users, label: "Connect", path: "/#social" },
     { id: "bento", Icon: Globe, label: "Bento", path: "/#bento" },
   ];
 
@@ -43,7 +43,7 @@ const Navigation = () => {
                   if (path.includes("#")) {
                     e.preventDefault();
                     setActiveSection(id);
-                    document.getElementById(id.split("#")[0])?.scrollIntoView({ behavior: "smooth" });
+                    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
                   }
                 }}
               >
