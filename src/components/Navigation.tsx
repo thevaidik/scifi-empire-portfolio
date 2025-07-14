@@ -17,7 +17,7 @@ const Navigation = () => {
 
   const navItems = [
     { id: "about", Icon: Star, label: "About", path: "/" },
-    { id: "projects", Icon: Rocket, label: "Projects", path: "/#projects" },
+    { id: "projects", Icon: Rocket, label: "My Work", path: "/#projects" },
     { id: "social", Icon: Users, label: "Connect", path: "/#social" },
     { id: "bento", Icon: Globe, label: "Bento", path: "/#bento" },
   ];

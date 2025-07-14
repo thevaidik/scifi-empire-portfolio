@@ -1,6 +1,6 @@
 
 import { motion } from "framer-motion";
-import { Github, Twitter, Youtube, Linkedin, Mail, ExternalLink } from "lucide-react";
+import { Github, Twitter, Youtube, Linkedin, Mail, ExternalLink, BookOpen } from "lucide-react";
 
 const SocialLinks = () => {
   const links = [
@@ -23,6 +23,11 @@ const SocialLinks = () => {
       name: "LinkedIn",
       url: "https://linkedin.com/in/yourusername",
       icon: <Linkedin className="h-6 w-6 text-white" />,
+    },
+    {
+      name: "Medium",
+      url: "https://medium.com/@thevaidik",
+      icon: <BookOpen className="h-6 w-6 text-white" />,
     },
     {
       name: "Email",
