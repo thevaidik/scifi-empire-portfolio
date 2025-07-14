@@ -40,9 +40,11 @@ const Navigation = () => {
                     : "text-[#B8B8BA] hover:text-white"
                 }`}
                 onClick={(e) => {
-                  if (path.includes("#")) {
-                    e.preventDefault();
-                    setActiveSection(id);
+                  e.preventDefault();
+                  setActiveSection(id);
+                  if (id === "about") {
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                  } else if (path.includes("#")) {
                     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
                   }
                 }}
