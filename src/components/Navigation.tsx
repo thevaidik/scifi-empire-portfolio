@@ -1,8 +1,7 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Star, Rocket, Wrench, Building2, BookOpen } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Star, Rocket, Wrench, Globe } from "lucide-react";
 
 const Navigation = () => {
   const [activeSection, setActiveSection] = useState("about");
@@ -19,9 +18,8 @@ const Navigation = () => {
   const navItems = [
     { id: "about", Icon: Star, label: "About", path: "/" },
     { id: "projects", Icon: Rocket, label: "Projects", path: "/#projects" },
-    { id: "companies", Icon: Building2, label: "Companies", path: "/#companies" },
     { id: "tools", Icon: Wrench, label: "Tools", path: "/#tools" },
-    { id: "blog", Icon: BookOpen, label: "Blog", path: "/blog" },
+    { id: "bento", Icon: Globe, label: "Bento", path: "/#bento" },
   ];
 
   return (
@@ -34,39 +32,24 @@ const Navigation = () => {
         <ul className="flex space-x-8">
           {navItems.map(({ id, Icon, label, path }) => (
             <li key={id}>
-              {path.startsWith("/#") ? (
-                <a
-                  href={path}
-                  className={`flex items-center space-x-2 text-sm transition-colors ${
-                    activeSection === id
-                      ? "text-[#E8E8EA] font-medium"
-                      : "text-[#B8B8BA] hover:text-white"
-                  }`}
-                  onClick={(e) => {
-                    if (path.includes("#")) {
-                      e.preventDefault();
-                      setActiveSection(id);
-                      document.getElementById(id.split("#")[0])?.scrollIntoView({ behavior: "smooth" });
-                    }
-                  }}
-                >
-                  <Icon className="w-4 h-4" />
-                  <span>{label}</span>
-                </a>
-              ) : (
-                <Link
-                  to={path}
-                  className={`flex items-center space-x-2 text-sm transition-colors ${
-                    activeSection === id
-                      ? "text-[#E8E8EA] font-medium"
-                      : "text-[#B8B8BA] hover:text-white"
-                  }`}
-                  onClick={() => setActiveSection(id)}
-                >
-                  <Icon className="w-4 h-4" />
-                  <span>{label}</span>
-                </Link>
-              )}
+              <a
+                href={path}
+                className={`flex items-center space-x-2 text-sm transition-colors ${
+                  activeSection === id
+                    ? "text-[#E8E8EA] font-medium"
+                    : "text-[#B8B8BA] hover:text-white"
+                }`}
+                onClick={(e) => {
+                  if (path.includes("#")) {
+                    e.preventDefault();
+                    setActiveSection(id);
+                    document.getElementById(id.split("#")[0])?.scrollIntoView({ behavior: "smooth" });
+                  }
+                }}
+              >
+                <Icon className="w-4 h-4" />
+                <span>{label}</span>
+              </a>
             </li>
           ))}
         </ul>

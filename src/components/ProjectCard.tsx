@@ -40,9 +40,11 @@ const ProjectCard = ({ title, description, image, tags, link }: ProjectCardProps
         
         <a
           href={link}
+          target="_blank"
+          rel="noopener noreferrer"
           className="inline-flex items-center text-[#A8A8AA] hover:text-white transition-colors"
         >
-          View Project
+          Visit App Store
           <svg
             className="w-4 h-4 ml-2"
             fill="none"

@@ -8,21 +8,21 @@ const projectsData = [
     description: "A revolutionary way to showcase creative work with quantum-inspired animations.",
     image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5",
     tags: ["React", "Three.js", "GSAP"],
-    link: "#",
+    link: "https://apps.apple.com/app/quantum-portfolio/id123456789",
   },
   {
     title: "Neural Network Blog",
     description: "AI-powered blog platform with dynamic content generation.",
     image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e",
     tags: ["Next.js", "TailwindCSS", "AI"],
-    link: "#",
+    link: "https://apps.apple.com/app/neural-network-blog/id123456790",
   },
   {
     title: "Cyberpunk Dashboard",
     description: "Futuristic dashboard interface with real-time data visualization.",
     image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158",
     tags: ["Vue", "D3.js", "Firebase"],
-    link: "#",
+    link: "https://apps.apple.com/app/cyberpunk-dashboard/id123456791",
   },
 ];
 

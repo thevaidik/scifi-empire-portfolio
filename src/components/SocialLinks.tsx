@@ -1,6 +1,6 @@
 
 import { motion } from "framer-motion";
-import { Github, Twitter, Youtube, Globe } from "lucide-react";
+import { Github, Twitter, Youtube, Globe, Mail } from "lucide-react";
 
 const SocialLinks = () => {
   const links = [
@@ -31,6 +31,13 @@ const SocialLinks = () => {
       icon: <Globe className="h-8 w-8 text-white" />,
       color: "border-[#0077B5]",
       hoverColor: "group-hover:bg-[#0077B5]",
+    },
+    {
+      name: "Email",
+      url: "mailto:vaidik50000@gmail.com",
+      icon: <Mail className="h-8 w-8 text-white" />,
+      color: "border-[#34D399]",
+      hoverColor: "group-hover:bg-[#34D399]",
     }
   ];
 
@@ -53,7 +60,7 @@ const SocialLinks = () => {
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.8, staggerChildren: 0.1 }}
           viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6"
         >
           {links.map((link, index) => (
             <motion.a
