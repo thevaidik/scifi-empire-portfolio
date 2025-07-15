@@ -19,12 +19,12 @@ const Hero = () => {
           <h1 className="text-5xl md:text-7xl font-bold text-white">
             Hey, Vaidik here
             <div className="text-2xl md:text-3xl font-light mt-4 text-[#D8D8DA]">
-              "perception is reality"
+              "Perception is reality"
             </div>
           </h1>
           
           <p className="text-lg md:text-xl text-[#E8E8EA] max-w-2xl mx-auto">
-            Normally I do development for Apple platforms (iOS, macOS, etc)
+            I do ideas and Apple (iOS, macOS, etc) | Feel free to reach out for noble collaborations, or just to say hi!
           </p>
         </motion.div>
       </motion.div>
