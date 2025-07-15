@@ -6,22 +6,22 @@ const SocialLinks = () => {
   const links = [
     {
       name: "GitHub",
-      url: "https://github.com/yourusername",
+      url: "https://github.com/thevaidik",
       icon: <Github className="h-6 w-6 text-white" />,
     },
     {
       name: "Twitter",
-      url: "https://twitter.com/yourusername", 
+      url: "https://twitter.com/thevaidik_", 
       icon: <Twitter className="h-6 w-6 text-white" />,
     },
     {
       name: "YouTube",
-      url: "https://youtube.com/yourchannel",
+      url: "https://youtube.com/thevaidik_",
       icon: <Youtube className="h-6 w-6 text-white" />,
     },
     {
       name: "LinkedIn",
-      url: "https://linkedin.com/in/yourusername",
+      url: "https://linkedin.com/in/vaidikxx",
       icon: <Linkedin className="h-6 w-6 text-white" />,
     },
     {
