@@ -4,18 +4,18 @@ import ProjectCard from "./ProjectCard";
 
 const projectsData = [
   {
-    title: "Quantum Portfolio",
-    description: "A revolutionary way to showcase creative work with quantum-inspired animations.",
-    image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5",
+    title: "Briefly - AI News",
+    description: "News Aggregator written in Swift and Go.",
+    image: "https://drive.google.com/file/d/1oHDTnCFD6HEfEy35yyv8aDr4mzBqi0-O/view?usp=share_link",
     tags: ["React", "Three.js", "GSAP"],
     link: "https://apps.apple.com/app/quantum-portfolio/id123456789",
   },
   {
-    title: "Neural Network Blog",
+    title: "XMPP Open Source blog",
     description: "AI-powered blog platform with dynamic content generation.",
-    image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e",
+    image: "https://upload.wikimedia.org/wikipedia/commons/9/95/XMPP_logo.svg",
     tags: ["Next.js", "TailwindCSS", "AI"],
-    link: "https://apps.apple.com/app/neural-network-blog/id123456790",
+    link: "https://medium.com/@thevaidik/google-summer-of-code-gsoc-my-experience-1-xmpp-standards-foundation-da781ac95560",
   },
   {
     title: "Cyberpunk Dashboard",
