@@ -16,7 +16,7 @@ const SocialLinks = () => {
     },
     {
       name: "YouTube",
-      url: "https://youtube.com/thevaidik_",
+      url: "https://www.youtube.com/@thevaidik_",
       icon: <Youtube className="h-6 w-6 text-white" />,
     },
     {
