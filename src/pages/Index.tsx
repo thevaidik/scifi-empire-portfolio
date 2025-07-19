@@ -6,7 +6,7 @@ import Interests from "@/components/Interests";
 import Projects from "@/components/Projects";
 import SocialLinks from "@/components/SocialLinks";
 import Bento from "@/components/Bento";
-import EarthBackground from "@/components/EarthBackground";
+
 import { motion } from "framer-motion";
 
 const Index = () => {
@@ -23,9 +23,8 @@ const Index = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="text-white overflow-hidden relative"
+      className="text-white overflow-hidden relative bg-gradient-to-br from-blue-900/20 via-background to-blue-800/10 min-h-screen"
     >
-      <EarthBackground />
       <Navigation />
       <Hero />
       <Interests />
