@@ -27,7 +27,7 @@ const Navigation = () => {
       <motion.div
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        className="bg-[#404042]/80 backdrop-blur-lg rounded-full px-6 py-3 border border-[#777779]/50 shadow-lg"
+        className="bg-card/80 backdrop-blur-lg rounded-full px-6 py-3 border border-border/50 shadow-lg"
       >
         <ul className="flex space-x-8">
           {navItems.map(({ id, Icon, label, path }) => (
@@ -36,8 +36,8 @@ const Navigation = () => {
                 href={path}
                 className={`flex items-center space-x-2 text-sm transition-colors ${
                   activeSection === id
-                    ? "text-[#E8E8EA] font-medium"
-                    : "text-[#B8B8BA] hover:text-white"
+                    ? "text-primary font-medium"
+                    : "text-muted-foreground hover:text-foreground"
                 }`}
                 onClick={(e) => {
                   e.preventDefault();
