@@ -59,40 +59,40 @@
   }
 
   .dark {
-    --background: 0 0% 9%;
+    --background: 0 0% 7%;
     --foreground: 0 0% 95%;
 
-    --card: 0 0% 11%;
+    --card: 0 0% 12%;
     --card-foreground: 0 0% 95%;
 
-    --popover: 0 0% 11%;
+    --popover: 0 0% 12%;
     --popover-foreground: 0 0% 95%;
 
-    --primary: 211 100% 60%;
+    --primary: 120 100% 50%;
     --primary-foreground: 0 0% 9%;
 
     --secondary: 0 0% 15%;
     --secondary-foreground: 0 0% 95%;
 
-    --muted: 0 0% 13%;
-    --muted-foreground: 0 0% 65%;
+    --muted: 0 0% 18%;
+    --muted-foreground: 0 0% 70%;
 
-    --accent: 0 0% 15%;
+    --accent: 120 100% 40%;
     --accent-foreground: 0 0% 95%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 95%;
 
-    --border: 0 0% 18%;
+    --border: 0 0% 22%;
     --input: 0 0% 15%;
-    --ring: 211 100% 60%;
+    --ring: 120 100% 50%;
     
-    /* Liquid Glass Design Tokens - Dark Mode */
-    --glass-bg: 0 0% 100% / 0.03;
-    --glass-border: 0 0% 100% / 0.08;
-    --glass-hover: 0 0% 100% / 0.06;
-    --glass-glow: 211 100% 70% / 0.12;
-    --glass-reflection: 0 0% 100% / 0.01;
+    /* Terminal Glass Design Tokens - Dark Mode */
+    --glass-bg: 0 0% 12% / 0.8;
+    --glass-border: 120 100% 50% / 0.2;
+    --glass-hover: 0 0% 15% / 0.9;
+    --glass-glow: 120 100% 50% / 0.15;
+    --glass-reflection: 120 100% 70% / 0.05;
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -111,5 +111,21 @@
 
   body {
     @apply bg-background text-foreground;
+  }
+
+  /* Terminal styling */
+  .terminal-pattern {
+    background-image: 
+      radial-gradient(circle at 1px 1px, rgba(0, 255, 0, 0.05) 1px, transparent 0);
+    background-size: 20px 20px;
+  }
+
+  /* Glass morphism utilities */
+  .glass-panel {
+    @apply bg-glass-bg backdrop-blur-xl border border-glass-border shadow-lg;
+  }
+
+  .glass-panel:hover {
+    @apply bg-glass-hover border-glass-hover shadow-xl shadow-glass-glow;
   }
 }
