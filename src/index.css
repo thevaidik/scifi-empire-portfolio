@@ -60,39 +60,39 @@
 
   .dark {
     --background: 0 0% 7%;
-    --foreground: 0 0% 95%;
+    --foreground: 0 0% 98%;
 
     --card: 0 0% 12%;
-    --card-foreground: 0 0% 95%;
+    --card-foreground: 0 0% 98%;
 
     --popover: 0 0% 12%;
-    --popover-foreground: 0 0% 95%;
+    --popover-foreground: 0 0% 98%;
 
     --primary: 120 100% 50%;
     --primary-foreground: 0 0% 9%;
 
     --secondary: 0 0% 15%;
-    --secondary-foreground: 0 0% 95%;
+    --secondary-foreground: 0 0% 98%;
 
     --muted: 0 0% 18%;
-    --muted-foreground: 0 0% 70%;
+    --muted-foreground: 0 0% 85%;
 
     --accent: 120 100% 40%;
-    --accent-foreground: 0 0% 95%;
+    --accent-foreground: 0 0% 98%;
 
     --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 95%;
+    --destructive-foreground: 0 0% 98%;
 
     --border: 0 0% 22%;
     --input: 0 0% 15%;
     --ring: 120 100% 50%;
     
-    /* Terminal Glass Design Tokens - Dark Mode */
-    --glass-bg: 0 0% 12% / 0.8;
-    --glass-border: 120 100% 50% / 0.2;
-    --glass-hover: 0 0% 15% / 0.9;
-    --glass-glow: 120 100% 50% / 0.15;
-    --glass-reflection: 120 100% 70% / 0.05;
+    /* Terminal Glass Design Tokens - Higher Opacity for Better Text Visibility */
+    --glass-bg: 0 0% 8% / 0.95;
+    --glass-border: 120 100% 50% / 0.3;
+    --glass-hover: 0 0% 12% / 0.98;
+    --glass-glow: 120 100% 50% / 0.2;
+    --glass-reflection: 120 100% 70% / 0.08;
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
