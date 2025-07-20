@@ -59,23 +59,23 @@
   }
 
   .dark {
-    --background: 0 0% 7%;
+    --background: 0 0% 25%;
     --foreground: 0 0% 98%;
 
-    --card: 0 0% 12%;
+    --card: 0 0% 30%;
     --card-foreground: 0 0% 98%;
 
-    --popover: 0 0% 12%;
+    --popover: 0 0% 30%;
     --popover-foreground: 0 0% 98%;
 
     --primary: 120 100% 50%;
     --primary-foreground: 0 0% 9%;
 
-    --secondary: 0 0% 15%;
+    --secondary: 0 0% 35%;
     --secondary-foreground: 0 0% 98%;
 
-    --muted: 0 0% 18%;
-    --muted-foreground: 0 0% 85%;
+    --muted: 0 0% 40%;
+    --muted-foreground: 0 0% 90%;
 
     --accent: 120 100% 40%;
     --accent-foreground: 0 0% 98%;
@@ -83,16 +83,16 @@
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 0 0% 22%;
-    --input: 0 0% 15%;
+    --border: 0 0% 45%;
+    --input: 0 0% 35%;
     --ring: 120 100% 50%;
     
-    /* Terminal Glass Design Tokens - Higher Opacity for Better Text Visibility */
-    --glass-bg: 0 0% 8% / 0.95;
-    --glass-border: 120 100% 50% / 0.3;
-    --glass-hover: 0 0% 12% / 0.98;
-    --glass-glow: 120 100% 50% / 0.2;
-    --glass-reflection: 120 100% 70% / 0.08;
+    /* Terminal Glass Design Tokens - Lighter Background */
+    --glass-bg: 0 0% 20% / 0.9;
+    --glass-border: 120 100% 50% / 0.4;
+    --glass-hover: 0 0% 25% / 0.95;
+    --glass-glow: 120 100% 50% / 0.25;
+    --glass-reflection: 120 100% 70% / 0.1;
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;

@@ -23,7 +23,7 @@ const Index = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="text-foreground overflow-hidden relative bg-gradient-to-br from-black via-gray-950 to-green-950 min-h-screen"
+      className="text-foreground overflow-hidden relative bg-gradient-to-br from-gray-700 via-gray-800 to-emerald-900 min-h-screen"
     >
       <Navigation />
       <Hero />
