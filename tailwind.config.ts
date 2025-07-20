@@ -31,12 +31,12 @@ export default {
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
-        scifi: {
-          primary: "#9F9EA1",
-          secondary: "#8E9196",
-          accent: "#C8C8C9",
-          dark: "#403E43",
-          light: "#F1F1F1",
+        glass: {
+          bg: "hsl(var(--glass-bg))",
+          border: "hsl(var(--glass-border))",
+          hover: "hsl(var(--glass-hover))",
+          glow: "hsl(var(--glass-glow))",
+          reflection: "hsl(var(--glass-reflection))",
         },
         primary: {
           DEFAULT: "hsl(var(--primary))",
@@ -84,12 +84,23 @@ export default {
           "0%, 100%": { opacity: "1" },
           "50%": { opacity: "0.5" },
         },
+        "liquid-flow": {
+          "0%": { transform: "translateY(0) scale(1)", opacity: "0.8" },
+          "50%": { transform: "translateY(-5px) scale(1.02)", opacity: "1" },
+          "100%": { transform: "translateY(0) scale(1)", opacity: "0.8" },
+        },
+        "glass-shimmer": {
+          "0%": { backgroundPosition: "-200% 0" },
+          "100%": { backgroundPosition: "200% 0" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         float: "float 6s ease-in-out infinite",
         glow: "glow 3s ease-in-out infinite",
+        "liquid-flow": "liquid-flow 4s ease-in-out infinite",
+        "glass-shimmer": "glass-shimmer 2s linear infinite",
       },
     },
   },

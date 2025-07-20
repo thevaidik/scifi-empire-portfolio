@@ -40,8 +40,8 @@ const Interests = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Fields of Interest</h2>
-          <p className="text-[#B8B8BA] max-w-2xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Fields of Interest</h2>
+          <p className="text-muted-foreground max-w-2xl mx-auto">
             Exploring the intersection of consciousness, technology, and artificial intelligence
           </p>
         </motion.div>
@@ -56,13 +56,13 @@ const Interests = () => {
               transition={{ delay: index * 0.2 }}
               className="group"
             >
-              <div className="p-8 rounded-xl bg-[#404042]/50 backdrop-blur-lg border border-[#777779]/30 hover:border-[#A8A8AA]/50 transition-all duration-300">
-                <div className="w-16 h-16 rounded-full bg-[#777779]/30 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                  <interest.icon className="w-8 h-8 text-[#D0D0D2]" />
+              <div className="p-8 rounded-2xl bg-glass-bg backdrop-blur-xl border border-glass-border hover:border-glass-hover hover:bg-glass-hover transition-all duration-500 shadow-lg hover:shadow-xl hover:shadow-glass-glow relative overflow-hidden before:absolute before:inset-0 before:bg-gradient-to-br before:from-glass-reflection before:to-transparent before:pointer-events-none group-hover:animate-liquid-flow">
+                <div className="w-16 h-16 rounded-full bg-glass-border flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-inner">
+                  <interest.icon className="w-8 h-8 text-foreground" />
                 </div>
                 
-                <h3 className="text-xl font-semibold text-white mb-4">{interest.title}</h3>
-                <p className="text-[#B8B8BA]">{interest.description}</p>
+                <h3 className="text-xl font-semibold text-foreground mb-4">{interest.title}</h3>
+                <p className="text-muted-foreground">{interest.description}</p>
               </div>
             </motion.div>
           ))}

@@ -32,7 +32,14 @@
     --input: 0 0% 90%;
     --ring: 211 100% 50%;
 
-    --radius: 0.5rem;
+    --radius: 1rem;
+    
+    /* Liquid Glass Design Tokens */
+    --glass-bg: 0 0% 100% / 0.05;
+    --glass-border: 0 0% 100% / 0.1;
+    --glass-hover: 0 0% 100% / 0.08;
+    --glass-glow: 211 100% 60% / 0.15;
+    --glass-reflection: 0 0% 100% / 0.02;
 
     --sidebar-background: 0 0% 98%;
 
@@ -79,6 +86,13 @@
     --border: 0 0% 18%;
     --input: 0 0% 15%;
     --ring: 211 100% 60%;
+    
+    /* Liquid Glass Design Tokens - Dark Mode */
+    --glass-bg: 0 0% 100% / 0.03;
+    --glass-border: 0 0% 100% / 0.08;
+    --glass-hover: 0 0% 100% / 0.06;
+    --glass-glow: 211 100% 70% / 0.12;
+    --glass-reflection: 0 0% 100% / 0.01;
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;

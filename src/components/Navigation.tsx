@@ -27,7 +27,7 @@ const Navigation = () => {
       <motion.div
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        className="bg-card/80 backdrop-blur-lg rounded-full px-6 py-3 border border-border/50 shadow-lg"
+        className="bg-glass-bg backdrop-blur-xl rounded-full px-6 py-3 border border-glass-border shadow-xl shadow-glass-glow relative overflow-hidden before:absolute before:inset-0 before:bg-gradient-to-r before:from-glass-reflection before:to-transparent before:pointer-events-none"
       >
         <ul className="flex space-x-8">
           {navItems.map(({ id, Icon, label, path }) => (
