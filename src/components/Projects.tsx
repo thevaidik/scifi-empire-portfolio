@@ -42,16 +42,29 @@ const Projects = () => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Timeline Layout */}
+        <div className="relative max-w-4xl mx-auto">
+          {/* Timeline Line */}
+          <div className="absolute left-1/2 transform -translate-x-1/2 w-0.5 bg-gradient-to-b from-primary via-accent to-primary h-full opacity-60"></div>
+          
           {projectsData.map((project, index) => (
             <motion.div
               key={project.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.2 }}
+              transition={{ delay: index * 0.3 }}
+              className={`relative flex items-center mb-12 ${
+                index % 2 === 0 ? "justify-start" : "justify-end"
+              }`}
             >
-              <ProjectCard {...project} />
+              {/* Timeline Node */}
+              <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-primary rounded-full border-4 border-background shadow-lg shadow-primary/30 z-10"></div>
+              
+              {/* Project Card */}
+              <div className={`w-full max-w-md ${index % 2 === 0 ? "mr-auto pr-8" : "ml-auto pl-8"}`}>
+                <ProjectCard {...project} compact={true} />
+              </div>
             </motion.div>
           ))}
         </div>

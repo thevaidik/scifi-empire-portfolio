@@ -60,28 +60,28 @@
 
   .dark {
     --background: 0 0% 32%;
-    --foreground: 0 0% 98%;
+    --foreground: 0 0% 95%; /* Shining titanium silver */
 
     --card: 0 0% 45%;
-    --card-foreground: 0 0% 98%;
+    --card-foreground: 0 0% 95%; /* Light silver text */
 
     --popover: 0 0% 45%;
-    --popover-foreground: 0 0% 98%;
+    --popover-foreground: 0 0% 95%; /* Light silver text */
 
     --primary: 120 100% 50%;
     --primary-foreground: 0 0% 9%;
 
     --secondary: 0 0% 50%;
-    --secondary-foreground: 0 0% 98%;
+    --secondary-foreground: 0 0% 95%; /* Light silver text */
 
     --muted: 0 0% 55%;
-    --muted-foreground: 0 0% 95%;
+    --muted-foreground: 0 0% 85%; /* Lighter muted text */
 
     --accent: 120 100% 40%;
-    --accent-foreground: 0 0% 98%;
+    --accent-foreground: 0 0% 95%; /* Light silver text */
 
     --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 98%;
+    --destructive-foreground: 0 0% 95%; /* Light silver text */
 
     --border: 0 0% 60%;
     --input: 0 0% 50%;
