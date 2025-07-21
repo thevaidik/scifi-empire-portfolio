@@ -4,42 +4,42 @@
 
 @layer base {
   :root {
-    --background: 0 0% 98%;
-    --foreground: 0 0% 9%;
+    --background: 0 0% 32%; /* Dark background */
+    --foreground: 0 0% 95%; /* Light foreground text */
 
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 9%;
+    --card: 0 0% 45%; /* Light card background */
+    --card-foreground: 0 0% 95%; /* Light text on cards */
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 9%;
+    --popover: 0 0% 45%; /* Light popover background */
+    --popover-foreground: 0 0% 95%; /* Light text in popovers */
 
-    --primary: 211 100% 50%;
-    --primary-foreground: 0 0% 98%;
+    --primary: 120 100% 50%; /* Bright green primary */
+    --primary-foreground: 0 0% 9%; /* Dark text on primary */
 
-    --secondary: 0 0% 96%;
-    --secondary-foreground: 0 0% 9%;
+    --secondary: 0 0% 50%; /* Light secondary background */
+    --secondary-foreground: 0 0% 95%; /* Light text on secondary */
 
-    --muted: 0 0% 96%;
-    --muted-foreground: 0 0% 45%;
+    --muted: 0 0% 55%; /* Light muted background */
+    --muted-foreground: 0 0% 85%; /* Light muted text */
 
-    --accent: 0 0% 96%;
-    --accent-foreground: 0 0% 9%;
+    --accent: 120 100% 40%; /* Green accent */
+    --accent-foreground: 0 0% 95%; /* Light text on accent */
 
     --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 98%;
+    --destructive-foreground: 0 0% 95%; /* Light text on destructive */
 
-    --border: 0 0% 90%;
-    --input: 0 0% 90%;
-    --ring: 211 100% 50%;
+    --border: 0 0% 60%; /* Light borders */
+    --input: 0 0% 50%; /* Light inputs */
+    --ring: 120 100% 50%; /* Green focus ring */
 
     --radius: 1rem;
     
-    /* Liquid Glass Design Tokens */
-    --glass-bg: 0 0% 100% / 0.05;
-    --glass-border: 0 0% 100% / 0.1;
-    --glass-hover: 0 0% 100% / 0.08;
-    --glass-glow: 211 100% 60% / 0.15;
-    --glass-reflection: 0 0% 100% / 0.02;
+    /* Liquid Glass Design Tokens - Light Mode */
+    --glass-bg: 0 0% 35% / 0.9;
+    --glass-border: 120 100% 50% / 0.4;
+    --glass-hover: 0 0% 40% / 0.95;
+    --glass-glow: 120 100% 50% / 0.25;
+    --glass-reflection: 120 100% 70% / 0.1;
 
     --sidebar-background: 0 0% 98%;
 
