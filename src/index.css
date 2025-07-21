@@ -13,8 +13,8 @@
     --popover: 0 0% 45%; /* Light popover background */
     --popover-foreground: 0 0% 95%; /* Light text in popovers */
 
-    --primary: 120 100% 50%; /* Bright green primary */
-    --primary-foreground: 0 0% 9%; /* Dark text on primary */
+    --primary: 211 100% 50%; /* Original blue primary */
+    --primary-foreground: 0 0% 98%; /* Light text on primary */
 
     --secondary: 0 0% 50%; /* Light secondary background */
     --secondary-foreground: 0 0% 95%; /* Light text on secondary */
@@ -22,7 +22,7 @@
     --muted: 0 0% 55%; /* Light muted background */
     --muted-foreground: 0 0% 85%; /* Light muted text */
 
-    --accent: 120 100% 40%; /* Green accent */
+    --accent: 211 100% 40%; /* Blue accent */
     --accent-foreground: 0 0% 95%; /* Light text on accent */
 
     --destructive: 0 84% 60%;
@@ -30,16 +30,16 @@
 
     --border: 0 0% 60%; /* Light borders */
     --input: 0 0% 50%; /* Light inputs */
-    --ring: 120 100% 50%; /* Green focus ring */
+    --ring: 211 100% 50%; /* Blue focus ring */
 
     --radius: 1rem;
     
     /* Liquid Glass Design Tokens - Light Mode */
     --glass-bg: 0 0% 35% / 0.9;
-    --glass-border: 120 100% 50% / 0.4;
+    --glass-border: 211 100% 50% / 0.4; /* Blue border */
     --glass-hover: 0 0% 40% / 0.95;
-    --glass-glow: 120 100% 50% / 0.25;
-    --glass-reflection: 120 100% 70% / 0.1;
+    --glass-glow: 211 100% 60% / 0.25; /* Blue glow */
+    --glass-reflection: 211 100% 70% / 0.1; /* Blue reflection */
 
     --sidebar-background: 0 0% 98%;
 
@@ -68,7 +68,7 @@
     --popover: 0 0% 45%;
     --popover-foreground: 0 0% 95%; /* Light silver text */
 
-    --primary: 120 100% 50%;
+    --primary: 211 100% 50%; /* Original blue primary */
     --primary-foreground: 0 0% 9%;
 
     --secondary: 0 0% 50%;
@@ -77,7 +77,7 @@
     --muted: 0 0% 55%;
     --muted-foreground: 0 0% 85%; /* Lighter muted text */
 
-    --accent: 120 100% 40%;
+    --accent: 211 100% 40%; /* Blue accent */
     --accent-foreground: 0 0% 95%; /* Light silver text */
 
     --destructive: 0 84% 60%;
@@ -85,14 +85,14 @@
 
     --border: 0 0% 60%;
     --input: 0 0% 50%;
-    --ring: 120 100% 50%;
+    --ring: 211 100% 50%; /* Blue focus ring */
     
     /* Terminal Glass Design Tokens - Lighter Background */
     --glass-bg: 0 0% 35% / 0.9;
-    --glass-border: 120 100% 50% / 0.4;
+    --glass-border: 211 100% 50% / 0.4; /* Blue border */
     --glass-hover: 0 0% 40% / 0.95;
-    --glass-glow: 120 100% 50% / 0.25;
-    --glass-reflection: 120 100% 70% / 0.1;
+    --glass-glow: 211 100% 50% / 0.25; /* Blue glow */
+    --glass-reflection: 211 100% 70% / 0.1; /* Blue reflection */
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
