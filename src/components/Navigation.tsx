@@ -23,7 +23,7 @@ const Navigation = () => {
   ];
 
   return (
-    <nav className="fixed top-0 left-1/2 transform -translate-x-1/2 z-50 py-4">
+    <nav className="fixed top-0 left-1/2 transform -translate-x-1/2 z-50 pt-2 pb-4">
       <motion.div
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
