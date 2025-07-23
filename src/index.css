@@ -35,11 +35,11 @@
     --radius: 1rem;
     
     /* Liquid Glass Design Tokens - Light Mode */
-    --glass-bg: 0 0% 35% / 0.9;
-    --glass-border: 211 100% 50% / 0.4; /* Blue border */
-    --glass-hover: 0 0% 40% / 0.95;
-    --glass-glow: 211 100% 60% / 0.25; /* Blue glow */
-    --glass-reflection: 211 100% 70% / 0.1; /* Blue reflection */
+    --glass-bg: 0 0% 15% / 0.3;
+    --glass-border: 211 100% 50% / 0.2; /* Blue border */
+    --glass-hover: 0 0% 20% / 0.4;
+    --glass-glow: 211 100% 60% / 0.15; /* Blue glow */
+    --glass-reflection: 211 100% 70% / 0.05; /* Blue reflection */
 
     --sidebar-background: 0 0% 98%;
 
@@ -88,11 +88,11 @@
     --ring: 211 100% 50%; /* Blue focus ring */
     
     /* Terminal Glass Design Tokens - Lighter Background */
-    --glass-bg: 0 0% 35% / 0.9;
-    --glass-border: 211 100% 50% / 0.4; /* Blue border */
-    --glass-hover: 0 0% 40% / 0.95;
-    --glass-glow: 211 100% 50% / 0.25; /* Blue glow */
-    --glass-reflection: 211 100% 70% / 0.1; /* Blue reflection */
+    --glass-bg: 0 0% 15% / 0.3;
+    --glass-border: 211 100% 50% / 0.2; /* Blue border */
+    --glass-hover: 0 0% 20% / 0.4;
+    --glass-glow: 211 100% 50% / 0.15; /* Blue glow */
+    --glass-reflection: 211 100% 70% / 0.05; /* Blue reflection */
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;

@@ -42,31 +42,55 @@ const Projects = () => {
           </p>
         </motion.div>
 
-        {/* Timeline Layout */}
-        <div className="relative max-w-4xl mx-auto">
-          {/* Timeline Line */}
-          <div className="absolute left-1/2 transform -translate-x-1/2 w-0.5 bg-gradient-to-b from-primary via-accent to-primary h-full opacity-60"></div>
-          
-          {projectsData.map((project, index) => (
-            <motion.div
-              key={project.title}
-              initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.3 }}
-              className={`relative flex items-center mb-12 ${
-                index % 2 === 0 ? "justify-start" : "justify-end"
-              }`}
-            >
-              {/* Timeline Node */}
-              <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-primary rounded-full border-4 border-background shadow-lg shadow-primary/30 z-10"></div>
-              
-              {/* Project Card */}
-              <div className={`w-full max-w-md ${index % 2 === 0 ? "mr-auto pr-8" : "ml-auto pl-8"}`}>
-                <ProjectCard {...project} compact={true} />
-              </div>
-            </motion.div>
-          ))}
+        {/* Table Format - 2 Rows */}
+        <div className="max-w-6xl mx-auto">
+          {/* First Row */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8"
+          >
+            {projectsData.slice(0, 2).map((project, index) => (
+              <motion.div
+                key={project.title}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.2 }}
+                className="group"
+              >
+                <div className="p-6 rounded-2xl bg-orange-500/20 backdrop-blur-xl border border-orange-400/30 hover:border-orange-300/50 hover:bg-orange-500/30 transition-all duration-500 shadow-lg hover:shadow-xl hover:shadow-orange-500/20 relative overflow-hidden before:absolute before:inset-0 before:bg-gradient-to-br before:from-orange-400/10 before:to-transparent before:pointer-events-none group-hover:animate-liquid-flow">
+                  <ProjectCard {...project} compact={true} />
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          {/* Second Row */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="flex justify-center"
+          >
+            {projectsData.slice(2, 3).map((project, index) => (
+              <motion.div
+                key={project.title}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.4 }}
+                className="group w-full max-w-md"
+              >
+                <div className="p-6 rounded-2xl bg-orange-500/20 backdrop-blur-xl border border-orange-400/30 hover:border-orange-300/50 hover:bg-orange-500/30 transition-all duration-500 shadow-lg hover:shadow-xl hover:shadow-orange-500/20 relative overflow-hidden before:absolute before:inset-0 before:bg-gradient-to-br before:from-orange-400/10 before:to-transparent before:pointer-events-none group-hover:animate-liquid-flow">
+                  <ProjectCard {...project} compact={true} />
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
       </div>
     </section>
