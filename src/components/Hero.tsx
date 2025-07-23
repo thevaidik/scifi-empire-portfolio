@@ -24,7 +24,7 @@ const Hero = () => {
           </h1>
           
           <p className="text-lg md:text-xl text-foreground/80 max-w-2xl mx-auto">
-            founder , ideas , apple systems | Feel free to reach out for noble collaborations, or just to say hi!
+            Founder and Apple systems (iOS, visionOS dev) | Feel free to reach out for noble collaborations, or just to say hi!
           </p>
         </motion.div>
       </motion.div>
