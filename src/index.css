@@ -128,4 +128,24 @@
   .glass-panel:hover {
     @apply bg-glass-hover border-glass-hover shadow-xl shadow-glass-glow;
   }
+
+  /* Liquid Glass Animation */
+  @keyframes liquid-flow {
+    0%, 100% {
+      transform: translateX(0%) translateY(0%) rotate(0deg);
+    }
+    25% {
+      transform: translateX(1%) translateY(-1%) rotate(0.5deg);
+    }
+    50% {
+      transform: translateX(-1%) translateY(1%) rotate(-0.5deg);
+    }
+    75% {
+      transform: translateX(1%) translateY(1%) rotate(0.25deg);
+    }
+  }
+
+  .animate-liquid-flow {
+    animation: liquid-flow 6s ease-in-out infinite;
+  }
 }
