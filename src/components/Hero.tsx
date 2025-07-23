@@ -14,7 +14,7 @@ const Hero = () => {
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ delay: 0.2 }}
-          className="space-y-6 bg-glass-bg backdrop-blur-xl rounded-3xl p-8 border border-glass-border shadow-2xl shadow-glass-glow relative overflow-hidden before:absolute before:inset-0 before:bg-gradient-to-br before:from-glass-reflection before:to-transparent before:pointer-events-none animate-liquid-flow"
+          className="space-y-4 bg-glass-bg backdrop-blur-xl rounded-2xl p-6 border border-glass-border shadow-2xl shadow-glass-glow relative overflow-hidden before:absolute before:inset-0 before:bg-gradient-to-br before:from-glass-reflection before:to-transparent before:pointer-events-none animate-liquid-flow"
         >
           <h1 className="text-5xl md:text-7xl font-bold text-foreground">
             Hey, Vaidik here
@@ -24,7 +24,7 @@ const Hero = () => {
           </h1>
           
           <p className="text-lg md:text-xl text-foreground/80 max-w-2xl mx-auto">
-            I do ideas and Apple (iOS, macOS, etc) | Feel free to reach out for noble collaborations, or just to say hi!
+            founder , ideas , apple systems | Feel free to reach out for noble collaborations, or just to say hi!
           </p>
         </motion.div>
       </motion.div>
