@@ -18,9 +18,6 @@ const Hero = () => {
         >
           <h1 className="text-5xl md:text-7xl font-bold text-foreground">
             Hey, Vaidik here
-            <div className="text-2xl md:text-3xl font-light mt-4 text-muted-foreground">
-              "Perception is reality"
-            </div>
           </h1>
           
           <p className="text-lg md:text-xl text-foreground/80 max-w-2xl mx-auto">
