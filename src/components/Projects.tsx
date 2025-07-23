@@ -61,9 +61,7 @@ const Projects = () => {
                 transition={{ delay: index * 0.2 }}
                 className="group"
               >
-                <div className="p-6 rounded-2xl bg-glass-bg backdrop-blur-xl border border-glass-border hover:border-glass-hover hover:bg-glass-hover transition-all duration-500 shadow-lg hover:shadow-xl hover:shadow-glass-glow relative overflow-hidden before:absolute before:inset-0 before:bg-gradient-to-br before:from-glass-reflection before:to-transparent before:pointer-events-none group-hover:animate-liquid-flow">
-                  <ProjectCard {...project} compact={true} />
-                </div>
+                <ProjectCard {...project} compact={true} />
               </motion.div>
             ))}
           </motion.div>
@@ -85,9 +83,7 @@ const Projects = () => {
                 transition={{ delay: 0.4 }}
                 className="group w-full max-w-md"
               >
-                <div className="p-6 rounded-2xl bg-glass-bg backdrop-blur-xl border border-glass-border hover:border-glass-hover hover:bg-glass-hover transition-all duration-500 shadow-lg hover:shadow-xl hover:shadow-glass-glow relative overflow-hidden before:absolute before:inset-0 before:bg-gradient-to-br before:from-glass-reflection before:to-transparent before:pointer-events-none group-hover:animate-liquid-flow">
-                  <ProjectCard {...project} compact={true} />
-                </div>
+                <ProjectCard {...project} compact={true} />
               </motion.div>
             ))}
           </motion.div>
