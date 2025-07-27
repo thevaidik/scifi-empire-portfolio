@@ -18,7 +18,7 @@ const Navigation = () => {
   const navItems = [
     { id: "about", Icon: Star, label: "About", path: "/" },
     { id: "projects", Icon: Rocket, label: "My Work", path: "/#projects" },
-    { id: "social", Icon: Users, label: "Connect", path: "/#social" },
+    { id: "social", Icon: Users, label: "Connect", path: "/connect" },
     { id: "bento", Icon: Globe, label: "Bento", path: "/#bento" },
   ];
 
@@ -40,6 +40,10 @@ const Navigation = () => {
                     : "text-muted-foreground hover:text-foreground"
                 }`}
                 onClick={(e) => {
+                  if (path.startsWith("/") && !path.includes("#")) {
+                    // External route - let the browser handle it
+                    return;
+                  }
                   e.preventDefault();
                   setActiveSection(id);
                   if (id === "about") {

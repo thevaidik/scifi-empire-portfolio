@@ -4,7 +4,7 @@ import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
 import Interests from "@/components/Interests";
 import Projects from "@/components/Projects";
-import ConnectCard from "@/components/ConnectCard";
+
 import Bento from "@/components/Bento";
 
 import { motion } from "framer-motion";
@@ -27,7 +27,7 @@ const Index = () => {
     >
       <Navigation />
       <Hero />
-      <ConnectCard />
+      
       <Interests />
       <Projects />
       <Bento />
