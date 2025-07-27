@@ -39,10 +39,9 @@ const SocialLinks = () => {
     <section id="social" className="py-16 bg-transparent">
       <div className="container mx-auto px-4">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
           transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
           className="text-center mb-8"
         >
           <h2 className="text-3xl font-bold mb-3 text-foreground">Connect With Me</h2>
@@ -53,10 +52,9 @@ const SocialLinks = () => {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
           className="flex flex-wrap justify-center gap-3 max-w-3xl mx-auto"
         >
           {links.map((link, index) => (
@@ -65,10 +63,9 @@ const SocialLinks = () => {
               href={link.url}
               target="_blank"
               rel="noopener noreferrer"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.05 }}
-              viewport={{ once: true }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3, delay: 0.5 + index * 0.05 }}
               className="group flex items-center gap-2 px-4 py-2.5 rounded-xl bg-glass-bg backdrop-blur-xl border border-glass-border hover:border-glass-hover hover:bg-glass-hover transition-all duration-300 shadow-md hover:shadow-lg hover:shadow-glass-glow relative overflow-hidden before:absolute before:inset-0 before:bg-gradient-to-br before:from-glass-reflection before:to-transparent before:pointer-events-none"
             >
               <div className="w-8 h-8 rounded-lg bg-glass-border flex items-center justify-center group-hover:scale-105 transition-transform duration-200">
