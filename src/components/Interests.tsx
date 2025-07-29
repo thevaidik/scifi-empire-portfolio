@@ -46,7 +46,7 @@ const Interests = () => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {interestData.map((interest, index) => (
             <motion.div
               key={interest.title}
@@ -56,13 +56,13 @@ const Interests = () => {
               transition={{ delay: index * 0.2 }}
               className="group"
             >
-              <div className="p-8 rounded-2xl bg-glass-bg backdrop-blur-xl border border-glass-border hover:border-glass-hover hover:bg-glass-hover transition-all duration-500 shadow-lg hover:shadow-xl hover:shadow-glass-glow relative overflow-hidden before:absolute before:inset-0 before:bg-gradient-to-br before:from-glass-reflection before:to-transparent before:pointer-events-none group-hover:animate-liquid-flow">
-                <div className="w-16 h-16 rounded-full bg-glass-border flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-inner">
-                  <interest.icon className="w-8 h-8 text-foreground" />
+              <div className="p-6 rounded-2xl bg-glass-bg backdrop-blur-xl border border-glass-border hover:border-glass-hover hover:bg-glass-hover transition-all duration-500 shadow-lg hover:shadow-xl hover:shadow-glass-glow relative overflow-hidden before:absolute before:inset-0 before:bg-gradient-to-br before:from-glass-reflection before:to-transparent before:pointer-events-none group-hover:animate-liquid-flow">
+                <div className="w-12 h-12 rounded-full bg-glass-border flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 shadow-inner">
+                  <interest.icon className="w-6 h-6 text-foreground" />
                 </div>
                 
-                <h3 className="text-xl font-semibold text-foreground mb-4">{interest.title}</h3>
-                <p className="text-muted-foreground">{interest.description}</p>
+                <h3 className="text-lg font-semibold text-foreground mb-3">{interest.title}</h3>
+                <p className="text-sm text-muted-foreground">{interest.description}</p>
               </div>
             </motion.div>
           ))}
