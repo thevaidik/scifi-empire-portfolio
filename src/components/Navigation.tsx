@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Star, Rocket, Globe, Users } from "lucide-react";
+import { Star, Rocket, Globe } from "lucide-react";
 
 const Navigation = () => {
   const [activeSection, setActiveSection] = useState("about");
@@ -18,7 +18,6 @@ const Navigation = () => {
   const navItems = [
     { id: "about", Icon: Star, label: "About", path: "/" },
     { id: "projects", Icon: Rocket, label: "My Work", path: "/#projects" },
-    { id: "social", Icon: Users, label: "Connect", path: "/connect" },
     { id: "bento", Icon: Globe, label: "Bento", path: "/#bento" },
   ];
 
