@@ -65,45 +65,25 @@ const Projects = () => {
 
         {/* Table Format - 3x2 Grid */}
         <div className="max-w-6xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="grid grid-cols-1 md:grid-cols-2 gap-6"
-          >
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Left Column - 3 projects */}
             <div className="space-y-4">
-              {projectsData.slice(0, 3).map((project, index) => (
-                <motion.div
-                  key={project.title}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className="group"
-                >
+              {projectsData.slice(0, 3).map((project) => (
+                <div key={project.title} className="group">
                   <ProjectCard {...project} compact={true} />
-                </motion.div>
+                </div>
               ))}
             </div>
 
             {/* Right Column - 3 projects */}
             <div className="space-y-4">
-              {projectsData.slice(3, 6).map((project, index) => (
-                <motion.div
-                  key={project.title}
-                  initial={{ opacity: 0, x: 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 + 0.3 }}
-                  className="group"
-                >
+              {projectsData.slice(3, 6).map((project) => (
+                <div key={project.title} className="group">
                   <ProjectCard {...project} compact={true} />
-                </motion.div>
+                </div>
               ))}
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>
