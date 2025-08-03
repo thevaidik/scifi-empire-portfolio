@@ -4,33 +4,33 @@
 
 @layer base {
   :root {
-    --background: 0 0% 32%; /* Dark background */
-    --foreground: 0 0% 95%; /* Light foreground text */
+    --background: 225 35% 8%; /* Deep space blue */
+    --foreground: 220 25% 95%; /* Bright starlight */
 
-    --card: 0 0% 45%; /* Light card background */
-    --card-foreground: 0 0% 95%; /* Light text on cards */
+    --card: 225 30% 12%; /* Space card background */
+    --card-foreground: 220 25% 95%; /* Bright text on cards */
 
-    --popover: 0 0% 45%; /* Light popover background */
-    --popover-foreground: 0 0% 95%; /* Light text in popovers */
+    --popover: 225 30% 12%; /* Space popover background */
+    --popover-foreground: 220 25% 95%; /* Bright text in popovers */
 
-    --primary: 211 100% 50%; /* Original blue primary */
-    --primary-foreground: 0 0% 98%; /* Light text on primary */
+    --primary: 260 70% 65%; /* Cosmic purple */
+    --primary-foreground: 225 35% 8%; /* Dark text on primary */
 
-    --secondary: 0 0% 50%; /* Light secondary background */
-    --secondary-foreground: 0 0% 95%; /* Light text on secondary */
+    --secondary: 225 25% 18%; /* Dark space secondary */
+    --secondary-foreground: 220 25% 95%; /* Bright text on secondary */
 
-    --muted: 0 0% 55%; /* Light muted background */
-    --muted-foreground: 0 0% 85%; /* Light muted text */
+    --muted: 225 25% 15%; /* Muted space background */
+    --muted-foreground: 220 15% 70%; /* Muted stellar text */
 
-    --accent: 211 100% 40%; /* Blue accent */
-    --accent-foreground: 0 0% 95%; /* Light text on accent */
+    --accent: 280 60% 60%; /* Nebula purple accent */
+    --accent-foreground: 220 25% 95%; /* Bright text on accent */
 
     --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 95%; /* Light text on destructive */
+    --destructive-foreground: 0 0% 95%; /* Bright text on destructive */
 
-    --border: 0 0% 60%; /* Light borders */
-    --input: 0 0% 50%; /* Light inputs */
-    --ring: 211 100% 50%; /* Blue focus ring */
+    --border: 225 25% 20%; /* Space borders */
+    --input: 225 25% 18%; /* Space inputs */
+    --ring: 260 70% 65%; /* Cosmic focus ring */
 
     --radius: 1rem;
     
@@ -59,33 +59,33 @@
   }
 
   .dark {
-    --background: 0 0% 32%;
-    --foreground: 0 0% 95%; /* Shining titanium silver */
+    --background: 225 40% 6%; /* Deeper space */
+    --foreground: 220 30% 98%; /* Stellar brightness */
 
-    --card: 0 0% 45%;
-    --card-foreground: 0 0% 95%; /* Light silver text */
+    --card: 225 35% 10%; /* Deep space cards */
+    --card-foreground: 220 30% 98%; /* Stellar text */
 
-    --popover: 0 0% 45%;
-    --popover-foreground: 0 0% 95%; /* Light silver text */
+    --popover: 225 35% 10%; /* Deep space popovers */
+    --popover-foreground: 220 30% 98%; /* Stellar text */
 
-    --primary: 211 100% 50%; /* Original blue primary */
-    --primary-foreground: 0 0% 9%;
+    --primary: 260 80% 70%; /* Brighter cosmic purple */
+    --primary-foreground: 225 40% 6%; /* Deep space text */
 
-    --secondary: 0 0% 50%;
-    --secondary-foreground: 0 0% 95%; /* Light silver text */
+    --secondary: 225 30% 15%; /* Dark nebula secondary */
+    --secondary-foreground: 220 30% 98%; /* Stellar text */
 
-    --muted: 0 0% 55%;
-    --muted-foreground: 0 0% 85%; /* Lighter muted text */
+    --muted: 225 30% 12%; /* Deep muted space */
+    --muted-foreground: 220 20% 75%; /* Muted starlight */
 
-    --accent: 211 100% 40%; /* Blue accent */
-    --accent-foreground: 0 0% 95%; /* Light silver text */
+    --accent: 280 70% 65%; /* Bright nebula accent */
+    --accent-foreground: 220 30% 98%; /* Stellar text */
 
     --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 95%; /* Light silver text */
+    --destructive-foreground: 0 0% 98%; /* Stellar text */
 
-    --border: 0 0% 60%;
-    --input: 0 0% 50%;
-    --ring: 211 100% 50%; /* Blue focus ring */
+    --border: 225 30% 18%; /* Space borders */
+    --input: 225 30% 15%; /* Space inputs */
+    --ring: 260 80% 70%; /* Bright cosmic ring */
     
     /* Terminal Glass Design Tokens - Lighter Background */
     --glass-bg: 0 0% 15% / 0.3;
@@ -110,7 +110,37 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply text-foreground;
+    background: radial-gradient(ellipse at center, hsl(225 40% 12%) 0%, hsl(225 35% 8%) 40%, hsl(225 30% 6%) 100%);
+    background-attachment: fixed;
+    position: relative;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+      radial-gradient(2px 2px at 20px 30px, rgba(255, 255, 255, 0.3), transparent),
+      radial-gradient(2px 2px at 40px 70px, rgba(255, 255, 255, 0.2), transparent),
+      radial-gradient(1px 1px at 90px 40px, rgba(255, 255, 255, 0.4), transparent),
+      radial-gradient(1px 1px at 130px 80px, rgba(255, 255, 255, 0.3), transparent),
+      radial-gradient(2px 2px at 160px 30px, rgba(255, 255, 255, 0.2), transparent),
+      radial-gradient(1px 1px at 200px 100px, rgba(138, 43, 226, 0.4), transparent),
+      radial-gradient(2px 2px at 250px 50px, rgba(75, 0, 130, 0.3), transparent);
+    background-repeat: repeat;
+    background-size: 300px 300px;
+    pointer-events: none;
+    z-index: -1;
+    animation: twinkle 8s infinite;
+  }
+
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.8; }
+    50% { opacity: 1; }
   }
 
   /* Terminal styling */

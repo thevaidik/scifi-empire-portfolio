@@ -7,7 +7,7 @@ const projectsData = [
     title: "Briefly - AI News",
     description: "News Aggregator written in Swift and Go.",
     image: "https://drive.google.com/file/d/1oHDTnCFD6HEfEy35yyv8aDr4mzBqi0-O/view?usp=share_link",
-    tags: ["React", "Three.js", "GSAP"],
+    tags: ["Swift", "Go", "iOS"],
     link: "https://apps.apple.com/app/quantum-portfolio/id123456789",
   },
   {
@@ -24,68 +24,85 @@ const projectsData = [
     tags: ["Vue", "D3.js", "Firebase"],
     link: "https://apps.apple.com/app/cyberpunk-dashboard/id123456791",
   },
+  {
+    title: "Swift Robotics",
+    description: "Embedded systems programming with Swift for robotics.",
+    image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e",
+    tags: ["Swift", "Embedded", "Robotics"],
+    link: "https://github.com/swift-robotics",
+  },
+  {
+    title: "Consciousness AI",
+    description: "Exploring artificial consciousness and cognitive architectures.",
+    image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485",
+    tags: ["AI", "Research", "Python"],
+    link: "https://consciousness-ai.demo",
+  },
+  {
+    title: "Aviation Tracker",
+    description: "Real-time flight tracking and aviation data analysis.",
+    image: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05",
+    tags: ["React", "APIs", "Data"],
+    link: "https://aviation-tracker.demo",
+  },
 ];
 
 const Projects = () => {
   return (
-    <section id="projects" className="min-h-screen py-20 bg-transparent relative">
+    <section id="projects" className="py-12 bg-transparent relative">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-12"
         >
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Featured Work</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Explore my latest works that push the boundaries of web development
+            Explore my latest works that push the boundaries of technology
           </p>
         </motion.div>
 
-        {/* Table Format - 2 Rows */}
+        {/* Table Format - 3x2 Grid */}
         <div className="max-w-6xl mx-auto">
-          {/* First Row */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8"
+            className="grid grid-cols-1 md:grid-cols-2 gap-6"
           >
-            {projectsData.slice(0, 2).map((project, index) => (
-              <motion.div
-                key={project.title}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.2 }}
-                className="group"
-              >
-                <ProjectCard {...project} compact={true} />
-              </motion.div>
-            ))}
-          </motion.div>
+            {/* Left Column - 3 projects */}
+            <div className="space-y-4">
+              {projectsData.slice(0, 3).map((project, index) => (
+                <motion.div
+                  key={project.title}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  className="group"
+                >
+                  <ProjectCard {...project} compact={true} />
+                </motion.div>
+              ))}
+            </div>
 
-          {/* Second Row */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="flex justify-center"
-          >
-            {projectsData.slice(2, 3).map((project, index) => (
-              <motion.div
-                key={project.title}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.4 }}
-                className="group w-full max-w-md"
-              >
-                <ProjectCard {...project} compact={true} />
-              </motion.div>
-            ))}
+            {/* Right Column - 3 projects */}
+            <div className="space-y-4">
+              {projectsData.slice(3, 6).map((project, index) => (
+                <motion.div
+                  key={project.title}
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 + 0.3 }}
+                  className="group"
+                >
+                  <ProjectCard {...project} compact={true} />
+                </motion.div>
+              ))}
+            </div>
           </motion.div>
         </div>
       </div>

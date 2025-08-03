@@ -32,7 +32,7 @@ const interestData = [
 
 const Interests = () => {
   return (
-    <section className="min-h-screen py-20 bg-gradient-to-b from-transparent to-transparent relative">
+    <section className="py-12 bg-gradient-to-b from-transparent to-transparent relative">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
