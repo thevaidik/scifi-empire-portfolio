@@ -110,7 +110,11 @@
   }
 
   body {
-    background: radial-gradient(ellipse at top, hsl(260 50% 15%) 0%, hsl(240 40% 10%) 30%, hsl(220 30% 8%) 60%, hsl(225 25% 6%) 100%);
+    background: 
+      radial-gradient(ellipse 800px 400px at 20% 20%, rgba(120, 119, 198, 0.3), transparent),
+      radial-gradient(ellipse 600px 300px at 80% 80%, rgba(255, 119, 198, 0.2), transparent),
+      radial-gradient(ellipse 1000px 500px at 50% 0%, rgba(138, 43, 226, 0.1), transparent),
+      linear-gradient(135deg, #0f0f23 0%, #1a1a2e 25%, #16213e 50%, #0f0f23 100%);
     background-attachment: fixed;
     color: hsl(var(--foreground));
     position: relative;

@@ -6,27 +6,15 @@ const Bento = () => {
   return (
     <section id="bento" className="py-24 bg-transparent">
       <div className="container mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="text-center mb-12"
-        >
+        <div className="text-center mb-12">
           <h2 className="text-4xl font-bold mb-4 text-foreground">Visit My Bento</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
             Discover more about me in a beautiful grid layout
           </p>
           <div className="h-1 w-20 bg-glass-border mx-auto mt-6 rounded-full shadow-sm"></div>
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true }}
-          className="max-w-md mx-auto"
-        >
+        <div className="max-w-md mx-auto">
           <a
             href="https://bento.me/thevaidik"
             target="_blank"
@@ -51,7 +39,7 @@ const Bento = () => {
               <ExternalLink className="w-4 h-4 ml-2" />
             </div>
           </a>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
