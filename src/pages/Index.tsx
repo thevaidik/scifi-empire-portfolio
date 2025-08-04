@@ -4,6 +4,7 @@ import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
 import Interests from "@/components/Interests";
 import Projects from "@/components/Projects";
+import OpenSource from "@/components/OpenSource";
 import Bento from "@/components/Bento";
 import { motion } from "framer-motion";
 import { Github, Twitter, Youtube, Linkedin, Mail, BookOpen } from "lucide-react";
@@ -62,7 +63,7 @@ const Index = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="text-foreground overflow-hidden relative bg-gradient-to-br from-slate-600 via-gray-500/90 to-slate-700 min-h-screen"
+      className="text-foreground overflow-hidden relative min-h-screen"
     >
       <Navigation />
       <Hero />
@@ -123,8 +124,9 @@ const Index = () => {
         </div>
       </section>
       
-      <Interests />
       <Projects />
+      <OpenSource />
+      <Interests />
       <Bento />
     </motion.div>
   );
