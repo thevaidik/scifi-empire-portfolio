@@ -65,7 +65,7 @@ const Index = () => {
       transition={{ duration: 0.5 }}
       className="text-foreground overflow-hidden relative min-h-screen"
     >
-      <Navigation />
+      
       <Hero />
       
       {/* Connect Section */}
