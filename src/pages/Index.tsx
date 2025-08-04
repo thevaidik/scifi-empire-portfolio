@@ -112,9 +112,6 @@ const Index = () => {
                       <h3 className="text-sm font-medium text-foreground mb-1 group-hover:text-primary transition-colors">
                         {link.name}
                       </h3>
-                      <p className="text-xs text-muted-foreground leading-tight">
-                        {link.description}
-                      </p>
                     </a>
                   </CardContent>
                 </Card>
