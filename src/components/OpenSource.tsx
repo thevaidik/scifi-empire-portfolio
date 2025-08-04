@@ -46,14 +46,14 @@ const OpenSource = () => {
             </thead>
             <tbody>
               {openSourcePRs.map((pr, index) => (
-                <tr key={pr.title} className="border-b border-glass-border last:border-b-0 hover:bg-glass-hover transition-colors">
+                <tr key={pr.title} className="border-b border-glass-border last:border-b-0">
                   <td className="p-6">
-                    <a href={pr.link} className="group">
-                      <h3 className="text-foreground font-medium group-hover:text-primary transition-colors mb-1">
+                    <div>
+                      <h3 className="text-foreground font-medium mb-1">
                         {pr.title}
                       </h3>
                       <p className="text-muted-foreground text-sm">{pr.description}</p>
-                    </a>
+                    </div>
                   </td>
                   <td className="p-6">
                     <div className="flex items-center space-x-2">
