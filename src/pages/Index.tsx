@@ -1,6 +1,6 @@
 
 import { useEffect } from "react";
-import Navigation from "@/components/Navigation";
+
 import Hero from "@/components/Hero";
 import Interests from "@/components/Interests";
 import Projects from "@/components/Projects";
