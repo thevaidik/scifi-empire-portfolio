@@ -13,7 +13,7 @@ const Bento = () => {
             <div className="prose prose-invert max-w-none">
               <p className="text-muted-foreground leading-relaxed">
                 I am always up for research and industry collaborations so if you like my work and think we can collaborate on something cool, reach out to me via email or message me on Twitter{" "}
-                <a href="https://twitter.com/serious_mehta" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary/80 transition-colors">
+                <a href="https://twitter.com/thevaidik_" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary/80 transition-colors">
                   @serious_mehta
                 </a>
                 .
