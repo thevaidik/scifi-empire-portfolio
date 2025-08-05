@@ -14,7 +14,7 @@ const Bento = () => {
               <p className="text-muted-foreground leading-relaxed">
                 I am always up for research and industry collaborations so if you like my work and think we can collaborate on something cool, reach out to me via email or message me on Twitter{" "}
                 <a href="https://twitter.com/thevaidik_" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary/80 transition-colors">
-                  @serious_mehta
+                  @thevaidik_
                 </a>
                 .
               </p>
@@ -26,10 +26,7 @@ const Bento = () => {
                 , see my projects on{" "}
                 <a href="https://github.com/thevaidik" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary/80 transition-colors">
                   Github
-                </a>
-                , see my work on{" "}
-                <a href="#" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary/80 transition-colors">
-                  Kaggle
+
                 </a>
                 {" "}or read my blogs on{" "}
                 <a href="https://medium.com/@thevaidik" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary/80 transition-colors">
