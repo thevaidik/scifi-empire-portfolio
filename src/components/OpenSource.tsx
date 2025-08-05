@@ -2,24 +2,31 @@ import { Github, GitMerge } from "lucide-react";
 
 const openSourcePRs = [
   {
-    title: "Add TypeScript support to React Router",
-    repository: "remix-run/react-router",
+    title: "autoDownloadSettings rewrite #1033",
+    repository: "monal-im/Monal",
     status: "merged",
-    description: "Enhanced type safety and developer experience",
+    description: "SwiftUI rewrite of autoDownloadSettings for improved user experience",
     link: "#",
   },
   {
-    title: "Optimize bundle size in Framer Motion",
-    repository: "framer/motion",
+    title: "Monal Onboarding #1083",
+    repository: "monal-im/Monal",
     status: "merged", 
-    description: "Reduced bundle size by 15% through tree-shaking improvements",
+    description: "Adding initial onboarding flow to improve new user experience",
     link: "#",
   },
   {
-    title: "Fix accessibility issues in Radix UI",
-    repository: "radix-ui/primitives",
+    title: "[Feature]: Rewrite the privacy settings UI using SwiftUI #993 #1021",
+    repository: "monal-im/Monal",
     status: "merged",
-    description: "Improved keyboard navigation and screen reader support",
+    description: "Complete SwiftUI rewrite of privacy settings interface",
+    link: "#",
+  },
+  {
+    title: "adding icons in privacy settings #1037",
+    repository: "monal-im/Monal",
+    status: "merged",
+    description: "Enhanced privacy settings with intuitive icons for better UX",
     link: "#",
   },
 ];
