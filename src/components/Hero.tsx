@@ -1,5 +1,6 @@
 
 import { motion } from "framer-motion";
+import { ChevronDown } from "lucide-react";
 
 const Hero = () => {
   return (
@@ -31,18 +32,34 @@ const Hero = () => {
         </motion.div>
       </motion.div>
 
-      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2">
+      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center space-y-2">
         <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-          className="w-8 h-12 rounded-full border-2 border-foreground/30 flex items-start justify-center pt-2"
+          animate={{ y: [0, 5, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          className="flex flex-col items-center"
         >
-          <motion.div
-            animate={{ y: [0, 16, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-            className="w-1 h-3 bg-foreground/60 rounded-full"
-          />
+          <ChevronDown className="w-6 h-6 text-foreground/60" />
+          <ChevronDown className="w-6 h-6 text-foreground/40 -mt-3" />
         </motion.div>
+        
+        <div className="flex space-x-1">
+          {[0, 1, 2].map((index) => (
+            <motion.div
+              key={index}
+              animate={{ 
+                opacity: [0.3, 1, 0.3],
+                scale: [0.8, 1, 0.8]
+              }}
+              transition={{ 
+                duration: 1.5, 
+                repeat: Infinity, 
+                delay: index * 0.2,
+                ease: "easeInOut"
+              }}
+              className="w-2 h-2 rounded-full bg-foreground/50"
+            />
+          ))}
+        </div>
       </div>
     </section>
   );
