@@ -4,46 +4,36 @@ import ProjectCard from "./ProjectCard";
 
 const projectsData = [
   {
-    title: "Briefly - AI News",
-    description: "News Aggregator written in Swift and Go.",
-    image: "https://drive.google.com/file/d/1oHDTnCFD6HEfEy35yyv8aDr4mzBqi0-O/view?usp=share_link",
-    tags: ["Swift", "Go", "iOS"],
-    link: "https://apps.apple.com/app/quantum-portfolio/id123456789",
+    title: "Briefly - RSS feeds and News",
+    description: "AI-powered RSS reader and news aggregator that curates and summarizes content from multiple sources.",
+    image: "https://images.unsplash.com/photo-1585776245991-cf89dd7fc73a",
   },
   {
     title: "XMPP Open Source blog",
-    description: "AI-powered blog platform with dynamic content generation.",
+    description: "Technical blog about XMPP protocol development and open source contributions.",
     image: "https://upload.wikimedia.org/wikipedia/commons/9/95/XMPP_logo.svg",
-    tags: ["Next.js", "TailwindCSS", "AI"],
     link: "https://medium.com/@thevaidik/google-summer-of-code-gsoc-my-experience-1-xmpp-standards-foundation-da781ac95560",
   },
   {
-    title: "Cyberpunk Dashboard",
-    description: "Futuristic dashboard interface with real-time data visualization.",
-    image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158",
-    tags: ["Vue", "D3.js", "Firebase"],
-    link: "https://apps.apple.com/app/cyberpunk-dashboard/id123456791",
+    title: "LogoGuess",
+    description: "Interactive game where users test their knowledge by guessing brand logos from various industries.",
+    image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71",
   },
   {
     title: "Swift Robotics",
-    description: "Embedded systems programming with Swift for robotics.",
+    description: "Embedded systems programming with Swift for robotics applications and hardware control.",
     image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e",
-    tags: ["Swift", "Embedded", "Robotics"],
     link: "https://github.com/swift-robotics",
   },
   {
-    title: "Consciousness AI",
-    description: "Exploring artificial consciousness and cognitive architectures.",
-    image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485",
-    tags: ["AI", "Research", "Python"],
-    link: "https://consciousness-ai.demo",
+    title: "MotorSports.ai",
+    description: "AI-powered app to track race scores, analyze performance, and discover amateur racing events worldwide.",
+    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64",
   },
   {
     title: "Aviation Tracker",
-    description: "Real-time flight tracking and aviation data analysis.",
+    description: "Real-time flight tracking and aviation data analysis with comprehensive route information.",
     image: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05",
-    tags: ["React", "APIs", "Data"],
-    link: "https://aviation-tracker.demo",
   },
 ];
 
