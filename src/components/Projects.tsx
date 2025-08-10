@@ -5,10 +5,10 @@ import ProjectCard from "./ProjectCard";
 const projectsData = [
   {
     title: "Briefly - RSS feeds and News",
-    description: "AI-powered RSS reader and news aggregator that curates and summarizes content from multiple sources.",
-    image: "https://images.unsplash.com/photo-1585776245991-cf89dd7fc73a",
+    description: "RSS feeds and News",
+    image: "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/24/fa/2f/24fa2f8f-ab6e-a94c-a16f-4dc22c4a8d7f/AppIcon-0-0-1x_U007epad-0-1-85-220.png/460x0w.png",
     tags: ["Swift", "SwiftUI", "iOS", "AI"],
-    link: "https://apps.apple.com/app/briefly/id123456789",
+    link: "https://apps.apple.com/in/app/briefly-rss-feeds-and-news/id6746949720",
   },
   {
     title: "OneCorpApps",

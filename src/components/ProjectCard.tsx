@@ -55,7 +55,7 @@ const ProjectCard = ({ title, description, image, tags, link, compact = false }:
                 rel="noopener noreferrer"
                 className="inline-flex items-center text-xs text-muted-foreground hover:text-foreground transition-colors"
               >
-                View Project
+                view
                 <svg className="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
@@ -102,7 +102,7 @@ const ProjectCard = ({ title, description, image, tags, link, compact = false }:
             rel="noopener noreferrer"
             className="inline-flex items-center text-muted-foreground hover:text-foreground transition-colors"
           >
-            View Project
+            view
             <svg
               className="w-4 h-4 ml-2"
               fill="none"
