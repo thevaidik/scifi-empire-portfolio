@@ -13,7 +13,7 @@ const projectsData = [
   {
     title: "OneCorpApps",
     description: "founder of OneCorpApps",
-    image: "https://images.unsplash.com/photo-1551650975-87deedd944c3",
+    image: "https://www.luxswipe.in/assets/mockup-F5TUgVaZ.png",
     tags: ["Swift", "iOS", "Startup", "Product"],
     link: "https://www.linkedin.com/company/luxswipe/?viewAsMember=true",
   },
