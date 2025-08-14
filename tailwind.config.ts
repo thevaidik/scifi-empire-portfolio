@@ -21,9 +21,12 @@ export default {
     extend: {
       fontFamily: {
         sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+        retro: ['Courier New', 'monospace'],
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+        'gradient-retro': 'linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)), hsl(var(--accent)))',
+        'gradient-neon': 'linear-gradient(90deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 100%)',
       },
       colors: {
         border: "hsl(var(--border))",
@@ -93,6 +96,20 @@ export default {
           "0%": { backgroundPosition: "-200% 0" },
           "100%": { backgroundPosition: "200% 0" },
         },
+        "neon-pulse": {
+          "0%": { 
+            textShadow: "0 0 5px hsl(var(--primary)), 0 0 10px hsl(var(--primary)), 0 0 15px hsl(var(--primary))",
+            filter: "brightness(1)"
+          },
+          "100%": { 
+            textShadow: "0 0 10px hsl(var(--primary)), 0 0 20px hsl(var(--primary)), 0 0 30px hsl(var(--primary))",
+            filter: "brightness(1.2)"
+          },
+        },
+        "retro-flicker": {
+          "0%": { opacity: "1" },
+          "100%": { opacity: "0.95" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -101,6 +118,8 @@ export default {
         glow: "glow 3s ease-in-out infinite",
         "liquid-flow": "liquid-flow 4s ease-in-out infinite",
         "glass-shimmer": "glass-shimmer 2s linear infinite",
+        "neon-pulse": "neon-pulse 2s ease-in-out infinite alternate",
+        "retro-flicker": "retro-flicker 0.15s ease-in-out infinite alternate",
       },
     },
   },
