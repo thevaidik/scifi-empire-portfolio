@@ -49,7 +49,7 @@ const projectsData = [
 
 const Projects = () => {
   return (
-    <section id="projects" className="py-12 bg-transparent relative">
+    <section id="projects" className="py-12 bg-transparent relative terminal-pattern">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -57,9 +57,11 @@ const Projects = () => {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Featured Work</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            Explore my latest works that push the boundaries of technology
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4 font-retro tracking-wider retro-text">
+            [FEATURED_WORK.EXE]
+          </h2>
+          <p className="text-muted-foreground max-w-2xl mx-auto font-mono">
+            &gt; Explore my latest works that push the boundaries of technology
           </p>
         </motion.div>
 

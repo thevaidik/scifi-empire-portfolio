@@ -15,11 +15,15 @@ const ProjectCard = ({ title, description, image, tags, link, compact = false }:
     return (
       <motion.div
         whileHover={{ scale: 1.02 }}
-        className="group relative overflow-hidden rounded-xl bg-glass-bg backdrop-blur-xl border border-glass-border hover:border-glass-hover hover:bg-glass-hover transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-glass-glow"
+        className="group relative overflow-hidden rounded-xl hud-element hover:bg-glass-hover transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-glass-glow animate-hud-flicker"
       >
         <div className="flex p-4 gap-4">
+          {/* HUD Corner Markers */}
+          <div className="absolute top-2 left-2 w-3 h-3 border-l border-t border-primary/40"></div>
+          <div className="absolute top-2 right-2 w-3 h-3 border-r border-t border-primary/40"></div>
+          
           {/* Compact Image */}
-          <div className="flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden">
+          <div className="flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden border border-primary/20">
             <img
               src={image}
               alt={title}
@@ -29,8 +33,8 @@ const ProjectCard = ({ title, description, image, tags, link, compact = false }:
           
           {/* Content */}
           <div className="flex-1 min-w-0">
-            <h3 className="text-lg font-semibold mb-1 text-foreground truncate">{title}</h3>
-            <p className="text-sm text-muted-foreground mb-3 line-clamp-2">{description}</p>
+            <h3 className="text-lg font-semibold mb-1 text-foreground truncate font-retro tracking-wider">{title}</h3>
+            <p className="text-sm text-muted-foreground mb-3 line-clamp-2 font-mono">&gt; {description}</p>
             
             <div className="flex flex-wrap gap-1 mb-2">
               {tags.slice(0, 2).map((tag) => (
@@ -70,9 +74,13 @@ const ProjectCard = ({ title, description, image, tags, link, compact = false }:
   return (
     <motion.div
       whileHover={{ y: -10 }}
-      className="group relative overflow-hidden rounded-2xl bg-glass-bg backdrop-blur-xl border border-glass-border hover:border-glass-hover hover:bg-glass-hover transition-all duration-500 shadow-lg hover:shadow-xl hover:shadow-glass-glow before:absolute before:inset-0 before:bg-gradient-to-br before:from-glass-reflection before:to-transparent before:pointer-events-none hover:before:animate-glass-shimmer"
+      className="group relative overflow-hidden rounded-2xl hud-element hover:bg-glass-hover transition-all duration-500 shadow-lg hover:shadow-xl hover:shadow-glass-glow before:absolute before:inset-0 before:bg-gradient-to-br before:from-glass-reflection before:to-transparent before:pointer-events-none hover:before:animate-glass-shimmer animate-hud-flicker"
     >
-      <div className="aspect-video overflow-hidden">
+      {/* HUD Corner Brackets */}
+      <div className="absolute top-3 left-3 w-4 h-4 border-l-2 border-t-2 border-primary/60 z-10"></div>
+      <div className="absolute top-3 right-3 w-4 h-4 border-r-2 border-t-2 border-primary/60 z-10"></div>
+      
+      <div className="aspect-video overflow-hidden border-b border-primary/20">
         <img
           src={image}
           alt={title}
@@ -81,8 +89,8 @@ const ProjectCard = ({ title, description, image, tags, link, compact = false }:
       </div>
       
       <div className="p-6">
-        <h3 className="text-xl font-semibold mb-2 text-foreground">{title}</h3>
-        <p className="text-muted-foreground mb-4">{description}</p>
+        <h3 className="text-xl font-semibold mb-2 text-foreground font-retro tracking-wider">{title}</h3>
+        <p className="text-muted-foreground mb-4 font-mono">&gt; {description}</p>
         
         <div className="flex flex-wrap gap-2 mb-4">
           {tags.map((tag) => (
