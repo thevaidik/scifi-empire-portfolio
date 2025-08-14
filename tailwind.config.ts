@@ -21,12 +21,15 @@ export default {
     extend: {
       fontFamily: {
         sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
-        retro: ['Courier New', 'monospace'],
+        mono: ['JetBrains Mono', 'Fira Code', 'Consolas', 'monospace'],
+        retro: ['Orbitron', 'Exo 2', 'system-ui', 'sans-serif'],
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-retro': 'linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)), hsl(var(--accent)))',
-        'gradient-neon': 'linear-gradient(90deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 100%)',
+        'gradient-conic': 'conic-gradient(var(--tw-gradient-stops))',
+        'radar-sweep': 'conic-gradient(from 0deg at 50% 50%, transparent 0deg, hsl(var(--primary) / 0.3) 90deg, transparent 180deg)',
+        'grid-pattern': 'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)',
+        'hud-display': 'linear-gradient(90deg, hsl(var(--primary) / 0.1) 0%, transparent 50%, hsl(var(--accent) / 0.1) 100%)',
       },
       colors: {
         border: "hsl(var(--border))",
@@ -96,19 +99,21 @@ export default {
           "0%": { backgroundPosition: "-200% 0" },
           "100%": { backgroundPosition: "200% 0" },
         },
-        "neon-pulse": {
-          "0%": { 
-            textShadow: "0 0 5px hsl(var(--primary)), 0 0 10px hsl(var(--primary)), 0 0 15px hsl(var(--primary))",
-            filter: "brightness(1)"
-          },
-          "100%": { 
-            textShadow: "0 0 10px hsl(var(--primary)), 0 0 20px hsl(var(--primary)), 0 0 30px hsl(var(--primary))",
-            filter: "brightness(1.2)"
-          },
+        "radar-sweep": {
+          "0%": { transform: "rotate(0deg)" },
+          "100%": { transform: "rotate(360deg)" },
         },
-        "retro-flicker": {
-          "0%": { opacity: "1" },
-          "100%": { opacity: "0.95" },
+        "hud-flicker": {
+          "0%, 100%": { opacity: "1", filter: "brightness(1)" },
+          "50%": { opacity: "0.95", filter: "brightness(1.1)" },
+        },
+        "terminal-cursor": {
+          "0%, 50%": { opacity: "1" },
+          "51%, 100%": { opacity: "0" },
+        },
+        "data-stream": {
+          "0%": { transform: "translateY(0)" },
+          "100%": { transform: "translateY(-20px)" },
         },
       },
       animation: {
@@ -118,8 +123,10 @@ export default {
         glow: "glow 3s ease-in-out infinite",
         "liquid-flow": "liquid-flow 4s ease-in-out infinite",
         "glass-shimmer": "glass-shimmer 2s linear infinite",
-        "neon-pulse": "neon-pulse 2s ease-in-out infinite alternate",
-        "retro-flicker": "retro-flicker 0.15s ease-in-out infinite alternate",
+        "radar-sweep": "radar-sweep 4s linear infinite",
+        "hud-flicker": "hud-flicker 3s ease-in-out infinite",
+        "terminal-cursor": "terminal-cursor 1s ease-in-out infinite",
+        "data-stream": "data-stream 0.5s ease-out infinite",
       },
     },
   },
