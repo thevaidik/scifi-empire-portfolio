@@ -47,10 +47,10 @@ const OpenSource = () => {
         <div className="max-w-6xl mx-auto">
           <div className="hud-element bg-glass-bg backdrop-blur-xl border border-glass-border rounded-xl relative overflow-hidden animate-hud-flicker">
             {/* HUD Corner Brackets */}
-            <div className="absolute top-3 left-3 w-4 h-4 border-l-2 border-t-2 border-primary/60 z-10"></div>
-            <div className="absolute top-3 right-3 w-4 h-4 border-r-2 border-t-2 border-primary/60 z-10"></div>
-            <div className="absolute bottom-3 left-3 w-4 h-4 border-l-2 border-b-2 border-primary/60 z-10"></div>
-            <div className="absolute bottom-3 right-3 w-4 h-4 border-r-2 border-b-2 border-primary/60 z-10"></div>
+            <div className="absolute top-3 left-3 w-4 h-4 border-l-2 border-t-2 border-muted-foreground/30 z-10"></div>
+            <div className="absolute top-3 right-3 w-4 h-4 border-r-2 border-t-2 border-muted-foreground/30 z-10"></div>
+            <div className="absolute bottom-3 left-3 w-4 h-4 border-l-2 border-b-2 border-muted-foreground/30 z-10"></div>
+            <div className="absolute bottom-3 right-3 w-4 h-4 border-r-2 border-b-2 border-muted-foreground/30 z-10"></div>
             
             <div className="overflow-x-auto">
               <table className="w-full">
@@ -66,7 +66,7 @@ const OpenSource = () => {
                     <tr key={pr.title} className="border-b border-glass-border last:border-b-0 hover:bg-glass-hover transition-colors group">
                       <td className="p-6">
                         <div>
-                          <h3 className="text-foreground font-medium mb-1 font-mono group-hover:text-primary transition-colors">
+                          <h3 className="text-foreground font-medium mb-1 font-mono group-hover:text-foreground transition-colors">
                             &gt; {pr.title}
                           </h3>
                           <p className="text-muted-foreground text-sm font-mono opacity-80">{pr.description}</p>
@@ -80,8 +80,8 @@ const OpenSource = () => {
                       </td>
                       <td className="p-6">
                         <div className="flex items-center space-x-2">
-                          <GitMerge className="w-4 h-4 text-accent" />
-                          <span className="text-accent font-medium font-mono">[MERGED]</span>
+                          <GitMerge className="w-4 h-4 text-muted-foreground" />
+                          <span className="text-muted-foreground font-medium font-mono">[MERGED]</span>
                         </div>
                       </td>
                     </tr>

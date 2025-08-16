@@ -19,11 +19,11 @@ const ProjectCard = ({ title, description, image, tags, link, compact = false }:
       >
         <div className="flex p-4 gap-4">
           {/* HUD Corner Markers */}
-          <div className="absolute top-2 left-2 w-3 h-3 border-l border-t border-accent/60"></div>
-          <div className="absolute top-2 right-2 w-3 h-3 border-r border-t border-accent/60"></div>
+          <div className="absolute top-2 left-2 w-3 h-3 border-l border-t border-muted-foreground/30"></div>
+          <div className="absolute top-2 right-2 w-3 h-3 border-r border-t border-muted-foreground/30"></div>
           
           {/* Compact Image */}
-          <div className="flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden border border-accent/30">
+          <div className="flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden border border-muted-foreground/20">
             <img
               src={image}
               alt={title}
@@ -77,10 +77,10 @@ const ProjectCard = ({ title, description, image, tags, link, compact = false }:
       className="group relative overflow-hidden rounded-2xl hud-element hover:bg-glass-hover transition-all duration-500 animate-hud-flicker"
     >
       {/* HUD Corner Brackets */}
-      <div className="absolute top-3 left-3 w-4 h-4 border-l-2 border-t-2 border-accent/60 z-10"></div>
-      <div className="absolute top-3 right-3 w-4 h-4 border-r-2 border-t-2 border-accent/60 z-10"></div>
+      <div className="absolute top-3 left-3 w-4 h-4 border-l-2 border-t-2 border-muted-foreground/30 z-10"></div>
+      <div className="absolute top-3 right-3 w-4 h-4 border-r-2 border-t-2 border-muted-foreground/30 z-10"></div>
       
-      <div className="aspect-video overflow-hidden border-b border-accent/30">
+      <div className="aspect-video overflow-hidden border-b border-muted-foreground/20">
         <img
           src={image}
           alt={title}
