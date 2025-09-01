@@ -51,18 +51,18 @@ const Projects = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-foreground mb-4 border-b-2 border-foreground inline-block pb-2">
-            FEATURED WORK
+            LATEST DEVELOPMENTS
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto mt-6">
-            A showcase of applications and projects pushing technological boundaries
+            Current projects and innovations in technology
           </p>
         </div>
 
         <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {projectsData.map((project) => (
-              <div key={project.title} className="group">
-                <ProjectCard {...project} />
+              <div key={project.title}>
+                <ProjectCard {...project} compact={true} />
               </div>
             ))}
           </div>

@@ -54,7 +54,7 @@ const Index = () => {
   ];
 
   return (
-    <div className="text-foreground bg-background min-h-screen">
+    <div className="text-foreground bg-background min-h-screen dark">
       <Hero />
       
       {/* Connect Section */}
