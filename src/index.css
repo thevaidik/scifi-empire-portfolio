@@ -4,103 +4,83 @@
 
 @layer base {
   :root {
-    --background: 225 35% 8%; /* Deep space blue */
-    --foreground: 220 25% 95%; /* Bright starlight */
+    --background: 0 0% 98%; /* Newspaper white */
+    --foreground: 0 0% 8%; /* Newspaper black */
 
-    --card: 225 30% 12%; /* Space card background */
-    --card-foreground: 220 25% 95%; /* Bright text on cards */
+    --card: 0 0% 100%; /* Pure white cards */
+    --card-foreground: 0 0% 8%; /* Black text on cards */
 
-    --popover: 225 30% 12%; /* Space popover background */
-    --popover-foreground: 220 25% 95%; /* Bright text in popovers */
+    --popover: 0 0% 100%; /* White popovers */
+    --popover-foreground: 0 0% 8%; /* Black text in popovers */
 
-    --primary: 260 70% 65%; /* Cosmic purple */
-    --primary-foreground: 225 35% 8%; /* Dark text on primary */
+    --primary: 0 0% 8%; /* Newspaper black for primary */
+    --primary-foreground: 0 0% 98%; /* White text on primary */
 
-    --secondary: 225 25% 18%; /* Dark space secondary */
-    --secondary-foreground: 220 25% 95%; /* Bright text on secondary */
+    --secondary: 0 0% 92%; /* Light gray secondary */
+    --secondary-foreground: 0 0% 8%; /* Black text on secondary */
 
-    --muted: 225 25% 15%; /* Muted space background */
-    --muted-foreground: 220 15% 70%; /* Muted stellar text */
+    --muted: 0 0% 95%; /* Light muted background */
+    --muted-foreground: 0 0% 45%; /* Gray text */
 
-    --accent: 280 60% 60%; /* Nebula purple accent */
-    --accent-foreground: 220 25% 95%; /* Bright text on accent */
+    --accent: 120 60% 40%; /* Green accent for merged status */
+    --accent-foreground: 0 0% 98%; /* White text on accent */
 
     --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 95%; /* Bright text on destructive */
+    --destructive-foreground: 0 0% 98%; /* White text on destructive */
 
-    --border: 225 25% 20%; /* Space borders */
-    --input: 225 25% 18%; /* Space inputs */
-    --ring: 260 70% 65%; /* Cosmic focus ring */
+    --border: 0 0% 90%; /* Light gray borders */
+    --input: 0 0% 100%; /* White inputs */
+    --ring: 0 0% 8%; /* Black focus ring */
 
-    --radius: 1rem;
-    
-    /* Retro Aviation Glass Design Tokens */
-    --glass-bg: 0 0% 15% / 0.3;
-    --glass-border: 0 0% 30% / 0.2; /* Gray border */
-    --glass-hover: 0 0% 20% / 0.4;
-    --glass-glow: 0 0% 40% / 0.1; /* Gray glow */
-    --glass-reflection: 0 0% 50% / 0.05; /* Gray reflection */
+    --radius: 0.25rem; /* Minimal radius */
 
     --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
+    --sidebar-foreground: 0 0% 8%;
+    --sidebar-primary: 0 0% 8%;
     --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-accent: 0 0% 95%;
+    --sidebar-accent-foreground: 0 0% 8%;
+    --sidebar-border: 0 0% 90%;
+    --sidebar-ring: 0 0% 8%;
   }
 
   .dark {
-    --background: 225 40% 6%; /* Deeper space */
-    --foreground: 220 30% 98%; /* Stellar brightness */
+    --background: 0 0% 8%; /* Dark newspaper */
+    --foreground: 0 0% 95%; /* Light text */
 
-    --card: 225 35% 10%; /* Deep space cards */
-    --card-foreground: 220 30% 98%; /* Stellar text */
+    --card: 0 0% 12%; /* Dark cards */
+    --card-foreground: 0 0% 95%; /* Light text on cards */
 
-    --popover: 225 35% 10%; /* Deep space popovers */
-    --popover-foreground: 220 30% 98%; /* Stellar text */
+    --popover: 0 0% 12%; /* Dark popovers */
+    --popover-foreground: 0 0% 95%; /* Light text in popovers */
 
-    --primary: 260 80% 70%; /* Brighter cosmic purple */
-    --primary-foreground: 225 40% 6%; /* Deep space text */
+    --primary: 0 0% 95%; /* Light primary */
+    --primary-foreground: 0 0% 8%; /* Dark text on primary */
 
-    --secondary: 225 30% 15%; /* Dark nebula secondary */
-    --secondary-foreground: 220 30% 98%; /* Stellar text */
+    --secondary: 0 0% 18%; /* Dark secondary */
+    --secondary-foreground: 0 0% 95%; /* Light text on secondary */
 
-    --muted: 225 30% 12%; /* Deep muted space */
-    --muted-foreground: 220 20% 75%; /* Muted starlight */
+    --muted: 0 0% 15%; /* Dark muted background */
+    --muted-foreground: 0 0% 65%; /* Light gray text */
 
-    --accent: 280 70% 65%; /* Bright nebula accent */
-    --accent-foreground: 220 30% 98%; /* Stellar text */
+    --accent: 120 60% 50%; /* Brighter green for dark mode */
+    --accent-foreground: 0 0% 8%; /* Dark text on accent */
 
     --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 98%; /* Stellar text */
+    --destructive-foreground: 0 0% 98%; /* Light text on destructive */
 
-    --border: 225 30% 18%; /* Space borders */
-    --input: 225 30% 15%; /* Space inputs */
-    --ring: 260 80% 70%; /* Bright cosmic ring */
-    
-    /* Retro Aviation Glass Design Tokens - Dark Mode */
-    --glass-bg: 0 0% 15% / 0.3;
-    --glass-border: 0 0% 30% / 0.2; /* Gray border */
-    --glass-hover: 0 0% 20% / 0.4;
-    --glass-glow: 0 0% 40% / 0.1; /* Gray glow */
-    --glass-reflection: 0 0% 50% / 0.05; /* Gray reflection */
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --border: 0 0% 20%; /* Dark borders */
+    --input: 0 0% 15%; /* Dark inputs */
+    --ring: 0 0% 95%; /* Light focus ring */
+
+    --sidebar-background: 0 0% 8%;
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-primary: 0 0% 95%;
+    --sidebar-primary-foreground: 0 0% 8%;
+    --sidebar-accent: 0 0% 15%;
+    --sidebar-accent-foreground: 0 0% 95%;
+    --sidebar-border: 0 0% 20%;
+    --sidebar-ring: 0 0% 95%;
   }
 }
 
@@ -110,142 +90,56 @@
   }
 
   body {
-    background: 
-      radial-gradient(ellipse 1200px 600px at 20% 30%, rgba(60, 60, 60, 0.1), transparent),
-      radial-gradient(ellipse 800px 400px at 80% 70%, rgba(80, 80, 80, 0.08), transparent),
-      radial-gradient(ellipse 600px 300px at 50% 10%, rgba(100, 100, 100, 0.05), transparent),
-      #000000;
+    background: hsl(var(--background));
     color: hsl(var(--foreground));
-    position: relative;
+    font-family: 'Georgia', 'Times New Roman', serif;
+    line-height: 1.6;
     min-height: 100vh;
   }
 
-  /* Retro Aviation Scanlines Overlay */
-  body::after {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
+  /* Newspaper typography */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-weight: bold;
+    line-height: 1.2;
+  }
+
+  /* Newspaper column separator */
+  .newspaper-divider {
+    border-left: 1px solid hsl(var(--border));
     height: 100%;
-    background: repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 2px,
-      rgba(255, 255, 255, 0.02) 2px,
-      rgba(255, 255, 255, 0.02) 4px
-    );
-    pointer-events: none;
-    z-index: 1000;
-    animation: scanlines 2s linear infinite;
   }
 
-  @keyframes scanlines {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(4px); }
+  /* Simple hover effects */
+  .hover-underline:hover {
+    text-decoration: underline;
   }
 
-  body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
+  /* Status indicators */
+  .status-merged {
+    color: hsl(var(--accent));
+    font-weight: 600;
+  }
+
+  /* Clean table styling */
+  .newspaper-table {
+    border-collapse: collapse;
     width: 100%;
-    height: 100%;
-    background-image: 
-      radial-gradient(1px 1px at 50px 80px, rgba(255, 255, 255, 0.8), transparent),
-      radial-gradient(1px 1px at 150px 40px, rgba(255, 255, 255, 0.9), transparent),
-      radial-gradient(1px 1px at 250px 120px, rgba(255, 255, 255, 0.7), transparent),
-      radial-gradient(1px 1px at 350px 60px, rgba(255, 255, 255, 0.8), transparent),
-      radial-gradient(1px 1px at 450px 180px, rgba(255, 255, 255, 0.6), transparent),
-      radial-gradient(1px 1px at 75px 150px, rgba(255, 255, 255, 0.7), transparent),
-      radial-gradient(1px 1px at 200px 90px, rgba(255, 255, 255, 0.8), transparent),
-      radial-gradient(1px 1px at 380px 140px, rgba(255, 255, 255, 0.6), transparent),
-      radial-gradient(1px 1px at 480px 50px, rgba(255, 255, 255, 0.9), transparent),
-      radial-gradient(1px 1px at 120px 30px, rgba(255, 255, 255, 0.7), transparent),
-      radial-gradient(1px 1px at 320px 190px, rgba(255, 255, 255, 0.8), transparent),
-      radial-gradient(1px 1px at 420px 110px, rgba(255, 255, 255, 0.6), transparent),
-      radial-gradient(2px 2px at 100px 200px, rgba(120, 120, 120, 0.3), transparent),
-      radial-gradient(2px 2px at 300px 20px, rgba(140, 140, 140, 0.25), transparent),
-      radial-gradient(1px 1px at 500px 100px, rgba(160, 160, 160, 0.3), transparent),
-      radial-gradient(1px 1px at 180px 160px, rgba(180, 180, 180, 0.25), transparent),
-      radial-gradient(2px 2px at 400px 220px, rgba(200, 200, 200, 0.25), transparent);
-    background-repeat: repeat;
-    background-size: 600px 400px;
-    pointer-events: none;
-    z-index: -1;
   }
 
-  @keyframes galaxyTwinkle {
-    0%, 100% { 
-      opacity: 0.7; 
-      transform: scale(1);
-    }
-    25% { 
-      opacity: 1; 
-      transform: scale(1.02);
-    }
-    50% { 
-      opacity: 0.8; 
-      transform: scale(0.98);
-    }
-    75% { 
-      opacity: 1; 
-      transform: scale(1.01);
-    }
+  .newspaper-table th,
+  .newspaper-table td {
+    border: 1px solid hsl(var(--border));
+    padding: 12px;
+    text-align: left;
   }
 
-
-  /* Retro Aviation Terminal styling */
-  .terminal-pattern {
-    background-image: 
-      radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.03) 1px, transparent 0);
-    background-size: 20px 20px;
+  .newspaper-table th {
+    background-color: hsl(var(--muted));
+    font-weight: bold;
   }
 
-  /* Enhanced Glass morphism utilities */
-  .glass-panel {
-    @apply bg-glass-bg backdrop-blur-xl border border-glass-border shadow-lg;
-    background-image: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.02));
-  }
-
-  .glass-panel:hover {
-    @apply bg-glass-hover border-glass-hover shadow-xl shadow-glass-glow;
-    background-image: linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,255,255,0.05));
-  }
-
-  /* HUD Display Elements */
-  .hud-element {
-    position: relative;
-    border: 1px solid hsl(var(--muted-foreground) / 0.2);
-    background: hsl(var(--background) / 0.8);
-    backdrop-filter: blur(10px);
-  }
-
-  .hud-element::before {
-    content: '';
-    position: absolute;
-    top: -1px;
-    left: -1px;
-    right: -1px;
-    bottom: -1px;
-    background: linear-gradient(45deg, hsl(var(--muted-foreground) / 0.1), transparent, hsl(var(--muted-foreground) / 0.1));
-    z-index: -1;
-    border-radius: inherit;
-  }
-
-  /* Aviation Grid Background */
-  .aviation-grid {
-    background-image: 
-      linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-    background-size: 50px 50px;
-  }
-
-  /* Retro Space Typography */
-  .retro-text {
-    font-family: 'Orbitron', monospace;
-    letter-spacing: 0.1em;
-    text-shadow: 0 0 10px hsl(var(--muted-foreground) / 0.3);
+  .newspaper-table tr:hover {
+    background-color: hsl(var(--muted) / 0.5);
   }
 }

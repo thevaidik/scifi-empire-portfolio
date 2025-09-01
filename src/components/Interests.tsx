@@ -1,5 +1,3 @@
-
-import { motion } from "framer-motion";
 import { Code, Brain, Cpu, Plane } from "lucide-react";
 
 const interestData = [
@@ -32,30 +30,28 @@ const interestData = [
 
 const Interests = () => {
   return (
-    <section className="py-12 bg-gradient-to-b from-transparent to-transparent relative">
+    <section className="py-16 border-b border-muted">
       <div className="container mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Fields of Interest</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
+        <div className="text-center mb-12">
+          <h2 className="text-4xl font-bold text-foreground mb-4 border-b-2 border-foreground inline-block pb-2">
+            FIELDS OF INTEREST
+          </h2>
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto mt-6">
             Exploring the intersection of consciousness, technology, and artificial intelligence
           </p>
-        </motion.div>
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {interestData.map((interest) => (
-            <div key={interest.title} className="group">
-              <div className="p-6 rounded-2xl bg-glass-bg backdrop-blur-xl border border-glass-border hover:border-glass-hover hover:bg-glass-hover transition-all duration-500 shadow-lg hover:shadow-xl hover:shadow-glass-glow relative overflow-hidden before:absolute before:inset-0 before:bg-gradient-to-br before:from-glass-reflection before:to-transparent before:pointer-events-none group-hover:animate-liquid-flow">
-                <div className="w-12 h-12 rounded-full bg-glass-border flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 shadow-inner">
-                  <interest.icon className="w-6 h-6 text-foreground" />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          {interestData.map((interest, index) => (
+            <div key={interest.title} className={`p-6 border border-border bg-background ${index >= 3 ? 'md:col-span-1 lg:col-span-1' : ''}`}>
+              <div className="flex items-start space-x-4">
+                <div className="w-10 h-10 border border-foreground flex items-center justify-center flex-shrink-0 mt-1">
+                  <interest.icon className="w-5 h-5 text-foreground" />
                 </div>
-                
-                <h3 className="text-lg font-semibold text-foreground mb-3">{interest.title}</h3>
-                <p className="text-sm text-muted-foreground">{interest.description}</p>
+                <div>
+                  <h3 className="text-lg font-bold text-foreground mb-2">{interest.title}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{interest.description}</p>
+                </div>
               </div>
             </div>
           ))}

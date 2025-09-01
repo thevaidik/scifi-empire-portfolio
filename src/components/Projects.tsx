@@ -1,5 +1,3 @@
-
-import { motion } from "framer-motion";
 import ProjectCard from "./ProjectCard";
 
 const projectsData = [
@@ -49,42 +47,24 @@ const projectsData = [
 
 const Projects = () => {
   return (
-    <section id="projects" className="py-12 bg-transparent relative terminal-pattern">
+    <section className="py-16 border-b border-muted">
       <div className="container mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-12"
-        >
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4 font-retro tracking-wider retro-text">
-            [FEATURED_WORK.EXE]
+        <div className="text-center mb-12">
+          <h2 className="text-4xl font-bold text-foreground mb-4 border-b-2 border-foreground inline-block pb-2">
+            FEATURED WORK
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto font-mono">
-            &gt; Explore my latest works that push the boundaries of technology
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto mt-6">
+            A showcase of applications and projects pushing technological boundaries
           </p>
-        </motion.div>
+        </div>
 
-        {/* Table Format - 3x2 Grid */}
         <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Left Column - 3 projects */}
-            <div className="space-y-4">
-              {projectsData.slice(0, 3).map((project) => (
-                <div key={project.title} className="group">
-                  <ProjectCard {...project} compact={true} />
-                </div>
-              ))}
-            </div>
-
-            {/* Right Column - 3 projects */}
-            <div className="space-y-4">
-              {projectsData.slice(3, 6).map((project) => (
-                <div key={project.title} className="group">
-                  <ProjectCard {...project} compact={true} />
-                </div>
-              ))}
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {projectsData.map((project) => (
+              <div key={project.title} className="group">
+                <ProjectCard {...project} />
+              </div>
+            ))}
           </div>
         </div>
       </div>
