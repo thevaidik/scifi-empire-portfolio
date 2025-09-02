@@ -8,12 +8,17 @@ const Hero = () => {
           </h1>
           <div className="border-t border-b border-foreground py-4 mb-6">
             <p className="text-lg font-semibold text-foreground uppercase tracking-widest">
-              Technology • Innovation • Development
+              Founder & Apple Systems Developer
+            </p>
+          </div>
+          <div className="text-center mb-4">
+            <p className="text-sm text-muted-foreground font-mono">
+              EST. JANUARY 1, 2030 • VOLUME XCVII
             </p>
           </div>
           <div className="text-center">
-            <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
-              Founder & Apple Systems Developer
+            <h2 className="text-xl md:text-2xl font-semibold text-foreground mb-4">
+              BREAKING: Innovation Through Code
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               Specializing in iOS, macOS, and visionOS development. Building the future of technology through innovative applications and open-source contributions.
