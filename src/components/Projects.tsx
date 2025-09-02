@@ -50,12 +50,12 @@ const Projects = () => {
     <section className="py-16 border-b border-muted">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <div className="flex justify-between items-center mb-4">
-            <p className="text-sm text-muted-foreground font-mono">DECEMBER 15, 2029</p>
-            <h2 className="text-4xl font-bold text-foreground border-b-2 border-foreground inline-block pb-2">
+          <div className="flex flex-col md:flex-row justify-between items-center mb-4 gap-2">
+            <p className="text-xs md:text-sm text-muted-foreground font-mono order-2 md:order-1">DEC 15, 2029</p>
+            <h2 className="text-2xl md:text-4xl font-bold text-foreground border-b-2 border-foreground inline-block pb-2 order-1 md:order-2">
               LATEST DEVELOPMENTS
             </h2>
-            <p className="text-sm text-muted-foreground font-mono">PAGE 2</p>
+            <p className="text-xs md:text-sm text-muted-foreground font-mono order-3">PAGE 2</p>
           </div>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto mt-6">
             Current projects and innovations in technology

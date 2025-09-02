@@ -17,9 +17,6 @@ const Hero = () => {
             </p>
           </div>
           <div className="text-center">
-            <h2 className="text-xl md:text-2xl font-semibold text-foreground mb-4">
-              BREAKING: Innovation Through Code
-            </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               Specializing in iOS, macOS, and visionOS development. Building the future of technology through innovative applications and open-source contributions.
             </p>
