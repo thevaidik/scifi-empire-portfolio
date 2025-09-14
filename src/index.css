@@ -4,13 +4,13 @@
 
 @layer base {
   :root {
-    --background: 0 0% 96%; /* Light newspaper */
+    --background: 45 8% 93%; /* Warm newspaper paper */
     --foreground: 0 0% 12%; /* Dark text */
 
-    --card: 0 0% 98%; /* Light cards */
+    --card: 45 10% 95%; /* Light warm cards */
     --card-foreground: 0 0% 12%; /* Dark text on cards */
 
-    --popover: 0 0% 98%; /* Light popovers */
+    --popover: 45 10% 95%; /* Light warm popovers */
     --popover-foreground: 0 0% 12%; /* Dark text in popovers */
 
     --primary: 0 0% 12%; /* Dark primary */
