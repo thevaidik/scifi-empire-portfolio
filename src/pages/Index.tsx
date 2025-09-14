@@ -55,7 +55,7 @@ const Index = () => {
   ];
 
   return (
-    <div className="text-foreground bg-background min-h-screen dark">
+    <div className="text-foreground bg-background min-h-screen">
       <ThemeToggle />
       <Hero />
       

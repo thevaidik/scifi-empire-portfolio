@@ -7,14 +7,24 @@ const ThemeToggle = () => {
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme") || "dark";
     setTheme(savedTheme as "light" | "dark");
-    document.documentElement.classList.toggle("dark", savedTheme === "light");
+    // Remove dark class for dark mode (default styles), add it for light mode
+    if (savedTheme === "light") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
   }, []);
 
   const toggleTheme = () => {
     const newTheme = theme === "dark" ? "light" : "dark";
     setTheme(newTheme);
     localStorage.setItem("theme", newTheme);
-    document.documentElement.classList.toggle("dark", newTheme === "light");
+    // Remove dark class for dark mode, add it for light mode
+    if (newTheme === "light") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
   };
 
   return (
