@@ -2,6 +2,13 @@ import { Github, GitMerge } from "lucide-react";
 
 const openSourcePRs = [
   {
+    title: "adding prav server and boarding",
+    repository: "prav/prav-ios",
+    status: "merged",
+    description: "Enhanced server integration and improved onboarding experience",
+    link: "#",
+  },
+  {
     title: "autoDownloadSettings rewrite #1033",
     repository: "monal-im/Monal",
     status: "merged",

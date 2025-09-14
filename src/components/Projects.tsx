@@ -2,8 +2,8 @@ import ProjectCard from "./ProjectCard";
 
 const projectsData = [
   {
-    title: "Briefly - RSS feeds and News",
-    description: "RSS feeds and News",
+    title: "Briefly - RSS reader and News",
+    description: "RSS reader and News",
     image: "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/24/fa/2f/24fa2f8f-ab6e-a94c-a16f-4dc22c4a8d7f/AppIcon-0-0-1x_U007epad-0-1-85-220.png/460x0w.png",
     tags: ["Swift", "SwiftUI", "iOS", "AI"],
     link: "https://apps.apple.com/in/app/briefly-rss-feeds-and-news/id6746949720",
@@ -53,7 +53,7 @@ const Projects = () => {
           <div className="flex flex-col md:flex-row justify-between items-center mb-4 gap-2">
             <p className="text-xs md:text-sm text-muted-foreground font-mono order-2 md:order-1">DEC 15, 2029</p>
             <h2 className="text-2xl md:text-4xl font-bold text-foreground border-b-2 border-foreground inline-block pb-2 order-1 md:order-2">
-              LATEST DEVELOPMENTS
+              CURRENT EVENTS
             </h2>
             <p className="text-xs md:text-sm text-muted-foreground font-mono order-3">PAGE 2</p>
           </div>

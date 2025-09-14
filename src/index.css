@@ -45,14 +45,14 @@
   }
 
   .dark {
-    --background: 0 0% 15%; /* Grayish dark newspaper */
-    --foreground: 0 0% 88%; /* Light gray text */
+    --background: 45 15% 15%; /* Aged newspaper brown-gray */
+    --foreground: 45 10% 85%; /* Warm light text */
 
-    --card: 0 0% 18%; /* Dark gray cards */
-    --card-foreground: 0 0% 88%; /* Light gray text on cards */
+    --card: 45 12% 18%; /* Warm dark gray cards */
+    --card-foreground: 45 10% 85%; /* Warm light text on cards */
 
-    --popover: 0 0% 18%; /* Dark gray popovers */
-    --popover-foreground: 0 0% 88%; /* Light gray text in popovers */
+    --popover: 45 12% 18%; /* Warm dark gray popovers */
+    --popover-foreground: 45 10% 85%; /* Warm light text in popovers */
 
     --primary: 0 0% 88%; /* Light gray primary */
     --primary-foreground: 0 0% 15%; /* Dark text on primary */
