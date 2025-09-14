@@ -8,12 +8,12 @@ const Hero = () => {
               EST. JANUARY 1, 2030 • VOLUME XCVII • PRICE: FREE
             </p>
           </div>
-          <h1 className="text-5xl md:text-7xl font-bold text-foreground mb-6 tracking-tight">
-            THE VAIDIK POST
+          <h1 className="text-5xl md:text-7xl font-headline font-bold text-foreground mb-6 tracking-tight">
+            The Washington Post
           </h1>
           <div className="border-t border-b border-foreground py-4 mb-6">
-            <p className="text-lg font-semibold text-foreground uppercase tracking-widest">
-              Founder & Apple Systems Developer
+            <p className="text-lg font-serif font-semibold text-foreground uppercase tracking-widest">
+              Apple Systems Developer and Maker
             </p>
           </div>
           <div className="text-center">

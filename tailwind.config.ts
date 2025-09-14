@@ -20,9 +20,10 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+        sans: ['Lora', 'Georgia', 'Times New Roman', 'serif'],
+        serif: ['Playfair Display', 'Georgia', 'Times New Roman', 'serif'],
+        headline: ['Old Standard TT', 'Playfair Display', 'Georgia', 'serif'],
         mono: ['JetBrains Mono', 'Fira Code', 'Consolas', 'monospace'],
-        retro: ['Orbitron', 'Exo 2', 'system-ui', 'sans-serif'],
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
