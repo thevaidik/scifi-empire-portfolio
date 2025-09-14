@@ -9,7 +9,7 @@ const Hero = () => {
             </p>
           </div>
           <h1 className="text-5xl md:text-7xl font-headline font-bold text-foreground mb-6 tracking-tight">
-            The Washington Post
+            THE VAIDIK POST
           </h1>
           <div className="border-t border-b border-foreground py-4 mb-6">
             <p className="text-lg font-serif font-semibold text-foreground uppercase tracking-widest">

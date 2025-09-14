@@ -4,14 +4,14 @@
 
 @layer base {
   :root {
-    --background: 45 8% 93%; /* Warm newspaper paper */
-    --foreground: 0 0% 12%; /* Dark text */
+    --background: 45 15% 15%; /* Dark newspaper brown-gray */
+    --foreground: 45 10% 85%; /* Warm light text */
 
-    --card: 45 10% 95%; /* Light warm cards */
-    --card-foreground: 0 0% 12%; /* Dark text on cards */
+    --card: 45 12% 18%; /* Warm dark gray cards */
+    --card-foreground: 45 10% 85%; /* Warm light text on cards */
 
-    --popover: 45 10% 95%; /* Light warm popovers */
-    --popover-foreground: 0 0% 12%; /* Dark text in popovers */
+    --popover: 45 12% 18%; /* Warm dark gray popovers */
+    --popover-foreground: 45 10% 85%; /* Warm light text in popovers */
 
     --primary: 0 0% 12%; /* Dark primary */
     --primary-foreground: 0 0% 96%; /* Light text on primary */
@@ -45,14 +45,14 @@
   }
 
   .dark {
-    --background: 45 15% 15%; /* Aged newspaper brown-gray */
-    --foreground: 45 10% 85%; /* Warm light text */
+    --background: 45 8% 93%; /* Light newspaper paper */
+    --foreground: 0 0% 12%; /* Dark text */
 
-    --card: 45 12% 18%; /* Warm dark gray cards */
-    --card-foreground: 45 10% 85%; /* Warm light text on cards */
+    --card: 45 10% 95%; /* Light warm cards */
+    --card-foreground: 0 0% 12%; /* Dark text on cards */
 
-    --popover: 45 12% 18%; /* Warm dark gray popovers */
-    --popover-foreground: 45 10% 85%; /* Warm light text in popovers */
+    --popover: 45 10% 95%; /* Light warm popovers */
+    --popover-foreground: 0 0% 12%; /* Dark text in popovers */
 
     --primary: 0 0% 88%; /* Light gray primary */
     --primary-foreground: 0 0% 15%; /* Dark text on primary */

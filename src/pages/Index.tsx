@@ -4,6 +4,7 @@ import Interests from "@/components/Interests";
 import Projects from "@/components/Projects";
 import OpenSource from "@/components/OpenSource";
 import Bento from "@/components/Bento";
+import ThemeToggle from "@/components/ThemeToggle";
 import { Github, Twitter, Youtube, Linkedin, Mail, BookOpen } from "lucide-react";
 
 const Index = () => {
@@ -55,6 +56,7 @@ const Index = () => {
 
   return (
     <div className="text-foreground bg-background min-h-screen dark">
+      <ThemeToggle />
       <Hero />
       
       {/* Connect Section */}
