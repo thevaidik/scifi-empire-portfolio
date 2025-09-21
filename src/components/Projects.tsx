@@ -49,109 +49,26 @@ const Projects = () => {
   return (
     <section className="py-16 border-b-2 border-foreground">
       <div className="container mx-auto px-4">
-        {/* Newspaper Header */}
         <div className="text-center mb-12">
-          <div className="border-t-2 border-b-2 border-foreground py-4 mb-6">
-            <div className="flex justify-between items-center mb-2">
-              <div className="text-xs font-mono text-muted-foreground">DEC 15, 2029</div>
-              <div className="text-xs font-mono text-muted-foreground">PAGE 2</div>
-            </div>
-            <h2 className="text-4xl font-headline font-black text-foreground tracking-wider">
+          <div className="flex flex-col md:flex-row justify-between items-center mb-4 gap-2">
+            <p className="text-xs md:text-sm text-muted-foreground font-mono order-2 md:order-1">DEC 15, 2029</p>
+            <h2 className="text-2xl md:text-4xl font-bold text-foreground border-b-2 border-foreground inline-block pb-2 order-1 md:order-2">
               CURRENT EVENTS
             </h2>
-            <div className="text-xs font-mono text-muted-foreground italic mt-2">
-              "Latest developments in technology and innovation"
-            </div>
+            <p className="text-xs md:text-sm text-muted-foreground font-mono order-3">PAGE 2</p>
           </div>
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto mt-6">
+            Current projects and innovations in technology
+          </p>
         </div>
 
-        {/* Newspaper Layout */}    
-        <div className="max-w-7xl mx-auto">
-          {/* Lead Story */}
-          <div className="border-b-2 border-foreground pb-8 mb-8">
-            <div className="grid md:grid-cols-3 gap-8">
-              <div className="md:col-span-2">
-                <h3 className="text-2xl font-headline font-bold text-foreground mb-3 leading-tight">
-                  {projectsData[0].title.toUpperCase()}
-                </h3>
-                <p className="font-serif text-base text-muted-foreground leading-relaxed mb-4">
-                  Revolutionary approach to {projectsData[0].description.toLowerCase()} transforms the digital news consumption landscape. 
-                  Built with cutting-edge {projectsData[0].tags.join(", ")} technologies, this application represents a significant 
-                  breakthrough in information accessibility and user experience design.
-                </p>
-                <div className="text-xs font-mono text-muted-foreground">
-                  TECHNOLOGIES: {projectsData[0].tags.join(" • ")}
-                </div>
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {projectsData.map((project) => (
+              <div key={project.title}>
+                <ProjectCard {...project} compact={true} />
               </div>
-              <div className="md:col-span-1">
-                <img 
-                  src={projectsData[0].image} 
-                  alt={projectsData[0].title}
-                  className="w-full h-48 object-cover border border-foreground"
-                />
-              </div>
-            </div>
-          </div>
-
-          {/* Secondary Stories - Two Column Layout */}
-          <div className="grid md:grid-cols-2 gap-12 mb-8">
-            {projectsData.slice(1, 3).map((project, index) => (
-              <article key={project.title} className="border-b border-foreground pb-6">
-                <div className="mb-4">
-                  <img 
-                    src={project.image} 
-                    alt={project.title}
-                    className="w-full h-32 object-cover border border-foreground mb-3"
-                  />
-                </div>
-                <h4 className="text-lg font-headline font-bold text-foreground mb-2 leading-tight">
-                  {project.title.toUpperCase()}
-                </h4>
-                <p className="font-serif text-sm text-muted-foreground leading-relaxed mb-3">
-                  {project.description}. This initiative showcases advanced implementation of {project.tags.slice(0, 2).join(" and ")} 
-                  technologies, marking significant progress in the field.
-                </p>
-                <div className="text-xs font-mono text-muted-foreground">
-                  {project.tags.join(" • ")}
-                </div>
-              </article>
             ))}
-          </div>
-
-          {/* Brief News Items */}
-          <div className="border-t-2 border-foreground pt-8">
-            <h3 className="text-xl font-headline font-bold text-foreground mb-6 text-center">
-              BRIEF DISPATCHES
-            </h3>
-            <div className="grid md:grid-cols-3 gap-8">
-              {projectsData.slice(3).map((project, index) => (
-                <div key={project.title} className="text-center">
-                  <div className="w-16 h-16 mx-auto mb-3 border border-foreground overflow-hidden">
-                    <img 
-                      src={project.image} 
-                      alt={project.title}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <h5 className="font-headline font-bold text-sm text-foreground mb-2">
-                    {project.title.toUpperCase()}
-                  </h5>
-                  <p className="font-serif text-xs text-muted-foreground leading-relaxed mb-2">
-                    {project.description}
-                  </p>
-                  <div className="text-xs font-mono text-muted-foreground opacity-70">
-                    {project.tags.slice(0, 2).join(" • ")}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Newspaper Footer */}
-          <div className="text-center mt-8 pt-6 border-t border-foreground">
-            <p className="text-xs font-mono text-muted-foreground">
-              All projects verified and continuously updated • For detailed information visit respective platforms
-            </p>
           </div>
         </div>
       </div>
