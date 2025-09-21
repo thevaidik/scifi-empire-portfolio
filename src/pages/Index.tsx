@@ -55,38 +55,39 @@ const Index = () => {
   ];
 
   return (
-    <div className="text-foreground bg-background min-h-screen">
+    <div className="text-foreground bg-background min-h-screen relative">
+      <div className="scanlines"></div>
       <ThemeToggle />
       <Hero />
       
       {/* Connect Section */}
-      <section className="py-16 border-b border-muted">
+      <section className="py-16 border-b neon-border-secondary relative">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-foreground mb-4 border-b-2 border-foreground inline-block pb-2">
+            <h2 className="text-4xl font-bold text-primary mb-4 neon-border inline-block pb-2 px-4 text-glow">
               CONNECT
             </h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto mt-6">
+            <p className="text-secondary text-lg max-w-2xl mx-auto mt-6">
               Professional networks and communication channels
             </p>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 max-w-4xl mx-auto">
             {links.map((link, index) => (
-              <div key={index} className="border border-border bg-background p-4 text-center hover:bg-muted/50 transition-colors">
+              <div key={index} className="neon-border bg-card p-4 text-center hover:neon-glow transition-all duration-300 group">
                 <a
                   href={link.url}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex flex-col items-center"
                 >
-                  <div className="w-8 h-8 flex items-center justify-center mb-2">
+                  <div className="w-8 h-8 flex items-center justify-center mb-2 text-accent group-hover:text-glow">
                     {link.icon}
                   </div>
-                  <h3 className="text-sm font-semibold text-foreground hover-underline">
+                  <h3 className="text-sm font-semibold text-primary group-hover:text-glow">
                     {link.name}
                   </h3>
-                  <p className="text-xs text-muted-foreground mt-1">
+                  <p className="text-xs text-secondary mt-1">
                     {link.description}
                   </p>
                 </a>

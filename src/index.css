@@ -4,85 +4,81 @@
 
 @layer base {
   :root {
-    /* Light mode - newspaper paper */
-    --background: 45 8% 96%; /* Light newspaper paper */
-    --foreground: 0 0% 8%; /* Dark text */
-
-    --card: 45 10% 98%; /* Very light warm cards */
-    --card-foreground: 0 0% 8%; /* Dark text on cards */
-
-    --popover: 45 10% 98%; /* Very light warm popovers */
-    --popover-foreground: 0 0% 8%; /* Dark text in popovers */
-
-    --primary: 0 0% 12%; /* Dark primary */
-    --primary-foreground: 0 0% 96%; /* Light text on primary */
-
-    --secondary: 0 0% 90%; /* Light gray secondary */
-    --secondary-foreground: 0 0% 12%; /* Dark text on secondary */
-
-    --muted: 0 0% 93%; /* Light muted background */
-    --muted-foreground: 0 0% 35%; /* Darker gray text */
-
-    --accent: 120 60% 35%; /* Green accent */
-    --accent-foreground: 0 0% 96%; /* Light text on accent */
-
+    --background: 220 15% 8%;
+    --foreground: 180 100% 85%;
+    --card: 220 15% 10%;
+    --card-foreground: 180 100% 85%;
+    --popover: 220 15% 10%;
+    --popover-foreground: 180 100% 85%;
+    --primary: 315 100% 70%;
+    --primary-foreground: 220 15% 8%;
+    --secondary: 195 100% 60%;
+    --secondary-foreground: 220 15% 8%;
+    --muted: 220 15% 15%;
+    --muted-foreground: 180 50% 65%;
+    --accent: 60 100% 70%;
+    --accent-foreground: 220 15% 8%;
     --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 96%; /* Light text on destructive */
-
-    --border: 0 0% 80%; /* Darker borders */
-    --input: 0 0% 95%; /* Light inputs */
-    --ring: 0 0% 12%; /* Dark focus ring */
-
-    --radius: 0.25rem; /* Minimal radius */
-
-    --sidebar-background: 0 0% 96%;
-    --sidebar-foreground: 0 0% 8%;
-    --sidebar-primary: 0 0% 12%;
-    --sidebar-primary-foreground: 0 0% 96%;
-    --sidebar-accent: 0 0% 93%;
-    --sidebar-accent-foreground: 0 0% 12%;
-    --sidebar-border: 0 0% 80%;
-    --sidebar-ring: 0 0% 12%;
+    --destructive-foreground: 210 20% 98%;
+    --border: 180 100% 25%;
+    --input: 220 15% 15%;
+    --ring: 315 100% 70%;
+    --chart-1: 315 100% 70%;
+    --chart-2: 195 100% 60%;
+    --chart-3: 60 100% 70%;
+    --chart-4: 280 100% 70%;
+    --chart-5: 120 100% 60%;
+    --radius: 0.5rem;
+    
+    /* Neon effects */
+    --neon-glow: 0 0 20px hsl(var(--primary)), 0 0 40px hsl(var(--primary)), 0 0 60px hsl(var(--primary));
+    --neon-glow-secondary: 0 0 15px hsl(var(--secondary)), 0 0 30px hsl(var(--secondary));
+    --neon-glow-accent: 0 0 10px hsl(var(--accent)), 0 0 20px hsl(var(--accent));
+    --text-glow: 0 0 10px currentColor, 0 0 20px currentColor, 0 0 30px currentColor;
   }
 
   .dark {
-    /* Dark mode - aged newspaper */
-    --background: 45 15% 15%; /* Dark newspaper brown-gray */
-    --foreground: 45 10% 85%; /* Warm light text */
+    --background: 220 15% 5%;
+    --foreground: 315 100% 85%;
+    --card: 220 15% 8%;
+    --card-foreground: 315 100% 85%;
+    --popover: 220 15% 8%;
+    --popover-foreground: 315 100% 85%;
+    --primary: 315 100% 75%;
+    --primary-foreground: 220 15% 5%;
+    --secondary: 195 100% 65%;
+    --secondary-foreground: 220 15% 5%;
+    --muted: 220 15% 12%;
+    --muted-foreground: 315 50% 70%;
+    --accent: 60 100% 75%;
+    --accent-foreground: 220 15% 5%;
+    --destructive: 0 84% 65%;
+    --destructive-foreground: 210 20% 98%;
+    --border: 315 100% 30%;
+    --input: 220 15% 12%;
+    --ring: 315 100% 75%;
+  }
 
-    --card: 45 12% 18%; /* Warm dark gray cards */
-    --card-foreground: 45 10% 85%; /* Warm light text on cards */
-
-    --popover: 45 12% 18%; /* Warm dark gray popovers */
-    --popover-foreground: 45 10% 85%; /* Warm light text in popovers */
-
-    --primary: 0 0% 88%; /* Light gray primary */
-    --primary-foreground: 0 0% 15%; /* Dark text on primary */
-
-    --secondary: 0 0% 22%; /* Dark gray secondary */
-    --secondary-foreground: 0 0% 88%; /* Light gray text on secondary */
-
-    --muted: 0 0% 20%; /* Dark muted background */
-    --muted-foreground: 0 0% 65%; /* Medium gray text */
-
-    --accent: 120 60% 45%; /* Green for dark mode */
-    --accent-foreground: 0 0% 15%; /* Dark text on accent */
-
+  .light {
+    --background: 20 20% 95%;
+    --foreground: 220 15% 15%;
+    --card: 0 0% 100%;
+    --card-foreground: 220 15% 15%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 15% 15%;
+    --primary: 315 80% 40%;
+    --primary-foreground: 210 20% 98%;
+    --secondary: 195 80% 35%;
+    --secondary-foreground: 210 20% 98%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+    --accent: 60 80% 45%;
+    --accent-foreground: 210 20% 98%;
     --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 88%; /* Light gray text on destructive */
-
-    --border: 0 0% 25%; /* Dark gray borders */
-    --input: 0 0% 20%; /* Dark gray inputs */
-    --ring: 0 0% 88%; /* Light gray focus ring */
-
-    --sidebar-background: 0 0% 15%;
-    --sidebar-foreground: 0 0% 88%;
-    --sidebar-primary: 0 0% 88%;
-    --sidebar-primary-foreground: 0 0% 15%;
-    --sidebar-accent: 0 0% 22%;
-    --sidebar-accent-foreground: 0 0% 88%;
-    --sidebar-border: 0 0% 25%;
-    --sidebar-ring: 0 0% 88%;
+    --destructive-foreground: 210 20% 98%;
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 315 80% 40%;
   }
 }
 
@@ -99,17 +95,86 @@
     min-height: 100vh;
   }
 
-  /* Newspaper typography */
+  /* Newspaper typography with neon effects */
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Playfair Display', 'Georgia', 'Times New Roman', serif;
     font-weight: bold;
     line-height: 1.2;
   }
 
-  /* Newspaper column separator */
-  .newspaper-divider {
-    border-left: 1px solid hsl(var(--border));
-    height: 100%;
+  /* Neon utility classes */
+  .neon-glow {
+    box-shadow: var(--neon-glow);
+  }
+
+  .neon-glow-secondary {
+    box-shadow: var(--neon-glow-secondary);
+  }
+
+  .neon-glow-accent {
+    box-shadow: var(--neon-glow-accent);
+  }
+
+  .text-glow {
+    text-shadow: var(--text-glow);
+  }
+
+  .neon-border {
+    border: 1px solid hsl(var(--primary));
+    box-shadow: 0 0 10px hsl(var(--primary) / 0.5), inset 0 0 10px hsl(var(--primary) / 0.1);
+  }
+
+  .neon-border-secondary {
+    border: 1px solid hsl(var(--secondary));
+    box-shadow: 0 0 10px hsl(var(--secondary) / 0.5), inset 0 0 10px hsl(var(--secondary) / 0.1);
+  }
+
+  /* Vintage neon animations */
+  @keyframes flicker {
+    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+      text-shadow: var(--text-glow);
+      opacity: 1;
+    }
+    20%, 24%, 55% {
+      text-shadow: none;
+      opacity: 0.8;
+    }
+  }
+
+  @keyframes glow-pulse {
+    0%, 100% {
+      box-shadow: 0 0 5px hsl(var(--primary)), 0 0 15px hsl(var(--primary)), 0 0 25px hsl(var(--primary));
+    }
+    50% {
+      box-shadow: 0 0 10px hsl(var(--primary)), 0 0 25px hsl(var(--primary)), 0 0 40px hsl(var(--primary));
+    }
+  }
+
+  .flicker-animation {
+    animation: flicker 3s infinite;
+  }
+
+  .glow-pulse {
+    animation: glow-pulse 2s ease-in-out infinite;
+  }
+
+  /* Scanlines effect */
+  .scanlines::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      transparent 2px,
+      hsl(var(--primary) / 0.03) 2px,
+      hsl(var(--primary) / 0.03) 4px,
+      transparent 4px
+    );
+    background-size: 100% 4px;
+    pointer-events: none;
+    z-index: 1000;
   }
 
   /* Simple hover effects */

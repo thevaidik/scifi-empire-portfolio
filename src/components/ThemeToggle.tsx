@@ -30,7 +30,7 @@ const ThemeToggle = () => {
   return (
     <button
       onClick={toggleTheme}
-      className="fixed top-4 right-4 z-50 p-2 border border-foreground bg-background hover:bg-muted transition-colors font-serif text-xs uppercase tracking-widest"
+      className="fixed top-4 right-4 z-50 p-2 neon-border bg-card text-primary hover:neon-glow-accent transition-all duration-300 font-serif text-xs uppercase tracking-widest text-glow"
       aria-label="Toggle theme"
     >
       <div className="flex items-center gap-1">

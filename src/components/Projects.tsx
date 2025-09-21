@@ -47,26 +47,28 @@ const projectsData = [
 
 const Projects = () => {
   return (
-    <section className="py-16 border-b-2 border-foreground">
+    <section className="py-16 neon-border-secondary border-b-2 relative">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <div className="flex flex-col md:flex-row justify-between items-center mb-4 gap-2">
-            <p className="text-xs md:text-sm text-muted-foreground font-mono order-2 md:order-1">DEC 15, 2029</p>
-            <h2 className="text-2xl md:text-4xl font-bold text-foreground border-b-2 border-foreground inline-block pb-2 order-1 md:order-2">
+            <p className="text-xs md:text-sm text-secondary font-mono order-2 md:order-1 text-glow">DEC 15, 2029</p>
+            <h2 className="text-2xl md:text-4xl font-bold text-primary neon-border inline-block pb-2 px-4 order-1 md:order-2 text-glow flicker-animation">
               CURRENT EVENTS
             </h2>
-            <p className="text-xs md:text-sm text-muted-foreground font-mono order-3">PAGE 2</p>
+            <p className="text-xs md:text-sm text-secondary font-mono order-3 text-glow">PAGE 2</p>
           </div>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto mt-6">
+          <p className="text-secondary text-lg max-w-2xl mx-auto mt-6">
             Current projects and innovations in technology
           </p>
         </div>
 
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {projectsData.map((project) => (
-              <div key={project.title}>
-                <ProjectCard {...project} compact={true} />
+            {projectsData.map((project, index) => (
+              <div key={project.title} className="group">
+                <div className="neon-border bg-card hover:neon-glow-secondary transition-all duration-300">
+                  <ProjectCard {...project} compact={true} />
+                </div>
               </div>
             ))}
           </div>
