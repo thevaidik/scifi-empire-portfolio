@@ -59,39 +59,64 @@ const Index = () => {
       <ThemeToggle />
       <Hero />
       
-      {/* Connect Section */}
-      <section className="py-16 border-b border-muted">
+      {/* Connect Section - Newspaper Style */}
+      <section className="py-16 border-b-2 border-foreground">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-foreground mb-4 border-b-2 border-foreground inline-block pb-2">
-              CONNECT
-            </h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto mt-6">
-              Professional networks and communication channels
+          {/* Newspaper Header */}
+          <div className="text-center mb-8">
+            <div className="border-t-2 border-b-2 border-foreground py-3 mb-6">
+              <h2 className="text-3xl font-headline font-bold text-foreground tracking-wider">
+                CORRESPONDENCE & NETWORKS
+              </h2>
+              <div className="flex items-center justify-center mt-2">
+                <div className="border-t border-foreground w-16"></div>
+                <span className="mx-4 text-xs font-mono text-muted-foreground">EST. 2030</span>
+                <div className="border-t border-foreground w-16"></div>
+              </div>
+            </div>
+            <p className="font-serif text-sm italic text-muted-foreground">
+              "Maintaining professional connections across digital platforms for the modern era"
             </p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 max-w-4xl mx-auto">
-            {links.map((link, index) => (
-              <div key={index} className="border border-border bg-background p-4 text-center hover:bg-muted/50 transition-colors">
-                <a
-                  href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex flex-col items-center"
-                >
-                  <div className="w-8 h-8 flex items-center justify-center mb-2">
-                    {link.icon}
+          {/* Newspaper-style grid layout */}
+          <div className="max-w-5xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {links.map((link, index) => (
+                <article key={index} className="border-b border-foreground pb-4 mb-4">
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 border border-foreground flex items-center justify-center bg-muted/20 flex-shrink-0">
+                      {link.icon}
+                    </div>
+                    <div className="flex-1">
+                      <a
+                        href={link.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group"
+                      >
+                        <h3 className="font-headline font-bold text-lg text-foreground group-hover:underline mb-1">
+                          {link.name.toUpperCase()}
+                        </h3>
+                        <p className="font-serif text-sm text-muted-foreground leading-relaxed">
+                          {link.description}. Access professional updates, technical discussions, and collaborative opportunities.
+                        </p>
+                        <div className="text-xs font-mono text-muted-foreground mt-2 opacity-70">
+                          ■ ACTIVE DAILY ■
+                        </div>
+                      </a>
+                    </div>
                   </div>
-                  <h3 className="text-sm font-semibold text-foreground hover-underline">
-                    {link.name}
-                  </h3>
-                  <p className="text-xs text-muted-foreground mt-1">
-                    {link.description}
-                  </p>
-                </a>
-              </div>
-            ))}
+                </article>
+              ))}
+            </div>
+          </div>
+
+          {/* Newspaper footer */}
+          <div className="text-center mt-8 pt-6 border-t border-foreground">
+            <p className="text-xs font-mono text-muted-foreground">
+              All correspondence channels verified and maintained • Updated regularly for optimal connectivity
+            </p>
           </div>
         </div>
       </section>
