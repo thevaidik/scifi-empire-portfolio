@@ -18,7 +18,7 @@ const Hero = () => {
           </div>
           <div className="text-center">
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Specializing in iOS, macOS, and visionOS development. Building the future of technology through innovative applications and open-source contributions.
+              iOS, macOS dev, also playing with Rust and server-side Swift + founding stuff. Building the future of technology through innovative applications and open-source contributions.
             </p>
           </div>
         </div>
