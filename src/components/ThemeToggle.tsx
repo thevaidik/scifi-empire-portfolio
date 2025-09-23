@@ -7,24 +7,18 @@ const ThemeToggle = () => {
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme") || "dark";
     setTheme(savedTheme as "light" | "dark");
-    // Add dark class for dark mode, remove for light mode
-    if (savedTheme === "dark") {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
+    // Apply theme classes
+    document.documentElement.classList.remove("dark", "light");
+    document.documentElement.classList.add(savedTheme);
   }, []);
 
   const toggleTheme = () => {
     const newTheme = theme === "dark" ? "light" : "dark";
     setTheme(newTheme);
     localStorage.setItem("theme", newTheme);
-    // Add dark class for dark mode, remove for light mode
-    if (newTheme === "dark") {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
+    // Apply theme classes
+    document.documentElement.classList.remove("dark", "light");
+    document.documentElement.classList.add(newTheme);
   };
 
   return (
