@@ -4,6 +4,7 @@ import Interests from "@/components/Interests";
 import Projects from "@/components/Projects";
 import OpenSource from "@/components/OpenSource";
 import Bento from "@/components/Bento";
+import HangingSign from "@/components/HangingSign";
 import { Github, Twitter, Youtube, Linkedin, Mail, BookOpen } from "lucide-react";
 
 const Index = () => {
@@ -56,6 +57,7 @@ const Index = () => {
   return (
     <div className="text-foreground vintage-neon-bg min-h-screen relative">
       <div className="scanlines"></div>
+      <HangingSign />
       <Hero />
       
       {/* Connect Section */}
