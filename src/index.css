@@ -4,30 +4,31 @@
 
 @layer base {
   :root {
-    --background: 220 15% 8%;
-    --foreground: 180 100% 90%;
-    --card: 220 15% 10%;
-    --card-foreground: 180 100% 88%;
-    --popover: 220 15% 10%;
-    --popover-foreground: 180 100% 88%;
-    --primary: 315 100% 65%;
-    --primary-foreground: 220 15% 8%;
-    --secondary: 195 100% 55%;
-    --secondary-foreground: 220 15% 8%;
-    --muted: 220 15% 15%;
-    --muted-foreground: 180 50% 70%;
-    --accent: 60 100% 65%;
-    --accent-foreground: 220 15% 8%;
+    /* Vintage Neon Color Palette */
+    --background: 220 25% 6%;
+    --foreground: 315 100% 88%;
+    --card: 220 20% 8%;
+    --card-foreground: 315 95% 85%;
+    --popover: 220 20% 8%;
+    --popover-foreground: 315 95% 85%;
+    --primary: 315 100% 68%;
+    --primary-foreground: 220 25% 6%;
+    --secondary: 195 100% 58%;
+    --secondary-foreground: 220 25% 6%;
+    --muted: 220 20% 12%;
+    --muted-foreground: 315 60% 70%;
+    --accent: 60 100% 68%;
+    --accent-foreground: 220 25% 6%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 210 20% 98%;
-    --border: 180 100% 20%;
-    --input: 220 15% 15%;
-    --ring: 315 100% 65%;
-    --chart-1: 315 100% 65%;
-    --chart-2: 195 100% 55%;
-    --chart-3: 60 100% 65%;
-    --chart-4: 280 100% 65%;
-    --chart-5: 120 100% 55%;
+    --border: 315 80% 25%;
+    --input: 220 20% 12%;
+    --ring: 315 100% 68%;
+    --chart-1: 315 100% 68%;
+    --chart-2: 195 100% 58%;
+    --chart-3: 60 100% 68%;
+    --chart-4: 280 100% 68%;
+    --chart-5: 120 100% 58%;
     --radius: 0.5rem;
     
     /* Neon effects */
@@ -36,50 +37,6 @@
     --neon-glow-accent: 0 0 8px hsl(var(--accent) / 0.8), 0 0 16px hsl(var(--accent) / 0.5);
     --text-glow: 0 0 8px currentColor, 0 0 16px currentColor, 0 0 24px currentColor;
     --subtle-glow: 0 0 5px hsl(var(--primary) / 0.3), 0 0 10px hsl(var(--primary) / 0.2);
-  }
-
-  .dark {
-    --background: 220 15% 5%;
-    --foreground: 315 100% 85%;
-    --card: 220 15% 8%;
-    --card-foreground: 315 100% 85%;
-    --popover: 220 15% 8%;
-    --popover-foreground: 315 100% 85%;
-    --primary: 315 100% 75%;
-    --primary-foreground: 220 15% 5%;
-    --secondary: 195 100% 65%;
-    --secondary-foreground: 220 15% 5%;
-    --muted: 220 15% 12%;
-    --muted-foreground: 315 50% 70%;
-    --accent: 60 100% 75%;
-    --accent-foreground: 220 15% 5%;
-    --destructive: 0 84% 65%;
-    --destructive-foreground: 210 20% 98%;
-    --border: 315 100% 30%;
-    --input: 220 15% 12%;
-    --ring: 315 100% 75%;
-  }
-
-  .light {
-    --background: 0 0% 98%;
-    --foreground: 220 15% 10%;
-    --card: 0 0% 100%;
-    --card-foreground: 220 15% 12%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 220 15% 12%;
-    --primary: 315 70% 35%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 195 70% 30%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 210 40% 96%;
-    --muted-foreground: 215 16% 40%;
-    --accent: 60 70% 35%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 84% 50%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 214 32% 85%;
-    --input: 214 32% 92%;
-    --ring: 315 70% 35%;
   }
 }
 
@@ -94,6 +51,16 @@
     font-family: 'Lora', 'Georgia', 'Times New Roman', serif;
     line-height: 1.6;
     min-height: 100vh;
+  }
+
+  /* Vintage Neon Background */
+  .vintage-neon-bg {
+    background: 
+      radial-gradient(circle at 20% 20%, hsl(315 100% 68% / 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, hsl(195 100% 58% / 0.08) 0%, transparent 50%),
+      radial-gradient(circle at 40% 70%, hsl(60 100% 68% / 0.06) 0%, transparent 50%),
+      linear-gradient(135deg, hsl(220 25% 6%) 0%, hsl(220 30% 4%) 100%);
+    background-attachment: fixed;
   }
 
   /* Newspaper typography with neon effects */
