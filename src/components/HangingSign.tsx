@@ -1,104 +1,134 @@
 import { motion, useMotionValue, useSpring, useTransform, animate } from "framer-motion";
 import { useEffect } from "react";
+import { Code2, Coffee } from "lucide-react";
 
 const HangingSign = () => {
-  // Pendulum-like rotation controlled by drag + idle sway
-  const rawRotate = useMotionValue(0);
-  const rotate = useSpring(rawRotate, { stiffness: 40, damping: 6, mass: 0.3 });
-  const chainAngle = useTransform(rotate, [-15, 15], [-6, 6]);
-
+  // Real pendulum physics - rotation based on horizontal displacement
+  const x = useMotionValue(0);
+  const rotate = useTransform(x, [-100, 100], [-25, 25]);
+  
+  // Chain angle follows the sign rotation
+  const chainRotate = useTransform(rotate, [-25, 25], [-8, 8]);
+  
   useEffect(() => {
-    // Subtle idle swing
-    const controls = animate(rawRotate, [-1.4, 1.4, -1.4], {
-      duration: 10,
+    // Gentle idle sway
+    const controls = animate(x, [-8, 8, -8], {
+      duration: 12,
       repeat: Infinity,
       ease: "easeInOut",
     });
     return () => controls.stop();
-  }, [rawRotate]);
+  }, [x]);
 
   return (
-    <div className="fixed top-0 right-6 z-50 select-none pointer-events-auto">
-      {/* Chains from ceiling to sign anchors */}
-      <div className="flex justify-center gap-10">
+    <div className="fixed top-0 right-8 z-50 select-none pointer-events-auto">
+      {/* Hanging chains that follow the swing */}
+      <div className="flex justify-center gap-16">
         {/* Left chain */}
-        <motion.div style={{ rotate: chainAngle }} className="relative">
+        <motion.div style={{ rotate: chainRotate }} className="origin-top">
           <div
-            className="w-1 h-20"
+            className="w-1 h-24"
             style={{
               backgroundImage:
-                "repeating-linear-gradient(to bottom, hsl(var(--muted-foreground)) 0 8px, transparent 8px 16px)",
-              backgroundColor: "hsl(var(--muted-foreground) / 0.6)",
+                "repeating-linear-gradient(to bottom, hsl(var(--muted-foreground)) 0 6px, transparent 6px 12px)",
+              backgroundColor: "hsl(var(--muted-foreground) / 0.7)",
             }}
           />
-          {/* Ring */}
-          <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full border-2 border-accent/60 bg-background"></div>
+          {/* Chain ring */}
+          <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full border border-muted-foreground/60 bg-background/80"></div>
         </motion.div>
+        
         {/* Right chain */}
-        <motion.div style={{ rotate: chainAngle }} className="relative">
+        <motion.div style={{ rotate: chainRotate }} className="origin-top">
           <div
-            className="w-1 h-20"
+            className="w-1 h-24"
             style={{
               backgroundImage:
-                "repeating-linear-gradient(to bottom, hsl(var(--muted-foreground)) 0 8px, transparent 8px 16px)",
-              backgroundColor: "hsl(var(--muted-foreground) / 0.6)",
+                "repeating-linear-gradient(to bottom, hsl(var(--muted-foreground)) 0 6px, transparent 6px 12px)",
+              backgroundColor: "hsl(var(--muted-foreground) / 0.7)",
             }}
           />
-          {/* Ring */}
-          <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full border-2 border-accent/60 bg-background"></div>
+          {/* Chain ring */}
+          <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full border border-muted-foreground/60 bg-background/80"></div>
         </motion.div>
       </div>
 
-      {/* Sign wrapper with pivot at top for realistic swing */}
+      {/* Swinging sign with realistic pendulum physics */}
       <motion.div
-        className="relative -mt-1 origin-top"
-        drag
-        dragConstraints={{ left: -120, right: 120, top: -20, bottom: 80 }}
-        dragElastic={0.25}
-        onDrag={(e, info) => {
-          const tilt = Math.max(-12, Math.min(12, info.offset.x * 0.06));
-          rawRotate.set(tilt);
+        className="relative -mt-1"
+        style={{ 
+          x,
+          rotate,
+          transformOrigin: "50% -24px" // Pivot point at chain attachment
         }}
+        drag="x"
+        dragConstraints={{ left: -150, right: 150 }}
+        dragElastic={0.2}
         onDragEnd={(e, info) => {
-          // Inertia kick + spring back to rest to simulate chain physics
-          const kick = Math.max(-10, Math.min(10, info.velocity.x * 0.01));
-          rawRotate.set(kick);
-          animate(rawRotate, 0, { type: "spring", stiffness: 30, damping: 4, mass: 0.25 });
+          // Apply physics-based momentum for realistic swing
+          const velocity = info.velocity.x;
+          const momentum = velocity * 0.3;
+          
+          animate(x, [x.get(), x.get() + momentum, 0], {
+            type: "spring",
+            stiffness: 80,
+            damping: 12,
+            mass: 0.8,
+            duration: 3
+          });
         }}
-        style={{ rotate }}
-        whileHover={{ scale: 1.02 }}
-        whileDrag={{ scale: 1.04 }}
+        whileHover={{ scale: 1.01 }}
+        whileDrag={{ scale: 1.02 }}
       >
-        {/* Compact motel sign with a single curved arrow */}
-        <div className="relative w-[220px]">
-          {/* Arrow-shaped panel (rounded head via rotated rounded square) */}
-          <div className="relative px-4 pt-3 pb-9 rounded-lg neon-border bg-gradient-to-br from-card/95 to-card/85 backdrop-blur-sm shadow-2xl">
-            <div className="absolute inset-0 rounded-lg neon-glow blur-sm opacity-60"></div>
-
-            <div className="relative text-center">
-              <div className="text-[11px] font-black tracking-[0.28em] text-primary text-glow">
+        {/* Motel sign body */}
+        <div className="relative w-48 bg-gradient-to-br from-card/95 to-card/85 backdrop-blur-sm rounded-lg neon-border shadow-2xl">
+          {/* Neon glow */}
+          <div className="absolute inset-0 rounded-lg neon-glow blur-sm opacity-60"></div>
+          
+          {/* Sign content */}
+          <div className="relative px-5 py-4 text-center">
+            {/* Header */}
+            <div className="mb-3">
+              <div className="text-sm font-black tracking-[0.3em] text-primary text-glow">
                 DEV MOTEL
               </div>
-              <div className="mt-1 text-[10px] tracking-[0.2em] text-secondary text-glow flicker-animation">
-                VACANCY
+              <div className="w-12 h-0.5 bg-primary/60 mx-auto mt-1"></div>
+            </div>
+            
+            {/* Vacancy */}
+            <div className="mb-3">
+              <div className="inline-block border-2 border-secondary/60 rounded px-3 py-1 bg-secondary/10">
+                <div className="text-xs font-bold text-secondary text-glow flicker-animation tracking-[0.2em]">
+                  VACANCY
+                </div>
               </div>
             </div>
-
-            {/* Curved arrow head */}
-            <div className="absolute left-1/2 -translate-x-1/2 bottom-1 w-9 h-9 bg-gradient-to-b from-primary/90 to-primary/70 rounded-[14px] rotate-45 neon-border border-t-0 border-l-0"></div>
+            
+            {/* Services */}
+            <div className="space-y-2">
+              <div className="flex items-center justify-center gap-2">
+                <Code2 className="w-3 h-3 text-primary text-glow" />
+                <div className="text-xs text-primary font-semibold tracking-[0.25em] text-glow">
+                  24/7 CODING
+                </div>
+                <Coffee className="w-3 h-3 text-primary text-glow" />
+              </div>
+              <div className="text-[9px] text-muted-foreground tracking-[0.15em] opacity-90">
+                FREE WIFI • COFFEE • DEBUG
+              </div>
+            </div>
           </div>
-
-          {/* Arrow shaft connector */}
-          <div className="absolute left-1/2 -translate-x-1/2 -bottom-2 w-1.5 h-5 bg-primary/70 rounded-full"></div>
-
-          {/* Corner brackets (subtle metal reinforcements) */}
+          
+          {/* Chain attachment points */}
+          <div className="absolute -top-2 left-4 w-4 h-3 bg-muted/30 border border-muted-foreground/40 rounded-sm"></div>
+          <div className="absolute -top-2 right-4 w-4 h-3 bg-muted/30 border border-muted-foreground/40 rounded-sm"></div>
+          
+          {/* Corner reinforcements */}
           <div className="absolute -top-1 -left-1 w-3 h-3 border-l-2 border-t-2 border-accent/40 rounded-tl"></div>
           <div className="absolute -top-1 -right-1 w-3 h-3 border-r-2 border-t-2 border-accent/40 rounded-tr"></div>
+          <div className="absolute -bottom-1 -left-1 w-3 h-3 border-l-2 border-b-2 border-accent/40 rounded-bl"></div>
+          <div className="absolute -bottom-1 -right-1 w-3 h-3 border-r-2 border-b-2 border-accent/40 rounded-br"></div>
         </div>
-
-        {/* Hinge plates matching chain positions */}
-        <div className="absolute -top-2 left-5 w-5 h-2 bg-accent/20 border border-accent/40 rounded-sm"></div>
-        <div className="absolute -top-2 right-5 w-5 h-2 bg-accent/20 border border-accent/40 rounded-sm"></div>
       </motion.div>
     </div>
   );
