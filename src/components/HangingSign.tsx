@@ -1,68 +1,86 @@
 import { motion } from "framer-motion";
-import { Code, Zap } from "lucide-react";
+import { ArrowDown, Code2, Coffee } from "lucide-react";
 
 const HangingSign = () => {
   return (
-    <div className="absolute top-6 right-6 z-20 select-none">
-      {/* Single hanging chain */}
-      <div className="flex justify-center mb-2">
-        <div className="w-0.5 h-8 bg-gradient-to-b from-muted-foreground/60 to-transparent"></div>
+    <div className="fixed top-0 right-8 z-50 select-none">
+      {/* Hanging chains from ceiling */}
+      <div className="flex justify-center gap-16">
+        <div className="w-0.5 h-16 bg-gradient-to-b from-muted-foreground/80 to-muted-foreground/40"></div>
+        <div className="w-0.5 h-16 bg-gradient-to-b from-muted-foreground/80 to-muted-foreground/40"></div>
       </div>
       
-      {/* Interactive motel-style sign */}
+      {/* Interactive hanging motel sign with physics */}
       <motion.div
-        className="relative"
+        className="relative -mt-2"
         drag
-        dragConstraints={{ left: -50, right: 50, top: -30, bottom: 30 }}
-        dragElastic={0.8}
-        whileHover={{ scale: 1.05 }}
-        whileDrag={{ scale: 1.1, rotate: 5 }}
-        initial={{ rotate: -1 }}
+        dragConstraints={{ left: -80, right: 80, top: -40, bottom: 60 }}
+        dragElastic={0.6}
+        whileHover={{ scale: 1.02 }}
+        whileDrag={{ scale: 1.05 }}
         animate={{ 
-          rotate: [-1, 1, -1],
-          y: [0, -2, 0]
+          rotate: [-0.5, 0.5, -0.5],
+          y: [0, -1, 0]
         }}
         transition={{
-          rotate: { duration: 4, repeat: Infinity, ease: "easeInOut" },
-          y: { duration: 3, repeat: Infinity, ease: "easeInOut" }
+          rotate: { duration: 6, repeat: Infinity, ease: "easeInOut" },
+          y: { duration: 4, repeat: Infinity, ease: "easeInOut" }
         }}
       >
-        {/* Outer neon glow */}
-        <div className="absolute inset-0 neon-glow rounded-lg blur-sm opacity-70"></div>
-        
-        {/* Main motel sign body */}
-        <div className="relative bg-gradient-to-br from-card/90 to-card/70 backdrop-blur-sm rounded-lg px-4 py-3 neon-border shadow-xl">
-          {/* Motel sign header */}
-          <div className="flex items-center justify-center gap-2 mb-1">
-            <Code className="w-3 h-3 text-primary text-glow" />
-            <div className="text-[10px] text-primary font-black tracking-[0.15em] text-glow flicker-animation">
-              DEV MOTEL
-            </div>
-            <Zap className="w-3 h-3 text-accent text-glow" />
-          </div>
-          
-          {/* Main vacancy sign */}
-          <div className="text-center border-2 border-primary/40 rounded px-2 py-1 mb-1">
-            <div className="text-xs font-bold text-accent text-glow tracking-wider">
-              VACANCY
+        {/* Main motel sign structure */}
+        <div className="relative">
+          {/* Top sign with arrow */}
+          <div className="relative bg-gradient-to-r from-primary/90 to-primary/70 backdrop-blur-sm rounded-t-lg px-4 py-2 neon-border">
+            <div className="absolute inset-0 neon-glow rounded-t-lg blur-sm opacity-60"></div>
+            <div className="relative flex items-center justify-between">
+              <div className="text-xs font-black text-background tracking-[0.15em]">
+                DEV MOTEL
+              </div>
+              <ArrowDown className="w-4 h-4 text-background transform rotate-45" />
             </div>
           </div>
           
-          {/* Bottom services */}
-          <div className="text-center space-y-0.5">
-            <div className="text-[9px] text-secondary font-semibold tracking-[0.2em]">
-              24/7 CODING
+          {/* Main sign body */}
+          <div className="relative bg-gradient-to-br from-card/95 to-card/80 backdrop-blur-sm px-4 py-3 neon-border border-t-0">
+            <div className="absolute inset-0 neon-glow blur-sm opacity-50"></div>
+            
+            {/* Vacancy indicator */}
+            <div className="relative text-center mb-2">
+              <div className="inline-block border-2 border-accent/60 rounded px-3 py-1 bg-accent/10">
+                <div className="text-sm font-bold text-accent text-glow flicker-animation tracking-wider">
+                  VACANCY
+                </div>
+              </div>
             </div>
-            <div className="text-[8px] text-muted-foreground tracking-wider">
-              WIFI • COFFEE • BUGS
+            
+            {/* Services */}
+            <div className="relative text-center space-y-1">
+              <div className="flex items-center justify-center gap-2">
+                <Code2 className="w-3 h-3 text-primary text-glow" />
+                <div className="text-xs text-primary font-semibold tracking-[0.2em] text-glow">
+                  24/7 CODING
+                </div>
+                <Coffee className="w-3 h-3 text-secondary text-glow" />
+              </div>
+              <div className="text-[10px] text-muted-foreground tracking-wider opacity-80">
+                FREE WIFI • COFFEE • DEBUG
+              </div>
             </div>
           </div>
           
-          {/* Corner brackets */}
-          <div className="absolute -top-1 -left-1 w-2 h-2 border-l-2 border-t-2 border-accent/60"></div>
-          <div className="absolute -top-1 -right-1 w-2 h-2 border-r-2 border-t-2 border-accent/60"></div>
-          <div className="absolute -bottom-1 -left-1 w-2 h-2 border-l-2 border-b-2 border-accent/60"></div>
-          <div className="absolute -bottom-1 -right-1 w-2 h-2 border-r-2 border-b-2 border-accent/60"></div>
+          {/* Bottom arrow pointer */}
+          <div className="relative bg-gradient-to-b from-primary/90 to-primary/70 backdrop-blur-sm rounded-b-lg px-2 py-1 neon-border border-t-0">
+            <div className="absolute inset-0 neon-glow rounded-b-lg blur-sm opacity-60"></div>
+            <div className="relative text-center">
+              <ArrowDown className="w-4 h-4 text-background mx-auto" />
+            </div>
+          </div>
+          
+          {/* Corner reinforcements */}
+          <div className="absolute -top-1 -left-1 w-3 h-3 border-l-2 border-t-2 border-accent/40 rounded-tl"></div>
+          <div className="absolute -top-1 -right-1 w-3 h-3 border-r-2 border-t-2 border-accent/40 rounded-tr"></div>
+          <div className="absolute -bottom-1 -left-1 w-3 h-3 border-l-2 border-b-2 border-accent/40 rounded-bl"></div>
+          <div className="absolute -bottom-1 -right-1 w-3 h-3 border-r-2 border-b-2 border-accent/40 rounded-br"></div>
         </div>
       </motion.div>
     </div>
