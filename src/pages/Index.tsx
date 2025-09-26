@@ -150,102 +150,126 @@ const Index = () => {
     if (selectedApp) {
       const app = apps.find(a => a.id === selectedApp);
       return (
-        <div className="min-h-screen bg-gradient-to-br from-ios-bg to-ios-secondary">
-          {/* Status Bar */}
-          <div className="h-12 bg-black/20 backdrop-blur-md flex items-center justify-between px-4 text-white text-sm">
-            <div className="flex items-center space-x-1">
-              <div className="w-1 h-1 bg-white rounded-full"></div>
-              <div className="w-1 h-1 bg-white rounded-full"></div>
-              <div className="w-1 h-1 bg-white rounded-full"></div>
-              <span className="ml-2">Verizon</span>
+        <div className="min-h-screen bg-gradient-to-br from-slate-100 to-slate-200 relative">
+          {/* Mode Switcher - Always visible */}
+          <div className="fixed top-4 left-4 z-50 bg-white/90 backdrop-blur-sm rounded-full p-3 border border-gray-200 shadow-lg">
+            <div className="flex items-center space-x-3">
+              <Globe className="w-4 h-4 text-gray-600" />
+              <Switch
+                checked={isOSMode}
+                onCheckedChange={setIsOSMode}
+              />
+              <Smartphone className="w-4 h-4 text-gray-600" />
             </div>
-            <span>9:41 AM</span>
-            <div className="flex items-center space-x-1">
-              <span>100%</span>
-              <div className="w-6 h-3 border border-white rounded-sm">
-                <div className="w-full h-full bg-green-500 rounded-sm"></div>
+          </div>
+
+          {/* Menu Bar */}
+          <div className="h-8 bg-white/80 backdrop-blur-md flex items-center justify-between px-4 text-gray-800 text-sm border-b border-gray-200">
+            <div className="flex items-center space-x-4">
+              <span className="font-semibold">🍎</span>
+              <span className="font-medium">{app?.name}</span>
+            </div>
+            <div className="flex items-center space-x-4">
+              <span>Thu 9:41 AM</span>
+            </div>
+          </div>
+
+          {/* Window */}
+          <div className="p-4">
+            <div className="bg-white rounded-lg shadow-2xl border border-gray-200 min-h-[calc(100vh-120px)]">
+              {/* Window Header */}
+              <div className="flex items-center justify-between p-4 border-b border-gray-200 bg-gray-50 rounded-t-lg">
+                <div className="flex items-center space-x-2">
+                  <button
+                    onClick={handleBackToHome}
+                    className="w-3 h-3 bg-red-500 rounded-full hover:bg-red-600"
+                  ></button>
+                  <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                  <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                </div>
+                <h1 className="font-semibold text-gray-800 text-sm">
+                  {app?.name}
+                </h1>
+                <div className="w-16"></div>
+              </div>
+
+              {/* App Content */}
+              <div className="overflow-hidden">
+                {app?.component}
               </div>
             </div>
-          </div>
-
-          {/* App Header */}
-          <div className="bg-ios-card/80 backdrop-blur-md p-4 flex items-center">
-            <button
-              onClick={handleBackToHome}
-              className="text-blue-500 font-medium"
-            >
-              ← Home
-            </button>
-            <h1 className="flex-1 text-center font-semibold text-primary">
-              {app?.name}
-            </h1>
-          </div>
-
-          {/* App Content */}
-          <div className="flex-1">
-            {app?.component}
           </div>
         </div>
       );
     }
 
     return (
-      <div className="min-h-screen bg-gradient-to-br from-ios-bg to-ios-secondary">
-        {/* Status Bar */}
-        <div className="h-12 bg-black/20 backdrop-blur-md flex items-center justify-between px-4 text-white text-sm">
-          <div className="flex items-center space-x-1">
-            <div className="w-1 h-1 bg-white rounded-full"></div>
-            <div className="w-1 h-1 bg-white rounded-full"></div>
-            <div className="w-1 h-1 bg-white rounded-full"></div>
-            <span className="ml-2">Verizon</span>
-          </div>
-          <span>9:41 AM</span>
-          <div className="flex items-center space-x-1">
-            <span>100%</span>
-            <div className="w-6 h-3 border border-white rounded-sm">
-              <div className="w-full h-full bg-green-500 rounded-sm"></div>
-            </div>
+      <div className="min-h-screen bg-gradient-to-br from-slate-100 to-slate-200 relative" 
+           style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-opacity='0.05'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z'/%3E%3C/g%3E%3C/svg%3E")` }}>
+        
+        {/* Mode Switcher - Always visible */}
+        <div className="fixed top-4 left-4 z-50 bg-white/90 backdrop-blur-sm rounded-full p-3 border border-gray-200 shadow-lg">
+          <div className="flex items-center space-x-3">
+            <Globe className="w-4 h-4 text-gray-600" />
+            <Switch
+              checked={isOSMode}
+              onCheckedChange={setIsOSMode}
+            />
+            <Smartphone className="w-4 h-4 text-gray-600" />
           </div>
         </div>
 
-        {/* Home Screen */}
-        <div className="p-8">
-          <div className="text-center mb-8">
-            <h1 className="text-2xl font-semibold text-white mb-2">
+        {/* Menu Bar */}
+        <div className="h-8 bg-white/80 backdrop-blur-md flex items-center justify-between px-4 text-gray-800 text-sm border-b border-gray-200">
+          <div className="flex items-center space-x-4">
+            <span className="font-semibold">🍎</span>
+            <span className="font-medium">Finder</span>
+            <span>File</span>
+            <span>Edit</span>
+            <span>View</span>
+            <span>Go</span>
+            <span>Window</span>
+            <span>Help</span>
+          </div>
+          <div className="flex items-center space-x-4">
+            <span>🔋</span>
+            <span>📶</span>
+            <span>Thu 9:41 AM</span>
+          </div>
+        </div>
+
+        {/* Desktop */}
+        <div className="flex-1 p-8">
+          <div className="text-center mb-8 mt-16">
+            <h1 className="text-4xl font-semibold text-gray-800 mb-2">
               THE VAIDIK POST
             </h1>
-            <p className="text-white/70">Apple Systems Developer</p>
+            <p className="text-gray-600 text-lg">macOS Developer Workspace</p>
           </div>
+        </div>
 
-          {/* App Grid */}
-          <div className="grid grid-cols-4 gap-6 max-w-sm mx-auto">
-            {apps.map((app) => (
-              <button
-                key={app.id}
-                onClick={() => handleAppClick(app.id)}
-                className="flex flex-col items-center group"
-              >
-                <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${app.color} flex items-center justify-center mb-2 shadow-lg group-active:scale-95 transition-transform`}>
-                  <div className="text-white">
-                    {app.icon}
+        {/* Dock */}
+        <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2">
+          <div className="bg-white/20 backdrop-blur-xl rounded-2xl p-2 border border-white/30 shadow-2xl">
+            <div className="flex space-x-1">
+              {apps.map((app) => (
+                <button
+                  key={app.id}
+                  onClick={() => handleAppClick(app.id)}
+                  className="group relative"
+                >
+                  <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${app.color} flex items-center justify-center shadow-lg group-hover:scale-110 group-active:scale-95 transition-all duration-200`}>
+                    <div className="text-white">
+                      {app.icon}
+                    </div>
                   </div>
-                </div>
-                <span className="text-xs text-white font-medium text-center">
-                  {app.name}
-                </span>
-              </button>
-            ))}
-          </div>
-
-          {/* Dock */}
-          <div className="fixed bottom-8 left-1/2 transform -translate-x-1/2">
-            <div className="bg-white/20 backdrop-blur-md rounded-2xl p-2 flex space-x-2">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center">
-                <Globe className="w-6 h-6 text-white" />
-              </div>
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-gray-400 to-gray-600 flex items-center justify-center">
-                <Mail className="w-6 h-6 text-white" />
-              </div>
+                  
+                  {/* Tooltip */}
+                  <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                    {app.name}
+                  </div>
+                </button>
+              ))}
             </div>
           </div>
         </div>
