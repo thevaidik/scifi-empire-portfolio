@@ -4,39 +4,39 @@
 
 @layer base {
   :root {
-    /* Vintage Neon Color Palette */
-    --background: 220 25% 6%;
-    --foreground: 315 100% 88%;
-    --card: 220 20% 8%;
-    --card-foreground: 315 95% 85%;
-    --popover: 220 20% 8%;
-    --popover-foreground: 315 95% 85%;
-    --primary: 315 100% 68%;
-    --primary-foreground: 220 25% 6%;
-    --secondary: 195 100% 58%;
-    --secondary-foreground: 220 25% 6%;
-    --muted: 220 20% 12%;
-    --muted-foreground: 315 60% 70%;
-    --accent: 60 100% 68%;
-    --accent-foreground: 220 25% 6%;
+    /* 90s Vintage Newspaper - Black & White with Retro-Futuristic Hints */
+    --background: 0 0% 98%;
+    --foreground: 0 0% 5%;
+    --card: 0 0% 95%;
+    --card-foreground: 0 0% 5%;
+    --popover: 0 0% 98%;
+    --popover-foreground: 0 0% 5%;
+    --primary: 0 0% 10%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 30%;
+    --secondary-foreground: 0 0% 95%;
+    --muted: 0 0% 88%;
+    --muted-foreground: 0 0% 40%;
+    --accent: 200 80% 45%;
+    --accent-foreground: 0 0% 98%;
     --destructive: 0 84% 60%;
-    --destructive-foreground: 210 20% 98%;
-    --border: 315 80% 25%;
-    --input: 220 20% 12%;
-    --ring: 315 100% 68%;
-    --chart-1: 315 100% 68%;
-    --chart-2: 195 100% 58%;
-    --chart-3: 60 100% 68%;
-    --chart-4: 280 100% 68%;
-    --chart-5: 120 100% 58%;
-    --radius: 0.5rem;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 20%;
+    --input: 0 0% 90%;
+    --ring: 200 80% 45%;
+    --chart-1: 0 0% 20%;
+    --chart-2: 0 0% 40%;
+    --chart-3: 200 80% 45%;
+    --chart-4: 0 0% 60%;
+    --chart-5: 0 0% 15%;
+    --radius: 0rem;
     
-    /* Neon effects */
-    --neon-glow: 0 0 15px hsl(var(--primary) / 0.8), 0 0 30px hsl(var(--primary) / 0.6), 0 0 45px hsl(var(--primary) / 0.4);
-    --neon-glow-secondary: 0 0 12px hsl(var(--secondary) / 0.8), 0 0 25px hsl(var(--secondary) / 0.5);
-    --neon-glow-accent: 0 0 8px hsl(var(--accent) / 0.8), 0 0 16px hsl(var(--accent) / 0.5);
-    --text-glow: 0 0 8px currentColor, 0 0 16px currentColor, 0 0 24px currentColor;
-    --subtle-glow: 0 0 5px hsl(var(--primary) / 0.3), 0 0 10px hsl(var(--primary) / 0.2);
+    /* Retro-Futuristic effects (subtle) */
+    --retro-glow: 0 0 8px hsl(200 80% 45% / 0.3), 0 0 16px hsl(200 80% 45% / 0.15);
+    --paper-texture: 0 0 2px hsl(0 0% 0% / 0.1);
+    --ink-shadow: 2px 2px 0 hsl(0 0% 0% / 0.1);
+    --text-glow: none;
+    --subtle-glow: 0 1px 3px hsl(0 0% 0% / 0.15);
   }
 }
 
@@ -53,14 +53,32 @@
     min-height: 100vh;
   }
 
-  /* Vintage Neon Background */
+  /* Vintage Paper Background */
   .vintage-neon-bg {
     background: 
-      radial-gradient(circle at 20% 20%, hsl(315 100% 68% / 0.1) 0%, transparent 50%),
-      radial-gradient(circle at 80% 80%, hsl(195 100% 58% / 0.08) 0%, transparent 50%),
-      radial-gradient(circle at 40% 70%, hsl(60 100% 68% / 0.06) 0%, transparent 50%),
-      linear-gradient(135deg, hsl(220 25% 6%) 0%, hsl(220 30% 4%) 100%);
+      repeating-linear-gradient(
+        0deg,
+        hsl(0 0% 98%),
+        hsl(0 0% 98%) 1px,
+        hsl(0 0% 97%) 1px,
+        hsl(0 0% 97%) 2px
+      );
     background-attachment: fixed;
+    position: relative;
+  }
+  
+  .vintage-neon-bg::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+      radial-gradient(circle at 20% 50%, hsl(0 0% 0% / 0.02) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, hsl(0 0% 0% / 0.015) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
   }
 
   /* Newspaper typography with neon effects */
@@ -70,80 +88,69 @@
     line-height: 1.2;
   }
 
-  /* Neon utility classes */
-  .neon-glow {
-    box-shadow: var(--neon-glow);
-  }
-
-  .neon-glow-secondary {
-    box-shadow: var(--neon-glow-secondary);
-  }
-
-  .neon-glow-accent {
-    box-shadow: var(--neon-glow-accent);
+  /* Vintage Newspaper utility classes */
+  .retro-glow {
+    box-shadow: var(--retro-glow);
   }
 
   .text-glow {
-    text-shadow: var(--text-glow);
+    text-shadow: var(--ink-shadow);
   }
 
   .neon-border {
-    border: 1px solid hsl(var(--primary) / 0.8);
-    box-shadow: 0 0 8px hsl(var(--primary) / 0.4), inset 0 0 8px hsl(var(--primary) / 0.1);
+    border: 3px double hsl(var(--border));
+    box-shadow: var(--paper-texture);
   }
 
   .neon-border-secondary {
-    border: 1px solid hsl(var(--secondary) / 0.8);
-    box-shadow: 0 0 8px hsl(var(--secondary) / 0.4), inset 0 0 8px hsl(var(--secondary) / 0.1);
+    border-top: 3px solid hsl(var(--border));
+    border-bottom: 3px solid hsl(var(--border));
+    box-shadow: var(--paper-texture);
   }
 
   .subtle-border {
-    border: 1px solid hsl(var(--border));
+    border: 2px solid hsl(var(--border));
     box-shadow: var(--subtle-glow);
   }
 
-  /* Vintage neon animations */
+  /* Vintage newspaper animations */
   @keyframes flicker {
-    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
-      text-shadow: var(--text-glow);
+    0%, 100% {
       opacity: 1;
     }
-    20%, 24%, 55% {
-      text-shadow: none;
-      opacity: 0.8;
+    50% {
+      opacity: 0.98;
     }
   }
 
   @keyframes glow-pulse {
     0%, 100% {
-      box-shadow: 0 0 4px hsl(var(--primary) / 0.6), 0 0 12px hsl(var(--primary) / 0.4), 0 0 20px hsl(var(--primary) / 0.2);
+      box-shadow: var(--retro-glow);
     }
     50% {
-      box-shadow: 0 0 8px hsl(var(--primary) / 0.8), 0 0 20px hsl(var(--primary) / 0.6), 0 0 32px hsl(var(--primary) / 0.4);
+      box-shadow: 0 0 12px hsl(200 80% 45% / 0.4), 0 0 24px hsl(200 80% 45% / 0.2);
     }
   }
 
   @keyframes subtle-pulse {
     0%, 100% {
-      opacity: 0.8;
       transform: scale(1);
     }
     50% {
-      opacity: 1;
-      transform: scale(1.02);
+      transform: scale(1.01);
     }
   }
 
   .flicker-animation {
-    animation: flicker 3s infinite;
+    animation: flicker 5s ease-in-out infinite;
   }
 
   .glow-pulse {
-    animation: glow-pulse 3s ease-in-out infinite;
+    animation: glow-pulse 4s ease-in-out infinite;
   }
 
   .subtle-pulse {
-    animation: subtle-pulse 4s ease-in-out infinite;
+    animation: subtle-pulse 6s ease-in-out infinite;
   }
 
   .elegant-hover {
@@ -155,7 +162,7 @@
     box-shadow: var(--subtle-glow);
   }
 
-  /* Scanlines effect */
+  /* Scanlines effect - subtle dot matrix */
   .scanlines::before {
     content: '';
     position: absolute;
@@ -163,15 +170,11 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(
-      transparent 2px,
-      hsl(var(--primary) / 0.03) 2px,
-      hsl(var(--primary) / 0.03) 4px,
-      transparent 4px
-    );
-    background-size: 100% 4px;
+    background-image: 
+      radial-gradient(circle at center, hsl(0 0% 0% / 0.03) 1px, transparent 1px);
+    background-size: 4px 4px;
     pointer-events: none;
-    z-index: 1000;
+    z-index: 1;
   }
 
   /* Simple hover effects */

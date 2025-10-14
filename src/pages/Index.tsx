@@ -89,16 +89,16 @@ const Index = () => {
         <section className="py-16 vintage-neon-bg">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
-              <h2 className="text-4xl font-headline font-bold text-primary mb-4 text-glow">
+              <h2 className="text-4xl font-headline font-bold text-primary mb-4 uppercase tracking-wide border-b-4 border-t-4 border-border py-4 inline-block px-8">
                 CONNECTIONS & CORRESPONDENCE
               </h2>
-              <p className="text-secondary text-lg max-w-2xl mx-auto mt-6 font-serif">
-                Professional networks and communication channels
+              <p className="text-secondary text-lg max-w-2xl mx-auto mt-8 font-serif italic">
+                Professional networks and communication channels for the modern era
               </p>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 max-w-4xl mx-auto">
               {links.map((link, index) => (
-                <div key={index} className="bg-card/50 backdrop-blur-md p-4 text-center hover:scale-105 transition-all duration-300 group neon-border elegant-hover">
+                <div key={index} className="bg-card border-2 border-border p-4 text-center hover:bg-muted transition-all duration-300 group shadow-sm">
                   <a
                     href={link.url}
                     target="_blank"
@@ -108,10 +108,10 @@ const Index = () => {
                     <div className="w-8 h-8 flex items-center justify-center mb-2 text-accent">
                       {link.icon}
                     </div>
-                    <h3 className="text-sm font-semibold text-primary">
+                    <h3 className="text-sm font-semibold text-primary uppercase tracking-wider">
                       {link.name}
                     </h3>
-                    <p className="text-xs text-secondary mt-1">
+                    <p className="text-xs text-secondary mt-1 font-mono">
                       {link.description}
                     </p>
                   </a>
@@ -284,14 +284,14 @@ const Index = () => {
   return (
     <div className="text-foreground vintage-neon-bg min-h-screen relative">
       {/* Mode Switcher */}
-      <div className="fixed top-4 left-4 z-50 bg-card/90 backdrop-blur-sm rounded-lg p-3 neon-border">
+      <div className="fixed top-4 left-4 z-50 bg-background border-2 border-border rounded-sm p-3 shadow-lg">
         <div className="flex items-center space-x-3">
-          <Globe className="w-4 h-4 text-primary" />
+          <Globe className="w-4 h-4 text-foreground" />
           <Switch
             checked={isOSMode}
             onCheckedChange={setIsOSMode}
           />
-          <Smartphone className="w-4 h-4 text-primary" />
+          <Smartphone className="w-4 h-4 text-foreground" />
         </div>
       </div>
 
@@ -302,17 +302,17 @@ const Index = () => {
       <section className="py-16 border-b-2 neon-border-secondary relative">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-headline font-bold text-primary mb-4 text-glow">
+            <h2 className="text-4xl font-headline font-bold text-primary mb-4 uppercase tracking-wide border-b-4 border-t-4 border-border py-4 inline-block px-8">
               CONNECTIONS & CORRESPONDENCE
             </h2>
-            <p className="text-secondary text-lg max-w-2xl mx-auto mt-6 font-serif">
-              Professional networks and communication channels
+            <p className="text-secondary text-lg max-w-2xl mx-auto mt-8 font-serif italic">
+              Professional networks and communication channels for the modern era
             </p>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 max-w-4xl mx-auto">
             {links.map((link, index) => (
-              <div key={index} className="bg-card/50 backdrop-blur-md p-4 text-center hover:scale-105 transition-all duration-300 group neon-border elegant-hover">
+              <div key={index} className="bg-card border-2 border-border p-4 text-center hover:bg-muted transition-all duration-300 group shadow-sm">
                 <a
                   href={link.url}
                   target="_blank"
@@ -322,10 +322,10 @@ const Index = () => {
                   <div className="w-8 h-8 flex items-center justify-center mb-2 text-accent">
                     {link.icon}
                   </div>
-                  <h3 className="text-sm font-semibold text-primary">
+                  <h3 className="text-sm font-semibold text-primary uppercase tracking-wider">
                     {link.name}
                   </h3>
-                  <p className="text-xs text-secondary mt-1">
+                  <p className="text-xs text-secondary mt-1 font-mono">
                     {link.description}
                   </p>
                 </a>
