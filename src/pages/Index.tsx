@@ -5,7 +5,7 @@ import Projects from "@/components/Projects";
 import OpenSource from "@/components/OpenSource";
 import Bento from "@/components/Bento";
 import HangingSign from "@/components/HangingSign";
-import { Github, Twitter, Youtube, Linkedin, Mail, BookOpen, Smartphone, Globe, Code, Users, Heart, Info, Briefcase, Coffee } from "lucide-react";
+import { Github, Twitter, Youtube, Linkedin, Mail, BookOpen, Monitor, Newspaper, Code, Users, Heart, Info, Briefcase, Coffee } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 
 const Index = () => {
@@ -150,51 +150,67 @@ const Index = () => {
     if (selectedApp) {
       const app = apps.find(a => a.id === selectedApp);
       return (
-        <div className="min-h-screen bg-gradient-to-br from-slate-100 to-slate-200 relative">
+        <div className="min-h-screen relative" style={{ 
+          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", system-ui, sans-serif'
+        }}>
           {/* Mode Switcher - Always visible */}
-          <div className="fixed top-4 left-4 z-50 bg-white/90 backdrop-blur-sm rounded-full p-3 border border-gray-200 shadow-lg">
+          <div className="fixed top-6 left-6 z-50 bg-gray-900/80 backdrop-blur-xl rounded-xl px-4 py-2.5 border border-white/20 shadow-2xl">
             <div className="flex items-center space-x-3">
-              <Globe className="w-4 h-4 text-gray-600" />
+              <Newspaper className="w-4 h-4 text-gray-300" />
               <Switch
                 checked={isOSMode}
                 onCheckedChange={setIsOSMode}
               />
-              <Smartphone className="w-4 h-4 text-gray-600" />
+              <Monitor className="w-4 h-4 text-blue-400" />
             </div>
           </div>
 
           {/* Menu Bar */}
-          <div className="h-8 bg-white/80 backdrop-blur-md flex items-center justify-between px-4 text-gray-800 text-sm border-b border-gray-200">
-            <div className="flex items-center space-x-4">
-              <span className="font-semibold">🍎</span>
-              <span className="font-medium">{app?.name}</span>
+          <div className="h-7 bg-gray-900/30 backdrop-blur-2xl flex items-center justify-between px-4 text-white text-[13px] font-medium border-b border-white/10">
+            <div className="flex items-center space-x-5">
+              <span className="text-lg">🍎</span>
+              <span className="font-semibold">{app?.name}</span>
+              <span className="text-white/70 hover:text-white cursor-pointer transition">File</span>
+              <span className="text-white/70 hover:text-white cursor-pointer transition">Edit</span>
+              <span className="text-white/70 hover:text-white cursor-pointer transition">View</span>
+              <span className="text-white/70 hover:text-white cursor-pointer transition">Window</span>
+              <span className="text-white/70 hover:text-white cursor-pointer transition">Help</span>
             </div>
-            <div className="flex items-center space-x-4">
-              <span>Thu 9:41 AM</span>
+            <div className="flex items-center space-x-4 text-white/90">
+              <span className="text-sm">🔋</span>
+              <span className="text-sm">📶</span>
+              <span className="text-xs">Thu 9:41 AM</span>
             </div>
           </div>
 
           {/* Window */}
-          <div className="p-4">
-            <div className="bg-white rounded-lg shadow-2xl border border-gray-200 min-h-[calc(100vh-120px)]">
+          <div className="p-6 pt-8">
+            <div className="bg-white/95 backdrop-blur-xl rounded-xl shadow-2xl border border-black/10 min-h-[calc(100vh-140px)] overflow-hidden">
               {/* Window Header */}
-              <div className="flex items-center justify-between p-4 border-b border-gray-200 bg-gray-50 rounded-t-lg">
+              <div className="flex items-center justify-between px-4 py-3 bg-gradient-to-b from-gray-50 to-gray-100/50 border-b border-gray-200/80">
                 <div className="flex items-center space-x-2">
                   <button
                     onClick={handleBackToHome}
-                    className="w-3 h-3 bg-red-500 rounded-full hover:bg-red-600"
-                  ></button>
-                  <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                  <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                    className="w-3 h-3 bg-[#ff5f57] rounded-full hover:bg-[#ff4b42] transition-colors shadow-sm flex items-center justify-center group"
+                  >
+                    <span className="text-[8px] text-black/40 opacity-0 group-hover:opacity-100">×</span>
+                  </button>
+                  <button className="w-3 h-3 bg-[#ffbd2e] rounded-full hover:bg-[#ffaa00] transition-colors shadow-sm flex items-center justify-center group">
+                    <span className="text-[8px] text-black/40 opacity-0 group-hover:opacity-100">−</span>
+                  </button>
+                  <button className="w-3 h-3 bg-[#28c840] rounded-full hover:bg-[#1fb832] transition-colors shadow-sm flex items-center justify-center group">
+                    <span className="text-[8px] text-black/40 opacity-0 group-hover:opacity-100">⤢</span>
+                  </button>
                 </div>
-                <h1 className="font-semibold text-gray-800 text-sm">
+                <h1 className="font-medium text-gray-700 text-[13px] tracking-tight absolute left-1/2 transform -translate-x-1/2">
                   {app?.name}
                 </h1>
                 <div className="w-16"></div>
               </div>
 
               {/* App Content */}
-              <div className="overflow-hidden">
+              <div className="overflow-auto max-h-[calc(100vh-200px)]">
                 {app?.component}
               </div>
             </div>
@@ -204,68 +220,85 @@ const Index = () => {
     }
 
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-100 to-slate-200 relative" 
-           style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-opacity='0.05'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z'/%3E%3C/g%3E%3C/svg%3E")` }}>
+      <div className="min-h-screen relative" style={{ 
+        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+        backgroundSize: 'cover',
+        backgroundAttachment: 'fixed',
+        fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", system-ui, sans-serif'
+      }}>
         
         {/* Mode Switcher - Always visible */}
-        <div className="fixed top-4 left-4 z-50 bg-white/90 backdrop-blur-sm rounded-full p-3 border border-gray-200 shadow-lg">
+        <div className="fixed top-6 left-6 z-50 bg-gray-900/80 backdrop-blur-xl rounded-xl px-4 py-2.5 border border-white/20 shadow-2xl">
           <div className="flex items-center space-x-3">
-            <Globe className="w-4 h-4 text-gray-600" />
+            <Newspaper className="w-4 h-4 text-gray-300" />
             <Switch
               checked={isOSMode}
               onCheckedChange={setIsOSMode}
             />
-            <Smartphone className="w-4 h-4 text-gray-600" />
+            <Monitor className="w-4 h-4 text-blue-400" />
           </div>
         </div>
 
         {/* Menu Bar */}
-        <div className="h-8 bg-white/80 backdrop-blur-md flex items-center justify-between px-4 text-gray-800 text-sm border-b border-gray-200">
-          <div className="flex items-center space-x-4">
-            <span className="font-semibold">🍎</span>
-            <span className="font-medium">Finder</span>
-            <span>File</span>
-            <span>Edit</span>
-            <span>View</span>
-            <span>Go</span>
-            <span>Window</span>
-            <span>Help</span>
+        <div className="h-7 bg-gray-900/30 backdrop-blur-2xl flex items-center justify-between px-4 text-white text-[13px] font-medium border-b border-white/10">
+          <div className="flex items-center space-x-5">
+            <span className="text-lg">🍎</span>
+            <span className="font-semibold">Finder</span>
+            <span className="text-white/70 hover:text-white cursor-pointer transition">File</span>
+            <span className="text-white/70 hover:text-white cursor-pointer transition">Edit</span>
+            <span className="text-white/70 hover:text-white cursor-pointer transition">View</span>
+            <span className="text-white/70 hover:text-white cursor-pointer transition">Go</span>
+            <span className="text-white/70 hover:text-white cursor-pointer transition">Window</span>
+            <span className="text-white/70 hover:text-white cursor-pointer transition">Help</span>
           </div>
-          <div className="flex items-center space-x-4">
-            <span>🔋</span>
-            <span>📶</span>
-            <span>Thu 9:41 AM</span>
+          <div className="flex items-center space-x-4 text-white/90">
+            <span className="text-sm">🔋</span>
+            <span className="text-sm">📶</span>
+            <span className="text-xs">Thu 9:41 AM</span>
           </div>
         </div>
 
         {/* Desktop */}
-        <div className="flex-1 p-8">
-          <div className="text-center mb-8 mt-16">
-            <h1 className="text-4xl font-semibold text-gray-800 mb-2">
+        <div className="flex-1 p-12 pt-20">
+          <div className="text-center mb-8">
+            <h1 className="text-5xl font-semibold text-white mb-3 drop-shadow-lg" style={{
+              textShadow: '0 2px 10px rgba(0,0,0,0.3)'
+            }}>
               THE VAIDIK POST
             </h1>
-            <p className="text-gray-600 text-lg">macOS Developer Workspace</p>
+            <p className="text-white/90 text-xl drop-shadow-md">macOS Developer Workspace</p>
           </div>
         </div>
 
         {/* Dock */}
-        <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2">
-          <div className="bg-white/20 backdrop-blur-xl rounded-2xl p-2 border border-white/30 shadow-2xl">
-            <div className="flex space-x-1">
+        <div className="fixed bottom-2 left-1/2 transform -translate-x-1/2">
+          <div className="bg-white/10 backdrop-blur-2xl rounded-[22px] px-3 py-2 border border-white/20 shadow-2xl" style={{
+            boxShadow: '0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.2)'
+          }}>
+            <div className="flex space-x-2">
               {apps.map((app) => (
                 <button
                   key={app.id}
                   onClick={() => handleAppClick(app.id)}
                   className="group relative"
                 >
-                  <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${app.color} flex items-center justify-center shadow-lg group-hover:scale-110 group-active:scale-95 transition-all duration-200`}>
-                    <div className="text-white">
+                  <div className={`w-[60px] h-[60px] rounded-[14px] bg-gradient-to-br ${app.color} flex items-center justify-center shadow-lg transition-all duration-200 ease-out group-hover:-translate-y-2 group-hover:scale-110 group-active:scale-95`}
+                       style={{
+                         boxShadow: '0 4px 12px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.3)'
+                       }}>
+                    <div className="text-white drop-shadow-lg">
                       {app.icon}
                     </div>
                   </div>
                   
+                  {/* Active indicator */}
+                  <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-white/70 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                  
                   {/* Tooltip */}
-                  <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                  <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 bg-gray-800/95 backdrop-blur-sm text-white text-xs px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-all whitespace-nowrap pointer-events-none"
+                       style={{
+                         boxShadow: '0 4px 12px rgba(0,0,0,0.4)'
+                       }}>
                     {app.name}
                   </div>
                 </button>
@@ -286,12 +319,12 @@ const Index = () => {
       {/* Mode Switcher */}
       <div className="fixed top-4 left-4 z-50 bg-background border-2 border-border rounded-sm p-3 shadow-lg">
         <div className="flex items-center space-x-3">
-          <Globe className="w-4 h-4 text-foreground" />
+          <Newspaper className="w-4 h-4 text-foreground" />
           <Switch
             checked={isOSMode}
             onCheckedChange={setIsOSMode}
           />
-          <Smartphone className="w-4 h-4 text-foreground" />
+          <Monitor className="w-4 h-4 text-accent" />
         </div>
       </div>
 
