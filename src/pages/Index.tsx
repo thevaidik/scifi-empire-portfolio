@@ -86,19 +86,19 @@ const Index = () => {
       icon: <Users className="w-8 h-8" />,
       color: "from-orange-400 to-orange-600",
       component: (
-        <section className="py-16 bg-ios-card backdrop-blur-md">
+        <section className="py-16 vintage-neon-bg">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
-              <h2 className="text-4xl font-bold text-primary mb-4">
-                CONNECT
+              <h2 className="text-4xl font-headline font-bold text-primary mb-4 text-glow">
+                CONNECTIONS & CORRESPONDENCE
               </h2>
-              <p className="text-secondary text-lg max-w-2xl mx-auto mt-6">
+              <p className="text-secondary text-lg max-w-2xl mx-auto mt-6 font-serif">
                 Professional networks and communication channels
               </p>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 max-w-4xl mx-auto">
               {links.map((link, index) => (
-                <div key={index} className="bg-ios-card backdrop-blur-md p-4 text-center hover:scale-105 transition-all duration-300 group rounded-2xl border border-white/10">
+                <div key={index} className="bg-card/50 backdrop-blur-md p-4 text-center hover:scale-105 transition-all duration-300 group neon-border elegant-hover">
                   <a
                     href={link.url}
                     target="_blank"
@@ -282,9 +282,9 @@ const Index = () => {
   }
 
   return (
-    <div className="text-foreground bg-gradient-to-br from-ios-bg to-ios-secondary min-h-screen relative">
+    <div className="text-foreground vintage-neon-bg min-h-screen relative">
       {/* Mode Switcher */}
-      <div className="fixed top-4 left-4 z-50 bg-ios-card/80 backdrop-blur-sm rounded-full p-3 border border-white/10">
+      <div className="fixed top-4 left-4 z-50 bg-card/90 backdrop-blur-sm rounded-lg p-3 neon-border">
         <div className="flex items-center space-x-3">
           <Globe className="w-4 h-4 text-primary" />
           <Switch
@@ -299,20 +299,20 @@ const Index = () => {
       <Hero />
       
       {/* Connect Section */}
-      <section className="py-16 bg-ios-card/50 backdrop-blur-sm border-b border-white/10">
+      <section className="py-16 border-b-2 neon-border-secondary relative">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-primary mb-4">
-              CONNECT
+            <h2 className="text-4xl font-headline font-bold text-primary mb-4 text-glow">
+              CONNECTIONS & CORRESPONDENCE
             </h2>
-            <p className="text-secondary text-lg max-w-2xl mx-auto mt-6">
+            <p className="text-secondary text-lg max-w-2xl mx-auto mt-6 font-serif">
               Professional networks and communication channels
             </p>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 max-w-4xl mx-auto">
             {links.map((link, index) => (
-              <div key={index} className="bg-ios-card backdrop-blur-md p-4 text-center hover:scale-105 transition-all duration-300 group rounded-2xl border border-white/10">
+              <div key={index} className="bg-card/50 backdrop-blur-md p-4 text-center hover:scale-105 transition-all duration-300 group neon-border elegant-hover">
                 <a
                   href={link.url}
                   target="_blank"
