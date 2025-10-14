@@ -295,7 +295,6 @@ const Index = () => {
         </div>
       </div>
 
-      <HangingSign />
       <Hero />
       
       {/* Connect Section */}
