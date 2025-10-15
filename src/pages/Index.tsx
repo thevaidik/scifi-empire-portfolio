@@ -11,6 +11,8 @@ import { Switch } from "@/components/ui/switch";
 const Index = () => {
   const [isOSMode, setIsOSMode] = useState(false);
   const [selectedApp, setSelectedApp] = useState<string | null>(null);
+  const [showWifiMenu, setShowWifiMenu] = useState(false);
+  const [showBatteryMenu, setShowBatteryMenu] = useState(false);
 
   useEffect(() => {
     document.documentElement.style.scrollBehavior = "smooth";
@@ -23,38 +25,32 @@ const Index = () => {
     {
       name: "GitHub",
       url: "https://github.com/thevaidik",
-      icon: <Github className="h-4 w-4" />,
-      description: "Code repositories"
+      icon: <Github className="h-4 w-4" />
     },
     {
       name: "Twitter",
       url: "https://twitter.com/thevaidik_", 
-      icon: <Twitter className="h-4 w-4" />,
-      description: "Tech discussions"
+      icon: <Twitter className="h-4 w-4" />
     },
     {
       name: "YouTube",
       url: "https://www.youtube.com/@thevaidik_",
-      icon: <Youtube className="h-4 w-4" />,
-      description: "Tech tutorials"
+      icon: <Youtube className="h-4 w-4" />
     },
     {
       name: "LinkedIn",
       url: "https://linkedin.com/in/vaidikxx",
-      icon: <Linkedin className="h-4 w-4" />,
-      description: "Professional network"
+      icon: <Linkedin className="h-4 w-4" />
     },
     {
       name: "Medium",
       url: "https://medium.com/@thevaidik",
-      icon: <BookOpen className="h-4 w-4" />,
-      description: "Technical blogs"
+      icon: <BookOpen className="h-4 w-4" />
     },
     {
       name: "Email",
       url: "mailto:vaidik50000@gmail.com",
-      icon: <Mail className="h-4 w-4" />,
-      description: "Direct communication"
+      icon: <Mail className="h-4 w-4" />
     }
   ];
 
@@ -108,12 +104,9 @@ const Index = () => {
                     <div className="w-8 h-8 flex items-center justify-center mb-2 text-accent">
                       {link.icon}
                     </div>
-                    <h3 className="text-sm font-semibold text-primary uppercase tracking-wider">
-                      {link.name}
-                    </h3>
-                    <p className="text-xs text-secondary mt-1 font-mono">
-                      {link.description}
-                    </p>
+                  <h3 className="text-sm font-semibold text-primary uppercase tracking-wider">
+                    {link.name}
+                  </h3>
                   </a>
                 </div>
               ))}
@@ -178,8 +171,45 @@ const Index = () => {
               <span className="text-white/70 hover:text-white cursor-pointer transition">Help</span>
             </div>
             <div className="flex items-center space-x-4 text-white/90">
-              <span className="text-sm">🔋</span>
-              <span className="text-sm">📶</span>
+              <div className="relative">
+                <button 
+                  onClick={() => setShowBatteryMenu(!showBatteryMenu)}
+                  className="text-sm hover:bg-white/10 px-2 py-1 rounded transition"
+                >
+                  🔋
+                </button>
+                {showBatteryMenu && (
+                  <div className="absolute right-0 top-8 bg-gray-800/95 backdrop-blur-xl rounded-lg p-4 shadow-2xl border border-white/10 w-64 text-sm">
+                    <div className="text-white/90 mb-2">Battery</div>
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-white/70">Power Source:</span>
+                      <span className="text-white">Power Adapter</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-white/70">Charge:</span>
+                      <span className="text-white">100%</span>
+                    </div>
+                  </div>
+                )}
+              </div>
+              <div className="relative">
+                <button 
+                  onClick={() => setShowWifiMenu(!showWifiMenu)}
+                  className="text-sm hover:bg-white/10 px-2 py-1 rounded transition"
+                >
+                  📶
+                </button>
+                {showWifiMenu && (
+                  <div className="absolute right-0 top-8 bg-gray-800/95 backdrop-blur-xl rounded-lg p-4 shadow-2xl border border-white/10 w-64 text-sm">
+                    <div className="text-white/90 mb-3">Wi-Fi</div>
+                    <div className="flex items-center space-x-2 bg-blue-500/20 p-2 rounded mb-2">
+                      <span className="text-blue-400">✓</span>
+                      <span className="text-white">Mars WiFi</span>
+                    </div>
+                    <div className="text-white/50 text-xs mt-2">Other Networks...</div>
+                  </div>
+                )}
+              </div>
               <span className="text-xs">Thu 9:41 AM</span>
             </div>
           </div>
@@ -252,8 +282,45 @@ const Index = () => {
             <span className="text-white/70 hover:text-white cursor-pointer transition">Help</span>
           </div>
           <div className="flex items-center space-x-4 text-white/90">
-            <span className="text-sm">🔋</span>
-            <span className="text-sm">📶</span>
+            <div className="relative">
+              <button 
+                onClick={() => setShowBatteryMenu(!showBatteryMenu)}
+                className="text-sm hover:bg-white/10 px-2 py-1 rounded transition"
+              >
+                🔋
+              </button>
+              {showBatteryMenu && (
+                <div className="absolute right-0 top-8 bg-gray-800/95 backdrop-blur-xl rounded-lg p-4 shadow-2xl border border-white/10 w-64 text-sm">
+                  <div className="text-white/90 mb-2">Battery</div>
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-white/70">Power Source:</span>
+                    <span className="text-white">Power Adapter</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-white/70">Charge:</span>
+                    <span className="text-white">100%</span>
+                  </div>
+                </div>
+              )}
+            </div>
+            <div className="relative">
+              <button 
+                onClick={() => setShowWifiMenu(!showWifiMenu)}
+                className="text-sm hover:bg-white/10 px-2 py-1 rounded transition"
+              >
+                📶
+              </button>
+              {showWifiMenu && (
+                <div className="absolute right-0 top-8 bg-gray-800/95 backdrop-blur-xl rounded-lg p-4 shadow-2xl border border-white/10 w-64 text-sm">
+                  <div className="text-white/90 mb-3">Wi-Fi</div>
+                  <div className="flex items-center space-x-2 bg-blue-500/20 p-2 rounded mb-2">
+                    <span className="text-blue-400">✓</span>
+                    <span className="text-white">Mars WiFi</span>
+                  </div>
+                  <div className="text-white/50 text-xs mt-2">Other Networks...</div>
+                </div>
+              )}
+            </div>
             <span className="text-xs">Thu 9:41 AM</span>
           </div>
         </div>
@@ -357,9 +424,6 @@ const Index = () => {
                   <h3 className="text-sm font-semibold text-primary uppercase tracking-wider">
                     {link.name}
                   </h3>
-                  <p className="text-xs text-secondary mt-1 font-mono">
-                    {link.description}
-                  </p>
                 </a>
               </div>
             ))}

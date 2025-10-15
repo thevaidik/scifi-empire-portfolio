@@ -30,11 +30,11 @@ const projectsData = [
     link: "https://github.com/swift-robotics",
   },
   {
-    title: "MotorSports.ai",
-    description: "AI race tracking.",
-    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64",
-    tags: ["SwiftUI", "AI", "Sports", "iOS"],
-    link: "https://apps.apple.com/app/motorsports-ai/id123456791",
+    title: "NxtLAP",
+    description: "Racing leagues platform",
+    image: "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7",
+    tags: ["Racing", "F1", "Web", "Platform"],
+    link: "https://nxtlap.com",
   },
   {
     title: "Aviation Tracker",
