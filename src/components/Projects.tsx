@@ -2,6 +2,13 @@ import ProjectCard from "./ProjectCard";
 
 const projectsData = [
   {
+    title: "nxtlap.com",
+    description: "Racing leagues platform",
+    image: "/nxtlap-favicon.ico",
+    tags: ["Racing", "F1", "Web", "Platform"],
+    link: "https://nxtlap.com",
+  },
+  {
     title: "Briefly - RSS reader and News",
     description: "RSS reader and News",
     image: "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/24/fa/2f/24fa2f8f-ab6e-a94c-a16f-4dc22c4a8d7f/AppIcon-0-0-1x_U007epad-0-1-85-220.png/460x0w.png",
@@ -28,13 +35,6 @@ const projectsData = [
     image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e",
     tags: ["Swift", "Embedded", "Robotics", "Hardware"],
     link: "https://github.com/swift-robotics",
-  },
-  {
-    title: "NxtLAP",
-    description: "Racing leagues platform",
-    image: "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7",
-    tags: ["Racing", "F1", "Web", "Platform"],
-    link: "https://nxtlap.com",
   },
   {
     title: "Aviation Tracker",
