@@ -144,19 +144,19 @@
 
   @keyframes float-horizontal {
     0%, 100% {
-      transform: translateX(0) rotate(0deg);
+      transform: translateX(-50%) translateY(-50%) rotate(-5deg);
     }
     50% {
-      transform: translateX(20px) rotate(3deg);
+      transform: translateX(-50%) translateY(-50%) rotate(5deg);
     }
   }
 
   @keyframes float-horizontal-reverse {
     0%, 100% {
-      transform: translateX(0) rotate(0deg);
+      transform: translateX(50%) translateY(-50%) rotate(5deg);
     }
     50% {
-      transform: translateX(-20px) rotate(-3deg);
+      transform: translateX(50%) translateY(-50%) rotate(-5deg);
     }
   }
 

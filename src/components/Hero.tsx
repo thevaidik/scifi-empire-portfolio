@@ -5,21 +5,21 @@ const Hero = () => {
   return (
     <section className="py-16 border-b-2 neon-border relative scanlines overflow-hidden">
       {/* Blueprint Background Images */}
-      <div className="absolute inset-0 opacity-30 pointer-events-none">
+      <div className="absolute inset-0 opacity-30 pointer-events-none overflow-visible">
         <img 
           src={droneBlueprint} 
           alt="" 
-          className="absolute top-0 left-0 w-1/2 h-auto object-contain"
+          className="absolute top-1/2 left-1/4 w-1/3 h-auto object-contain -translate-x-1/2 -translate-y-1/2"
           style={{ 
-            animation: 'float-horizontal 30s ease-in-out infinite, pulse 6s ease-in-out infinite'
+            animation: 'float-horizontal 12s ease-in-out infinite, pulse 6s ease-in-out infinite'
           }}
         />
         <img 
           src={rocketBlueprint} 
           alt="" 
-          className="absolute top-0 right-0 w-1/2 h-auto object-contain"
+          className="absolute top-1/2 right-1/4 w-1/3 h-auto object-contain translate-x-1/2 -translate-y-1/2"
           style={{ 
-            animation: 'float-horizontal-reverse 35s ease-in-out infinite, pulse 8s ease-in-out infinite'
+            animation: 'float-horizontal-reverse 15s ease-in-out infinite, pulse 8s ease-in-out infinite'
           }}
         />
       </div>
