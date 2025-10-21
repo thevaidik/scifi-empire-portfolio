@@ -4,39 +4,39 @@
 
 @layer base {
   :root {
-    /* Vintage Aged Paper - 90s Newspaper Colors */
-    --background: 40 25% 92%;
-    --foreground: 25 15% 15%;
-    --card: 40 20% 88%;
-    --card-foreground: 25 15% 15%;
-    --popover: 40 25% 90%;
-    --popover-foreground: 25 15% 15%;
-    --primary: 25 20% 20%;
-    --primary-foreground: 40 25% 92%;
-    --secondary: 25 10% 35%;
-    --secondary-foreground: 40 20% 88%;
-    --muted: 40 15% 82%;
-    --muted-foreground: 25 10% 40%;
-    --accent: 200 70% 40%;
-    --accent-foreground: 40 25% 92%;
+    /* Tony Stark Blueprint Theme */
+    --background: 210 100% 6%;
+    --foreground: 190 100% 85%;
+    --card: 210 90% 8%;
+    --card-foreground: 190 100% 85%;
+    --popover: 210 95% 10%;
+    --popover-foreground: 190 100% 85%;
+    --primary: 190 100% 50%;
+    --primary-foreground: 210 100% 6%;
+    --secondary: 200 90% 40%;
+    --secondary-foreground: 190 100% 95%;
+    --muted: 210 50% 20%;
+    --muted-foreground: 190 70% 60%;
+    --accent: 180 100% 60%;
+    --accent-foreground: 210 100% 6%;
     --destructive: 0 70% 50%;
-    --destructive-foreground: 40 25% 92%;
-    --border: 25 15% 30%;
-    --input: 40 20% 85%;
-    --ring: 200 70% 40%;
-    --chart-1: 25 20% 25%;
-    --chart-2: 25 15% 40%;
-    --chart-3: 200 70% 40%;
-    --chart-4: 25 10% 55%;
-    --chart-5: 25 20% 20%;
-    --radius: 0rem;
+    --destructive-foreground: 190 100% 95%;
+    --border: 190 80% 35%;
+    --input: 210 80% 12%;
+    --ring: 190 100% 50%;
+    --chart-1: 190 100% 50%;
+    --chart-2: 200 90% 40%;
+    --chart-3: 180 100% 60%;
+    --chart-4: 170 80% 45%;
+    --chart-5: 195 90% 55%;
+    --radius: 0.25rem;
     
-    /* Aged paper effects */
-    --retro-glow: 0 0 8px hsl(200 70% 40% / 0.25), 0 0 16px hsl(200 70% 40% / 0.12);
-    --paper-texture: 0 1px 3px hsl(25 15% 15% / 0.12);
-    --ink-shadow: 1px 1px 0 hsl(25 15% 15% / 0.15);
-    --text-glow: none;
-    --subtle-glow: 0 1px 2px hsl(25 15% 15% / 0.15);
+    /* Blueprint effects */
+    --blueprint-glow: 0 0 20px hsl(190 100% 50% / 0.5), 0 0 40px hsl(190 100% 50% / 0.3);
+    --tech-shadow: 0 4px 20px hsl(190 100% 50% / 0.2);
+    --hologram-glow: 0 0 10px hsl(180 100% 60% / 0.6), 0 0 20px hsl(180 100% 60% / 0.4);
+    --grid-line: hsl(190 80% 35% / 0.3);
+    --scan-line: hsl(190 100% 50% / 0.15);
   }
 }
 
@@ -48,23 +48,20 @@
   body {
     background: hsl(var(--background));
     color: hsl(var(--foreground));
-    font-family: 'Lora', 'Georgia', 'Times New Roman', serif;
+    font-family: 'Rajdhani', 'Orbitron', 'monospace', sans-serif;
     line-height: 1.6;
     min-height: 100vh;
   }
 
-  /* Aged Vintage Paper Background */
+  /* Technical Blueprint Background */
   .vintage-neon-bg {
     background: 
-      repeating-linear-gradient(
-        180deg,
-        hsl(40 25% 92%),
-        hsl(40 25% 92%) 1px,
-        hsl(40 23% 91%) 1px,
-        hsl(40 23% 91%) 2px
-      ),
-      radial-gradient(circle at 30% 40%, hsl(35 30% 85% / 0.3) 0%, transparent 60%),
-      radial-gradient(circle at 70% 60%, hsl(30 25% 88% / 0.25) 0%, transparent 50%);
+      linear-gradient(0deg, var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px),
+      radial-gradient(circle at 20% 30%, hsl(190 100% 50% / 0.08) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, hsl(180 100% 60% / 0.06) 0%, transparent 50%),
+      hsl(var(--background));
+    background-size: 40px 40px, 40px 40px, 100% 100%, 100% 100%, 100% 100%;
     background-attachment: fixed;
     position: relative;
   }
@@ -77,62 +74,71 @@
     right: 0;
     bottom: 0;
     background-image: 
-      radial-gradient(circle at 15% 25%, hsl(30 20% 75% / 0.08) 0%, transparent 40%),
-      radial-gradient(circle at 85% 75%, hsl(35 25% 80% / 0.06) 0%, transparent 45%),
-      radial-gradient(circle at 50% 50%, hsl(25 15% 70% / 0.04) 0%, transparent 60%);
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        var(--scan-line) 2px,
+        var(--scan-line) 4px
+      );
     pointer-events: none;
-    opacity: 0.6;
+    opacity: 0.4;
     z-index: 0;
+    animation: scan-lines 8s linear infinite;
   }
 
-  /* Newspaper typography with neon effects */
+  /* Technical typography */
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Playfair Display', 'Georgia', 'Times New Roman', serif;
-    font-weight: bold;
+    font-family: 'Orbitron', 'Rajdhani', 'monospace', sans-serif;
+    font-weight: 700;
     line-height: 1.2;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
   }
 
-  /* Vintage Newspaper utility classes */
+  /* Blueprint utility classes */
   .retro-glow {
-    box-shadow: var(--retro-glow);
+    box-shadow: var(--blueprint-glow);
   }
 
   .text-glow {
-    text-shadow: var(--ink-shadow);
+    text-shadow: 0 0 10px hsl(var(--primary) / 0.8), 0 0 20px hsl(var(--primary) / 0.5);
   }
 
   .neon-border {
-    border: 3px double hsl(var(--border));
-    box-shadow: var(--paper-texture);
+    border: 2px solid hsl(var(--border));
+    box-shadow: var(--tech-shadow), inset 0 0 20px hsl(var(--primary) / 0.1);
   }
 
   .neon-border-secondary {
-    border-top: 3px solid hsl(var(--border));
-    border-bottom: 3px solid hsl(var(--border));
-    box-shadow: var(--paper-texture);
+    border-top: 2px solid hsl(var(--border));
+    border-bottom: 2px solid hsl(var(--border));
+    box-shadow: var(--tech-shadow);
   }
 
   .subtle-border {
-    border: 2px solid hsl(var(--border));
-    box-shadow: var(--subtle-glow);
+    border: 1px solid hsl(var(--border));
+    box-shadow: 0 0 10px hsl(var(--primary) / 0.3);
   }
 
-  /* Vintage newspaper animations */
+  /* Blueprint animations */
   @keyframes flicker {
     0%, 100% {
       opacity: 1;
     }
     50% {
-      opacity: 0.98;
+      opacity: 0.95;
     }
   }
 
   @keyframes glow-pulse {
     0%, 100% {
-      box-shadow: var(--retro-glow);
+      box-shadow: var(--blueprint-glow);
+      text-shadow: 0 0 10px hsl(var(--primary) / 0.8), 0 0 20px hsl(var(--primary) / 0.5);
     }
     50% {
-      box-shadow: 0 0 12px hsl(200 80% 45% / 0.4), 0 0 24px hsl(200 80% 45% / 0.2);
+      box-shadow: 0 0 30px hsl(190 100% 50% / 0.7), 0 0 60px hsl(190 100% 50% / 0.5);
+      text-shadow: 0 0 15px hsl(var(--primary) / 1), 0 0 30px hsl(var(--primary) / 0.7);
     }
   }
 
@@ -141,20 +147,40 @@
       transform: scale(1);
     }
     50% {
-      transform: scale(1.01);
+      transform: scale(1.02);
+    }
+  }
+
+  @keyframes scan-lines {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(4px);
+    }
+  }
+
+  @keyframes hologram-flicker {
+    0%, 100% {
+      opacity: 1;
+      box-shadow: var(--hologram-glow);
+    }
+    50% {
+      opacity: 0.9;
+      box-shadow: 0 0 5px hsl(180 100% 60% / 0.4), 0 0 10px hsl(180 100% 60% / 0.2);
     }
   }
 
   .flicker-animation {
-    animation: flicker 5s ease-in-out infinite;
+    animation: flicker 3s ease-in-out infinite;
   }
 
   .glow-pulse {
-    animation: glow-pulse 4s ease-in-out infinite;
+    animation: glow-pulse 3s ease-in-out infinite;
   }
 
   .subtle-pulse {
-    animation: subtle-pulse 6s ease-in-out infinite;
+    animation: subtle-pulse 4s ease-in-out infinite;
   }
 
   .elegant-hover {
@@ -163,10 +189,10 @@
 
   .elegant-hover:hover {
     transform: translateY(-2px);
-    box-shadow: var(--subtle-glow);
+    box-shadow: var(--hologram-glow);
   }
 
-  /* Scanlines effect - subtle dot matrix */
+  /* Technical grid overlay */
   .scanlines::before {
     content: '';
     position: absolute;
@@ -175,10 +201,12 @@
     right: 0;
     bottom: 0;
     background-image: 
-      radial-gradient(circle at center, hsl(0 0% 0% / 0.03) 1px, transparent 1px);
-    background-size: 4px 4px;
+      linear-gradient(0deg, var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 20px 20px;
     pointer-events: none;
     z-index: 1;
+    opacity: 0.3;
   }
 
   /* Simple hover effects */

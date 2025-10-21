@@ -51,13 +51,13 @@ const Projects = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <div className="flex flex-col md:flex-row justify-between items-center mb-4 gap-2">
-            <p className="text-xs md:text-sm text-secondary font-mono order-2 md:order-1 text-glow">DEC 15, 2029</p>
-            <h2 className="text-2xl md:text-4xl font-bold text-primary neon-border inline-block pb-2 px-4 order-1 md:order-2 text-glow flicker-animation">
-              CURRENT EVENTS
+            <p className="text-xs md:text-sm text-muted-foreground font-mono order-2 md:order-1 text-glow tracking-wider">SECTOR: DEVELOPMENT</p>
+            <h2 className="text-2xl md:text-4xl font-bold text-primary neon-border inline-block pb-2 px-6 order-1 md:order-2 text-glow glow-pulse bg-card/30 backdrop-blur-sm">
+              ACTIVE PROJECTS
             </h2>
-            <p className="text-xs md:text-sm text-secondary font-mono order-3 text-glow">PAGE 2</p>
+            <p className="text-xs md:text-sm text-muted-foreground font-mono order-3 text-glow tracking-wider">STATUS: LIVE</p>
           </div>
-          <p className="text-secondary text-lg max-w-2xl mx-auto mt-6">
+          <p className="text-foreground/70 text-lg max-w-2xl mx-auto mt-6 font-mono">
             Current projects and innovations in technology
           </p>
         </div>
@@ -66,7 +66,7 @@ const Projects = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {projectsData.map((project, index) => (
               <div key={project.title} className="group">
-                <div className="neon-border bg-card hover:neon-glow-secondary transition-all duration-300">
+                <div className="neon-border bg-card/50 backdrop-blur-sm hover:bg-card/70 transition-all duration-300 elegant-hover">
                   <ProjectCard {...project} compact={true} />
                 </div>
               </div>
