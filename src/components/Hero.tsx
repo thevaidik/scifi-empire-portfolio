@@ -5,18 +5,24 @@ const Hero = () => {
   return (
     <section className="py-16 border-b-2 neon-border relative scanlines overflow-hidden">
       {/* Blueprint Background Images */}
-      <div className="absolute inset-0 opacity-10 pointer-events-none">
+      <div className="absolute inset-0 opacity-30 pointer-events-none">
         <img 
           src={droneBlueprint} 
           alt="" 
-          className="absolute top-0 left-0 w-1/2 h-auto object-contain animate-pulse"
-          style={{ animationDuration: '6s' }}
+          className="absolute top-0 left-0 w-1/2 h-auto object-contain"
+          style={{ 
+            animation: 'rotate-slow 20s linear infinite, pulse 6s ease-in-out infinite',
+            transformOrigin: 'center'
+          }}
         />
         <img 
           src={rocketBlueprint} 
           alt="" 
-          className="absolute top-0 right-0 w-1/2 h-auto object-contain animate-pulse"
-          style={{ animationDuration: '8s' }}
+          className="absolute top-0 right-0 w-1/2 h-auto object-contain"
+          style={{ 
+            animation: 'rotate-slow-reverse 25s linear infinite, pulse 8s ease-in-out infinite',
+            transformOrigin: 'center'
+          }}
         />
       </div>
       

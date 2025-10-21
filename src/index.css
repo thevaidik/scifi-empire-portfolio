@@ -4,39 +4,39 @@
 
 @layer base {
   :root {
-    /* Tony Stark Blueprint Theme */
+    /* Tony Stark Blueprint Theme - Enhanced Visibility */
     --background: 210 100% 6%;
-    --foreground: 190 100% 85%;
-    --card: 210 90% 8%;
-    --card-foreground: 190 100% 85%;
-    --popover: 210 95% 10%;
-    --popover-foreground: 190 100% 85%;
-    --primary: 190 100% 50%;
+    --foreground: 190 100% 95%;
+    --card: 210 90% 10%;
+    --card-foreground: 190 100% 92%;
+    --popover: 210 95% 12%;
+    --popover-foreground: 190 100% 95%;
+    --primary: 190 100% 55%;
     --primary-foreground: 210 100% 6%;
-    --secondary: 200 90% 40%;
-    --secondary-foreground: 190 100% 95%;
-    --muted: 210 50% 20%;
-    --muted-foreground: 190 70% 60%;
-    --accent: 180 100% 60%;
+    --secondary: 200 90% 45%;
+    --secondary-foreground: 190 100% 98%;
+    --muted: 210 50% 25%;
+    --muted-foreground: 190 70% 70%;
+    --accent: 180 100% 65%;
     --accent-foreground: 210 100% 6%;
     --destructive: 0 70% 50%;
     --destructive-foreground: 190 100% 95%;
-    --border: 190 80% 35%;
-    --input: 210 80% 12%;
-    --ring: 190 100% 50%;
-    --chart-1: 190 100% 50%;
-    --chart-2: 200 90% 40%;
-    --chart-3: 180 100% 60%;
-    --chart-4: 170 80% 45%;
-    --chart-5: 195 90% 55%;
+    --border: 190 80% 40%;
+    --input: 210 80% 15%;
+    --ring: 190 100% 55%;
+    --chart-1: 190 100% 55%;
+    --chart-2: 200 90% 45%;
+    --chart-3: 180 100% 65%;
+    --chart-4: 170 80% 50%;
+    --chart-5: 195 90% 60%;
     --radius: 0.25rem;
     
-    /* Blueprint effects */
-    --blueprint-glow: 0 0 20px hsl(190 100% 50% / 0.5), 0 0 40px hsl(190 100% 50% / 0.3);
-    --tech-shadow: 0 4px 20px hsl(190 100% 50% / 0.2);
-    --hologram-glow: 0 0 10px hsl(180 100% 60% / 0.6), 0 0 20px hsl(180 100% 60% / 0.4);
-    --grid-line: hsl(190 80% 35% / 0.3);
-    --scan-line: hsl(190 100% 50% / 0.15);
+    /* Blueprint effects - Enhanced */
+    --blueprint-glow: 0 0 25px hsl(190 100% 55% / 0.6), 0 0 50px hsl(190 100% 55% / 0.4);
+    --tech-shadow: 0 4px 25px hsl(190 100% 55% / 0.3);
+    --hologram-glow: 0 0 15px hsl(180 100% 65% / 0.7), 0 0 30px hsl(180 100% 65% / 0.5);
+    --grid-line: hsl(190 80% 40% / 0.4);
+    --scan-line: hsl(190 100% 55% / 0.2);
   }
 }
 
@@ -102,7 +102,7 @@
   }
 
   .text-glow {
-    text-shadow: 0 0 10px hsl(var(--primary) / 0.8), 0 0 20px hsl(var(--primary) / 0.5);
+    text-shadow: 0 0 15px hsl(var(--primary) / 1), 0 0 30px hsl(var(--primary) / 0.6), 0 0 45px hsl(var(--primary) / 0.3);
   }
 
   .neon-border {
@@ -134,11 +134,29 @@
   @keyframes glow-pulse {
     0%, 100% {
       box-shadow: var(--blueprint-glow);
-      text-shadow: 0 0 10px hsl(var(--primary) / 0.8), 0 0 20px hsl(var(--primary) / 0.5);
+      text-shadow: 0 0 15px hsl(var(--primary) / 1), 0 0 30px hsl(var(--primary) / 0.6);
     }
     50% {
-      box-shadow: 0 0 30px hsl(190 100% 50% / 0.7), 0 0 60px hsl(190 100% 50% / 0.5);
-      text-shadow: 0 0 15px hsl(var(--primary) / 1), 0 0 30px hsl(var(--primary) / 0.7);
+      box-shadow: 0 0 40px hsl(190 100% 55% / 0.8), 0 0 70px hsl(190 100% 55% / 0.6);
+      text-shadow: 0 0 20px hsl(var(--primary) / 1), 0 0 40px hsl(var(--primary) / 0.8);
+    }
+  }
+
+  @keyframes rotate-slow {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes rotate-slow-reverse {
+    from {
+      transform: rotate(360deg);
+    }
+    to {
+      transform: rotate(0deg);
     }
   }
 
