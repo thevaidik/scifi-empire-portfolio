@@ -11,8 +11,7 @@ const Hero = () => {
           alt="" 
           className="absolute top-0 left-0 w-1/2 h-auto object-contain"
           style={{ 
-            animation: 'rotate-slow 20s linear infinite, pulse 6s ease-in-out infinite',
-            transformOrigin: 'center'
+            animation: 'float-horizontal 30s ease-in-out infinite, pulse 6s ease-in-out infinite'
           }}
         />
         <img 
@@ -20,8 +19,7 @@ const Hero = () => {
           alt="" 
           className="absolute top-0 right-0 w-1/2 h-auto object-contain"
           style={{ 
-            animation: 'rotate-slow-reverse 25s linear infinite, pulse 8s ease-in-out infinite',
-            transformOrigin: 'center'
+            animation: 'float-horizontal-reverse 35s ease-in-out infinite, pulse 8s ease-in-out infinite'
           }}
         />
       </div>
