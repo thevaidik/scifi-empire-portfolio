@@ -9,17 +9,17 @@ const Hero = () => {
         <img 
           src={droneBlueprint} 
           alt="" 
-          className="absolute top-1/2 left-1/4 w-1/3 h-auto object-contain -translate-x-1/2 -translate-y-1/2"
+          className="absolute top-1/2 left-1/4 w-1/3 h-auto object-contain -translate-x-1/2 -translate-y-1/2 animate-pulse"
           style={{ 
-            animation: 'float-horizontal 12s ease-in-out infinite, pulse 6s ease-in-out infinite'
+            animationDuration: '6s'
           }}
         />
         <img 
           src={rocketBlueprint} 
           alt="" 
-          className="absolute top-1/2 right-1/4 w-1/3 h-auto object-contain translate-x-1/2 -translate-y-1/2"
+          className="absolute top-1/2 right-1/4 w-1/3 h-auto object-contain translate-x-1/2 -translate-y-1/2 animate-pulse"
           style={{ 
-            animation: 'float-horizontal-reverse 15s ease-in-out infinite, pulse 8s ease-in-out infinite'
+            animationDuration: '8s'
           }}
         />
       </div>
