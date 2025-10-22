@@ -1,16 +1,25 @@
-import propellerPlane from "@/assets/propeller-plane-blueprint.png";
+import droneBlueprint from "@/assets/drone-blueprint.png";
+import rocketBlueprint from "@/assets/rocket-blueprint.png";
 
 const Hero = () => {
   return (
     <section className="py-16 border-b-2 neon-border relative scanlines overflow-hidden">
       {/* Blueprint Background Images */}
-      <div className="absolute inset-0 opacity-25 pointer-events-none overflow-visible">
+      <div className="absolute inset-0 opacity-30 pointer-events-none overflow-visible">
         <img 
-          src={propellerPlane} 
+          src={droneBlueprint} 
           alt="" 
-          className="absolute top-1/2 left-1/2 w-1/2 h-auto object-contain -translate-x-1/2 -translate-y-1/2"
+          className="absolute top-1/2 left-1/4 w-1/3 h-auto object-contain -translate-x-1/2 -translate-y-1/2 animate-pulse"
           style={{ 
-            animation: 'spin 60s linear infinite'
+            animationDuration: '6s'
+          }}
+        />
+        <img 
+          src={rocketBlueprint} 
+          alt="" 
+          className="absolute top-1/2 right-1/4 w-1/3 h-auto object-contain translate-x-1/2 -translate-y-1/2 animate-pulse"
+          style={{ 
+            animationDuration: '8s'
           }}
         />
       </div>
