@@ -4,39 +4,39 @@
 
 @layer base {
   :root {
-    /* Tony Stark Blueprint Theme - Enhanced Visibility */
-    --background: 210 100% 6%;
-    --foreground: 190 100% 95%;
-    --card: 210 90% 10%;
-    --card-foreground: 190 100% 92%;
-    --popover: 210 95% 12%;
-    --popover-foreground: 190 100% 95%;
-    --primary: 190 100% 55%;
-    --primary-foreground: 210 100% 6%;
-    --secondary: 200 90% 45%;
-    --secondary-foreground: 190 100% 98%;
-    --muted: 210 50% 25%;
-    --muted-foreground: 190 70% 70%;
-    --accent: 180 100% 65%;
-    --accent-foreground: 210 100% 6%;
+    /* Tony Stark Blueprint Theme - Enhanced Readability */
+    --background: 220 15% 8%;
+    --foreground: 210 5% 95%;
+    --card: 220 15% 12%;
+    --card-foreground: 210 5% 92%;
+    --popover: 220 15% 14%;
+    --popover-foreground: 210 5% 95%;
+    --primary: 190 85% 55%;
+    --primary-foreground: 220 15% 8%;
+    --secondary: 200 70% 50%;
+    --secondary-foreground: 210 5% 98%;
+    --muted: 220 15% 22%;
+    --muted-foreground: 210 10% 65%;
+    --accent: 180 80% 60%;
+    --accent-foreground: 220 15% 8%;
     --destructive: 0 70% 50%;
-    --destructive-foreground: 190 100% 95%;
-    --border: 190 80% 40%;
-    --input: 210 80% 15%;
-    --ring: 190 100% 55%;
-    --chart-1: 190 100% 55%;
-    --chart-2: 200 90% 45%;
-    --chart-3: 180 100% 65%;
-    --chart-4: 170 80% 50%;
-    --chart-5: 195 90% 60%;
+    --destructive-foreground: 210 5% 95%;
+    --border: 190 40% 35%;
+    --input: 220 15% 16%;
+    --ring: 190 85% 55%;
+    --chart-1: 190 85% 55%;
+    --chart-2: 200 70% 50%;
+    --chart-3: 180 80% 60%;
+    --chart-4: 170 70% 50%;
+    --chart-5: 195 75% 60%;
     --radius: 0.25rem;
     
-    /* Blueprint effects - Enhanced */
-    --blueprint-glow: 0 0 25px hsl(190 100% 55% / 0.6), 0 0 50px hsl(190 100% 55% / 0.4);
-    --tech-shadow: 0 4px 25px hsl(190 100% 55% / 0.3);
-    --hologram-glow: 0 0 15px hsl(180 100% 65% / 0.7), 0 0 30px hsl(180 100% 65% / 0.5);
-    --grid-line: hsl(190 80% 40% / 0.25);
-    --scan-line: hsl(190 100% 55% / 0.15);
+    /* Blueprint effects - Enhanced Readability */
+    --blueprint-glow: 0 0 20px hsl(190 85% 55% / 0.4), 0 0 40px hsl(190 85% 55% / 0.2);
+    --tech-shadow: 0 4px 20px hsl(190 85% 55% / 0.2);
+    --hologram-glow: 0 0 12px hsl(180 80% 60% / 0.5), 0 0 25px hsl(180 80% 60% / 0.3);
+    --grid-line: hsl(190 40% 35% / 0.15);
+    --scan-line: hsl(190 85% 55% / 0.08);
   }
 }
 
