@@ -4,39 +4,38 @@
 
 @layer base {
   :root {
-    /* Tony Stark Blueprint Theme - Enhanced Readability */
-    --background: 220 15% 8%;
-    --foreground: 210 5% 95%;
-    --card: 220 15% 12%;
-    --card-foreground: 210 5% 92%;
-    --popover: 220 15% 14%;
-    --popover-foreground: 210 5% 95%;
-    --primary: 190 85% 55%;
-    --primary-foreground: 220 15% 8%;
-    --secondary: 200 70% 50%;
-    --secondary-foreground: 210 5% 98%;
-    --muted: 220 15% 22%;
-    --muted-foreground: 210 10% 65%;
-    --accent: 180 80% 60%;
-    --accent-foreground: 220 15% 8%;
+    /* Purple Engineering Blueprint Theme - Clear & Readable */
+    --background: 260 30% 8%;
+    --foreground: 0 0% 98%;
+    --card: 260 25% 12%;
+    --card-foreground: 0 0% 98%;
+    --popover: 260 25% 14%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 270 70% 65%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 280 60% 60%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 260 20% 20%;
+    --muted-foreground: 0 0% 75%;
+    --accent: 290 65% 70%;
+    --accent-foreground: 260 30% 8%;
     --destructive: 0 70% 50%;
-    --destructive-foreground: 210 5% 95%;
-    --border: 190 40% 35%;
-    --input: 220 15% 16%;
-    --ring: 190 85% 55%;
-    --chart-1: 190 85% 55%;
-    --chart-2: 200 70% 50%;
-    --chart-3: 180 80% 60%;
-    --chart-4: 170 70% 50%;
-    --chart-5: 195 75% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 270 40% 45%;
+    --input: 260 25% 16%;
+    --ring: 270 70% 65%;
+    --chart-1: 270 70% 65%;
+    --chart-2: 280 60% 60%;
+    --chart-3: 290 65% 70%;
+    --chart-4: 260 55% 55%;
+    --chart-5: 275 65% 60%;
     --radius: 0.25rem;
     
-    /* Blueprint effects - Enhanced Readability */
-    --blueprint-glow: 0 0 20px hsl(190 85% 55% / 0.4), 0 0 40px hsl(190 85% 55% / 0.2);
-    --tech-shadow: 0 4px 20px hsl(190 85% 55% / 0.2);
-    --hologram-glow: 0 0 12px hsl(180 80% 60% / 0.5), 0 0 25px hsl(180 80% 60% / 0.3);
-    --grid-line: hsl(190 40% 35% / 0.15);
-    --scan-line: hsl(190 85% 55% / 0.08);
+    /* Clean blueprint lines - no glow */
+    --blueprint-shadow: 0 2px 8px hsl(270 70% 65% / 0.15);
+    --tech-shadow: 0 1px 3px hsl(270 70% 65% / 0.1);
+    --grid-line: hsl(0 0% 100% / 0.12);
+    --scan-line: hsl(270 70% 65% / 0.03);
   }
 }
 
@@ -58,8 +57,8 @@
     background: 
       linear-gradient(0deg, var(--grid-line) 1px, transparent 1px),
       linear-gradient(90deg, var(--grid-line) 1px, transparent 1px),
-      radial-gradient(circle at 20% 30%, hsl(190 100% 50% / 0.08) 0%, transparent 50%),
-      radial-gradient(circle at 80% 70%, hsl(180 100% 60% / 0.06) 0%, transparent 50%),
+      radial-gradient(circle at 20% 30%, hsl(270 70% 65% / 0.05) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, hsl(280 60% 60% / 0.04) 0%, transparent 50%),
       hsl(var(--background));
     background-size: 40px 40px, 40px 40px, 100% 100%, 100% 100%, 100% 100%;
     background-attachment: fixed;
@@ -96,29 +95,29 @@
     letter-spacing: 0.05em;
   }
 
-  /* Blueprint utility classes */
+  /* Blueprint utility classes - clean lines */
   .retro-glow {
-    box-shadow: var(--blueprint-glow);
+    box-shadow: var(--blueprint-shadow);
   }
 
   .text-glow {
-    text-shadow: 0 0 15px hsl(var(--primary) / 1), 0 0 30px hsl(var(--primary) / 0.6), 0 0 45px hsl(var(--primary) / 0.3);
+    text-shadow: none;
   }
 
   .neon-border {
-    border: 2px solid hsl(var(--border));
-    box-shadow: var(--tech-shadow), inset 0 0 20px hsl(var(--primary) / 0.1);
+    border: 1px solid hsl(var(--border));
+    box-shadow: var(--tech-shadow);
   }
 
   .neon-border-secondary {
-    border-top: 2px solid hsl(var(--border));
-    border-bottom: 2px solid hsl(var(--border));
-    box-shadow: var(--tech-shadow);
+    border-top: 1px solid hsl(var(--border));
+    border-bottom: 1px solid hsl(var(--border));
+    box-shadow: none;
   }
 
   .subtle-border {
     border: 1px solid hsl(var(--border));
-    box-shadow: 0 0 10px hsl(var(--primary) / 0.3);
+    box-shadow: none;
   }
 
   /* Blueprint animations */
@@ -133,12 +132,10 @@
 
   @keyframes glow-pulse {
     0%, 100% {
-      box-shadow: var(--blueprint-glow);
-      text-shadow: 0 0 15px hsl(var(--primary) / 1), 0 0 30px hsl(var(--primary) / 0.6);
+      opacity: 1;
     }
     50% {
-      box-shadow: 0 0 40px hsl(190 100% 55% / 0.8), 0 0 70px hsl(190 100% 55% / 0.6);
-      text-shadow: 0 0 20px hsl(var(--primary) / 1), 0 0 40px hsl(var(--primary) / 0.8);
+      opacity: 0.85;
     }
   }
 
@@ -181,11 +178,9 @@
   @keyframes hologram-flicker {
     0%, 100% {
       opacity: 1;
-      box-shadow: var(--hologram-glow);
     }
     50% {
-      opacity: 0.9;
-      box-shadow: 0 0 5px hsl(180 100% 60% / 0.4), 0 0 10px hsl(180 100% 60% / 0.2);
+      opacity: 0.92;
     }
   }
 
@@ -207,7 +202,7 @@
 
   .elegant-hover:hover {
     transform: translateY(-2px);
-    box-shadow: var(--hologram-glow);
+    box-shadow: var(--blueprint-shadow);
   }
 
   /* Technical grid overlay */
