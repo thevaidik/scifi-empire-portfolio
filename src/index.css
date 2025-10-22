@@ -4,39 +4,39 @@
 
 @layer base {
   :root {
-    /* Tony Stark Blueprint Theme - Enhanced Readability */
-    --background: 220 15% 8%;
-    --foreground: 210 5% 95%;
-    --card: 220 15% 12%;
-    --card-foreground: 210 5% 92%;
-    --popover: 220 15% 14%;
-    --popover-foreground: 210 5% 95%;
-    --primary: 190 85% 55%;
-    --primary-foreground: 220 15% 8%;
-    --secondary: 200 70% 50%;
-    --secondary-foreground: 210 5% 98%;
-    --muted: 220 15% 22%;
-    --muted-foreground: 210 10% 65%;
-    --accent: 180 80% 60%;
-    --accent-foreground: 220 15% 8%;
+    /* Purple Blueprint Theme */
+    --background: 260 20% 8%;
+    --foreground: 260 5% 95%;
+    --card: 260 20% 12%;
+    --card-foreground: 260 5% 92%;
+    --popover: 260 20% 14%;
+    --popover-foreground: 260 5% 95%;
+    --primary: 270 70% 60%;
+    --primary-foreground: 260 20% 8%;
+    --secondary: 280 60% 55%;
+    --secondary-foreground: 260 5% 98%;
+    --muted: 260 20% 22%;
+    --muted-foreground: 260 10% 65%;
+    --accent: 290 70% 65%;
+    --accent-foreground: 260 20% 8%;
     --destructive: 0 70% 50%;
-    --destructive-foreground: 210 5% 95%;
-    --border: 190 40% 35%;
-    --input: 220 15% 16%;
-    --ring: 190 85% 55%;
-    --chart-1: 190 85% 55%;
-    --chart-2: 200 70% 50%;
-    --chart-3: 180 80% 60%;
-    --chart-4: 170 70% 50%;
-    --chart-5: 195 75% 60%;
+    --destructive-foreground: 260 5% 95%;
+    --border: 270 40% 40%;
+    --input: 260 20% 16%;
+    --ring: 270 70% 60%;
+    --chart-1: 270 70% 60%;
+    --chart-2: 280 60% 55%;
+    --chart-3: 290 70% 65%;
+    --chart-4: 265 65% 58%;
+    --chart-5: 275 68% 62%;
     --radius: 0.25rem;
     
-    /* Blueprint effects - Enhanced Readability */
-    --blueprint-glow: 0 0 20px hsl(190 85% 55% / 0.4), 0 0 40px hsl(190 85% 55% / 0.2);
-    --tech-shadow: 0 4px 20px hsl(190 85% 55% / 0.2);
-    --hologram-glow: 0 0 12px hsl(180 80% 60% / 0.5), 0 0 25px hsl(180 80% 60% / 0.3);
-    --grid-line: hsl(190 40% 35% / 0.15);
-    --scan-line: hsl(190 85% 55% / 0.08);
+    /* Purple Blueprint effects */
+    --blueprint-glow: 0 0 20px hsl(270 70% 60% / 0.4), 0 0 40px hsl(270 70% 60% / 0.2);
+    --tech-shadow: 0 4px 20px hsl(270 70% 60% / 0.2);
+    --hologram-glow: 0 0 12px hsl(290 70% 65% / 0.5), 0 0 25px hsl(290 70% 65% / 0.3);
+    --grid-line: hsl(270 40% 40% / 0.15);
+    --scan-line: hsl(270 70% 60% / 0.08);
   }
 }
 
@@ -58,8 +58,8 @@
     background: 
       linear-gradient(0deg, var(--grid-line) 1px, transparent 1px),
       linear-gradient(90deg, var(--grid-line) 1px, transparent 1px),
-      radial-gradient(circle at 20% 30%, hsl(190 100% 50% / 0.08) 0%, transparent 50%),
-      radial-gradient(circle at 80% 70%, hsl(180 100% 60% / 0.06) 0%, transparent 50%),
+      radial-gradient(circle at 20% 30%, hsl(270 70% 60% / 0.08) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, hsl(290 70% 65% / 0.06) 0%, transparent 50%),
       hsl(var(--background));
     background-size: 40px 40px, 40px 40px, 100% 100%, 100% 100%, 100% 100%;
     background-attachment: fixed;
