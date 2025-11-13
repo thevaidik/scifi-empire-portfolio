@@ -40,36 +40,38 @@ const openSourcePRs = [
 
 const OpenSource = () => {
   return (
-    <section className="py-16 border-b border-muted">
+    <section className="py-20 border-b border-border/30">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <div className="flex flex-col md:flex-row justify-between items-center mb-4 gap-2">
-            <p className="text-xs md:text-sm text-muted-foreground font-mono order-2 md:order-1">NOV 20, 2029</p>
-            <h2 className="text-2xl md:text-4xl font-bold text-foreground border-b-2 border-foreground inline-block pb-2 order-1 md:order-2">
-              OPEN SOURCE CONTRIBUTIONS
-            </h2>
-            <p className="text-xs md:text-sm text-muted-foreground font-mono order-3">PAGE 3</p>
+        <div className="mb-16 space-y-4">
+          <div className="flex items-center justify-center gap-12 mb-2">
+            <span className="text-xs text-muted-foreground font-mono tracking-wider">NOV 20, 2029</span>
+            <span className="text-xs text-muted-foreground font-mono tracking-wider">PAGE 3</span>
           </div>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto mt-6">
+          
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-foreground tracking-tight">
+            OPEN SOURCE CONTRIBUTIONS
+          </h2>
+          
+          <p className="text-sm text-muted-foreground text-center font-mono max-w-xl mx-auto">
             Contributing to the future of technology through collaborative development
           </p>
         </div>
 
         {/* Mobile Layout */}
-        <div className="block md:hidden max-w-full mx-auto">
-          {openSourcePRs.map((pr, index) => (
-            <div key={pr.title} className="border border-border mb-4 p-4">
-              <div className="flex items-start justify-between mb-2">
+        <div className="block md:hidden max-w-full mx-auto space-y-4">
+          {openSourcePRs.map((pr) => (
+            <div key={pr.title} className="border border-border/50 p-4 hover:border-primary/30 transition-colors">
+              <div className="flex items-start justify-between mb-3">
                 <h3 className="font-semibold text-foreground text-sm flex-1">
                   {pr.title}
                 </h3>
-                <div className="flex items-center space-x-1 ml-2">
-                  <GitMerge className="w-3 h-3 text-green-600" />
-                  <span className="text-green-600 text-xs font-semibold">MERGED</span>
+                <div className="flex items-center gap-1.5 ml-2">
+                  <GitMerge className="w-3 h-3 text-primary" />
+                  <span className="text-primary text-xs font-medium">MERGED</span>
                 </div>
               </div>
-              <p className="text-muted-foreground text-xs mb-2">{pr.description}</p>
-              <div className="flex items-center space-x-2">
+              <p className="text-muted-foreground text-xs mb-3">{pr.description}</p>
+              <div className="flex items-center gap-2">
                 <Github className="w-3 h-3 text-muted-foreground" />
                 <span className="text-foreground text-xs">{pr.repository}</span>
               </div>
@@ -79,18 +81,18 @@ const OpenSource = () => {
 
         {/* Desktop Layout */}
         <div className="hidden md:block max-w-6xl mx-auto overflow-x-auto">
-          <table className="newspaper-table min-w-full">
+          <table className="w-full">
             <thead>
-              <tr>
-                <th className="text-left">Pull Request</th>
-                <th className="text-left">Repository</th>
-                <th className="text-left">Status</th>
+              <tr className="border-b border-border/50">
+                <th className="text-left pb-3 font-semibold text-foreground text-sm">Pull Request</th>
+                <th className="text-left pb-3 font-semibold text-foreground text-sm">Repository</th>
+                <th className="text-left pb-3 font-semibold text-foreground text-sm">Status</th>
               </tr>
             </thead>
             <tbody>
-              {openSourcePRs.map((pr, index) => (
-                <tr key={pr.title}>
-                  <td>
+              {openSourcePRs.map((pr) => (
+                <tr key={pr.title} className="border-b border-border/30 hover:bg-card/30 transition-colors">
+                  <td className="py-4">
                     <div>
                       <h3 className="font-semibold text-foreground mb-1">
                         {pr.title}
@@ -98,16 +100,16 @@ const OpenSource = () => {
                       <p className="text-muted-foreground text-sm">{pr.description}</p>
                     </div>
                   </td>
-                  <td>
-                    <div className="flex items-center space-x-2">
+                  <td className="py-4">
+                    <div className="flex items-center gap-2">
                       <Github className="w-4 h-4 text-muted-foreground" />
-                      <span className="text-foreground">{pr.repository}</span>
+                      <span className="text-foreground text-sm">{pr.repository}</span>
                     </div>
                   </td>
-                  <td>
-                    <div className="flex items-center space-x-2">
-                      <GitMerge className="w-4 h-4 text-green-600" />
-                      <span className="text-green-600 font-semibold">MERGED</span>
+                  <td className="py-4">
+                    <div className="flex items-center gap-2">
+                      <GitMerge className="w-4 h-4 text-primary" />
+                      <span className="text-primary font-medium text-sm">MERGED</span>
                     </div>
                   </td>
                 </tr>

@@ -3,47 +3,28 @@ import rocketBlueprint from "@/assets/rocket-blueprint.png";
 
 const Hero = () => {
   return (
-    <section className="py-16 border-b-2 neon-border relative scanlines overflow-hidden">
-      {/* Blueprint Background Images */}
-      <div className="absolute inset-0 opacity-30 pointer-events-none overflow-visible">
-        <img 
-          src={droneBlueprint} 
-          alt="" 
-          className="absolute top-1/2 left-1/4 w-1/3 h-auto object-contain -translate-x-1/2 -translate-y-1/2 animate-pulse"
-          style={{ 
-            animationDuration: '6s'
-          }}
-        />
-        <img 
-          src={rocketBlueprint} 
-          alt="" 
-          className="absolute top-1/2 right-1/4 w-1/3 h-auto object-contain translate-x-1/2 -translate-y-1/2 animate-pulse"
-          style={{ 
-            animationDuration: '8s'
-          }}
-        />
-      </div>
-      
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="text-center max-w-4xl mx-auto">
-          <div className="text-center mb-4">
-            <p className="text-sm text-muted-foreground font-mono text-glow tracking-wider">
+    <section className="py-24 border-b border-border/30 relative">
+      <div className="container mx-auto px-4">
+        <div className="max-w-3xl mx-auto space-y-8">
+          <div className="text-center space-y-1">
+            <p className="text-xs text-muted-foreground font-mono tracking-widest">
               CLASSIFIED // PROJECT ID: VK-2030 // CLEARANCE LEVEL: PUBLIC
             </p>
           </div>
-          <h1 className="text-5xl md:text-7xl font-bold text-primary mb-6 tracking-tight text-glow glow-pulse">
+          
+          <h1 className="text-6xl md:text-7xl font-bold text-foreground tracking-tight text-center">
             THE VAIDIK PROJECT
           </h1>
-          <div className="neon-border-secondary py-4 mb-6 glow-pulse bg-card/30 backdrop-blur-sm">
-            <p className="text-lg font-bold text-accent uppercase tracking-widest text-glow">
+          
+          <div className="border-t border-b border-border/50 py-3 text-center">
+            <p className="text-sm font-medium text-primary uppercase tracking-widest">
               Apple Systems Developer and Maker
             </p>
           </div>
-          <div className="text-center">
-            <p className="text-lg text-foreground/80 max-w-2xl mx-auto font-mono">
-              iOS, macOS dev, also playing with Rust and server-side Swift + founding stuff.
-            </p>
-          </div>
+          
+          <p className="text-base text-muted-foreground text-center font-mono leading-relaxed">
+            iOS, macOS dev, also playing with Rust and server-side Swift + founding stuff.
+          </p>
         </div>
       </div>
     </section>

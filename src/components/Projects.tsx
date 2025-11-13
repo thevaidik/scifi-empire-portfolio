@@ -47,28 +47,28 @@ const projectsData = [
 
 const Projects = () => {
   return (
-    <section className="py-16 neon-border-secondary border-b-2 relative">
+    <section className="py-20 border-b border-border/30">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <div className="flex flex-col md:flex-row justify-between items-center mb-4 gap-2">
-            <p className="text-xs md:text-sm text-muted-foreground font-mono order-2 md:order-1 text-glow tracking-wider">SECTOR: DEVELOPMENT</p>
-            <h2 className="text-2xl md:text-4xl font-bold text-primary neon-border inline-block pb-2 px-6 order-1 md:order-2 text-glow glow-pulse bg-card/30 backdrop-blur-sm">
-              ACTIVE PROJECTS
-            </h2>
-            <p className="text-xs md:text-sm text-muted-foreground font-mono order-3 text-glow tracking-wider">STATUS: LIVE</p>
+        <div className="mb-16 space-y-4">
+          <div className="flex items-center justify-center gap-12 mb-2">
+            <span className="text-xs text-muted-foreground font-mono tracking-wider">SECTOR: DEVELOPMENT</span>
+            <span className="text-xs text-muted-foreground font-mono tracking-wider">STATUS: LIVE</span>
           </div>
-          <p className="text-foreground/70 text-lg max-w-2xl mx-auto mt-6 font-mono">
+          
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-foreground tracking-tight">
+            ACTIVE PROJECTS
+          </h2>
+          
+          <p className="text-sm text-muted-foreground text-center font-mono max-w-xl mx-auto">
             Current projects and innovations in technology
           </p>
         </div>
 
         <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {projectsData.map((project, index) => (
-              <div key={project.title} className="group">
-                <div className="neon-border bg-card/50 backdrop-blur-sm hover:bg-card/70 transition-all duration-300 elegant-hover">
-                  <ProjectCard {...project} compact={true} />
-                </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {projectsData.map((project) => (
+              <div key={project.title} className="border border-border/50 hover:border-primary/30 transition-colors">
+                <ProjectCard {...project} compact={true} />
               </div>
             ))}
           </div>

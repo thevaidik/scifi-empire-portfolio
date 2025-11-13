@@ -1,4 +1,4 @@
-import { motion, useMotionValue, useSpring, useTransform, animate } from "framer-motion";
+import { motion, useMotionValue, useTransform, animate } from "framer-motion";
 import { useEffect } from "react";
 import { Code2, Coffee } from "lucide-react";
 
@@ -22,50 +22,33 @@ const HangingSign = () => {
 
   return (
     <div className="fixed top-0 right-8 z-50 select-none pointer-events-auto">
-      {/* Hanging chains that follow the swing */}
+      {/* Hanging chains */}
       <div className="flex justify-center gap-16">
-        {/* Left chain */}
         <motion.div style={{ rotate: chainRotate }} className="origin-top">
           <div
-            className="w-1 h-24"
-            style={{
-              backgroundImage:
-                "repeating-linear-gradient(to bottom, hsl(var(--muted-foreground)) 0 6px, transparent 6px 12px)",
-              backgroundColor: "hsl(var(--muted-foreground) / 0.7)",
-            }}
+            className="w-0.5 h-24 bg-border/50"
           />
-          {/* Chain ring */}
-          <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full border border-muted-foreground/60 bg-background/80"></div>
         </motion.div>
         
-        {/* Right chain */}
         <motion.div style={{ rotate: chainRotate }} className="origin-top">
           <div
-            className="w-1 h-24"
-            style={{
-              backgroundImage:
-                "repeating-linear-gradient(to bottom, hsl(var(--muted-foreground)) 0 6px, transparent 6px 12px)",
-              backgroundColor: "hsl(var(--muted-foreground) / 0.7)",
-            }}
+            className="w-0.5 h-24 bg-border/50"
           />
-          {/* Chain ring */}
-          <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full border border-muted-foreground/60 bg-background/80"></div>
         </motion.div>
       </div>
 
-      {/* Swinging sign with realistic pendulum physics */}
+      {/* Swinging sign */}
       <motion.div
         className="relative -mt-1"
         style={{ 
           x,
           rotate,
-          transformOrigin: "50% -24px" // Pivot point at chain attachment
+          transformOrigin: "50% -24px"
         }}
         drag="x"
         dragConstraints={{ left: -150, right: 150 }}
         dragElastic={0.2}
         onDragEnd={(e, info) => {
-          // Apply physics-based momentum for realistic swing
           const velocity = info.velocity.x;
           const momentum = velocity * 0.3;
           
@@ -80,54 +63,42 @@ const HangingSign = () => {
         whileHover={{ scale: 1.01 }}
         whileDrag={{ scale: 1.02 }}
       >
-        {/* Motel sign body */}
-        <div className="relative w-48 bg-gradient-to-br from-card/95 to-card/85 backdrop-blur-sm rounded-lg neon-border shadow-2xl">
-          {/* Neon glow */}
-          <div className="absolute inset-0 rounded-lg neon-glow blur-sm opacity-60"></div>
-          
-          {/* Sign content */}
-          <div className="relative px-5 py-4 text-center">
+        {/* Sign body */}
+        <div className="relative w-48 bg-card border border-border/50">
+          <div className="px-5 py-4 text-center space-y-3">
             {/* Header */}
-            <div className="mb-3">
-              <div className="text-sm font-black tracking-[0.3em] text-primary text-glow">
+            <div>
+              <div className="text-sm font-bold tracking-[0.3em] text-foreground">
                 DEV MOTEL
               </div>
-              <div className="w-12 h-0.5 bg-primary/60 mx-auto mt-1"></div>
+              <div className="w-12 h-px bg-border/50 mx-auto mt-1"></div>
             </div>
             
             {/* Vacancy */}
-            <div className="mb-3">
-              <div className="inline-block border-2 border-secondary/60 rounded px-3 py-1 bg-secondary/10">
-                <div className="text-xs font-bold text-secondary text-glow flicker-animation tracking-[0.2em]">
-                  VACANCY
-                </div>
+            <div className="inline-block border border-border/50 px-3 py-1">
+              <div className="text-xs font-semibold text-primary tracking-[0.2em]">
+                VACANCY
               </div>
             </div>
             
             {/* Services */}
             <div className="space-y-2">
               <div className="flex items-center justify-center gap-2">
-                <Code2 className="w-3 h-3 text-primary text-glow" />
-                <div className="text-xs text-primary font-semibold tracking-[0.25em] text-glow">
+                <Code2 className="w-3 h-3 text-primary" />
+                <div className="text-xs text-foreground font-medium tracking-[0.25em]">
                   24/7 CODING
                 </div>
-                <Coffee className="w-3 h-3 text-primary text-glow" />
+                <Coffee className="w-3 h-3 text-primary" />
               </div>
-              <div className="text-[9px] text-muted-foreground tracking-[0.15em] opacity-90">
+              <div className="text-[9px] text-muted-foreground tracking-[0.15em]">
                 FREE WIFI • COFFEE • DEBUG
               </div>
             </div>
           </div>
           
           {/* Chain attachment points */}
-          <div className="absolute -top-2 left-4 w-4 h-3 bg-muted/30 border border-muted-foreground/40 rounded-sm"></div>
-          <div className="absolute -top-2 right-4 w-4 h-3 bg-muted/30 border border-muted-foreground/40 rounded-sm"></div>
-          
-          {/* Corner reinforcements */}
-          <div className="absolute -top-1 -left-1 w-3 h-3 border-l-2 border-t-2 border-accent/40 rounded-tl"></div>
-          <div className="absolute -top-1 -right-1 w-3 h-3 border-r-2 border-t-2 border-accent/40 rounded-tr"></div>
-          <div className="absolute -bottom-1 -left-1 w-3 h-3 border-l-2 border-b-2 border-accent/40 rounded-bl"></div>
-          <div className="absolute -bottom-1 -right-1 w-3 h-3 border-r-2 border-b-2 border-accent/40 rounded-br"></div>
+          <div className="absolute -top-1.5 left-4 w-3 h-2 border border-border/50"></div>
+          <div className="absolute -top-1.5 right-4 w-3 h-2 border border-border/50"></div>
         </div>
       </motion.div>
     </div>

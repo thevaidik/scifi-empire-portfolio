@@ -384,48 +384,49 @@ const Index = () => {
   return (
     <div className="text-foreground vintage-neon-bg min-h-screen relative">
       {/* Mode Switcher */}
-      <div className="fixed top-4 left-4 z-50 bg-background border-2 border-border rounded-sm p-3 shadow-lg">
-        <div className="flex items-center space-x-3">
-          <Newspaper className="w-4 h-4 text-foreground" />
+      <div className="fixed top-4 left-4 z-50 bg-background border border-border/50 p-3">
+        <div className="flex items-center gap-3">
+          <Newspaper className="w-4 h-4 text-muted-foreground" />
           <Switch
             checked={isOSMode}
             onCheckedChange={setIsOSMode}
           />
-          <Monitor className="w-4 h-4 text-accent" />
+          <Monitor className="w-4 h-4 text-primary" />
         </div>
       </div>
 
       <Hero />
       
       {/* Connect Section */}
-      <section className="py-16 border-b-2 neon-border-secondary relative">
+      <section className="py-20 border-b border-border/30">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-headline font-bold text-primary mb-4 uppercase tracking-wide border-b-4 border-t-4 border-border py-4 inline-block px-8">
+          <div className="mb-16 space-y-3">
+            <h2 className="text-3xl md:text-4xl font-bold text-center text-foreground tracking-tight">
               CONNECTIONS & CORRESPONDENCE
             </h2>
-            <p className="text-secondary text-lg max-w-2xl mx-auto mt-8 font-serif italic">
+            <p className="text-sm text-muted-foreground text-center max-w-xl mx-auto">
               Professional networks and communication channels for the modern era
             </p>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 max-w-4xl mx-auto">
             {links.map((link, index) => (
-              <div key={index} className="bg-card border-2 border-border p-4 text-center hover:bg-muted transition-all duration-300 group shadow-sm">
-                <a
-                  href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex flex-col items-center"
-                >
-                  <div className="w-8 h-8 flex items-center justify-center mb-2 text-accent">
+              <a
+                key={index}
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="border border-border/50 p-4 text-center hover:border-primary/30 transition-colors"
+              >
+                <div className="flex flex-col items-center gap-2">
+                  <div className="w-8 h-8 flex items-center justify-center text-primary">
                     {link.icon}
                   </div>
-                  <h3 className="text-sm font-semibold text-primary uppercase tracking-wider">
+                  <span className="text-xs font-medium text-foreground uppercase tracking-wider">
                     {link.name}
-                  </h3>
-                </a>
-              </div>
+                  </span>
+                </div>
+              </a>
             ))}
           </div>
         </div>
