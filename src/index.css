@@ -34,8 +34,8 @@
     /* Clean blueprint lines - crisp white */
     --blueprint-shadow: 0 2px 8px hsl(200 100% 70% / 0.12);
     --tech-shadow: 0 1px 3px hsl(0 0% 0% / 0.1);
-    --grid-line: hsl(0 0% 100% / 0.15);
-    --scan-line: hsl(200 100% 70% / 0.04);
+    --grid-line: hsl(0 0% 100% / 0.05);
+    --scan-line: hsl(200 100% 70% / 0.02);
   }
 }
 
