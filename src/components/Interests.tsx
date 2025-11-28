@@ -30,34 +30,28 @@ const interestData = [
 
 const Interests = () => {
   return (
-    <section className="py-20 border-b border-border/30">
-      <div className="container mx-auto px-4">
-        <div className="mb-16 space-y-3">
-          <h2 className="text-3xl md:text-4xl font-bold text-center text-foreground tracking-tight">
-            FIELDS OF INTEREST
-          </h2>
-          <p className="text-sm text-muted-foreground text-center max-w-xl mx-auto">
-            Exploring the intersection of consciousness, technology, and artificial intelligence
-          </p>
-        </div>
+    <div className="p-8">
+      <h2 className="text-2xl font-semibold mb-3 text-foreground">
+        Technical Interests
+      </h2>
+      <p className="text-muted-foreground text-sm mb-6">
+        Areas of focus and exploration
+      </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-          {interestData.map((interest) => (
-            <div key={interest.title} className="border border-border/50 p-6 hover:border-primary/30 transition-colors">
-              <div className="flex items-start gap-4">
-                <div className="w-10 h-10 border border-border/50 flex items-center justify-center flex-shrink-0">
-                  <interest.icon className="w-5 h-5 text-primary" />
-                </div>
-                <div className="flex-1">
-                  <h3 className="text-base font-semibold text-foreground mb-2">{interest.title}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{interest.description}</p>
-                </div>
-              </div>
+      <div className="space-y-4">
+        {interestData.map((interest) => (
+          <div key={interest.title} className="flex items-start gap-4 p-4 rounded-lg hover:bg-accent/50 transition-colors">
+            <div className="w-10 h-10 flex items-center justify-center flex-shrink-0">
+              <interest.icon className="w-5 h-5 text-primary" />
             </div>
-          ))}
-        </div>
+            <div className="flex-1">
+              <h3 className="text-base font-medium text-foreground mb-1">{interest.title}</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">{interest.description}</p>
+            </div>
+          </div>
+        ))}
       </div>
-    </section>
+    </div>
   );
 };
 

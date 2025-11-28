@@ -47,34 +47,22 @@ const projectsData = [
 
 const Projects = () => {
   return (
-    <section className="py-20 border-b border-border/30">
-      <div className="container mx-auto px-4">
-        <div className="mb-16 space-y-4">
-          <div className="flex items-center justify-center gap-12 mb-2">
-            <span className="text-xs text-muted-foreground font-mono tracking-wider">SECTOR: DEVELOPMENT</span>
-            <span className="text-xs text-muted-foreground font-mono tracking-wider">STATUS: LIVE</span>
-          </div>
-          
-          <h2 className="text-3xl md:text-4xl font-bold text-center text-foreground tracking-tight">
-            ACTIVE PROJECTS
-          </h2>
-          
-          <p className="text-sm text-muted-foreground text-center font-mono max-w-xl mx-auto">
-            Current projects and innovations in technology
-          </p>
-        </div>
+    <div className="p-8">
+      <h2 className="text-2xl font-semibold mb-3 text-foreground">
+        Current Events & Projects
+      </h2>
+      <p className="text-muted-foreground text-sm mb-6">
+        Recent work and ongoing initiatives
+      </p>
 
-        <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {projectsData.map((project) => (
-              <div key={project.title} className="border border-border/50 hover:border-primary/30 transition-colors">
-                <ProjectCard {...project} compact={true} />
-              </div>
-            ))}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {projectsData.map((project) => (
+          <div key={project.title} className="border border-border rounded-lg hover:bg-accent/50 transition-colors">
+            <ProjectCard {...project} compact={true} />
           </div>
-        </div>
+        ))}
       </div>
-    </section>
+    </div>
   );
 };
 
