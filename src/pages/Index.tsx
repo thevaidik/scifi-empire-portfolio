@@ -517,20 +517,24 @@ const Index = () => {
         </div>
       </div>
 
-      {/* Notes List */}
-      <div className="container mx-auto px-4 py-6 max-w-5xl">
-        <div className="space-y-3">
+      {/* Notes Gallery Grid */}
+      <div className="container mx-auto px-4 py-6 max-w-7xl">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {notes.map((note) => (
             <button
               key={note.id}
               onClick={() => setOpenNote(note.id)}
-              className="w-full bg-card rounded-xl shadow-[var(--note-shadow)] hover:shadow-[var(--note-shadow-hover)] transition-all duration-200 p-5 text-left border border-transparent hover:border-primary/20"
+              className="bg-card rounded-2xl shadow-[var(--note-shadow)] hover:shadow-[var(--note-shadow-hover)] transition-all duration-200 overflow-hidden text-left border border-transparent hover:border-primary/20 h-64 flex flex-col"
             >
-              <div className="flex items-start justify-between mb-2">
-                <h2 className="text-lg font-semibold text-foreground">{note.title}</h2>
+              <div className="p-5 flex-1 flex flex-col">
+                <div className="flex items-start justify-between mb-3">
+                  <h2 className="text-xl font-semibold text-foreground pr-2 line-clamp-2">{note.title}</h2>
+                </div>
+                <p className="text-sm text-muted-foreground line-clamp-4 flex-1">{note.preview}</p>
+              </div>
+              <div className="px-5 py-3 border-t border-border/50">
                 <span className="text-xs text-muted-foreground">{note.date}</span>
               </div>
-              <p className="text-sm text-muted-foreground line-clamp-2">{note.preview}</p>
             </button>
           ))}
         </div>
