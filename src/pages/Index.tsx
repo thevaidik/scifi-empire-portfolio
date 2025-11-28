@@ -382,9 +382,9 @@ const Index = () => {
   }
 
   return (
-    <div className="text-foreground vintage-neon-bg min-h-screen relative">
+    <div className="min-h-screen bg-background">
       {/* Mode Switcher */}
-      <div className="fixed top-4 left-4 z-50 bg-background border border-border/50 p-3">
+      <div className="fixed top-4 left-4 z-50 bg-card border border-border rounded-lg px-3 py-2 shadow-lg">
         <div className="flex items-center gap-3">
           <Newspaper className="w-4 h-4 text-muted-foreground" />
           <Switch
@@ -395,47 +395,61 @@ const Index = () => {
         </div>
       </div>
 
-      <Hero />
-      
-      {/* Connect Section */}
-      <section className="py-20 border-b border-border/30">
-        <div className="container mx-auto px-4">
-          <div className="mb-16 space-y-3">
-            <h2 className="text-3xl md:text-4xl font-bold text-center text-foreground tracking-tight">
-              CONNECTIONS & CORRESPONDENCE
-            </h2>
-            <p className="text-sm text-muted-foreground text-center max-w-xl mx-auto">
-              Professional networks and communication channels for the modern era
-            </p>
-          </div>
+      {/* Notes Container */}
+      <div className="container mx-auto px-4 py-16 max-w-5xl">
+        {/* Note: About */}
+        <div className="mb-6 bg-card rounded-xl shadow-[var(--note-shadow)] hover:shadow-[var(--note-shadow-hover)] transition-shadow duration-200 overflow-hidden">
+          <Hero />
+        </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 max-w-4xl mx-auto">
+        {/* Note: Connect */}
+        <div className="mb-6 bg-card rounded-xl shadow-[var(--note-shadow)] hover:shadow-[var(--note-shadow-hover)] transition-shadow duration-200 p-8">
+          <h2 className="text-2xl font-semibold mb-3 text-foreground">
+            Connect
+          </h2>
+          <p className="text-muted-foreground text-sm mb-6">
+            Professional networks and communication channels
+          </p>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
             {links.map((link, index) => (
               <a
                 key={index}
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="border border-border/50 p-4 text-center hover:border-primary/30 transition-colors"
+                className="flex items-center gap-3 p-3 rounded-lg hover:bg-accent transition-colors"
               >
-                <div className="flex flex-col items-center gap-2">
-                  <div className="w-8 h-8 flex items-center justify-center text-primary">
-                    {link.icon}
-                  </div>
-                  <span className="text-xs font-medium text-foreground uppercase tracking-wider">
-                    {link.name}
-                  </span>
+                <div className="text-primary">
+                  {link.icon}
                 </div>
+                <span className="text-sm font-medium text-foreground">
+                  {link.name}
+                </span>
               </a>
             ))}
           </div>
         </div>
-      </section>
-      
-      <Projects />
-      <OpenSource />
-      <Interests />
-      <Bento />
+
+        {/* Note: Projects */}
+        <div className="mb-6 bg-card rounded-xl shadow-[var(--note-shadow)] hover:shadow-[var(--note-shadow-hover)] transition-shadow duration-200 overflow-hidden">
+          <Projects />
+        </div>
+
+        {/* Note: Interests */}
+        <div className="mb-6 bg-card rounded-xl shadow-[var(--note-shadow)] hover:shadow-[var(--note-shadow-hover)] transition-shadow duration-200 overflow-hidden">
+          <Interests />
+        </div>
+
+        {/* Note: Open Source */}
+        <div className="mb-6 bg-card rounded-xl shadow-[var(--note-shadow)] hover:shadow-[var(--note-shadow-hover)] transition-shadow duration-200 overflow-hidden">
+          <OpenSource />
+        </div>
+
+        {/* Note: More */}
+        <div className="mb-6 bg-card rounded-xl shadow-[var(--note-shadow)] hover:shadow-[var(--note-shadow-hover)] transition-shadow duration-200 overflow-hidden">
+          <Bento />
+        </div>
+      </div>
     </div>
   );
 };
