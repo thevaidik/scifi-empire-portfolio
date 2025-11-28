@@ -13,6 +13,7 @@ const Index = () => {
   const [selectedApp, setSelectedApp] = useState<string | null>(null);
   const [showWifiMenu, setShowWifiMenu] = useState(false);
   const [showBatteryMenu, setShowBatteryMenu] = useState(false);
+  const [openNote, setOpenNote] = useState<string | null>(null);
 
   useEffect(() => {
     document.documentElement.style.scrollBehavior = "smooth";
@@ -381,29 +382,21 @@ const Index = () => {
     return renderOSMode();
   }
 
-  return (
-    <div className="min-h-screen bg-background">
-      {/* Mode Switcher */}
-      <div className="fixed top-4 left-4 z-50 bg-card border border-border rounded-lg px-3 py-2 shadow-lg">
-        <div className="flex items-center gap-3">
-          <Newspaper className="w-4 h-4 text-muted-foreground" />
-          <Switch
-            checked={isOSMode}
-            onCheckedChange={setIsOSMode}
-          />
-          <Monitor className="w-4 h-4 text-primary" />
-        </div>
-      </div>
-
-      {/* Notes Container */}
-      <div className="container mx-auto px-4 py-16 max-w-5xl">
-        {/* Note: About */}
-        <div className="mb-6 bg-card rounded-xl shadow-[var(--note-shadow)] hover:shadow-[var(--note-shadow-hover)] transition-shadow duration-200 overflow-hidden">
-          <Hero />
-        </div>
-
-        {/* Note: Connect */}
-        <div className="mb-6 bg-card rounded-xl shadow-[var(--note-shadow)] hover:shadow-[var(--note-shadow-hover)] transition-shadow duration-200 p-8">
+  const notes = [
+    {
+      id: 'about',
+      title: 'THE VAIDIK PROJECT',
+      preview: 'Apple Systems Developer and Maker - iOS, macOS dev, also playing with Rust...',
+      date: 'Nov 28',
+      component: <Hero />
+    },
+    {
+      id: 'connect',
+      title: 'Connect',
+      preview: 'Professional networks and communication channels',
+      date: 'Nov 27',
+      component: (
+        <div className="p-8">
           <h2 className="text-2xl font-semibold mb-3 text-foreground">
             Connect
           </h2>
@@ -429,25 +422,117 @@ const Index = () => {
             ))}
           </div>
         </div>
+      )
+    },
+    {
+      id: 'projects',
+      title: 'Current Events & Projects',
+      preview: 'Recent work and ongoing initiatives - nxtlap.com, Briefly RSS reader...',
+      date: 'Nov 26',
+      component: <Projects />
+    },
+    {
+      id: 'interests',
+      title: 'Technical Interests',
+      preview: 'Areas of focus and exploration - iOS Development, Consciousness & Bicameral Mind...',
+      date: 'Nov 25',
+      component: <Interests />
+    },
+    {
+      id: 'opensource',
+      title: 'Open Source Activity',
+      preview: 'Recent contributions to open-source projects',
+      date: 'Nov 24',
+      component: <OpenSource />
+    },
+    {
+      id: 'collaborate',
+      title: "Let's Collaborate",
+      preview: 'Building the future, one project at a time',
+      date: 'Nov 23',
+      component: <Bento />
+    }
+  ];
 
-        {/* Note: Projects */}
-        <div className="mb-6 bg-card rounded-xl shadow-[var(--note-shadow)] hover:shadow-[var(--note-shadow-hover)] transition-shadow duration-200 overflow-hidden">
-          <Projects />
+  if (openNote) {
+    const note = notes.find(n => n.id === openNote);
+    return (
+      <div className="min-h-screen bg-background">
+        {/* Mode Switcher */}
+        <div className="fixed top-4 left-4 z-50 bg-card border border-border rounded-lg px-3 py-2 shadow-lg">
+          <div className="flex items-center gap-3">
+            <Newspaper className="w-4 h-4 text-muted-foreground" />
+            <Switch
+              checked={isOSMode}
+              onCheckedChange={setIsOSMode}
+            />
+            <Monitor className="w-4 h-4 text-primary" />
+          </div>
         </div>
 
-        {/* Note: Interests */}
-        <div className="mb-6 bg-card rounded-xl shadow-[var(--note-shadow)] hover:shadow-[var(--note-shadow-hover)] transition-shadow duration-200 overflow-hidden">
-          <Interests />
+        {/* Note Header */}
+        <div className="bg-card border-b border-border sticky top-0 z-40">
+          <div className="container mx-auto px-4 py-3 flex items-center gap-3">
+            <button
+              onClick={() => setOpenNote(null)}
+              className="flex items-center gap-2 text-primary hover:text-primary/80 transition-colors"
+            >
+              <span className="text-xl">‹</span>
+              <span className="text-sm font-medium">Notes</span>
+            </button>
+            <div className="flex-1"></div>
+            <span className="text-sm text-muted-foreground">{note?.date}</span>
+          </div>
         </div>
 
-        {/* Note: Open Source */}
-        <div className="mb-6 bg-card rounded-xl shadow-[var(--note-shadow)] hover:shadow-[var(--note-shadow-hover)] transition-shadow duration-200 overflow-hidden">
-          <OpenSource />
+        {/* Note Content */}
+        <div className="container mx-auto px-4 py-6 max-w-5xl">
+          <div className="bg-card rounded-xl shadow-lg overflow-hidden">
+            {note?.component}
+          </div>
         </div>
+      </div>
+    );
+  }
 
-        {/* Note: More */}
-        <div className="mb-6 bg-card rounded-xl shadow-[var(--note-shadow)] hover:shadow-[var(--note-shadow-hover)] transition-shadow duration-200 overflow-hidden">
-          <Bento />
+  return (
+    <div className="min-h-screen bg-background">
+      {/* Mode Switcher */}
+      <div className="fixed top-4 left-4 z-50 bg-card border border-border rounded-lg px-3 py-2 shadow-lg">
+        <div className="flex items-center gap-3">
+          <Newspaper className="w-4 h-4 text-muted-foreground" />
+          <Switch
+            checked={isOSMode}
+            onCheckedChange={setIsOSMode}
+          />
+          <Monitor className="w-4 h-4 text-primary" />
+        </div>
+      </div>
+
+      {/* Notes Header */}
+      <div className="bg-card border-b border-border sticky top-0 z-40">
+        <div className="container mx-auto px-4 py-4">
+          <h1 className="text-3xl font-bold text-foreground">Notes</h1>
+          <p className="text-sm text-muted-foreground mt-1">{notes.length} notes</p>
+        </div>
+      </div>
+
+      {/* Notes List */}
+      <div className="container mx-auto px-4 py-6 max-w-5xl">
+        <div className="space-y-3">
+          {notes.map((note) => (
+            <button
+              key={note.id}
+              onClick={() => setOpenNote(note.id)}
+              className="w-full bg-card rounded-xl shadow-[var(--note-shadow)] hover:shadow-[var(--note-shadow-hover)] transition-all duration-200 p-5 text-left border border-transparent hover:border-primary/20"
+            >
+              <div className="flex items-start justify-between mb-2">
+                <h2 className="text-lg font-semibold text-foreground">{note.title}</h2>
+                <span className="text-xs text-muted-foreground">{note.date}</span>
+              </div>
+              <p className="text-sm text-muted-foreground line-clamp-2">{note.preview}</p>
+            </button>
+          ))}
         </div>
       </div>
     </div>
