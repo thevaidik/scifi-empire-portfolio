@@ -5,7 +5,7 @@ import Projects from "@/components/Projects";
 import OpenSource from "@/components/OpenSource";
 import Bento from "@/components/Bento";
 import HangingSign from "@/components/HangingSign";
-import { Github, Twitter, Youtube, Linkedin, Mail, BookOpen, Monitor, Newspaper, Code, Users, Heart, Info, Briefcase, Coffee } from "lucide-react";
+import { ChevronLeft, Github, Twitter, Youtube, Linkedin, Mail, BookOpen, Monitor, Newspaper, Code, Users, Heart, Info, Briefcase, Coffee } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 
 const Index = () => {
@@ -454,49 +454,10 @@ const Index = () => {
     }
   ];
 
-  if (openNote) {
-    const note = notes.find(n => n.id === openNote);
-    return (
-      <div className="min-h-screen bg-background">
-        {/* Mode Switcher */}
-        <div className="fixed top-4 left-4 z-50 bg-card border border-border rounded-lg px-3 py-2 shadow-lg">
-          <div className="flex items-center gap-3">
-            <Newspaper className="w-4 h-4 text-muted-foreground" />
-            <Switch
-              checked={isOSMode}
-              onCheckedChange={setIsOSMode}
-            />
-            <Monitor className="w-4 h-4 text-primary" />
-          </div>
-        </div>
-
-        {/* Note Header */}
-        <div className="bg-card border-b border-border sticky top-0 z-40">
-          <div className="container mx-auto px-4 py-3 flex items-center gap-3">
-            <button
-              onClick={() => setOpenNote(null)}
-              className="flex items-center gap-2 text-primary hover:text-primary/80 transition-colors"
-            >
-              <span className="text-xl">‹</span>
-              <span className="text-sm font-medium">Notes</span>
-            </button>
-            <div className="flex-1"></div>
-            <span className="text-sm text-muted-foreground">{note?.date}</span>
-          </div>
-        </div>
-
-        {/* Note Content */}
-        <div className="container mx-auto px-4 py-6 max-w-5xl">
-          <div className="bg-card rounded-xl shadow-lg overflow-hidden">
-            {note?.component}
-          </div>
-        </div>
-      </div>
-    );
-  }
+  const currentNote = notes.find(n => n.id === openNote);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen notes-bg">
       {/* Mode Switcher */}
       <div className="fixed top-4 left-4 z-50 bg-card border border-border rounded-lg px-3 py-2 shadow-lg">
         <div className="flex items-center gap-3">
@@ -510,35 +471,60 @@ const Index = () => {
       </div>
 
       {/* Notes Header */}
-      <div className="bg-card border-b border-border sticky top-0 z-40">
-        <div className="container mx-auto px-4 py-4">
-          <h1 className="text-3xl font-bold text-foreground">Notes</h1>
-          <p className="text-sm text-muted-foreground mt-1">{notes.length} notes</p>
+      <div className="bg-background border-b border-border/50 sticky top-0 z-40 backdrop-blur-xl bg-background/80">
+        <div className="container mx-auto px-6 py-4 max-w-7xl">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              {openNote && (
+                <button
+                  onClick={() => setOpenNote(null)}
+                  className="text-primary hover:text-primary/90 transition-colors -ml-2 p-1 rounded-lg hover:bg-secondary/50"
+                >
+                  <ChevronLeft className="w-7 h-7" />
+                </button>
+              )}
+              <h1 className="text-[28px] font-semibold text-primary tracking-tight">Notes</h1>
+            </div>
+            <div className="text-[15px] text-muted-foreground font-medium">
+              {notes.length} notes
+            </div>
+          </div>
         </div>
       </div>
 
       {/* Notes Gallery Grid */}
-      <div className="container mx-auto px-4 py-6 max-w-7xl">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {notes.map((note) => (
-            <button
-              key={note.id}
-              onClick={() => setOpenNote(note.id)}
-              className="bg-card rounded-2xl shadow-[var(--note-shadow)] hover:shadow-[var(--note-shadow-hover)] transition-all duration-200 overflow-hidden text-left border border-transparent hover:border-primary/20 h-64 flex flex-col"
-            >
-              <div className="p-5 flex-1 flex flex-col">
-                <div className="flex items-start justify-between mb-3">
-                  <h2 className="text-xl font-semibold text-foreground pr-2 line-clamp-2">{note.title}</h2>
+      {!openNote && (
+        <div className="container mx-auto px-6 py-6 max-w-7xl">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            {notes.map((note) => (
+              <button
+                key={note.id}
+                onClick={() => setOpenNote(note.id)}
+                className="bg-card rounded-xl shadow-[var(--note-shadow)] hover:shadow-[var(--note-shadow-hover)] transition-all duration-150 overflow-hidden text-left border border-border/40 hover:border-border/80 h-[240px] flex flex-col group"
+              >
+                <div className="p-5 flex-1 flex flex-col min-h-0">
+                  <div className="flex items-start justify-between mb-2.5">
+                    <h2 className="text-[17px] font-semibold text-foreground pr-2 line-clamp-2 leading-snug">{note.title}</h2>
+                  </div>
+                  <p className="text-[15px] text-muted-foreground/90 line-clamp-5 flex-1 leading-relaxed">{note.preview}</p>
                 </div>
-                <p className="text-sm text-muted-foreground line-clamp-4 flex-1">{note.preview}</p>
-              </div>
-              <div className="px-5 py-3 border-t border-border/50">
-                <span className="text-xs text-muted-foreground">{note.date}</span>
-              </div>
-            </button>
-          ))}
+                <div className="px-5 py-3 border-t border-border/30">
+                  <span className="text-[13px] text-muted-foreground/80 font-normal">{note.date}</span>
+                </div>
+              </button>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
+
+      {/* Full Note View */}
+      {openNote && (
+        <div className="container mx-auto px-6 py-6 max-w-5xl">
+          <div className="bg-card rounded-xl shadow-[var(--note-shadow)] p-8 border border-border/40 min-h-[calc(100vh-200px)]">
+            {currentNote?.component}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
