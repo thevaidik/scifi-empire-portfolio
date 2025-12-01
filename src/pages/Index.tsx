@@ -7,6 +7,8 @@ import Bento from "@/components/Bento";
 import HangingSign from "@/components/HangingSign";
 import { ChevronLeft, Github, Twitter, Youtube, Linkedin, Mail, BookOpen, Monitor, Newspaper, Code, Users, Heart, Info, Briefcase, Coffee } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
+import { DndContext, DragEndEvent, DragOverlay, useDraggable, useDroppable } from "@dnd-kit/core";
+import { CSS } from "@dnd-kit/utilities";
 
 const Index = () => {
   const [isOSMode, setIsOSMode] = useState(false);
@@ -382,7 +384,7 @@ const Index = () => {
     return renderOSMode();
   }
 
-  const notes = [
+  const [notes, setNotes] = useState([
     {
       id: 'about',
       title: 'THE VAIDIK PROJECT',
@@ -458,7 +460,9 @@ const Index = () => {
       date: 'Nov 23',
       component: <Bento />
     }
-  ];
+  ]);
+  
+  const [activeId, setActiveId] = useState<string | null>(null);
 
   const groupedNotes = notes.reduce((acc, note) => {
     if (!acc[note.dateGroup]) {
@@ -469,6 +473,31 @@ const Index = () => {
   }, {} as Record<string, typeof notes>);
 
   const currentNote = notes.find(n => n.id === openNote);
+  
+  const handleDragStart = (event: DragEndEvent) => {
+    setActiveId(event.active.id as string);
+  };
+  
+  const handleDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
+    
+    if (over && active.id !== over.id) {
+      const noteId = active.id as string;
+      const newDateGroup = over.id as string;
+      
+      setNotes(prevNotes =>
+        prevNotes.map(note =>
+          note.id === noteId ? { ...note, dateGroup: newDateGroup } : note
+        )
+      );
+    }
+    
+    setActiveId(null);
+  };
+  
+  const handleDragCancel = () => {
+    setActiveId(null);
+  };
 
   return (
     <div className="min-h-screen notes-bg">
@@ -508,34 +537,43 @@ const Index = () => {
 
       {/* Notes Gallery Grid */}
       {!openNote && (
-        <div className="container mx-auto px-6 py-6 max-w-7xl">
-          {Object.entries(groupedNotes).map(([dateGroup, groupNotes]) => (
-            <div key={dateGroup} className="mb-8">
-              <h3 className="text-[13px] font-semibold text-muted-foreground uppercase tracking-wider mb-3 px-1">
-                {dateGroup}
-              </h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-                {groupNotes.map((note) => (
-                  <button
-                    key={note.id}
-                    onClick={() => setOpenNote(note.id)}
-                    className="bg-card rounded-xl shadow-[var(--note-shadow)] hover:shadow-[var(--note-shadow-hover)] transition-all duration-150 overflow-hidden text-left border border-border/40 hover:border-border/80 h-[240px] flex flex-col group"
-                  >
-                    <div className="p-5 flex-1 flex flex-col min-h-0">
-                      <div className="flex items-start justify-between mb-2.5">
-                        <h2 className="text-[17px] font-semibold text-foreground pr-2 line-clamp-2 leading-snug">{note.title}</h2>
-                      </div>
-                      <p className="text-[15px] text-muted-foreground/90 line-clamp-5 flex-1 leading-relaxed">{note.preview}</p>
-                    </div>
-                    <div className="px-5 py-3 border-t border-border/30">
-                      <span className="text-[13px] text-muted-foreground/80 font-normal">{note.date}</span>
-                    </div>
-                  </button>
-                ))}
+        <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd} onDragCancel={handleDragCancel}>
+          <div className="container mx-auto px-6 py-6 max-w-7xl">
+            {Object.entries(groupedNotes).map(([dateGroup, groupNotes]) => (
+              <DroppableSection key={dateGroup} id={dateGroup}>
+                <h3 className="text-[13px] font-semibold text-muted-foreground uppercase tracking-wider mb-3 px-1">
+                  {dateGroup}
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                  {groupNotes.map((note) => (
+                    <DraggableNote key={note.id} note={note} onOpen={setOpenNote} />
+                  ))}
+                </div>
+              </DroppableSection>
+            ))}
+          </div>
+          <DragOverlay>
+            {activeId ? (
+              <div className="bg-card rounded-xl shadow-2xl border border-border/60 h-[240px] flex flex-col opacity-90 rotate-3">
+                <div className="p-5 flex-1 flex flex-col min-h-0">
+                  <div className="flex items-start justify-between mb-2.5">
+                    <h2 className="text-[17px] font-semibold text-foreground pr-2 line-clamp-2 leading-snug">
+                      {notes.find(n => n.id === activeId)?.title}
+                    </h2>
+                  </div>
+                  <p className="text-[15px] text-muted-foreground/90 line-clamp-5 flex-1 leading-relaxed">
+                    {notes.find(n => n.id === activeId)?.preview}
+                  </p>
+                </div>
+                <div className="px-5 py-3 border-t border-border/30">
+                  <span className="text-[13px] text-muted-foreground/80 font-normal">
+                    {notes.find(n => n.id === activeId)?.date}
+                  </span>
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ) : null}
+          </DragOverlay>
+        </DndContext>
       )}
 
       {/* Full Note View */}
@@ -546,6 +584,52 @@ const Index = () => {
           </div>
         </div>
       )}
+    </div>
+  );
+};
+
+const DraggableNote = ({ note, onOpen }: { note: any; onOpen: (id: string) => void }) => {
+  const { attributes, listeners, setNodeRef, transform, isDragging } = useDraggable({
+    id: note.id,
+  });
+
+  const style = {
+    transform: CSS.Translate.toString(transform),
+    opacity: isDragging ? 0.5 : 1,
+    cursor: isDragging ? 'grabbing' : 'grab',
+  };
+
+  return (
+    <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
+      <button
+        onClick={() => onOpen(note.id)}
+        className="bg-card rounded-xl shadow-[var(--note-shadow)] hover:shadow-[var(--note-shadow-hover)] transition-all duration-150 overflow-hidden text-left border border-border/40 hover:border-border/80 h-[240px] flex flex-col group w-full touch-none"
+      >
+        <div className="p-5 flex-1 flex flex-col min-h-0">
+          <div className="flex items-start justify-between mb-2.5">
+            <h2 className="text-[17px] font-semibold text-foreground pr-2 line-clamp-2 leading-snug">{note.title}</h2>
+          </div>
+          <p className="text-[15px] text-muted-foreground/90 line-clamp-5 flex-1 leading-relaxed">{note.preview}</p>
+        </div>
+        <div className="px-5 py-3 border-t border-border/30">
+          <span className="text-[13px] text-muted-foreground/80 font-normal">{note.date}</span>
+        </div>
+      </button>
+    </div>
+  );
+};
+
+const DroppableSection = ({ id, children }: { id: string; children: React.ReactNode }) => {
+  const { setNodeRef, isOver } = useDroppable({
+    id: id,
+  });
+
+  return (
+    <div 
+      ref={setNodeRef} 
+      className={`mb-8 transition-colors rounded-lg ${isOver ? 'bg-accent/20 p-4' : ''}`}
+    >
+      {children}
     </div>
   );
 };
