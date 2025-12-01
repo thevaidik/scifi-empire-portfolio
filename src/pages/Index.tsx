@@ -387,6 +387,7 @@ const Index = () => {
       id: 'about',
       title: 'THE VAIDIK PROJECT',
       preview: 'Apple Systems Developer and Maker - iOS, macOS dev, also playing with Rust...',
+      dateGroup: 'Today',
       date: 'Nov 28',
       component: <Hero />
     },
@@ -394,6 +395,7 @@ const Index = () => {
       id: 'connect',
       title: 'Connect',
       preview: 'Professional networks and communication channels',
+      dateGroup: 'Yesterday',
       date: 'Nov 27',
       component: (
         <div className="p-8">
@@ -428,6 +430,7 @@ const Index = () => {
       id: 'projects',
       title: 'Current Events & Projects',
       preview: 'Recent work and ongoing initiatives - nxtlap.com, Briefly RSS reader...',
+      dateGroup: 'Previous 7 Days',
       date: 'Nov 26',
       component: <Projects />
     },
@@ -435,6 +438,7 @@ const Index = () => {
       id: 'interests',
       title: 'Technical Interests',
       preview: 'Areas of focus and exploration - iOS Development, Consciousness & Bicameral Mind...',
+      dateGroup: 'Previous 7 Days',
       date: 'Nov 25',
       component: <Interests />
     },
@@ -442,6 +446,7 @@ const Index = () => {
       id: 'opensource',
       title: 'Open Source Activity',
       preview: 'Recent contributions to open-source projects',
+      dateGroup: 'Previous 7 Days',
       date: 'Nov 24',
       component: <OpenSource />
     },
@@ -449,17 +454,26 @@ const Index = () => {
       id: 'collaborate',
       title: "Let's Collaborate",
       preview: 'Building the future, one project at a time',
+      dateGroup: 'Previous 7 Days',
       date: 'Nov 23',
       component: <Bento />
     }
   ];
+
+  const groupedNotes = notes.reduce((acc, note) => {
+    if (!acc[note.dateGroup]) {
+      acc[note.dateGroup] = [];
+    }
+    acc[note.dateGroup].push(note);
+    return acc;
+  }, {} as Record<string, typeof notes>);
 
   const currentNote = notes.find(n => n.id === openNote);
 
   return (
     <div className="min-h-screen notes-bg">
       {/* Mode Switcher */}
-      <div className="fixed top-4 left-4 z-50 bg-card border border-border rounded-lg px-3 py-2 shadow-lg">
+      <div className="fixed top-4 right-4 z-50 bg-card border border-border rounded-lg px-3 py-2 shadow-lg">
         <div className="flex items-center gap-3">
           <Newspaper className="w-4 h-4 text-muted-foreground" />
           <Switch
@@ -495,25 +509,32 @@ const Index = () => {
       {/* Notes Gallery Grid */}
       {!openNote && (
         <div className="container mx-auto px-6 py-6 max-w-7xl">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-            {notes.map((note) => (
-              <button
-                key={note.id}
-                onClick={() => setOpenNote(note.id)}
-                className="bg-card rounded-xl shadow-[var(--note-shadow)] hover:shadow-[var(--note-shadow-hover)] transition-all duration-150 overflow-hidden text-left border border-border/40 hover:border-border/80 h-[240px] flex flex-col group"
-              >
-                <div className="p-5 flex-1 flex flex-col min-h-0">
-                  <div className="flex items-start justify-between mb-2.5">
-                    <h2 className="text-[17px] font-semibold text-foreground pr-2 line-clamp-2 leading-snug">{note.title}</h2>
-                  </div>
-                  <p className="text-[15px] text-muted-foreground/90 line-clamp-5 flex-1 leading-relaxed">{note.preview}</p>
-                </div>
-                <div className="px-5 py-3 border-t border-border/30">
-                  <span className="text-[13px] text-muted-foreground/80 font-normal">{note.date}</span>
-                </div>
-              </button>
-            ))}
-          </div>
+          {Object.entries(groupedNotes).map(([dateGroup, groupNotes]) => (
+            <div key={dateGroup} className="mb-8">
+              <h3 className="text-[13px] font-semibold text-muted-foreground uppercase tracking-wider mb-3 px-1">
+                {dateGroup}
+              </h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                {groupNotes.map((note) => (
+                  <button
+                    key={note.id}
+                    onClick={() => setOpenNote(note.id)}
+                    className="bg-card rounded-xl shadow-[var(--note-shadow)] hover:shadow-[var(--note-shadow-hover)] transition-all duration-150 overflow-hidden text-left border border-border/40 hover:border-border/80 h-[240px] flex flex-col group"
+                  >
+                    <div className="p-5 flex-1 flex flex-col min-h-0">
+                      <div className="flex items-start justify-between mb-2.5">
+                        <h2 className="text-[17px] font-semibold text-foreground pr-2 line-clamp-2 leading-snug">{note.title}</h2>
+                      </div>
+                      <p className="text-[15px] text-muted-foreground/90 line-clamp-5 flex-1 leading-relaxed">{note.preview}</p>
+                    </div>
+                    <div className="px-5 py-3 border-t border-border/30">
+                      <span className="text-[13px] text-muted-foreground/80 font-normal">{note.date}</span>
+                    </div>
+                  </button>
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
       )}
 
