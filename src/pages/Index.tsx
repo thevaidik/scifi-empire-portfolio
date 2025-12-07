@@ -164,7 +164,7 @@ const Index = () => {
           </div>
 
           {/* Menu Bar */}
-          <div className="h-7 bg-gray-900/30 backdrop-blur-2xl flex items-center justify-between px-4 text-white text-[13px] font-medium border-b border-white/10">
+          <div className="h-7 bg-gray-900/30 backdrop-blur-2xl flex items-center justify-between px-4 text-white text-[13px] font-medium border-b border-white/10 relative z-20">
             <div className="flex items-center space-x-5">
               <span className="text-lg">🍎</span>
               <span className="font-semibold">{app?.name}</span>
@@ -220,9 +220,9 @@ const Index = () => {
 
           {/* Window */}
           <div className="p-6 pt-8">
-            <div className="bg-white/95 backdrop-blur-xl rounded-xl shadow-2xl border border-black/10 min-h-[calc(100vh-140px)] overflow-hidden">
+            <div className="bg-gray-900/95 backdrop-blur-xl rounded-xl shadow-2xl border border-white/10 min-h-[calc(100vh-140px)] overflow-hidden">
               {/* Window Header */}
-              <div className="flex items-center justify-between px-4 py-3 bg-gradient-to-b from-gray-50 to-gray-100/50 border-b border-gray-200/80">
+              <div className="flex items-center justify-between px-4 py-3 bg-gradient-to-b from-gray-800 to-gray-850 border-b border-white/10">
                 <div className="flex items-center space-x-2">
                   <button
                     onClick={handleBackToHome}
@@ -237,14 +237,14 @@ const Index = () => {
                     <span className="text-[8px] text-black/40 opacity-0 group-hover:opacity-100">⤢</span>
                   </button>
                 </div>
-                <h1 className="font-medium text-gray-700 text-[13px] tracking-tight absolute left-1/2 transform -translate-x-1/2">
+                <h1 className="font-medium text-white/90 text-[13px] tracking-tight absolute left-1/2 transform -translate-x-1/2">
                   {app?.name}
                 </h1>
                 <div className="w-16"></div>
               </div>
 
               {/* App Content */}
-              <div className="overflow-auto max-h-[calc(100vh-200px)]">
+              <div className="overflow-auto max-h-[calc(100vh-200px)] dark">
                 {app?.component}
               </div>
             </div>
@@ -274,7 +274,7 @@ const Index = () => {
         </div>
 
         {/* Menu Bar */}
-        <div className="h-7 bg-gray-900/30 backdrop-blur-2xl flex items-center justify-between px-4 text-white text-[13px] font-medium border-b border-white/10">
+        <div className="h-7 bg-gray-900/30 backdrop-blur-2xl flex items-center justify-between px-4 text-white text-[13px] font-medium border-b border-white/10 relative z-20">
           <div className="flex items-center space-x-5">
             <span className="text-lg">🍎</span>
             <span className="font-semibold">Finder</span>
