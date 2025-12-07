@@ -589,51 +589,42 @@ const Index = () => {
 };
 
 const DraggableNote = ({ note, onOpen }: { note: any; onOpen: (id: string) => void }) => {
-  const [hasDragged, setHasDragged] = useState(false);
   const { attributes, listeners, setNodeRef, transform, isDragging } = useDraggable({
     id: note.id,
   });
 
-  // Track when drag starts
-  const handlePointerDown = (e: React.PointerEvent) => {
-    setHasDragged(false);
-    listeners?.onPointerDown?.(e as any);
-  };
-
-  const handlePointerMove = (e: React.PointerEvent) => {
-    if (transform) {
-      setHasDragged(true);
-    }
-  };
-
-  const handleClick = () => {
-    if (!hasDragged && !isDragging) {
-      onOpen(note.id);
-    }
-  };
-
   const style = {
     transform: CSS.Translate.toString(transform),
     opacity: isDragging ? 0.5 : 1,
-    cursor: isDragging ? 'grabbing' : 'pointer',
   };
 
   return (
-    <div 
-      ref={setNodeRef} 
-      style={style} 
-      {...attributes} 
-      {...listeners}
-      onPointerDown={handlePointerDown}
-      onPointerMove={handlePointerMove}
-      onClick={handleClick}
-    >
+    <div ref={setNodeRef} style={style}>
       <div
-        className="bg-card rounded-xl shadow-[var(--note-shadow)] hover:shadow-[var(--note-shadow-hover)] transition-all duration-150 overflow-hidden text-left border border-border/40 hover:border-border/80 h-[240px] flex flex-col group w-full touch-none"
+        onClick={() => onOpen(note.id)}
+        className="bg-card rounded-xl shadow-[var(--note-shadow)] hover:shadow-[var(--note-shadow-hover)] transition-all duration-150 overflow-hidden text-left border border-border/40 hover:border-border/80 h-[240px] flex flex-col group w-full cursor-pointer relative"
       >
+        {/* Drag Handle */}
+        <div
+          {...attributes}
+          {...listeners}
+          onClick={(e) => e.stopPropagation()}
+          className="absolute top-2 right-2 p-1.5 rounded-md bg-secondary/50 hover:bg-secondary cursor-grab active:cursor-grabbing opacity-0 group-hover:opacity-100 transition-opacity z-10"
+          title="Drag to move"
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground">
+            <circle cx="9" cy="5" r="1.5" fill="currentColor" />
+            <circle cx="15" cy="5" r="1.5" fill="currentColor" />
+            <circle cx="9" cy="12" r="1.5" fill="currentColor" />
+            <circle cx="15" cy="12" r="1.5" fill="currentColor" />
+            <circle cx="9" cy="19" r="1.5" fill="currentColor" />
+            <circle cx="15" cy="19" r="1.5" fill="currentColor" />
+          </svg>
+        </div>
+        
         <div className="p-5 flex-1 flex flex-col min-h-0">
           <div className="flex items-start justify-between mb-2.5">
-            <h2 className="text-[17px] font-semibold text-foreground pr-2 line-clamp-2 leading-snug">{note.title}</h2>
+            <h2 className="text-[17px] font-semibold text-foreground pr-8 line-clamp-2 leading-snug">{note.title}</h2>
           </div>
           <p className="text-[15px] text-muted-foreground/90 line-clamp-5 flex-1 leading-relaxed">{note.preview}</p>
         </div>
