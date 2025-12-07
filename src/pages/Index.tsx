@@ -589,20 +589,46 @@ const Index = () => {
 };
 
 const DraggableNote = ({ note, onOpen }: { note: any; onOpen: (id: string) => void }) => {
+  const [hasDragged, setHasDragged] = useState(false);
   const { attributes, listeners, setNodeRef, transform, isDragging } = useDraggable({
     id: note.id,
   });
 
+  // Track when drag starts
+  const handlePointerDown = (e: React.PointerEvent) => {
+    setHasDragged(false);
+    listeners?.onPointerDown?.(e as any);
+  };
+
+  const handlePointerMove = (e: React.PointerEvent) => {
+    if (transform) {
+      setHasDragged(true);
+    }
+  };
+
+  const handleClick = () => {
+    if (!hasDragged && !isDragging) {
+      onOpen(note.id);
+    }
+  };
+
   const style = {
     transform: CSS.Translate.toString(transform),
     opacity: isDragging ? 0.5 : 1,
-    cursor: isDragging ? 'grabbing' : 'grab',
+    cursor: isDragging ? 'grabbing' : 'pointer',
   };
 
   return (
-    <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
-      <button
-        onClick={() => onOpen(note.id)}
+    <div 
+      ref={setNodeRef} 
+      style={style} 
+      {...attributes} 
+      {...listeners}
+      onPointerDown={handlePointerDown}
+      onPointerMove={handlePointerMove}
+      onClick={handleClick}
+    >
+      <div
         className="bg-card rounded-xl shadow-[var(--note-shadow)] hover:shadow-[var(--note-shadow-hover)] transition-all duration-150 overflow-hidden text-left border border-border/40 hover:border-border/80 h-[240px] flex flex-col group w-full touch-none"
       >
         <div className="p-5 flex-1 flex flex-col min-h-0">
@@ -614,7 +640,7 @@ const DraggableNote = ({ note, onOpen }: { note: any; onOpen: (id: string) => vo
         <div className="px-5 py-3 border-t border-border/30">
           <span className="text-[13px] text-muted-foreground/80 font-normal">{note.date}</span>
         </div>
-      </button>
+      </div>
     </div>
   );
 };
