@@ -16,6 +16,7 @@ const Index = () => {
   const [showWifiMenu, setShowWifiMenu] = useState(false);
   const [showBatteryMenu, setShowBatteryMenu] = useState(false);
   const [openNote, setOpenNote] = useState<string | null>(null);
+  const [activeId, setActiveId] = useState<string | null>(null);
 
   useEffect(() => {
     document.documentElement.style.scrollBehavior = "smooth";
@@ -380,10 +381,6 @@ const Index = () => {
     );
   };
 
-  if (isOSMode) {
-    return renderOSMode();
-  }
-
   const [notes, setNotes] = useState([
     {
       id: 'about',
@@ -461,8 +458,10 @@ const Index = () => {
       component: <Bento />
     }
   ]);
-  
-  const [activeId, setActiveId] = useState<string | null>(null);
+
+  if (isOSMode) {
+    return renderOSMode();
+  }
 
   const groupedNotes = notes.reduce((acc, note) => {
     if (!acc[note.dateGroup]) {
