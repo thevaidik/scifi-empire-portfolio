@@ -17,6 +17,21 @@ const Index = () => {
   const [showBatteryMenu, setShowBatteryMenu] = useState(false);
   const [openNote, setOpenNote] = useState<string | null>(null);
   const [activeId, setActiveId] = useState<string | null>(null);
+  const [notes, setNotes] = useState<{
+    id: string;
+    title: string;
+    preview: string;
+    dateGroup: string;
+    date: string;
+    componentId: string;
+  }[]>([
+    { id: 'about', title: 'THE VAIDIK PROJECT', preview: 'Apple Systems Developer and Maker - iOS, macOS dev, also playing with Rust...', dateGroup: 'Today', date: 'Nov 28', componentId: 'about' },
+    { id: 'connect', title: 'Connect', preview: 'Professional networks and communication channels', dateGroup: 'Yesterday', date: 'Nov 27', componentId: 'connect' },
+    { id: 'projects', title: 'Current Events & Projects', preview: 'Recent work and ongoing initiatives - nxtlap.com, Briefly RSS reader...', dateGroup: 'Previous 7 Days', date: 'Nov 26', componentId: 'projects' },
+    { id: 'interests', title: 'Technical Interests', preview: 'Areas of focus and exploration - iOS Development, Consciousness & Bicameral Mind...', dateGroup: 'Previous 7 Days', date: 'Nov 25', componentId: 'interests' },
+    { id: 'opensource', title: 'Open Source Activity', preview: 'Recent contributions to open-source projects', dateGroup: 'Previous 7 Days', date: 'Nov 24', componentId: 'opensource' },
+    { id: 'collaborate', title: "Let's Collaborate", preview: 'Building the future, one project at a time', dateGroup: 'Previous 7 Days', date: 'Nov 23', componentId: 'collaborate' }
+  ]);
 
   useEffect(() => {
     document.documentElement.style.scrollBehavior = "smooth";
@@ -381,83 +396,30 @@ const Index = () => {
     );
   };
 
-  const [notes, setNotes] = useState([
-    {
-      id: 'about',
-      title: 'THE VAIDIK PROJECT',
-      preview: 'Apple Systems Developer and Maker - iOS, macOS dev, also playing with Rust...',
-      dateGroup: 'Today',
-      date: 'Nov 28',
-      component: <Hero />
-    },
-    {
-      id: 'connect',
-      title: 'Connect',
-      preview: 'Professional networks and communication channels',
-      dateGroup: 'Yesterday',
-      date: 'Nov 27',
-      component: (
+  const getComponentById = (componentId: string) => {
+    switch (componentId) {
+      case 'about': return <Hero />;
+      case 'connect': return (
         <div className="p-8">
-          <h2 className="text-2xl font-semibold mb-3 text-foreground">
-            Connect
-          </h2>
-          <p className="text-muted-foreground text-sm mb-6">
-            Professional networks and communication channels
-          </p>
+          <h2 className="text-2xl font-semibold mb-3 text-foreground">Connect</h2>
+          <p className="text-muted-foreground text-sm mb-6">Professional networks and communication channels</p>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
             {links.map((link, index) => (
-              <a
-                key={index}
-                href={link.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-3 p-3 rounded-lg hover:bg-accent transition-colors"
-              >
-                <div className="text-primary">
-                  {link.icon}
-                </div>
-                <span className="text-sm font-medium text-foreground">
-                  {link.name}
-                </span>
+              <a key={index} href={link.url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-3 rounded-lg hover:bg-accent transition-colors">
+                <div className="text-primary">{link.icon}</div>
+                <span className="text-sm font-medium text-foreground">{link.name}</span>
               </a>
             ))}
           </div>
         </div>
-      )
-    },
-    {
-      id: 'projects',
-      title: 'Current Events & Projects',
-      preview: 'Recent work and ongoing initiatives - nxtlap.com, Briefly RSS reader...',
-      dateGroup: 'Previous 7 Days',
-      date: 'Nov 26',
-      component: <Projects />
-    },
-    {
-      id: 'interests',
-      title: 'Technical Interests',
-      preview: 'Areas of focus and exploration - iOS Development, Consciousness & Bicameral Mind...',
-      dateGroup: 'Previous 7 Days',
-      date: 'Nov 25',
-      component: <Interests />
-    },
-    {
-      id: 'opensource',
-      title: 'Open Source Activity',
-      preview: 'Recent contributions to open-source projects',
-      dateGroup: 'Previous 7 Days',
-      date: 'Nov 24',
-      component: <OpenSource />
-    },
-    {
-      id: 'collaborate',
-      title: "Let's Collaborate",
-      preview: 'Building the future, one project at a time',
-      dateGroup: 'Previous 7 Days',
-      date: 'Nov 23',
-      component: <Bento />
+      );
+      case 'projects': return <Projects />;
+      case 'interests': return <Interests />;
+      case 'opensource': return <OpenSource />;
+      case 'collaborate': return <Bento />;
+      default: return null;
     }
-  ]);
+  };
 
   if (isOSMode) {
     return renderOSMode();
@@ -579,7 +541,7 @@ const Index = () => {
       {openNote && (
         <div className="container mx-auto px-6 py-6 max-w-5xl">
           <div className="bg-card rounded-xl shadow-[var(--note-shadow)] p-8 border border-border/40 min-h-[calc(100vh-200px)]">
-            {currentNote?.component}
+            {currentNote && getComponentById(currentNote.componentId)}
           </div>
         </div>
       )}
