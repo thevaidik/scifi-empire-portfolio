@@ -26,9 +26,11 @@ const Index = () => {
   ];
 
   const opensource = [
-    { name: "SwiftUI Components", desc: "Reusable UI components for iOS" },
-    { name: "Rust CLI Tools", desc: "Command-line utilities" },
-    { name: "Open Source Contributions", desc: "Various community projects" },
+    { repo: "prav/prav-ios", title: "adding prav server and boarding", desc: "Enhanced server integration and improved onboarding experience", status: "MERGED" },
+    { repo: "prav/prav-ios", title: "autoDownloadSettings rewrite #1033", desc: "SwiftUI rewrite of autoDownloadSettings for improved user experience", status: "MERGED" },
+    { repo: "monal-im/Monal", title: "Monal Onboarding #1083", desc: "Adding initial onboarding flow to improve new user experience", status: "MERGED" },
+    { repo: "monal-im/Monal", title: "Rewrite privacy settings UI #993 #1021", desc: "Complete SwiftUI rewrite of privacy settings interface", status: "MERGED" },
+    { repo: "monal-im/Monal", title: "adding icons in privacy settings #1037", desc: "Enhanced privacy settings with intuitive icons for better UX", status: "MERGED" },
   ];
 
   return (
@@ -108,12 +110,21 @@ const Index = () => {
 
         {/* Open Source */}
         <section className="mb-16">
-          <h2 className="section-title">OPEN SOURCE</h2>
-          <div className="grid md:grid-cols-3 gap-4">
-            {opensource.map((item) => (
-              <div key={item.name} className="synthwave-card p-6">
-                <h3 className="text-synthwave-cyan font-bold mb-2">{item.name}</h3>
-                <p className="text-sm text-synthwave-text/70">{item.desc}</p>
+          <h2 className="section-title">OPEN SOURCE ACTIVITY</h2>
+          <p className="text-center text-synthwave-text/60 mb-8">Recent contributions to open-source projects</p>
+          <div className="space-y-4">
+            {opensource.map((item, index) => (
+              <div key={index} className="synthwave-card p-5">
+                <div className="flex items-start justify-between gap-4 flex-wrap">
+                  <div className="flex-1 min-w-0">
+                    <p className="text-synthwave-purple text-xs font-mono mb-1">{item.repo}</p>
+                    <h3 className="text-synthwave-cyan font-bold mb-2">{item.title}</h3>
+                    <p className="text-sm text-synthwave-text/70">{item.desc}</p>
+                  </div>
+                  <span className="px-3 py-1 text-xs font-bold rounded bg-green-500/20 text-green-400 border border-green-500/40 shrink-0">
+                    {item.status}
+                  </span>
+                </div>
               </div>
             ))}
           </div>
