@@ -18,5 +18,7 @@ export default defineConfig(({ mode }) => ({
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
+    // Prevent "invalid hook call" / dispatcher null errors by ensuring a single React instance
+    dedupe: ["react", "react-dom"],
   },
 }));
