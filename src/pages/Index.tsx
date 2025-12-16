@@ -1,613 +1,147 @@
-import { useEffect, useState } from "react";
-import Hero from "@/components/Hero";
-import Interests from "@/components/Interests";
-import Projects from "@/components/Projects";
-import OpenSource from "@/components/OpenSource";
-import Bento from "@/components/Bento";
-import HangingSign from "@/components/HangingSign";
-import { ChevronLeft, Github, Twitter, Youtube, Linkedin, Mail, BookOpen, Monitor, Newspaper, Code, Users, Heart, Info, Briefcase, Coffee } from "lucide-react";
-import { Switch } from "@/components/ui/switch";
-import { DndContext, DragEndEvent, DragOverlay, useDraggable, useDroppable } from "@dnd-kit/core";
-import { CSS } from "@dnd-kit/utilities";
+import { Github, Twitter, Youtube, Linkedin, Mail, BookOpen } from "lucide-react";
 
 const Index = () => {
-  const [isOSMode, setIsOSMode] = useState(false);
-  const [selectedApp, setSelectedApp] = useState<string | null>(null);
-  const [showWifiMenu, setShowWifiMenu] = useState(false);
-  const [showBatteryMenu, setShowBatteryMenu] = useState(false);
-  const [openNote, setOpenNote] = useState<string | null>(null);
-  const [activeId, setActiveId] = useState<string | null>(null);
-  const [notes, setNotes] = useState<{
-    id: string;
-    title: string;
-    preview: string;
-    dateGroup: string;
-    date: string;
-    componentId: string;
-  }[]>([
-    { id: 'about', title: 'THE VAIDIK PROJECT', preview: 'Apple Systems Developer and Maker - iOS, macOS dev, also playing with Rust...', dateGroup: 'Today', date: 'Nov 28', componentId: 'about' },
-    { id: 'connect', title: 'Connect', preview: 'Professional networks and communication channels', dateGroup: 'Yesterday', date: 'Nov 27', componentId: 'connect' },
-    { id: 'projects', title: 'Current Events & Projects', preview: 'Recent work and ongoing initiatives - nxtlap.com, Briefly RSS reader...', dateGroup: 'Previous 7 Days', date: 'Nov 26', componentId: 'projects' },
-    { id: 'interests', title: 'Technical Interests', preview: 'Areas of focus and exploration - iOS Development, Consciousness & Bicameral Mind...', dateGroup: 'Previous 7 Days', date: 'Nov 25', componentId: 'interests' },
-    { id: 'opensource', title: 'Open Source Activity', preview: 'Recent contributions to open-source projects', dateGroup: 'Previous 7 Days', date: 'Nov 24', componentId: 'opensource' },
-    { id: 'collaborate', title: "Let's Collaborate", preview: 'Building the future, one project at a time', dateGroup: 'Previous 7 Days', date: 'Nov 23', componentId: 'collaborate' }
-  ]);
-
-  useEffect(() => {
-    document.documentElement.style.scrollBehavior = "smooth";
-    return () => {
-      document.documentElement.style.scrollBehavior = "auto";
-    };
-  }, []);
-
   const links = [
-    {
-      name: "GitHub",
-      url: "https://github.com/thevaidik",
-      icon: <Github className="h-4 w-4" />
-    },
-    {
-      name: "Twitter",
-      url: "https://twitter.com/thevaidik_", 
-      icon: <Twitter className="h-4 w-4" />
-    },
-    {
-      name: "YouTube",
-      url: "https://www.youtube.com/@thevaidik_",
-      icon: <Youtube className="h-4 w-4" />
-    },
-    {
-      name: "LinkedIn",
-      url: "https://linkedin.com/in/vaidikxx",
-      icon: <Linkedin className="h-4 w-4" />
-    },
-    {
-      name: "Medium",
-      url: "https://medium.com/@thevaidik",
-      icon: <BookOpen className="h-4 w-4" />
-    },
-    {
-      name: "Email",
-      url: "mailto:vaidik50000@gmail.com",
-      icon: <Mail className="h-4 w-4" />
-    }
+    { name: "GitHub", url: "https://github.com/thevaidik", icon: <Github className="w-5 h-5" /> },
+    { name: "Twitter", url: "https://twitter.com/thevaidik_", icon: <Twitter className="w-5 h-5" /> },
+    { name: "YouTube", url: "https://www.youtube.com/@thevaidik_", icon: <Youtube className="w-5 h-5" /> },
+    { name: "LinkedIn", url: "https://linkedin.com/in/vaidikxx", icon: <Linkedin className="w-5 h-5" /> },
+    { name: "Medium", url: "https://medium.com/@thevaidik", icon: <BookOpen className="w-5 h-5" /> },
+    { name: "Email", url: "mailto:vaidik50000@gmail.com", icon: <Mail className="w-5 h-5" /> },
   ];
 
-  const apps = [
-    {
-      id: "about",
-      name: "About",
-      icon: <Info className="w-8 h-8" />,
-      color: "from-blue-400 to-blue-600",
-      component: <Hero />
-    },
-    {
-      id: "projects",
-      name: "Current Events",
-      icon: <Briefcase className="w-8 h-8" />,
-      color: "from-purple-400 to-purple-600",
-      component: <Projects />
-    },
-    {
-      id: "opensource",
-      name: "Open Source",
-      icon: <Code className="w-8 h-8" />,
-      color: "from-green-400 to-green-600",
-      component: <OpenSource />
-    },
-    {
-      id: "connect",
-      name: "Connect",
-      icon: <Users className="w-8 h-8" />,
-      color: "from-orange-400 to-orange-600",
-      component: (
-        <section className="py-16 vintage-neon-bg">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-12">
-              <h2 className="text-4xl font-headline font-bold text-primary mb-4 uppercase tracking-wide border-b-4 border-t-4 border-border py-4 inline-block px-8">
-                CONNECTIONS & CORRESPONDENCE
-              </h2>
-              <p className="text-secondary text-lg max-w-2xl mx-auto mt-8 font-serif italic">
-                Professional networks and communication channels for the modern era
-              </p>
-            </div>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 max-w-4xl mx-auto">
-              {links.map((link, index) => (
-                <div key={index} className="bg-card border-2 border-border p-4 text-center hover:bg-muted transition-all duration-300 group shadow-sm">
-                  <a
-                    href={link.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex flex-col items-center"
-                  >
-                    <div className="w-8 h-8 flex items-center justify-center mb-2 text-accent">
-                      {link.icon}
-                    </div>
-                  <h3 className="text-sm font-semibold text-primary uppercase tracking-wider">
-                    {link.name}
-                  </h3>
-                  </a>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-      )
-    },
-    {
-      id: "interests",
-      name: "Interests",
-      icon: <Heart className="w-8 h-8" />,
-      color: "from-pink-400 to-pink-600",
-      component: <Interests />
-    },
-    {
-      id: "more",
-      name: "More",
-      icon: <Coffee className="w-8 h-8" />,
-      color: "from-yellow-400 to-yellow-600",
-      component: <Bento />
-    }
+  const projects = [
+    { name: "nxtlap.com", desc: "Motorsport news aggregator", url: "https://nxtlap.com" },
+    { name: "Briefly", desc: "Minimalist RSS reader for iOS", url: "#" },
+    { name: "Vaidik.life", desc: "Personal portfolio (this site)", url: "#" },
   ];
 
-  const handleAppClick = (appId: string) => {
-    setSelectedApp(selectedApp === appId ? null : appId);
-  };
+  const interests = [
+    "iOS Development",
+    "macOS Development", 
+    "Rust Programming",
+    "Consciousness & Bicameral Mind",
+    "Space Exploration",
+    "Aviation & Drones",
+  ];
 
-  const handleBackToHome = () => {
-    setSelectedApp(null);
-  };
+  const opensource = [
+    { name: "SwiftUI Components", desc: "Reusable UI components for iOS" },
+    { name: "Rust CLI Tools", desc: "Command-line utilities" },
+    { name: "Open Source Contributions", desc: "Various community projects" },
+  ];
 
-  const renderOSMode = () => {
-    if (selectedApp) {
-      const app = apps.find(a => a.id === selectedApp);
-      return (
-        <div className="min-h-screen relative" style={{ 
-          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-          fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", system-ui, sans-serif'
-        }}>
-          {/* Mode Switcher - Always visible */}
-          <div className="fixed top-6 left-6 z-50 bg-gray-900/80 backdrop-blur-xl rounded-xl px-4 py-2.5 border border-white/20 shadow-2xl">
-            <div className="flex items-center space-x-3">
-              <Newspaper className="w-4 h-4 text-gray-300" />
-              <Switch
-                checked={isOSMode}
-                onCheckedChange={setIsOSMode}
-              />
-              <Monitor className="w-4 h-4 text-blue-400" />
-            </div>
-          </div>
+  return (
+    <div className="min-h-screen bg-synthwave-dark text-synthwave-text">
+      {/* Grid Background */}
+      <div className="fixed inset-0 synthwave-grid opacity-20 pointer-events-none" />
+      
+      {/* Sun Gradient */}
+      <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] rounded-t-full bg-gradient-to-t from-synthwave-pink via-synthwave-orange to-transparent opacity-30 blur-3xl pointer-events-none" />
 
-          {/* Menu Bar */}
-          <div className="h-7 bg-gray-900/30 backdrop-blur-2xl flex items-center justify-between px-4 text-white text-[13px] font-medium border-b border-white/10 relative z-20">
-            <div className="flex items-center space-x-5">
-              <span className="text-lg">🍎</span>
-              <span className="font-semibold">{app?.name}</span>
-              <span className="text-white/70 hover:text-white cursor-pointer transition">File</span>
-              <span className="text-white/70 hover:text-white cursor-pointer transition">Edit</span>
-              <span className="text-white/70 hover:text-white cursor-pointer transition">View</span>
-              <span className="text-white/70 hover:text-white cursor-pointer transition">Window</span>
-              <span className="text-white/70 hover:text-white cursor-pointer transition">Help</span>
-            </div>
-            <div className="flex items-center space-x-4 text-white/90">
-              <div className="relative">
-                <button 
-                  onClick={() => setShowBatteryMenu(!showBatteryMenu)}
-                  className="text-sm hover:bg-white/10 px-2 py-1 rounded transition"
-                >
-                  🔋
-                </button>
-                {showBatteryMenu && (
-                  <div className="absolute right-0 top-8 bg-gray-800/95 backdrop-blur-xl rounded-lg p-4 shadow-2xl border border-white/10 w-64 text-sm">
-                    <div className="text-white/90 mb-2">Battery</div>
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-white/70">Power Source:</span>
-                      <span className="text-white">Power Adapter</span>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-white/70">Charge:</span>
-                      <span className="text-white">100%</span>
-                    </div>
-                  </div>
-                )}
-              </div>
-              <div className="relative">
-                <button 
-                  onClick={() => setShowWifiMenu(!showWifiMenu)}
-                  className="text-sm hover:bg-white/10 px-2 py-1 rounded transition"
-                >
-                  📶
-                </button>
-                {showWifiMenu && (
-                  <div className="absolute right-0 top-8 bg-gray-800/95 backdrop-blur-xl rounded-lg p-4 shadow-2xl border border-white/10 w-64 text-sm">
-                    <div className="text-white/90 mb-3">Wi-Fi</div>
-                    <div className="flex items-center space-x-2 bg-blue-500/20 p-2 rounded mb-2">
-                      <span className="text-blue-400">✓</span>
-                      <span className="text-white">Mars WiFi</span>
-                    </div>
-                    <div className="text-white/50 text-xs mt-2">Other Networks...</div>
-                  </div>
-                )}
-              </div>
-              <span className="text-xs">Thu 9:41 AM</span>
-            </div>
-          </div>
-
-          {/* Window */}
-          <div className="p-6 pt-8">
-            <div className="bg-gray-900/95 backdrop-blur-xl rounded-xl shadow-2xl border border-white/10 min-h-[calc(100vh-140px)] overflow-hidden">
-              {/* Window Header */}
-              <div className="flex items-center justify-between px-4 py-3 bg-gradient-to-b from-gray-800 to-gray-850 border-b border-white/10">
-                <div className="flex items-center space-x-2">
-                  <button
-                    onClick={handleBackToHome}
-                    className="w-3 h-3 bg-[#ff5f57] rounded-full hover:bg-[#ff4b42] transition-colors shadow-sm flex items-center justify-center group"
-                  >
-                    <span className="text-[8px] text-black/40 opacity-0 group-hover:opacity-100">×</span>
-                  </button>
-                  <button className="w-3 h-3 bg-[#ffbd2e] rounded-full hover:bg-[#ffaa00] transition-colors shadow-sm flex items-center justify-center group">
-                    <span className="text-[8px] text-black/40 opacity-0 group-hover:opacity-100">−</span>
-                  </button>
-                  <button className="w-3 h-3 bg-[#28c840] rounded-full hover:bg-[#1fb832] transition-colors shadow-sm flex items-center justify-center group">
-                    <span className="text-[8px] text-black/40 opacity-0 group-hover:opacity-100">⤢</span>
-                  </button>
-                </div>
-                <h1 className="font-medium text-white/90 text-[13px] tracking-tight absolute left-1/2 transform -translate-x-1/2">
-                  {app?.name}
-                </h1>
-                <div className="w-16"></div>
-              </div>
-
-              {/* App Content */}
-              <div className="overflow-auto max-h-[calc(100vh-200px)] dark">
-                {app?.component}
-              </div>
-            </div>
-          </div>
-        </div>
-      );
-    }
-
-    return (
-      <div className="min-h-screen relative" style={{ 
-        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-        backgroundSize: 'cover',
-        backgroundAttachment: 'fixed',
-        fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", system-ui, sans-serif'
-      }}>
+      <div className="relative z-10 container mx-auto px-6 py-12 max-w-4xl">
         
-        {/* Mode Switcher - Always visible */}
-        <div className="fixed top-6 left-6 z-50 bg-gray-900/80 backdrop-blur-xl rounded-xl px-4 py-2.5 border border-white/20 shadow-2xl">
-          <div className="flex items-center space-x-3">
-            <Newspaper className="w-4 h-4 text-gray-300" />
-            <Switch
-              checked={isOSMode}
-              onCheckedChange={setIsOSMode}
-            />
-            <Monitor className="w-4 h-4 text-blue-400" />
-          </div>
-        </div>
+        {/* Hero */}
+        <header className="text-center mb-16 animate-fade-in">
+          <h1 className="text-6xl md:text-8xl font-bold mb-4 synthwave-glow">
+            VAIDIK
+          </h1>
+          <p className="text-xl md:text-2xl text-synthwave-cyan font-mono">
+            Apple Systems Developer & Maker
+          </p>
+          <p className="text-synthwave-text/70 mt-4 max-w-xl mx-auto">
+            iOS, macOS, visionOS developer. Building products, exploring Rust, 
+            and diving into consciousness research.
+          </p>
+        </header>
 
-        {/* Menu Bar */}
-        <div className="h-7 bg-gray-900/30 backdrop-blur-2xl flex items-center justify-between px-4 text-white text-[13px] font-medium border-b border-white/10 relative z-20">
-          <div className="flex items-center space-x-5">
-            <span className="text-lg">🍎</span>
-            <span className="font-semibold">Finder</span>
-            <span className="text-white/70 hover:text-white cursor-pointer transition">File</span>
-            <span className="text-white/70 hover:text-white cursor-pointer transition">Edit</span>
-            <span className="text-white/70 hover:text-white cursor-pointer transition">View</span>
-            <span className="text-white/70 hover:text-white cursor-pointer transition">Go</span>
-            <span className="text-white/70 hover:text-white cursor-pointer transition">Window</span>
-            <span className="text-white/70 hover:text-white cursor-pointer transition">Help</span>
-          </div>
-          <div className="flex items-center space-x-4 text-white/90">
-            <div className="relative">
-              <button 
-                onClick={() => setShowBatteryMenu(!showBatteryMenu)}
-                className="text-sm hover:bg-white/10 px-2 py-1 rounded transition"
+        {/* Connect */}
+        <section className="mb-16">
+          <h2 className="section-title">CONNECT</h2>
+          <div className="flex flex-wrap justify-center gap-4">
+            {links.map((link) => (
+              <a
+                key={link.name}
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="synthwave-card px-6 py-3 flex items-center gap-3 hover:scale-105 transition-transform"
               >
-                🔋
-              </button>
-              {showBatteryMenu && (
-                <div className="absolute right-0 top-8 bg-gray-800/95 backdrop-blur-xl rounded-lg p-4 shadow-2xl border border-white/10 w-64 text-sm">
-                  <div className="text-white/90 mb-2">Battery</div>
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-white/70">Power Source:</span>
-                    <span className="text-white">Power Adapter</span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-white/70">Charge:</span>
-                    <span className="text-white">100%</span>
-                  </div>
-                </div>
-              )}
-            </div>
-            <div className="relative">
-              <button 
-                onClick={() => setShowWifiMenu(!showWifiMenu)}
-                className="text-sm hover:bg-white/10 px-2 py-1 rounded transition"
-              >
-                📶
-              </button>
-              {showWifiMenu && (
-                <div className="absolute right-0 top-8 bg-gray-800/95 backdrop-blur-xl rounded-lg p-4 shadow-2xl border border-white/10 w-64 text-sm">
-                  <div className="text-white/90 mb-3">Wi-Fi</div>
-                  <div className="flex items-center space-x-2 bg-blue-500/20 p-2 rounded mb-2">
-                    <span className="text-blue-400">✓</span>
-                    <span className="text-white">Mars WiFi</span>
-                  </div>
-                  <div className="text-white/50 text-xs mt-2">Other Networks...</div>
-                </div>
-              )}
-            </div>
-            <span className="text-xs">Thu 9:41 AM</span>
-          </div>
-        </div>
-
-        {/* Desktop */}
-        <div className="flex-1 p-12 pt-20">
-          <div className="text-center mb-8">
-            <h1 className="text-5xl font-semibold text-white mb-3 drop-shadow-lg" style={{
-              textShadow: '0 2px 10px rgba(0,0,0,0.3)'
-            }}>
-              THE VAIDIK POST
-            </h1>
-            <p className="text-white/90 text-xl drop-shadow-md">macOS Developer Workspace</p>
-          </div>
-        </div>
-
-        {/* Dock */}
-        <div className="fixed bottom-2 left-1/2 transform -translate-x-1/2">
-          <div className="bg-white/10 backdrop-blur-2xl rounded-[22px] px-3 py-2 border border-white/20 shadow-2xl" style={{
-            boxShadow: '0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.2)'
-          }}>
-            <div className="flex space-x-2">
-              {apps.map((app) => (
-                <button
-                  key={app.id}
-                  onClick={() => handleAppClick(app.id)}
-                  className="group relative"
-                >
-                  <div className={`w-[60px] h-[60px] rounded-[14px] bg-gradient-to-br ${app.color} flex items-center justify-center shadow-lg transition-all duration-200 ease-out group-hover:-translate-y-2 group-hover:scale-110 group-active:scale-95`}
-                       style={{
-                         boxShadow: '0 4px 12px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.3)'
-                       }}>
-                    <div className="text-white drop-shadow-lg">
-                      {app.icon}
-                    </div>
-                  </div>
-                  
-                  {/* Active indicator */}
-                  <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-white/70 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                  
-                  {/* Tooltip */}
-                  <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 bg-gray-800/95 backdrop-blur-sm text-white text-xs px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-all whitespace-nowrap pointer-events-none"
-                       style={{
-                         boxShadow: '0 4px 12px rgba(0,0,0,0.4)'
-                       }}>
-                    {app.name}
-                  </div>
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  };
-
-  const getComponentById = (componentId: string) => {
-    switch (componentId) {
-      case 'about': return <Hero />;
-      case 'connect': return (
-        <div className="p-8">
-          <h2 className="text-2xl font-semibold mb-3 text-foreground">Connect</h2>
-          <p className="text-muted-foreground text-sm mb-6">Professional networks and communication channels</p>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-            {links.map((link, index) => (
-              <a key={index} href={link.url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-3 rounded-lg hover:bg-accent transition-colors">
-                <div className="text-primary">{link.icon}</div>
-                <span className="text-sm font-medium text-foreground">{link.name}</span>
+                <span className="text-synthwave-cyan">{link.icon}</span>
+                <span>{link.name}</span>
               </a>
             ))}
           </div>
-        </div>
-      );
-      case 'projects': return <Projects />;
-      case 'interests': return <Interests />;
-      case 'opensource': return <OpenSource />;
-      case 'collaborate': return <Bento />;
-      default: return null;
-    }
-  };
+        </section>
 
-  if (isOSMode) {
-    return renderOSMode();
-  }
-
-  const groupedNotes = notes.reduce((acc, note) => {
-    if (!acc[note.dateGroup]) {
-      acc[note.dateGroup] = [];
-    }
-    acc[note.dateGroup].push(note);
-    return acc;
-  }, {} as Record<string, typeof notes>);
-
-  const currentNote = notes.find(n => n.id === openNote);
-  
-  const handleDragStart = (event: DragEndEvent) => {
-    setActiveId(event.active.id as string);
-  };
-  
-  const handleDragEnd = (event: DragEndEvent) => {
-    const { active, over } = event;
-    
-    if (over && active.id !== over.id) {
-      const noteId = active.id as string;
-      const newDateGroup = over.id as string;
-      
-      setNotes(prevNotes =>
-        prevNotes.map(note =>
-          note.id === noteId ? { ...note, dateGroup: newDateGroup } : note
-        )
-      );
-    }
-    
-    setActiveId(null);
-  };
-  
-  const handleDragCancel = () => {
-    setActiveId(null);
-  };
-
-  return (
-    <div className="min-h-screen notes-bg">
-      {/* Mode Switcher */}
-      <div className="fixed top-4 right-4 z-50 bg-card border border-border rounded-lg px-3 py-2 shadow-lg">
-        <div className="flex items-center gap-3">
-          <Newspaper className="w-4 h-4 text-muted-foreground" />
-          <Switch
-            checked={isOSMode}
-            onCheckedChange={setIsOSMode}
-          />
-          <Monitor className="w-4 h-4 text-primary" />
-        </div>
-      </div>
-
-      {/* Notes Header */}
-      <div className="bg-background border-b border-border/50 sticky top-0 z-40 backdrop-blur-xl bg-background/80">
-        <div className="container mx-auto px-6 py-4 max-w-7xl">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              {openNote && (
-                <button
-                  onClick={() => setOpenNote(null)}
-                  className="text-primary hover:text-primary/90 transition-colors -ml-2 p-1 rounded-lg hover:bg-secondary/50"
-                >
-                  <ChevronLeft className="w-7 h-7" />
-                </button>
-              )}
-              <h1 className="text-[28px] font-semibold text-primary tracking-tight">Notes</h1>
-            </div>
-            <div className="text-[15px] text-muted-foreground font-medium">
-              {notes.length} notes
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Notes Gallery Grid */}
-      {!openNote && (
-        <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd} onDragCancel={handleDragCancel}>
-          <div className="container mx-auto px-6 py-6 max-w-7xl">
-            {Object.entries(groupedNotes).map(([dateGroup, groupNotes]) => (
-              <DroppableSection key={dateGroup} id={dateGroup}>
-                <h3 className="text-[13px] font-semibold text-muted-foreground uppercase tracking-wider mb-3 px-1">
-                  {dateGroup}
-                </h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-                  {groupNotes.map((note) => (
-                    <DraggableNote key={note.id} note={note} onOpen={setOpenNote} />
-                  ))}
-                </div>
-              </DroppableSection>
+        {/* Projects */}
+        <section className="mb-16">
+          <h2 className="section-title">PROJECTS</h2>
+          <div className="grid md:grid-cols-3 gap-4">
+            {projects.map((project) => (
+              <a
+                key={project.name}
+                href={project.url}
+                className="synthwave-card p-6 hover:scale-105 transition-transform block"
+              >
+                <h3 className="text-synthwave-pink font-bold text-lg mb-2">{project.name}</h3>
+                <p className="text-sm text-synthwave-text/70">{project.desc}</p>
+              </a>
             ))}
           </div>
-          <DragOverlay>
-            {activeId ? (
-              <div className="bg-card rounded-xl shadow-2xl border border-border/60 h-[240px] flex flex-col opacity-90 rotate-3">
-                <div className="p-5 flex-1 flex flex-col min-h-0">
-                  <div className="flex items-start justify-between mb-2.5">
-                    <h2 className="text-[17px] font-semibold text-foreground pr-2 line-clamp-2 leading-snug">
-                      {notes.find(n => n.id === activeId)?.title}
-                    </h2>
-                  </div>
-                  <p className="text-[15px] text-muted-foreground/90 line-clamp-5 flex-1 leading-relaxed">
-                    {notes.find(n => n.id === activeId)?.preview}
-                  </p>
-                </div>
-                <div className="px-5 py-3 border-t border-border/30">
-                  <span className="text-[13px] text-muted-foreground/80 font-normal">
-                    {notes.find(n => n.id === activeId)?.date}
-                  </span>
-                </div>
+        </section>
+
+        {/* Interests */}
+        <section className="mb-16">
+          <h2 className="section-title">INTERESTS</h2>
+          <div className="flex flex-wrap justify-center gap-3">
+            {interests.map((interest) => (
+              <span
+                key={interest}
+                className="synthwave-tag"
+              >
+                {interest}
+              </span>
+            ))}
+          </div>
+        </section>
+
+        {/* Open Source */}
+        <section className="mb-16">
+          <h2 className="section-title">OPEN SOURCE</h2>
+          <div className="grid md:grid-cols-3 gap-4">
+            {opensource.map((item) => (
+              <div key={item.name} className="synthwave-card p-6">
+                <h3 className="text-synthwave-cyan font-bold mb-2">{item.name}</h3>
+                <p className="text-sm text-synthwave-text/70">{item.desc}</p>
               </div>
-            ) : null}
-          </DragOverlay>
-        </DndContext>
-      )}
-
-      {/* Full Note View */}
-      {openNote && (
-        <div className="container mx-auto px-6 py-6 max-w-5xl">
-          <div className="bg-card rounded-xl shadow-[var(--note-shadow)] p-8 border border-border/40 min-h-[calc(100vh-200px)]">
-            {currentNote && getComponentById(currentNote.componentId)}
+            ))}
           </div>
-        </div>
-      )}
-    </div>
-  );
-};
+        </section>
 
-const DraggableNote = ({ note, onOpen }: { note: any; onOpen: (id: string) => void }) => {
-  const { attributes, listeners, setNodeRef, transform, isDragging } = useDraggable({
-    id: note.id,
-  });
-
-  const style = {
-    transform: CSS.Translate.toString(transform),
-    opacity: isDragging ? 0.5 : 1,
-  };
-
-  return (
-    <div ref={setNodeRef} style={style}>
-      <div
-        onClick={() => onOpen(note.id)}
-        className="bg-card rounded-xl shadow-[var(--note-shadow)] hover:shadow-[var(--note-shadow-hover)] transition-all duration-150 overflow-hidden text-left border border-border/40 hover:border-border/80 h-[240px] flex flex-col group w-full cursor-pointer relative"
-      >
-        {/* Drag Handle */}
-        <div
-          {...attributes}
-          {...listeners}
-          onClick={(e) => e.stopPropagation()}
-          className="absolute top-2 right-2 p-1.5 rounded-md bg-secondary/50 hover:bg-secondary cursor-grab active:cursor-grabbing opacity-0 group-hover:opacity-100 transition-opacity z-10"
-          title="Drag to move"
-        >
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground">
-            <circle cx="9" cy="5" r="1.5" fill="currentColor" />
-            <circle cx="15" cy="5" r="1.5" fill="currentColor" />
-            <circle cx="9" cy="12" r="1.5" fill="currentColor" />
-            <circle cx="15" cy="12" r="1.5" fill="currentColor" />
-            <circle cx="9" cy="19" r="1.5" fill="currentColor" />
-            <circle cx="15" cy="19" r="1.5" fill="currentColor" />
-          </svg>
-        </div>
-        
-        <div className="p-5 flex-1 flex flex-col min-h-0">
-          <div className="flex items-start justify-between mb-2.5">
-            <h2 className="text-[17px] font-semibold text-foreground pr-8 line-clamp-2 leading-snug">{note.title}</h2>
+        {/* Collaborate */}
+        <section className="mb-16 text-center">
+          <h2 className="section-title">LET'S COLLABORATE</h2>
+          <div className="synthwave-card p-8 max-w-2xl mx-auto">
+            <p className="text-lg mb-6 text-synthwave-text/80">
+              Building the future, one project at a time. 
+              Open to collaboration on iOS/macOS projects, Rust development, 
+              and innovative ideas.
+            </p>
+            <a
+              href="mailto:vaidik50000@gmail.com"
+              className="inline-block px-8 py-3 bg-gradient-to-r from-synthwave-pink to-synthwave-purple text-white font-bold rounded-lg hover:scale-105 transition-transform synthwave-button-glow"
+            >
+              Get In Touch
+            </a>
           </div>
-          <p className="text-[15px] text-muted-foreground/90 line-clamp-5 flex-1 leading-relaxed">{note.preview}</p>
-        </div>
-        <div className="px-5 py-3 border-t border-border/30">
-          <span className="text-[13px] text-muted-foreground/80 font-normal">{note.date}</span>
-        </div>
+        </section>
+
+        {/* Footer */}
+        <footer className="text-center text-synthwave-text/50 text-sm py-8 border-t border-synthwave-purple/30">
+          <p>© 2024 Vaidik. Built with passion.</p>
+        </footer>
       </div>
-    </div>
-  );
-};
-
-const DroppableSection = ({ id, children }: { id: string; children: React.ReactNode }) => {
-  const { setNodeRef, isOver } = useDroppable({
-    id: id,
-  });
-
-  return (
-    <div 
-      ref={setNodeRef} 
-      className={`mb-8 transition-colors rounded-lg ${isOver ? 'bg-accent/20 p-4' : ''}`}
-    >
-      {children}
     </div>
   );
 };

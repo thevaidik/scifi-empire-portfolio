@@ -4,36 +4,35 @@
 
 @layer base {
   :root {
-    /* Apple Notes Dark Mode */
-    --background: 0 0% 11%;
-    --foreground: 0 0% 98%;
-    --card: 0 0% 17%;
-    --card-foreground: 0 0% 98%;
-    --popover: 0 0% 17%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 48 96% 53%;
-    --primary-foreground: 0 0% 11%;
-    --secondary: 0 0% 21%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 21%;
-    --muted-foreground: 0 0% 60%;
-    --accent: 48 96% 53%;
-    --accent-foreground: 0 0% 11%;
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 24%;
-    --input: 0 0% 17%;
-    --ring: 48 96% 53%;
-    --chart-1: 48 96% 53%;
-    --chart-2: 45 93% 47%;
-    --chart-3: 25 95% 53%;
-    --chart-4: 40 96% 51%;
-    --chart-5: 30 97% 48%;
-    --radius: 0.75rem;
+    /* Synthwave Colors */
+    --synthwave-dark: 260 20% 8%;
+    --synthwave-purple: 280 80% 50%;
+    --synthwave-pink: 330 90% 60%;
+    --synthwave-cyan: 180 100% 50%;
+    --synthwave-orange: 30 100% 60%;
+    --synthwave-text: 260 10% 90%;
     
-    /* Apple Notes shadows for dark mode */
-    --note-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
-    --note-shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.5);
+    /* Shadcn compatibility */
+    --background: 260 20% 8%;
+    --foreground: 260 10% 90%;
+    --primary: 180 100% 50%;
+    --primary-foreground: 260 20% 8%;
+    --secondary: 280 80% 50%;
+    --secondary-foreground: 260 10% 90%;
+    --muted: 260 15% 15%;
+    --muted-foreground: 260 10% 60%;
+    --accent: 330 90% 60%;
+    --accent-foreground: 260 10% 90%;
+    --border: 280 50% 30%;
+    --ring: 180 100% 50%;
+    --radius: 0.5rem;
+    --card: 260 20% 12%;
+    --card-foreground: 260 10% 90%;
+    --popover: 260 20% 12%;
+    --popover-foreground: 260 10% 90%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 260 10% 90%;
+    --input: 260 15% 15%;
   }
 }
 
@@ -42,202 +41,106 @@
     @apply border-border;
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
-    background: hsl(var(--background));
-    color: hsl(var(--foreground));
-    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Helvetica Neue', sans-serif;
-    line-height: 1.5;
-    min-height: 100vh;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    @apply antialiased;
+    background: hsl(var(--synthwave-dark));
+    color: hsl(var(--synthwave-text));
+    font-family: 'Orbitron', 'JetBrains Mono', monospace;
+  }
+}
+
+@layer components {
+  /* Synthwave Grid Background */
+  .synthwave-grid {
+    background-image: 
+      linear-gradient(hsl(var(--synthwave-purple) / 0.3) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--synthwave-purple) / 0.3) 1px, transparent 1px);
+    background-size: 60px 60px;
+    background-position: center;
   }
 
-  /* Apple Notes Background */
-  .notes-bg {
-    background: hsl(var(--background));
-    position: relative;
+  /* Neon Glow Text */
+  .synthwave-glow {
+    background: linear-gradient(135deg, hsl(var(--synthwave-cyan)), hsl(var(--synthwave-pink)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 0 20px hsl(var(--synthwave-cyan) / 0.5))
+            drop-shadow(0 0 40px hsl(var(--synthwave-pink) / 0.3));
   }
 
-  /* Apple Notes typography */
-  h1, h2, h3, h4, h5, h6 {
-    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif;
-    font-weight: 600;
-    line-height: 1.3;
-    letter-spacing: -0.02em;
+  /* Card Style */
+  .synthwave-card {
+    @apply rounded-lg;
+    background: linear-gradient(135deg, hsl(var(--synthwave-dark)) 0%, hsl(260 20% 12%) 100%);
+    border: 1px solid hsl(var(--synthwave-purple) / 0.4);
+    box-shadow: 
+      0 0 20px hsl(var(--synthwave-purple) / 0.1),
+      inset 0 1px 0 hsl(var(--synthwave-purple) / 0.2);
+    transition: all 0.3s ease;
   }
 
-  /* Blueprint utility classes - clean lines */
-  .retro-glow {
-    box-shadow: var(--blueprint-shadow);
+  .synthwave-card:hover {
+    border-color: hsl(var(--synthwave-cyan) / 0.6);
+    box-shadow: 
+      0 0 30px hsl(var(--synthwave-cyan) / 0.2),
+      0 0 60px hsl(var(--synthwave-pink) / 0.1);
   }
 
-  .text-glow {
-    text-shadow: none;
+  /* Tags */
+  .synthwave-tag {
+    @apply px-4 py-2 rounded-full text-sm;
+    background: hsl(var(--synthwave-purple) / 0.2);
+    border: 1px solid hsl(var(--synthwave-purple) / 0.5);
+    color: hsl(var(--synthwave-cyan));
+    transition: all 0.3s ease;
   }
 
-  .neon-border {
-    border: 1px solid hsl(var(--border));
-    box-shadow: var(--tech-shadow);
+  .synthwave-tag:hover {
+    background: hsl(var(--synthwave-purple) / 0.4);
+    box-shadow: 0 0 15px hsl(var(--synthwave-cyan) / 0.3);
   }
 
-  .neon-border-secondary {
-    border-top: 1px solid hsl(var(--border));
-    border-bottom: 1px solid hsl(var(--border));
-    box-shadow: none;
+  /* Section Titles */
+  .section-title {
+    @apply text-2xl font-bold text-center mb-8 tracking-widest;
+    color: hsl(var(--synthwave-pink));
+    text-shadow: 0 0 10px hsl(var(--synthwave-pink) / 0.5);
   }
 
-  .subtle-border {
-    border: 1px solid hsl(var(--border));
-    box-shadow: none;
+  /* Button Glow */
+  .synthwave-button-glow {
+    box-shadow: 
+      0 0 20px hsl(var(--synthwave-pink) / 0.4),
+      0 0 40px hsl(var(--synthwave-purple) / 0.2);
+    transition: all 0.3s ease;
   }
 
-  /* Blueprint animations */
-  @keyframes flicker {
-    0%, 100% {
+  .synthwave-button-glow:hover {
+    box-shadow: 
+      0 0 30px hsl(var(--synthwave-pink) / 0.6),
+      0 0 60px hsl(var(--synthwave-purple) / 0.4);
+  }
+}
+
+@layer utilities {
+  /* Fade In Animation */
+  .animate-fade-in {
+    animation: fadeIn 0.8s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
       opacity: 1;
-    }
-    50% {
-      opacity: 0.95;
-    }
-  }
-
-  @keyframes glow-pulse {
-    0%, 100% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0.85;
-    }
-  }
-
-  @keyframes float-horizontal {
-    0%, 100% {
-      transform: translateX(-50%) translateY(-50%) rotate(-5deg);
-    }
-    50% {
-      transform: translateX(-50%) translateY(-50%) rotate(5deg);
-    }
-  }
-
-  @keyframes float-horizontal-reverse {
-    0%, 100% {
-      transform: translateX(50%) translateY(-50%) rotate(5deg);
-    }
-    50% {
-      transform: translateX(50%) translateY(-50%) rotate(-5deg);
-    }
-  }
-
-  @keyframes subtle-pulse {
-    0%, 100% {
-      transform: scale(1);
-    }
-    50% {
-      transform: scale(1.02);
-    }
-  }
-
-  @keyframes scan-lines {
-    0% {
       transform: translateY(0);
     }
-    100% {
-      transform: translateY(4px);
-    }
-  }
-
-  @keyframes hologram-flicker {
-    0%, 100% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0.92;
-    }
-  }
-
-  .flicker-animation {
-    animation: flicker 3s ease-in-out infinite;
-  }
-
-  .glow-pulse {
-    animation: glow-pulse 3s ease-in-out infinite;
-  }
-
-  .subtle-pulse {
-    animation: subtle-pulse 4s ease-in-out infinite;
-  }
-
-  .elegant-hover {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .elegant-hover:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--blueprint-shadow);
-  }
-
-  /* Technical grid overlay */
-  .scanlines::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: 
-      linear-gradient(0deg, var(--grid-line) 1px, transparent 1px),
-      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
-    background-size: 20px 20px;
-    pointer-events: none;
-    z-index: 1;
-    opacity: 0.3;
-  }
-
-  /* Simple hover effects */
-  .hover-underline:hover {
-    text-decoration: underline;
-  }
-
-  /* Status indicators */
-  .status-merged {
-    color: hsl(var(--accent));
-    font-weight: 600;
-  }
-
-  /* Text truncation utilities */
-  .line-clamp-1 {
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-
-  .line-clamp-2 {
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-
-  /* Clean table styling */
-  .newspaper-table {
-    border-collapse: collapse;
-    width: 100%;
-  }
-
-  .newspaper-table th,
-  .newspaper-table td {
-    border: 1px solid hsl(var(--border));
-    padding: 12px;
-    text-align: left;
-  }
-
-  .newspaper-table th {
-    background-color: hsl(var(--muted));
-    font-weight: bold;
-  }
-
-  .newspaper-table tr:hover {
-    background-color: hsl(var(--muted) / 0.5);
   }
 }
