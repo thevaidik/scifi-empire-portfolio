@@ -1,4 +1,5 @@
 import { Github, Twitter, Youtube, Linkedin, Mail, BookOpen, Feather } from "lucide-react";
+import davinciHelicopter from "@/assets/davinci-helicopter.png";
 
 const Index = () => {
   const links = [
@@ -95,6 +96,21 @@ const Index = () => {
               </a>
             ))}
           </div>
+        </section>
+
+        {/* Da Vinci Blueprint */}
+        <section className="mb-20">
+          <h2 className="section-title">INVENTIONS</h2>
+          <div className="blueprint-container p-4 rounded-sm max-w-2xl mx-auto">
+            <img 
+              src={davinciHelicopter} 
+              alt="Leonardo da Vinci's Aerial Screw - Flying Machine Blueprint" 
+              className="w-full"
+            />
+          </div>
+          <p className="text-center text-davinci-sketch/70 italic mt-4 font-body text-sm">
+            "Learning never exhausts the mind." — Leonardo da Vinci
+          </p>
         </section>
 
         {/* Interests */}
