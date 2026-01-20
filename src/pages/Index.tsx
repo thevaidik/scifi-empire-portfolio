@@ -36,9 +36,14 @@ const Index = () => {
 
   return (
     <div className="min-h-screen parchment-bg text-davinci-ink">
+      {/* Tribute to Da Vinci */}
+      <div className="fixed top-3 left-1/2 -translate-x-1/2 text-davinci-sketch/50 text-xs font-body italic tracking-wide">
+        Design inspired by Leonardo da Vinci (1452–1519)
+      </div>
+
       {/* Decorative corner ornaments */}
-      <div className="fixed top-4 left-4 text-davinci-gold/30 text-4xl font-display">❧</div>
-      <div className="fixed top-4 right-4 text-davinci-gold/30 text-4xl font-display rotate-90">❧</div>
+      <div className="fixed top-8 left-4 text-davinci-gold/30 text-4xl font-display">❧</div>
+      <div className="fixed top-8 right-4 text-davinci-gold/30 text-4xl font-display rotate-90">❧</div>
       <div className="fixed bottom-4 left-4 text-davinci-gold/30 text-4xl font-display -rotate-90">❧</div>
       <div className="fixed bottom-4 right-4 text-davinci-gold/30 text-4xl font-display rotate-180">❧</div>
 
@@ -100,7 +105,6 @@ const Index = () => {
 
         {/* Da Vinci Blueprint */}
         <section className="mb-20">
-          <h2 className="section-title">INVENTIONS</h2>
           <div className="blueprint-container p-4 rounded-sm max-w-2xl mx-auto">
             <img 
               src={davinciHelicopter} 
