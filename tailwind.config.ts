@@ -19,13 +19,14 @@ export default {
     },
     extend: {
       colors: {
-        synthwave: {
-          dark: "hsl(var(--synthwave-dark))",
-          purple: "hsl(var(--synthwave-purple))",
-          pink: "hsl(var(--synthwave-pink))",
-          cyan: "hsl(var(--synthwave-cyan))",
-          orange: "hsl(var(--synthwave-orange))",
-          text: "hsl(var(--synthwave-text))",
+        davinci: {
+          parchment: "hsl(var(--davinci-parchment))",
+          sepia: "hsl(var(--davinci-sepia))",
+          ink: "hsl(var(--davinci-ink))",
+          gold: "hsl(var(--davinci-gold))",
+          copper: "hsl(var(--davinci-copper))",
+          sketch: "hsl(var(--davinci-sketch))",
+          aged: "hsl(var(--davinci-aged))",
         },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -62,7 +63,8 @@ export default {
         },
       },
       fontFamily: {
-        mono: ["Orbitron", "JetBrains Mono", "monospace"],
+        display: ["Cinzel", "serif"],
+        body: ["EB Garamond", "Georgia", "serif"],
       },
       borderRadius: {
         lg: "var(--radius)",
