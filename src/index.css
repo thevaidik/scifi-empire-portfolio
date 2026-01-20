@@ -4,35 +4,36 @@
 
 @layer base {
   :root {
-    /* Synthwave Colors */
-    --synthwave-dark: 260 20% 8%;
-    --synthwave-purple: 280 80% 50%;
-    --synthwave-pink: 330 90% 60%;
-    --synthwave-cyan: 180 100% 50%;
-    --synthwave-orange: 30 100% 60%;
-    --synthwave-text: 260 10% 90%;
+    /* Leonardo da Vinci / Renaissance Colors */
+    --davinci-parchment: 38 45% 92%;
+    --davinci-sepia: 30 40% 25%;
+    --davinci-ink: 25 30% 15%;
+    --davinci-gold: 43 70% 45%;
+    --davinci-copper: 25 55% 40%;
+    --davinci-sketch: 30 25% 35%;
+    --davinci-aged: 35 30% 80%;
     
     /* Shadcn compatibility */
-    --background: 260 20% 8%;
-    --foreground: 260 10% 90%;
-    --primary: 180 100% 50%;
-    --primary-foreground: 260 20% 8%;
-    --secondary: 280 80% 50%;
-    --secondary-foreground: 260 10% 90%;
-    --muted: 260 15% 15%;
-    --muted-foreground: 260 10% 60%;
-    --accent: 330 90% 60%;
-    --accent-foreground: 260 10% 90%;
-    --border: 280 50% 30%;
-    --ring: 180 100% 50%;
-    --radius: 0.5rem;
-    --card: 260 20% 12%;
-    --card-foreground: 260 10% 90%;
-    --popover: 260 20% 12%;
-    --popover-foreground: 260 10% 90%;
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 260 10% 90%;
-    --input: 260 15% 15%;
+    --background: 38 45% 92%;
+    --foreground: 25 30% 15%;
+    --primary: 43 70% 45%;
+    --primary-foreground: 38 45% 95%;
+    --secondary: 30 40% 25%;
+    --secondary-foreground: 38 45% 92%;
+    --muted: 35 30% 80%;
+    --muted-foreground: 30 25% 45%;
+    --accent: 25 55% 40%;
+    --accent-foreground: 38 45% 92%;
+    --border: 30 30% 70%;
+    --ring: 43 70% 45%;
+    --radius: 0.25rem;
+    --card: 38 40% 88%;
+    --card-foreground: 25 30% 15%;
+    --popover: 38 45% 92%;
+    --popover-foreground: 25 30% 15%;
+    --destructive: 0 60% 40%;
+    --destructive-foreground: 38 45% 92%;
+    --input: 35 30% 80%;
   }
 }
 
@@ -47,83 +48,180 @@
 
   body {
     @apply antialiased;
-    background: hsl(var(--synthwave-dark));
-    color: hsl(var(--synthwave-text));
-    font-family: 'Orbitron', 'JetBrains Mono', monospace;
+    background: hsl(var(--davinci-parchment));
+    color: hsl(var(--davinci-ink));
+    font-family: 'EB Garamond', Georgia, serif;
   }
 }
 
 @layer components {
-  /* Synthwave Grid Background */
-  .synthwave-grid {
-    background-image: 
-      linear-gradient(hsl(var(--synthwave-purple) / 0.3) 1px, transparent 1px),
-      linear-gradient(90deg, hsl(var(--synthwave-purple) / 0.3) 1px, transparent 1px);
-    background-size: 60px 60px;
-    background-position: center;
+  /* Parchment texture background */
+  .parchment-bg {
+    background: 
+      linear-gradient(135deg, hsl(var(--davinci-parchment)) 0%, hsl(35 35% 85%) 50%, hsl(var(--davinci-parchment)) 100%);
+    position: relative;
   }
 
-  /* Neon Glow Text */
-  .synthwave-glow {
-    background: linear-gradient(135deg, hsl(var(--synthwave-cyan)), hsl(var(--synthwave-pink)));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    filter: drop-shadow(0 0 20px hsl(var(--synthwave-cyan) / 0.5))
-            drop-shadow(0 0 40px hsl(var(--synthwave-pink) / 0.3));
+  .parchment-bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    opacity: 0.03;
+    pointer-events: none;
   }
 
-  /* Card Style */
-  .synthwave-card {
-    @apply rounded-lg;
-    background: linear-gradient(135deg, hsl(var(--synthwave-dark)) 0%, hsl(260 20% 12%) 100%);
-    border: 1px solid hsl(var(--synthwave-purple) / 0.4);
+  /* Sketch border ornament */
+  .sketch-border {
+    position: relative;
+  }
+
+  .sketch-border::after {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border: 2px solid hsl(var(--davinci-sepia) / 0.3);
+    border-radius: inherit;
+    pointer-events: none;
+  }
+
+  /* Renaissance title styling */
+  .renaissance-title {
+    font-family: 'Cinzel', serif;
+    font-weight: 600;
+    color: hsl(var(--davinci-sepia));
+    letter-spacing: 0.15em;
+    position: relative;
+  }
+
+  .renaissance-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, hsl(var(--davinci-gold)), transparent);
+    margin: 0.75rem auto 0;
+  }
+
+  /* Da Vinci glow text */
+  .davinci-glow {
+    font-family: 'Cinzel', serif;
+    color: hsl(var(--davinci-sepia));
+    text-shadow: 
+      0 2px 4px hsl(var(--davinci-gold) / 0.3),
+      0 4px 8px hsl(var(--davinci-copper) / 0.2);
+  }
+
+  /* Card Style - aged paper look */
+  .davinci-card {
+    @apply rounded-sm;
+    background: linear-gradient(145deg, hsl(38 40% 90%) 0%, hsl(35 35% 85%) 100%);
+    border: 1px solid hsl(var(--davinci-sepia) / 0.25);
     box-shadow: 
-      0 0 20px hsl(var(--synthwave-purple) / 0.1),
-      inset 0 1px 0 hsl(var(--synthwave-purple) / 0.2);
+      2px 3px 8px hsl(var(--davinci-sepia) / 0.15),
+      inset 0 1px 0 hsl(38 45% 95% / 0.5);
+    transition: all 0.3s ease;
+    position: relative;
+  }
+
+  .davinci-card::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    right: 8px;
+    bottom: 8px;
+    border: 1px solid hsl(var(--davinci-sepia) / 0.1);
+    border-radius: inherit;
+    pointer-events: none;
+  }
+
+  .davinci-card:hover {
+    box-shadow: 
+      3px 5px 15px hsl(var(--davinci-sepia) / 0.2),
+      inset 0 1px 0 hsl(38 45% 95% / 0.5);
+    transform: translateY(-2px);
+  }
+
+  /* Tags - wax seal inspired */
+  .davinci-tag {
+    @apply px-4 py-2 rounded-sm text-sm;
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    background: hsl(var(--davinci-aged));
+    border: 1px solid hsl(var(--davinci-sepia) / 0.3);
+    color: hsl(var(--davinci-sepia));
     transition: all 0.3s ease;
   }
 
-  .synthwave-card:hover {
-    border-color: hsl(var(--synthwave-cyan) / 0.6);
-    box-shadow: 
-      0 0 30px hsl(var(--synthwave-cyan) / 0.2),
-      0 0 60px hsl(var(--synthwave-pink) / 0.1);
-  }
-
-  /* Tags */
-  .synthwave-tag {
-    @apply px-4 py-2 rounded-full text-sm;
-    background: hsl(var(--synthwave-purple) / 0.2);
-    border: 1px solid hsl(var(--synthwave-purple) / 0.5);
-    color: hsl(var(--synthwave-cyan));
-    transition: all 0.3s ease;
-  }
-
-  .synthwave-tag:hover {
-    background: hsl(var(--synthwave-purple) / 0.4);
-    box-shadow: 0 0 15px hsl(var(--synthwave-cyan) / 0.3);
+  .davinci-tag:hover {
+    background: hsl(var(--davinci-gold) / 0.2);
+    border-color: hsl(var(--davinci-gold) / 0.5);
   }
 
   /* Section Titles */
   .section-title {
-    @apply text-2xl font-bold text-center mb-8 tracking-widest;
-    color: hsl(var(--synthwave-pink));
-    text-shadow: 0 0 10px hsl(var(--synthwave-pink) / 0.5);
+    @apply text-xl font-semibold text-center mb-8 tracking-widest;
+    font-family: 'Cinzel', serif;
+    color: hsl(var(--davinci-sepia));
+    position: relative;
   }
 
-  /* Button Glow */
-  .synthwave-button-glow {
+  .section-title::before,
+  .section-title::after {
+    content: '✦';
+    margin: 0 1rem;
+    color: hsl(var(--davinci-gold));
+    font-size: 0.75em;
+  }
+
+  /* Button - Renaissance style */
+  .davinci-button {
+    font-family: 'Cinzel', serif;
+    background: linear-gradient(135deg, hsl(var(--davinci-sepia)) 0%, hsl(25 35% 22%) 100%);
+    color: hsl(var(--davinci-parchment));
+    border: 2px solid hsl(var(--davinci-gold) / 0.5);
     box-shadow: 
-      0 0 20px hsl(var(--synthwave-pink) / 0.4),
-      0 0 40px hsl(var(--synthwave-purple) / 0.2);
+      2px 3px 8px hsl(var(--davinci-sepia) / 0.3),
+      inset 0 1px 0 hsl(var(--davinci-gold) / 0.2);
     transition: all 0.3s ease;
   }
 
-  .synthwave-button-glow:hover {
+  .davinci-button:hover {
     box-shadow: 
-      0 0 30px hsl(var(--synthwave-pink) / 0.6),
-      0 0 60px hsl(var(--synthwave-purple) / 0.4);
+      3px 5px 15px hsl(var(--davinci-sepia) / 0.4),
+      inset 0 1px 0 hsl(var(--davinci-gold) / 0.3);
+    transform: translateY(-1px);
+  }
+
+  /* Decorative flourish */
+  .flourish {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    color: hsl(var(--davinci-gold));
+    font-size: 1.5rem;
+    opacity: 0.6;
+  }
+
+  .flourish::before,
+  .flourish::after {
+    content: '';
+    flex: 1;
+    max-width: 100px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, hsl(var(--davinci-gold)), transparent);
+  }
+
+  /* Merged badge */
+  .merged-badge {
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    background: hsl(var(--davinci-gold) / 0.15);
+    color: hsl(30 50% 30%);
+    border: 1px solid hsl(var(--davinci-gold) / 0.4);
   }
 }
 
@@ -142,5 +240,25 @@
       opacity: 1;
       transform: translateY(0);
     }
+  }
+
+  /* Sketch line decoration */
+  .sketch-underline {
+    position: relative;
+  }
+
+  .sketch-underline::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, 
+      transparent, 
+      hsl(var(--davinci-sepia) / 0.4) 20%, 
+      hsl(var(--davinci-sepia) / 0.4) 80%, 
+      transparent
+    );
   }
 }
