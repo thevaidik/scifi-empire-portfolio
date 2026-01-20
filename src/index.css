@@ -4,36 +4,36 @@
 
 @layer base {
   :root {
-    /* Leonardo da Vinci / Renaissance Colors */
-    --davinci-parchment: 38 45% 92%;
-    --davinci-sepia: 30 40% 25%;
-    --davinci-ink: 25 30% 15%;
-    --davinci-gold: 43 70% 45%;
-    --davinci-copper: 25 55% 40%;
-    --davinci-sketch: 30 25% 35%;
-    --davinci-aged: 35 30% 80%;
+    /* Leonardo da Vinci / Renaissance Colors - Semi-Dark Mode */
+    --davinci-parchment: 30 20% 12%;
+    --davinci-sepia: 35 35% 65%;
+    --davinci-ink: 35 30% 85%;
+    --davinci-gold: 43 70% 55%;
+    --davinci-copper: 25 55% 50%;
+    --davinci-sketch: 35 25% 55%;
+    --davinci-aged: 30 15% 22%;
     
     /* Shadcn compatibility */
-    --background: 38 45% 92%;
-    --foreground: 25 30% 15%;
-    --primary: 43 70% 45%;
-    --primary-foreground: 38 45% 95%;
-    --secondary: 30 40% 25%;
-    --secondary-foreground: 38 45% 92%;
-    --muted: 35 30% 80%;
-    --muted-foreground: 30 25% 45%;
-    --accent: 25 55% 40%;
-    --accent-foreground: 38 45% 92%;
-    --border: 30 30% 70%;
-    --ring: 43 70% 45%;
+    --background: 30 20% 12%;
+    --foreground: 35 30% 85%;
+    --primary: 43 70% 55%;
+    --primary-foreground: 30 20% 10%;
+    --secondary: 35 35% 65%;
+    --secondary-foreground: 30 20% 12%;
+    --muted: 30 15% 22%;
+    --muted-foreground: 35 25% 55%;
+    --accent: 25 55% 50%;
+    --accent-foreground: 30 20% 12%;
+    --border: 30 20% 25%;
+    --ring: 43 70% 55%;
     --radius: 0.25rem;
-    --card: 38 40% 88%;
-    --card-foreground: 25 30% 15%;
-    --popover: 38 45% 92%;
-    --popover-foreground: 25 30% 15%;
-    --destructive: 0 60% 40%;
-    --destructive-foreground: 38 45% 92%;
-    --input: 35 30% 80%;
+    --card: 30 18% 16%;
+    --card-foreground: 35 30% 85%;
+    --popover: 30 20% 12%;
+    --popover-foreground: 35 30% 85%;
+    --destructive: 0 60% 45%;
+    --destructive-foreground: 30 20% 12%;
+    --input: 30 15% 22%;
   }
 }
 
@@ -52,13 +52,31 @@
     color: hsl(var(--davinci-ink));
     font-family: 'EB Garamond', Georgia, serif;
   }
+
+  /* Custom scrollbar for dark mode */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--davinci-parchment));
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--davinci-sepia) / 0.5);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--davinci-gold) / 0.6);
+  }
 }
 
 @layer components {
-  /* Parchment texture background */
+  /* Dark parchment texture background */
   .parchment-bg {
     background: 
-      linear-gradient(135deg, hsl(var(--davinci-parchment)) 0%, hsl(35 35% 85%) 50%, hsl(var(--davinci-parchment)) 100%);
+      radial-gradient(ellipse at 50% 0%, hsl(30 18% 18%) 0%, hsl(var(--davinci-parchment)) 70%);
     position: relative;
   }
 
@@ -67,7 +85,7 @@
     position: absolute;
     inset: 0;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-    opacity: 0.03;
+    opacity: 0.08;
     pointer-events: none;
   }
 
@@ -112,14 +130,14 @@
       0 4px 8px hsl(var(--davinci-copper) / 0.2);
   }
 
-  /* Card Style - aged paper look */
+  /* Card Style - dark aged paper look */
   .davinci-card {
     @apply rounded-sm;
-    background: linear-gradient(145deg, hsl(38 40% 90%) 0%, hsl(35 35% 85%) 100%);
-    border: 1px solid hsl(var(--davinci-sepia) / 0.25);
+    background: linear-gradient(145deg, hsl(30 18% 18%) 0%, hsl(30 15% 14%) 100%);
+    border: 1px solid hsl(var(--davinci-sepia) / 0.2);
     box-shadow: 
-      2px 3px 8px hsl(var(--davinci-sepia) / 0.15),
-      inset 0 1px 0 hsl(38 45% 95% / 0.5);
+      2px 3px 12px hsl(0 0% 0% / 0.3),
+      inset 0 1px 0 hsl(var(--davinci-sepia) / 0.1);
     transition: all 0.3s ease;
     position: relative;
   }
@@ -131,15 +149,16 @@
     left: 8px;
     right: 8px;
     bottom: 8px;
-    border: 1px solid hsl(var(--davinci-sepia) / 0.1);
+    border: 1px solid hsl(var(--davinci-gold) / 0.1);
     border-radius: inherit;
     pointer-events: none;
   }
 
   .davinci-card:hover {
     box-shadow: 
-      3px 5px 15px hsl(var(--davinci-sepia) / 0.2),
-      inset 0 1px 0 hsl(38 45% 95% / 0.5);
+      3px 5px 20px hsl(0 0% 0% / 0.4),
+      inset 0 1px 0 hsl(var(--davinci-gold) / 0.15);
+    border-color: hsl(var(--davinci-gold) / 0.3);
     transform: translateY(-2px);
   }
 
@@ -149,14 +168,15 @@
     font-family: 'EB Garamond', serif;
     font-style: italic;
     background: hsl(var(--davinci-aged));
-    border: 1px solid hsl(var(--davinci-sepia) / 0.3);
+    border: 1px solid hsl(var(--davinci-gold) / 0.2);
     color: hsl(var(--davinci-sepia));
     transition: all 0.3s ease;
   }
 
   .davinci-tag:hover {
-    background: hsl(var(--davinci-gold) / 0.2);
-    border-color: hsl(var(--davinci-gold) / 0.5);
+    background: hsl(var(--davinci-gold) / 0.15);
+    border-color: hsl(var(--davinci-gold) / 0.4);
+    color: hsl(var(--davinci-gold));
   }
 
   /* Section Titles */
@@ -219,9 +239,36 @@
     font-family: 'Cinzel', serif;
     font-size: 0.65rem;
     letter-spacing: 0.1em;
-    background: hsl(var(--davinci-gold) / 0.15);
-    color: hsl(30 50% 30%);
+    background: hsl(var(--davinci-gold) / 0.2);
+    color: hsl(var(--davinci-gold));
     border: 1px solid hsl(var(--davinci-gold) / 0.4);
+  }
+
+  /* Blueprint illustration container */
+  .blueprint-container {
+    position: relative;
+    border: 2px solid hsl(var(--davinci-gold) / 0.3);
+    background: linear-gradient(135deg, hsl(30 15% 10%) 0%, hsl(30 18% 14%) 100%);
+    box-shadow: 
+      inset 0 0 30px hsl(0 0% 0% / 0.3),
+      0 4px 20px hsl(0 0% 0% / 0.4);
+    overflow: hidden;
+  }
+
+  .blueprint-container::before {
+    content: '';
+    position: absolute;
+    inset: 8px;
+    border: 1px solid hsl(var(--davinci-gold) / 0.15);
+    pointer-events: none;
+  }
+
+  .blueprint-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    opacity: 0.85;
+    mix-blend-mode: screen;
   }
 }
 
