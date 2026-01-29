@@ -1,4 +1,4 @@
-import { Github, Twitter, Youtube, Linkedin, Mail, BookOpen, Feather } from "lucide-react";
+import { Github, Twitter, Youtube, Linkedin, Mail, BookOpen, Feather, Apple } from "lucide-react";
 import davinciHelicopter from "@/assets/davinci-helicopter.png";
 
 const Index = () => {
@@ -11,10 +11,25 @@ const Index = () => {
     { name: "Email", url: "mailto:vaidik50000@gmail.com", icon: <Mail className="w-5 h-5" /> },
   ];
 
-  const projects = [
-    { name: "nxtlap.com", desc: "Motorsport news aggregator", url: "https://nxtlap.com" },
-    { name: "Briefly", desc: "Minimalist RSS reader for iOS", url: "#" },
-    { name: "Vaidik.life", desc: "Personal portfolio (this site)", url: "#" },
+  const apps = [
+    { 
+      name: "NxtLap", 
+      desc: "Race Scores & Widgets", 
+      url: "https://apps.apple.com/in/app/nxtlap-race-scores-widgets/id6754256034",
+      isAppStore: true
+    },
+    { 
+      name: "Briefly", 
+      desc: "RSS Reader & News", 
+      url: "https://apps.apple.com/in/app/briefly-rss-reader-and-news/id6746949720",
+      isAppStore: true
+    },
+    { 
+      name: "nxtlap.com", 
+      desc: "Motorsport news aggregator", 
+      url: "https://nxtlap.com",
+      isAppStore: false
+    },
   ];
 
   const interests = [
@@ -86,18 +101,26 @@ const Index = () => {
           </div>
         </section>
 
-        {/* Projects */}
+        {/* My Projects and Apps */}
         <section className="mb-16">
-          <h2 className="section-title">PROJECTS</h2>
+          <h2 className="section-title">MY PROJECTS & APPS</h2>
           <div className="grid md:grid-cols-3 gap-4">
-            {projects.map((project) => (
+            {apps.map((app) => (
               <a
-                key={project.name}
-                href={project.url}
+                key={app.name}
+                href={app.url}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="davinci-card p-5 hover:scale-105 transition-transform block text-center"
               >
-                <h3 className="text-davinci-copper font-display font-semibold text-base mb-1.5 tracking-wide">{project.name}</h3>
-                <p className="text-sm text-davinci-sketch font-body leading-relaxed">{project.desc}</p>
+                <h3 className="text-davinci-copper font-display font-semibold text-base mb-1.5 tracking-wide">{app.name}</h3>
+                <p className="text-sm text-davinci-sketch font-body leading-relaxed mb-2">{app.desc}</p>
+                {app.isAppStore && (
+                  <div className="flex items-center justify-center gap-1.5 text-davinci-gold/80 text-xs font-display tracking-wider">
+                    <Apple className="w-3.5 h-3.5" />
+                    <span>Available on App Store</span>
+                  </div>
+                )}
               </a>
             ))}
           </div>
