@@ -4,36 +4,36 @@
 
 @layer base {
   :root {
-    /* Leonardo da Vinci / Renaissance Colors - Semi-Dark Mode */
-    --davinci-parchment: 30 20% 12%;
-    --davinci-sepia: 35 35% 65%;
-    --davinci-ink: 35 30% 85%;
-    --davinci-gold: 43 70% 55%;
-    --davinci-copper: 25 55% 50%;
-    --davinci-sketch: 35 25% 55%;
-    --davinci-aged: 30 15% 22%;
+    /* Leonardo da Vinci / Renaissance Colors - Warm Readable Dark Mode */
+    --davinci-parchment: 25 25% 10%;
+    --davinci-sepia: 38 50% 78%;
+    --davinci-ink: 40 40% 92%;
+    --davinci-gold: 45 85% 62%;
+    --davinci-copper: 28 65% 58%;
+    --davinci-sketch: 35 35% 68%;
+    --davinci-aged: 28 20% 18%;
     
     /* Shadcn compatibility */
-    --background: 30 20% 12%;
-    --foreground: 35 30% 85%;
-    --primary: 43 70% 55%;
-    --primary-foreground: 30 20% 10%;
-    --secondary: 35 35% 65%;
-    --secondary-foreground: 30 20% 12%;
-    --muted: 30 15% 22%;
-    --muted-foreground: 35 25% 55%;
-    --accent: 25 55% 50%;
-    --accent-foreground: 30 20% 12%;
-    --border: 30 20% 25%;
-    --ring: 43 70% 55%;
+    --background: 25 25% 10%;
+    --foreground: 40 40% 92%;
+    --primary: 45 85% 62%;
+    --primary-foreground: 25 25% 8%;
+    --secondary: 38 50% 78%;
+    --secondary-foreground: 25 25% 10%;
+    --muted: 28 20% 18%;
+    --muted-foreground: 35 35% 68%;
+    --accent: 28 65% 58%;
+    --accent-foreground: 25 25% 10%;
+    --border: 30 25% 28%;
+    --ring: 45 85% 62%;
     --radius: 0.25rem;
-    --card: 30 18% 16%;
-    --card-foreground: 35 30% 85%;
-    --popover: 30 20% 12%;
-    --popover-foreground: 35 30% 85%;
+    --card: 28 22% 14%;
+    --card-foreground: 40 40% 92%;
+    --popover: 25 25% 10%;
+    --popover-foreground: 40 40% 92%;
     --destructive: 0 60% 45%;
-    --destructive-foreground: 30 20% 12%;
-    --input: 30 15% 22%;
+    --destructive-foreground: 25 25% 10%;
+    --input: 28 20% 18%;
   }
 }
 
