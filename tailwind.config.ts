@@ -19,14 +19,15 @@ export default {
     },
     extend: {
       colors: {
-        davinci: {
-          parchment: "hsl(var(--davinci-parchment))",
-          sepia: "hsl(var(--davinci-sepia))",
-          ink: "hsl(var(--davinci-ink))",
-          gold: "hsl(var(--davinci-gold))",
-          copper: "hsl(var(--davinci-copper))",
-          sketch: "hsl(var(--davinci-sketch))",
-          aged: "hsl(var(--davinci-aged))",
+        sw: {
+          void: "hsl(var(--sw-void))",
+          nebula: "hsl(var(--sw-nebula))",
+          star: "hsl(var(--sw-star))",
+          saber: "hsl(var(--sw-saber))",
+          force: "hsl(var(--sw-force))",
+          holo: "hsl(var(--sw-holo))",
+          steel: "hsl(var(--sw-steel))",
+          ember: "hsl(var(--sw-ember))",
         },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -63,8 +64,9 @@ export default {
         },
       },
       fontFamily: {
-        display: ["Cinzel", "serif"],
-        body: ["EB Garamond", "Georgia", "serif"],
+        display: ["Orbitron", "sans-serif"],
+        body: ["Rajdhani", "sans-serif"],
+        mono: ["Share Tech Mono", "monospace"],
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -80,10 +82,20 @@ export default {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        "pulse-glow": {
+          "0%, 100%": { opacity: "0.4" },
+          "50%": { opacity: "0.8" },
+        },
+        "scan-line": {
+          "0%": { transform: "translateY(-100%)" },
+          "100%": { transform: "translateY(100vh)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "pulse-glow": "pulse-glow 3s ease-in-out infinite",
+        "scan-line": "scan-line 8s linear infinite",
       },
     },
   },

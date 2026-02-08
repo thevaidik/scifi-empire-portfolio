@@ -1,4 +1,4 @@
-import { Github, Twitter, Youtube, Linkedin, Mail, BookOpen, Feather, Apple } from "lucide-react";
+import { Github, Twitter, Youtube, Linkedin, Mail, BookOpen, Sparkles, Apple } from "lucide-react";
 import davinciHelicopter from "@/assets/davinci-helicopter.png";
 
 const Index = () => {
@@ -50,33 +50,33 @@ const Index = () => {
   ];
 
   return (
-    <div className="min-h-screen parchment-bg text-davinci-ink">
-      {/* Tribute to Da Vinci */}
-      <div className="fixed top-3 left-1/2 -translate-x-1/2 text-davinci-sketch/50 text-xs font-body italic tracking-wide">
-        Design inspired by Leonardo da Vinci (1452–1519)
+    <div className="min-h-screen space-bg text-sw-star">
+      {/* Ambient top tagline */}
+      <div className="fixed top-3 left-1/2 -translate-x-1/2 text-sw-steel/50 text-xs font-mono tracking-[0.2em] z-20">
+        A long time ago in a galaxy far, far away...
       </div>
 
-      {/* Decorative corner ornaments */}
-      <div className="fixed top-8 left-4 text-davinci-gold/30 text-4xl font-display">❧</div>
-      <div className="fixed top-8 right-4 text-davinci-gold/30 text-4xl font-display rotate-90">❧</div>
-      <div className="fixed bottom-4 left-4 text-davinci-gold/30 text-4xl font-display -rotate-90">❧</div>
-      <div className="fixed bottom-4 right-4 text-davinci-gold/30 text-4xl font-display rotate-180">❧</div>
+      {/* Corner decorations - geometric Star Wars style */}
+      <div className="fixed top-8 left-4 text-sw-saber/15 text-2xl font-display z-20">◆</div>
+      <div className="fixed top-8 right-4 text-sw-saber/15 text-2xl font-display z-20">◆</div>
+      <div className="fixed bottom-4 left-4 text-sw-saber/15 text-2xl font-display z-20">◆</div>
+      <div className="fixed bottom-4 right-4 text-sw-saber/15 text-2xl font-display z-20">◆</div>
 
       <div className="relative z-10 container mx-auto px-6 py-20 max-w-3xl">
         
         {/* Hero */}
-        <header className="text-center mb-16 animate-fade-in">
-          <div className="flourish mb-6">
-            <Feather className="w-6 h-6" />
+        <header className="text-center mb-20 animate-fade-in">
+          <div className="scan-flourish mb-8">
+            <Sparkles className="w-5 h-5" />
           </div>
-          <h1 className="text-5xl md:text-7xl font-display font-bold mb-5 davinci-glow tracking-wide">
+          <h1 className="text-5xl md:text-7xl font-display font-bold mb-5 holo-glow tracking-wider">
             VAIDIK
           </h1>
-          <p className="text-xl md:text-2xl text-davinci-sepia font-display tracking-widest mb-4">
+          <p className="text-lg md:text-xl text-sw-holo font-display tracking-[0.25em] mb-5 font-light">
             Apple Systems Developer & Maker
           </p>
-          <div className="w-32 h-px bg-gradient-to-r from-transparent via-davinci-gold to-transparent mx-auto my-5" />
-          <p className="text-davinci-sketch max-w-lg mx-auto font-body text-lg leading-relaxed">
+          <div className="w-40 h-px bg-gradient-to-r from-transparent via-sw-saber/40 to-transparent mx-auto my-6" />
+          <p className="text-sw-steel max-w-lg mx-auto font-body text-lg leading-relaxed tracking-wide">
             iOS, macOS, visionOS developer. Building products, exploring Rust, 
             and diving into consciousness research.
           </p>
@@ -92,10 +92,10 @@ const Index = () => {
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="davinci-card px-4 py-2.5 flex items-center gap-2.5 hover:scale-105 transition-transform text-sm"
+                className="sw-card px-4 py-2.5 flex items-center gap-2.5 hover:scale-105 transition-transform text-sm"
               >
-                <span className="text-davinci-copper">{link.icon}</span>
-                <span className="font-body">{link.name}</span>
+                <span className="text-sw-saber">{link.icon}</span>
+                <span className="font-body font-medium tracking-wide">{link.name}</span>
               </a>
             ))}
           </div>
@@ -111,14 +111,14 @@ const Index = () => {
                 href={app.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="davinci-card p-5 hover:scale-105 transition-transform block text-center"
+                className="sw-card p-5 hover:scale-105 transition-transform block text-center scan-line-effect"
               >
-                <h3 className="text-davinci-copper font-display font-semibold text-base mb-1.5 tracking-wide">{app.name}</h3>
-                <p className="text-sm text-davinci-sketch font-body leading-relaxed mb-2">{app.desc}</p>
+                <h3 className="text-sw-saber font-display font-semibold text-sm mb-1.5 tracking-widest">{app.name}</h3>
+                <p className="text-sm text-sw-steel font-body leading-relaxed mb-2 tracking-wide">{app.desc}</p>
                 {app.isAppStore && (
-                  <div className="flex items-center justify-center gap-1.5 text-davinci-gold/80 text-xs font-display tracking-wider">
+                  <div className="flex items-center justify-center gap-1.5 text-sw-holo/80 text-xs font-display tracking-[0.15em]">
                     <Apple className="w-3.5 h-3.5" />
-                    <span>Available on App Store</span>
+                    <span>App Store</span>
                   </div>
                 )}
               </a>
@@ -126,18 +126,18 @@ const Index = () => {
           </div>
         </section>
 
-        {/* Open Source - Moved above Interests */}
+        {/* Open Source */}
         <section className="mb-16">
           <h2 className="section-title">OPEN SOURCE</h2>
-          <p className="text-center text-davinci-sketch mb-6 font-body text-sm">Recent contributions to open-source projects</p>
+          <p className="text-center text-sw-steel mb-6 font-body text-sm tracking-wide">Recent contributions to open-source projects</p>
           <div className="space-y-3">
             {opensource.map((item, index) => (
-              <div key={index} className="davinci-card p-4">
+              <div key={index} className="sw-card p-4">
                 <div className="flex items-start justify-between gap-3 flex-wrap">
                   <div className="flex-1 min-w-0">
-                    <p className="text-davinci-gold text-xs font-display tracking-wider mb-0.5">{item.repo}</p>
-                    <h3 className="text-davinci-sepia font-display font-semibold text-sm mb-1">{item.title}</h3>
-                    <p className="text-xs text-davinci-sketch font-body leading-relaxed">{item.desc}</p>
+                    <p className="text-sw-holo text-xs font-mono tracking-wider mb-0.5">{item.repo}</p>
+                    <h3 className="text-sw-star font-display font-semibold text-sm mb-1 tracking-wide">{item.title}</h3>
+                    <p className="text-xs text-sw-steel font-body leading-relaxed tracking-wide">{item.desc}</p>
                   </div>
                   <span className="px-2.5 py-0.5 text-xs rounded-sm merged-badge shrink-0">
                     {item.status}
@@ -155,7 +155,7 @@ const Index = () => {
             {interests.map((interest) => (
               <span
                 key={interest}
-                className="davinci-tag text-sm"
+                className="sw-tag text-sm"
               >
                 {interest}
               </span>
@@ -166,38 +166,38 @@ const Index = () => {
         {/* Collaborate */}
         <section className="mb-16 text-center">
           <h2 className="section-title">LET'S COLLABORATE</h2>
-          <div className="davinci-card p-8 max-w-xl mx-auto">
-            <p className="text-base mb-6 text-davinci-sketch font-body leading-relaxed">
+          <div className="sw-card p-8 max-w-xl mx-auto scan-line-effect">
+            <p className="text-base mb-6 text-sw-steel font-body leading-relaxed tracking-wide">
               Building the future, one project at a time. 
               Open to collaboration on iOS/macOS projects, Rust development, 
               and innovative ideas.
             </p>
             <a
               href="mailto:vaidik50000@gmail.com"
-              className="inline-block px-6 py-2.5 davinci-button rounded-sm font-semibold tracking-widest text-sm"
+              className="inline-block px-6 py-2.5 sw-button rounded-md font-semibold text-xs"
             >
               GET IN TOUCH
             </a>
           </div>
         </section>
 
-        {/* Da Vinci Blueprint - At the bottom */}
+        {/* Blueprint - At the bottom */}
         <section className="mb-12">
-          <div className="blueprint-container p-4 rounded-sm max-w-md mx-auto opacity-80">
+          <div className="blueprint-container p-4 rounded-md max-w-md mx-auto opacity-80">
             <img 
               src={davinciHelicopter} 
               alt="Leonardo da Vinci's Aerial Screw - Flying Machine Blueprint" 
               className="w-full"
             />
           </div>
-          <p className="text-center text-davinci-sketch/60 mt-3 font-body text-xs tracking-wide">
-            "Learning never exhausts the mind." — Leonardo da Vinci
+          <p className="text-center text-sw-steel/50 mt-3 font-mono text-xs tracking-[0.15em]">
+            "Do. Or do not. There is no try." — Yoda
           </p>
         </section>
 
         {/* Footer */}
-        <footer className="text-center text-davinci-sketch/50 text-xs py-6 border-t border-davinci-sepia/15">
-          <p className="font-body">© 2024 Vaidik. Built with passion.</p>
+        <footer className="text-center text-sw-steel/40 text-xs py-6 border-t border-sw-saber/10">
+          <p className="font-body tracking-wide">© 2024 Vaidik. Built with passion.</p>
         </footer>
       </div>
     </div>
