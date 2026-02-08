@@ -1,5 +1,5 @@
 import { Github, Twitter, Youtube, Linkedin, Mail, BookOpen, Sparkles, Apple } from "lucide-react";
-import davinciHelicopter from "@/assets/davinci-helicopter.png";
+import deathStar from "@/assets/death-star.png";
 
 const Index = () => {
   const links = [
@@ -183,10 +183,10 @@ const Index = () => {
 
         {/* Blueprint - At the bottom */}
         <section className="mb-12">
-          <div className="blueprint-container p-4 rounded-md max-w-md mx-auto opacity-80">
+          <div className="blueprint-container p-4 rounded-md max-w-sm mx-auto">
             <img 
-              src={davinciHelicopter} 
-              alt="Leonardo da Vinci's Aerial Screw - Flying Machine Blueprint" 
+              src={deathStar} 
+              alt="Death Star Blueprint Schematic" 
               className="w-full"
             />
           </div>
