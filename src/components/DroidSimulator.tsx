@@ -1,6 +1,6 @@
 import { useRef, useMemo } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { OrbitControls, Grid, Environment } from "@react-three/drei";
+import { OrbitControls } from "@react-three/drei";
 import * as THREE from "three";
 
 /* ── B1 Battle Droid (geometric primitives) ─────────────────────── */
@@ -187,27 +187,42 @@ const PatrolDroid = ({ path, speed = 0.6, offset = 0 }: { path: [number, number,
 };
 
 /* ── Ground Platform ──────────────────────────────────────────── */
-const Platform = () => (
-  <>
-    <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.25, 0]} receiveShadow>
-      <planeGeometry args={[12, 12]} />
-      <meshStandardMaterial color="#1a1a2e" roughness={0.8} metalness={0.3} />
-    </mesh>
-    <Grid
-      args={[12, 12]}
-      position={[0, 0.26, 0]}
-      cellSize={0.5}
-      cellThickness={0.5}
-      cellColor="#c4a35a"
-      sectionSize={2}
-      sectionThickness={1}
-      sectionColor="#c4a35a"
-      fadeDistance={15}
-      fadeStrength={1}
-      infiniteGrid={false}
-    />
-  </>
-);
+const Platform = () => {
+  const gridLines = useMemo(() => {
+    const lines: JSX.Element[] = [];
+    const size = 6;
+    const step = 0.5;
+    for (let i = -size; i <= size; i += step) {
+      lines.push(
+        <line key={`h${i}`}>
+          <bufferGeometry>
+            <bufferAttribute attach="attributes-position" args={[new Float32Array([-size, 0, i, size, 0, i]), 3]} count={2} />
+          </bufferGeometry>
+          <lineBasicMaterial color="#c4a35a" transparent opacity={0.15} />
+        </line>
+      );
+      lines.push(
+        <line key={`v${i}`}>
+          <bufferGeometry>
+            <bufferAttribute attach="attributes-position" args={[new Float32Array([i, 0, -size, i, 0, size]), 3]} count={2} />
+          </bufferGeometry>
+          <lineBasicMaterial color="#c4a35a" transparent opacity={0.15} />
+        </line>
+      );
+    }
+    return lines;
+  }, []);
+
+  return (
+    <>
+      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.01, 0]} receiveShadow>
+        <planeGeometry args={[12, 12]} />
+        <meshStandardMaterial color="#1a1a2e" roughness={0.8} metalness={0.3} />
+      </mesh>
+      <group position={[0, 0.01, 0]}>{gridLines}</group>
+    </>
+  );
+};
 
 /* ── Main Scene ───────────────────────────────────────────────── */
 const DroidSimulator = () => {
@@ -236,7 +251,6 @@ const DroidSimulator = () => {
       <div className="w-full h-[400px] md:h-[500px] cursor-grab active:cursor-grabbing">
         <Canvas
           camera={{ position: [4, 3, 5], fov: 50 }}
-          shadows
           gl={{ antialias: true }}
           dpr={[1, 1.5]}
         >
@@ -246,8 +260,6 @@ const DroidSimulator = () => {
             position={[5, 8, 5]}
             intensity={1.2}
             color="#ffe4a0"
-            castShadow
-            shadow-mapSize={[1024, 1024]}
           />
           <pointLight position={[-3, 4, -3]} intensity={0.5} color="#4488ff" />
           <pointLight position={[3, 2, 3]} intensity={0.3} color="#ff4444" />
