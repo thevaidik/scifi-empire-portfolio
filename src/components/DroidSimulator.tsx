@@ -1,335 +1,284 @@
-import { useState, useCallback, useRef, useEffect } from "react";
-import { Play, RotateCcw, Trash2 } from "lucide-react";
+import { useRef, useMemo } from "react";
+import { Canvas, useFrame } from "@react-three/fiber";
+import { OrbitControls, Grid, Environment } from "@react-three/drei";
+import * as THREE from "three";
 
-const COLS = 28;
-const ROWS = 16;
+/* ── B1 Battle Droid (geometric primitives) ─────────────────────── */
+const BattleDroid = ({ position, walking }: { position: [number, number, number]; walking: boolean }) => {
+  const group = useRef<THREE.Group>(null!);
+  const leftLeg = useRef<THREE.Group>(null!);
+  const rightLeg = useRef<THREE.Group>(null!);
+  const leftArm = useRef<THREE.Group>(null!);
+  const rightArm = useRef<THREE.Group>(null!);
 
-type CellType = "empty" | "wall" | "start" | "end" | "path" | "visited" | "droid";
-
-interface Node {
-  row: number;
-  col: number;
-  g: number;
-  h: number;
-  f: number;
-  parent: Node | null;
-}
-
-const heuristic = (a: { row: number; col: number }, b: { row: number; col: number }) =>
-  Math.abs(a.row - b.row) + Math.abs(a.col - b.col);
-
-const aStar = (
-  grid: CellType[][],
-  start: { row: number; col: number },
-  end: { row: number; col: number }
-): { path: { row: number; col: number }[]; visited: { row: number; col: number }[] } => {
-  const open: Node[] = [];
-  const closed = new Set<string>();
-  const visited: { row: number; col: number }[] = [];
-
-  const startNode: Node = { ...start, g: 0, h: heuristic(start, end), f: heuristic(start, end), parent: null };
-  open.push(startNode);
-
-  const dirs = [[-1, 0], [1, 0], [0, -1], [0, 1], [-1, -1], [-1, 1], [1, -1], [1, 1]];
-
-  while (open.length > 0) {
-    open.sort((a, b) => a.f - b.f);
-    const current = open.shift()!;
-    const key = `${current.row},${current.col}`;
-
-    if (closed.has(key)) continue;
-    closed.add(key);
-    visited.push({ row: current.row, col: current.col });
-
-    if (current.row === end.row && current.col === end.col) {
-      const path: { row: number; col: number }[] = [];
-      let node: Node | null = current;
-      while (node) {
-        path.unshift({ row: node.row, col: node.col });
-        node = node.parent;
-      }
-      return { path, visited };
-    }
-
-    for (const [dr, dc] of dirs) {
-      const nr = current.row + dr;
-      const nc = current.col + dc;
-      if (nr < 0 || nr >= ROWS || nc < 0 || nc >= COLS) continue;
-      if (grid[nr][nc] === "wall") continue;
-      if (closed.has(`${nr},${nc}`)) continue;
-
-      // Diagonal movement cost
-      const moveCost = dr !== 0 && dc !== 0 ? 1.414 : 1;
-      const g = current.g + moveCost;
-      const h = heuristic({ row: nr, col: nc }, end);
-
-      open.push({ row: nr, col: nc, g, h, f: g + h, parent: current });
-    }
-  }
-
-  return { path: [], visited };
-};
-
-type PlaceMode = "wall" | "start" | "end";
-
-const DroidSimulator = () => {
-  const createEmptyGrid = (): CellType[][] =>
-    Array.from({ length: ROWS }, () => Array(COLS).fill("empty"));
-
-  const [grid, setGrid] = useState<CellType[][]>(createEmptyGrid);
-  const [startPos, setStartPos] = useState<{ row: number; col: number } | null>(null);
-  const [endPos, setEndPos] = useState<{ row: number; col: number } | null>(null);
-  const [mode, setMode] = useState<PlaceMode>("wall");
-  const [isRunning, setIsRunning] = useState(false);
-  const [droidPos, setDroidPos] = useState<{ row: number; col: number } | null>(null);
-  const [isDrawing, setIsDrawing] = useState(false);
-  const [stats, setStats] = useState<{ explored: number; pathLen: number } | null>(null);
-  const animRef = useRef<number | null>(null);
-
-  const handleCellClick = useCallback(
-    (row: number, col: number) => {
-      if (isRunning) return;
-      setGrid((prev) => {
-        const next = prev.map((r) => [...r]);
-        if (mode === "start") {
-          // Clear old start
-          if (startPos) next[startPos.row][startPos.col] = "empty";
-          next[row][col] = "start";
-          setStartPos({ row, col });
-        } else if (mode === "end") {
-          if (endPos) next[endPos.row][endPos.col] = "empty";
-          next[row][col] = "end";
-          setEndPos({ row, col });
-        } else {
-          if (next[row][col] === "wall") next[row][col] = "empty";
-          else if (next[row][col] === "empty") next[row][col] = "wall";
-        }
-        return next;
-      });
-    },
-    [mode, isRunning, startPos, endPos]
+  const droidMat = useMemo(
+    () => new THREE.MeshStandardMaterial({ color: "#c4a35a", roughness: 0.6, metalness: 0.7 }),
+    []
+  );
+  const darkMat = useMemo(
+    () => new THREE.MeshStandardMaterial({ color: "#8a7440", roughness: 0.5, metalness: 0.8 }),
+    []
+  );
+  const eyeMat = useMemo(
+    () =>
+      new THREE.MeshStandardMaterial({
+        color: "#ff4444",
+        emissive: "#ff2222",
+        emissiveIntensity: 2,
+      }),
+    []
   );
 
-  const handleMouseDown = (row: number, col: number) => {
-    if (mode === "wall") setIsDrawing(true);
-    handleCellClick(row, col);
-  };
-
-  const handleMouseEnter = (row: number, col: number) => {
-    if (isDrawing && mode === "wall" && !isRunning) {
-      setGrid((prev) => {
-        const next = prev.map((r) => [...r]);
-        if (next[row][col] === "empty") next[row][col] = "wall";
-        return next;
-      });
-    }
-  };
-
-  const clearPath = useCallback(() => {
-    setGrid((prev) =>
-      prev.map((r) => r.map((c) => (c === "path" || c === "visited" || c === "droid" ? "empty" : c)))
-    );
-    setDroidPos(null);
-    setStats(null);
-  }, []);
-
-  const resetGrid = useCallback(() => {
-    if (animRef.current) cancelAnimationFrame(animRef.current);
-    setGrid(createEmptyGrid());
-    setStartPos(null);
-    setEndPos(null);
-    setDroidPos(null);
-    setIsRunning(false);
-    setStats(null);
-  }, []);
-
-  const runSimulation = useCallback(() => {
-    if (!startPos || !endPos || isRunning) return;
-    clearPath();
-    setIsRunning(true);
-
-    // Clean grid for algorithm
-    const cleanGrid = grid.map((r) =>
-      r.map((c) => (c === "path" || c === "visited" || c === "droid" ? "empty" : c))
-    );
-
-    const { path, visited } = aStar(cleanGrid, startPos, endPos);
-
-    // Animate visited cells, then path, then droid
-    let i = 0;
-    const animateVisited = () => {
-      if (i < visited.length) {
-        const { row, col } = visited[i];
-        setGrid((prev) => {
-          const next = prev.map((r) => [...r]);
-          if (next[row][col] === "empty") next[row][col] = "visited";
-          return next;
-        });
-        i++;
-        animRef.current = requestAnimationFrame(animateVisited);
-      } else {
-        // Animate path
-        let j = 0;
-        const animatePath = () => {
-          if (j < path.length) {
-            const { row, col } = path[j];
-            setGrid((prev) => {
-              const next = prev.map((r) => [...r]);
-              if (next[row][col] !== "start" && next[row][col] !== "end")
-                next[row][col] = "path";
-              return next;
-            });
-            j++;
-            setTimeout(animatePath, 40);
-          } else {
-            // Animate droid
-            let d = 0;
-            const animateDroid = () => {
-              if (d < path.length) {
-                setDroidPos(path[d]);
-                d++;
-                setTimeout(animateDroid, 60);
-              } else {
-                setIsRunning(false);
-                setStats({ explored: visited.length, pathLen: path.length });
-              }
-            };
-            animateDroid();
-          }
-        };
-        animatePath();
-      }
-    };
-    animateVisited();
-  }, [startPos, endPos, grid, isRunning, clearPath]);
-
-  // Cleanup on unmount
-  useEffect(() => {
-    return () => {
-      if (animRef.current) cancelAnimationFrame(animRef.current);
-    };
-  }, []);
-
-  const getCellClass = (type: CellType, row: number, col: number) => {
-    const isDroid = droidPos?.row === row && droidPos?.col === col;
-    if (isDroid) return "bg-sw-saber shadow-[0_0_8px_hsl(45,90%,55%,0.6)] scale-110 rounded-full";
-    switch (type) {
-      case "wall": return "bg-sw-steel/60 border-sw-steel/40";
-      case "start": return "bg-emerald-500/70 shadow-[0_0_6px_hsl(150,60%,50%,0.4)]";
-      case "end": return "bg-red-500/70 shadow-[0_0_6px_hsl(0,70%,50%,0.4)]";
-      case "path": return "bg-sw-saber/40 shadow-[0_0_4px_hsl(45,90%,55%,0.2)]";
-      case "visited": return "bg-sw-force/15";
-      default: return "bg-sw-nebula/50 hover:bg-sw-steel/20";
-    }
-  };
+  useFrame((state) => {
+    if (!walking) return;
+    const t = state.clock.elapsedTime * 4;
+    const swing = Math.sin(t) * 0.4;
+    if (leftLeg.current) leftLeg.current.rotation.x = swing;
+    if (rightLeg.current) rightLeg.current.rotation.x = -swing;
+    if (leftArm.current) leftArm.current.rotation.x = -swing * 0.6;
+    if (rightArm.current) rightArm.current.rotation.x = swing * 0.6;
+    // Slight body bob
+    if (group.current) group.current.position.y = Math.abs(Math.sin(t * 2)) * 0.03;
+  });
 
   return (
-    <div className="sw-card p-6 scan-line-effect">
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-5">
-        <div>
-          <h3 className="font-display text-sm font-bold tracking-[0.2em] text-sw-saber mb-1">
-            DROID PATHFINDER
-          </h3>
-          <p className="text-xs text-sw-steel font-body tracking-wide">
-            A* search algorithm — used in real autonomous robots
-          </p>
-        </div>
+    <group ref={group} position={position}>
+      {/* Head - elongated B1 style */}
+      <group position={[0, 1.65, 0]}>
+        {/* Main head */}
+        <mesh material={droidMat}>
+          <boxGeometry args={[0.18, 0.2, 0.25]} />
+        </mesh>
+        {/* Snout */}
+        <mesh material={darkMat} position={[0, -0.05, 0.15]}>
+          <boxGeometry args={[0.1, 0.08, 0.12]} />
+        </mesh>
+        {/* Eyes */}
+        <mesh material={eyeMat} position={[-0.05, 0.02, 0.13]}>
+          <sphereGeometry args={[0.025, 8, 8]} />
+        </mesh>
+        <mesh material={eyeMat} position={[0.05, 0.02, 0.13]}>
+          <sphereGeometry args={[0.025, 8, 8]} />
+        </mesh>
+        {/* Antenna nub */}
+        <mesh material={darkMat} position={[0, 0.12, -0.05]}>
+          <cylinderGeometry args={[0.01, 0.015, 0.06, 6]} />
+        </mesh>
+      </group>
 
-        <div className="flex items-center gap-2 flex-wrap">
-          {/* Mode buttons */}
-          {(["start", "end", "wall"] as PlaceMode[]).map((m) => (
-            <button
-              key={m}
-              onClick={() => setMode(m)}
-              className={`px-3 py-1.5 text-xs font-display tracking-wider rounded-md border transition-all ${
-                mode === m
-                  ? "border-sw-saber/50 bg-sw-saber/15 text-sw-saber"
-                  : "border-border text-sw-steel hover:border-sw-steel/40"
-              }`}
-            >
-              {m === "start" ? "START" : m === "end" ? "TARGET" : "WALLS"}
-            </button>
-          ))}
+      {/* Neck */}
+      <mesh material={darkMat} position={[0, 1.5, 0]}>
+        <cylinderGeometry args={[0.03, 0.04, 0.12, 8]} />
+      </mesh>
 
-          <div className="w-px h-6 bg-border mx-1" />
+      {/* Torso - thin skeletal */}
+      <mesh material={droidMat} position={[0, 1.25, 0]}>
+        <boxGeometry args={[0.25, 0.35, 0.12]} />
+      </mesh>
 
-          <button
-            onClick={runSimulation}
-            disabled={!startPos || !endPos || isRunning}
-            className="px-3 py-1.5 text-xs font-display tracking-wider rounded-md border border-sw-saber/50 bg-sw-saber/10 text-sw-saber hover:bg-sw-saber/20 transition-all disabled:opacity-30 disabled:cursor-not-allowed flex items-center gap-1.5"
-          >
-            <Play className="w-3 h-3" /> RUN
-          </button>
-          <button
-            onClick={clearPath}
-            className="px-2 py-1.5 text-xs rounded-md border border-border text-sw-steel hover:border-sw-steel/40 transition-all"
-            title="Clear path"
-          >
-            <RotateCcw className="w-3 h-3" />
-          </button>
-          <button
-            onClick={resetGrid}
-            className="px-2 py-1.5 text-xs rounded-md border border-border text-sw-steel hover:border-sw-steel/40 transition-all"
-            title="Reset grid"
-          >
-            <Trash2 className="w-3 h-3" />
-          </button>
-        </div>
+      {/* Chest plate detail */}
+      <mesh material={darkMat} position={[0, 1.3, 0.065]}>
+        <boxGeometry args={[0.15, 0.12, 0.02]} />
+      </mesh>
+
+      {/* Backpack */}
+      <mesh material={darkMat} position={[0, 1.28, -0.09]}>
+        <boxGeometry args={[0.18, 0.2, 0.06]} />
+      </mesh>
+
+      {/* Waist */}
+      <mesh material={darkMat} position={[0, 1.05, 0]}>
+        <boxGeometry args={[0.2, 0.08, 0.1]} />
+      </mesh>
+
+      {/* Left Arm */}
+      <group ref={leftArm} position={[-0.18, 1.35, 0]}>
+        {/* Upper arm */}
+        <mesh material={droidMat} position={[0, -0.12, 0]}>
+          <cylinderGeometry args={[0.025, 0.02, 0.25, 6]} />
+        </mesh>
+        {/* Elbow joint */}
+        <mesh material={darkMat} position={[0, -0.25, 0]}>
+          <sphereGeometry args={[0.03, 6, 6]} />
+        </mesh>
+        {/* Forearm */}
+        <mesh material={droidMat} position={[0, -0.38, 0]}>
+          <cylinderGeometry args={[0.02, 0.025, 0.22, 6]} />
+        </mesh>
+      </group>
+
+      {/* Right Arm (holding blaster pose) */}
+      <group ref={rightArm} position={[0.18, 1.35, 0]}>
+        <mesh material={droidMat} position={[0, -0.12, 0]}>
+          <cylinderGeometry args={[0.025, 0.02, 0.25, 6]} />
+        </mesh>
+        <mesh material={darkMat} position={[0, -0.25, 0]}>
+          <sphereGeometry args={[0.03, 6, 6]} />
+        </mesh>
+        <mesh material={droidMat} position={[0, -0.38, 0]}>
+          <cylinderGeometry args={[0.02, 0.025, 0.22, 6]} />
+        </mesh>
+      </group>
+
+      {/* Left Leg */}
+      <group ref={leftLeg} position={[-0.07, 1.0, 0]}>
+        {/* Upper leg */}
+        <mesh material={droidMat} position={[0, -0.18, 0]}>
+          <cylinderGeometry args={[0.03, 0.025, 0.35, 6]} />
+        </mesh>
+        {/* Knee */}
+        <mesh material={darkMat} position={[0, -0.36, 0]}>
+          <sphereGeometry args={[0.035, 6, 6]} />
+        </mesh>
+        {/* Lower leg */}
+        <mesh material={droidMat} position={[0, -0.55, 0]}>
+          <cylinderGeometry args={[0.025, 0.03, 0.35, 6]} />
+        </mesh>
+        {/* Foot */}
+        <mesh material={darkMat} position={[0, -0.73, 0.02]}>
+          <boxGeometry args={[0.06, 0.03, 0.1]} />
+        </mesh>
+      </group>
+
+      {/* Right Leg */}
+      <group ref={rightLeg} position={[0.07, 1.0, 0]}>
+        <mesh material={droidMat} position={[0, -0.18, 0]}>
+          <cylinderGeometry args={[0.03, 0.025, 0.35, 6]} />
+        </mesh>
+        <mesh material={darkMat} position={[0, -0.36, 0]}>
+          <sphereGeometry args={[0.035, 6, 6]} />
+        </mesh>
+        <mesh material={droidMat} position={[0, -0.55, 0]}>
+          <cylinderGeometry args={[0.025, 0.03, 0.35, 6]} />
+        </mesh>
+        <mesh material={darkMat} position={[0, -0.73, 0.02]}>
+          <boxGeometry args={[0.06, 0.03, 0.1]} />
+        </mesh>
+      </group>
+    </group>
+  );
+};
+
+/* ── Patrolling Droid that walks in a loop ────────────────────── */
+const PatrolDroid = ({ path, speed = 0.6, offset = 0 }: { path: [number, number, number][]; speed?: number; offset?: number }) => {
+  const group = useRef<THREE.Group>(null!);
+
+  useFrame((state) => {
+    if (!group.current || path.length < 2) return;
+    const t = ((state.clock.elapsedTime * speed + offset) % path.length);
+    const idx = Math.floor(t);
+    const frac = t - idx;
+    const from = path[idx % path.length];
+    const to = path[(idx + 1) % path.length];
+
+    group.current.position.x = THREE.MathUtils.lerp(from[0], to[0], frac);
+    group.current.position.z = THREE.MathUtils.lerp(from[2], to[2], frac);
+
+    // Face direction of travel
+    const angle = Math.atan2(to[0] - from[0], to[2] - from[2]);
+    group.current.rotation.y = angle;
+  });
+
+  return (
+    <group ref={group}>
+      <BattleDroid position={[0, 0, 0]} walking={true} />
+    </group>
+  );
+};
+
+/* ── Ground Platform ──────────────────────────────────────────── */
+const Platform = () => (
+  <>
+    <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.25, 0]} receiveShadow>
+      <planeGeometry args={[12, 12]} />
+      <meshStandardMaterial color="#1a1a2e" roughness={0.8} metalness={0.3} />
+    </mesh>
+    <Grid
+      args={[12, 12]}
+      position={[0, 0.26, 0]}
+      cellSize={0.5}
+      cellThickness={0.5}
+      cellColor="#c4a35a"
+      sectionSize={2}
+      sectionThickness={1}
+      sectionColor="#c4a35a"
+      fadeDistance={15}
+      fadeStrength={1}
+      infiniteGrid={false}
+    />
+  </>
+);
+
+/* ── Main Scene ───────────────────────────────────────────────── */
+const DroidSimulator = () => {
+  // Patrol paths for multiple droids
+  const path1: [number, number, number][] = [
+    [-2, 0, -2], [-2, 0, 2], [2, 0, 2], [2, 0, -2],
+  ];
+  const path2: [number, number, number][] = [
+    [0, 0, -3], [3, 0, 0], [0, 0, 3], [-3, 0, 0],
+  ];
+  const path3: [number, number, number][] = [
+    [-4, 0, 0], [-4, 0, -3], [0, 0, -3], [0, 0, 0], [-4, 0, 0],
+  ];
+
+  return (
+    <div className="sw-card overflow-hidden scan-line-effect">
+      <div className="p-5 pb-2">
+        <h3 className="font-display text-sm font-bold tracking-[0.2em] text-sw-saber mb-1">
+          SEPARATIST DROID PATROL
+        </h3>
+        <p className="text-xs text-sw-steel font-body tracking-wide">
+          B1 Battle Droids executing waypoint navigation — drag to orbit, scroll to zoom
+        </p>
       </div>
 
-      {/* Instructions */}
-      <div className="flex gap-4 mb-4 text-[10px] font-mono tracking-wider text-sw-steel/60 flex-wrap">
-        <span className="flex items-center gap-1.5">
-          <span className="w-2.5 h-2.5 rounded-sm bg-emerald-500/70 inline-block" /> START
-        </span>
-        <span className="flex items-center gap-1.5">
-          <span className="w-2.5 h-2.5 rounded-sm bg-red-500/70 inline-block" /> TARGET
-        </span>
-        <span className="flex items-center gap-1.5">
-          <span className="w-2.5 h-2.5 rounded-sm bg-sw-steel/60 inline-block" /> WALL
-        </span>
-        <span className="flex items-center gap-1.5">
-          <span className="w-2.5 h-2.5 rounded-sm bg-sw-force/30 inline-block" /> EXPLORED
-        </span>
-        <span className="flex items-center gap-1.5">
-          <span className="w-2.5 h-2.5 rounded-sm bg-sw-saber/40 inline-block" /> PATH
-        </span>
-        <span className="flex items-center gap-1.5">
-          <span className="w-2.5 h-2.5 rounded-full bg-sw-saber inline-block" /> DROID
-        </span>
+      <div className="w-full h-[400px] md:h-[500px] cursor-grab active:cursor-grabbing">
+        <Canvas
+          camera={{ position: [4, 3, 5], fov: 50 }}
+          shadows
+          gl={{ antialias: true }}
+          dpr={[1, 1.5]}
+        >
+          {/* Lighting */}
+          <ambientLight intensity={0.3} color="#ffd700" />
+          <directionalLight
+            position={[5, 8, 5]}
+            intensity={1.2}
+            color="#ffe4a0"
+            castShadow
+            shadow-mapSize-width={1024}
+            shadow-mapSize-height={1024}
+          />
+          <pointLight position={[-3, 4, -3]} intensity={0.5} color="#4488ff" />
+          <pointLight position={[3, 2, 3]} intensity={0.3} color="#ff4444" />
+
+          {/* Fog for depth */}
+          <fog attach="fog" args={["#0a0a14", 8, 20]} />
+
+          <Platform />
+
+          {/* Droids on patrol */}
+          <PatrolDroid path={path1} speed={0.5} offset={0} />
+          <PatrolDroid path={path2} speed={0.4} offset={1.5} />
+          <PatrolDroid path={path3} speed={0.35} offset={3} />
+
+          <OrbitControls
+            enablePan={false}
+            minDistance={3}
+            maxDistance={12}
+            maxPolarAngle={Math.PI / 2.2}
+            autoRotate
+            autoRotateSpeed={0.5}
+          />
+        </Canvas>
       </div>
 
-      {/* Grid */}
-      <div
-        className="grid gap-[1px] w-full overflow-x-auto select-none"
-        style={{ gridTemplateColumns: `repeat(${COLS}, minmax(0, 1fr))` }}
-        onMouseLeave={() => setIsDrawing(false)}
-        onMouseUp={() => setIsDrawing(false)}
-      >
-        {grid.map((row, ri) =>
-          row.map((cell, ci) => (
-            <div
-              key={`${ri}-${ci}`}
-              className={`aspect-square rounded-[2px] border border-border/30 transition-colors duration-150 cursor-pointer ${getCellClass(cell, ri, ci)}`}
-              onMouseDown={() => handleMouseDown(ri, ci)}
-              onMouseEnter={() => handleMouseEnter(ri, ci)}
-            />
-          ))
-        )}
+      <div className="px-5 pb-4 pt-2">
+        <p className="text-[10px] font-mono tracking-wider text-sw-steel/40 text-center">
+          Waypoint-based patrol algorithm — real autonomous navigation used in robotics &amp; game AI
+        </p>
       </div>
-
-      {/* Stats */}
-      {stats && (
-        <div className="mt-4 flex gap-6 text-[10px] font-mono tracking-wider text-sw-steel/70">
-          <span>NODES EXPLORED: <span className="text-sw-force">{stats.explored}</span></span>
-          <span>PATH LENGTH: <span className="text-sw-saber">{stats.pathLen}</span></span>
-          <span>ALGORITHM: <span className="text-sw-holo">A* SEARCH</span></span>
-        </div>
-      )}
-
-      <p className="mt-4 text-[10px] font-mono tracking-wider text-sw-steel/40 text-center">
-        A* finds the shortest path using heuristic-guided search — the same algorithm powering real-world autonomous robots and droids.
-      </p>
     </div>
   );
 };
