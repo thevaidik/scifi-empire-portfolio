@@ -188,13 +188,21 @@ const PatrolDroid = ({ path, speed = 0.6, offset = 0 }: { path: [number, number,
 
 /* ── Ground Platform ──────────────────────────────────────────── */
 const Platform = () => {
+  const grid = useMemo(() => {
+    const g = new THREE.GridHelper(12, 24, new THREE.Color("#c4a35a"), new THREE.Color("#c4a35a"));
+    g.position.y = 0.01;
+    (g.material as THREE.Material).opacity = 0.15;
+    (g.material as THREE.Material).transparent = true;
+    return g;
+  }, []);
+
   return (
     <>
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.01, 0]}>
         <planeGeometry args={[12, 12]} />
         <meshStandardMaterial color="#1a1a2e" roughness={0.8} metalness={0.3} />
       </mesh>
-      <gridHelper args={[12, 24, "#c4a35a", "#c4a35a"]} position={[0, 0.01, 0]} />
+      <primitive object={grid} />
     </>
   );
 };
@@ -239,8 +247,8 @@ const DroidSimulator = () => {
           <pointLight position={[-3, 4, -3]} intensity={0.5} color="#4488ff" />
           <pointLight position={[3, 2, 3]} intensity={0.3} color="#ff4444" />
 
-          {/* Fog for depth */}
-          <fog attach="fog" args={["#0a0a14", 8, 20]} />
+          {/* Scene background color */}
+          <color attach="background" args={["#0a0a14"]} />
 
           <Platform />
 
