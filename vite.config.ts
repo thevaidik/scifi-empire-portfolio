@@ -19,6 +19,6 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
     // Prevent "invalid hook call" / dispatcher null errors by ensuring a single React instance
-    dedupe: ["react", "react-dom", "react/jsx-runtime", "three", "@react-three/fiber", "@react-three/drei"],
+    dedupe: ["react", "react-dom"],
   },
 }));
