@@ -247,8 +247,7 @@ const DroidSimulator = () => {
             intensity={1.2}
             color="#ffe4a0"
             castShadow
-            shadow-mapSize-width={1024}
-            shadow-mapSize-height={1024}
+            shadow-mapSize={[1024, 1024]}
           />
           <pointLight position={[-3, 4, -3]} intensity={0.5} color="#4488ff" />
           <pointLight position={[3, 2, 3]} intensity={0.3} color="#ff4444" />
