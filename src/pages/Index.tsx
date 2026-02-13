@@ -1,6 +1,5 @@
 import { Github, Twitter, Youtube, Linkedin, Mail, BookOpen, Sparkles, Apple } from "lucide-react";
 import deathStar from "@/assets/death-star.png";
-import DroidSimulator from "@/components/DroidSimulator";
 
 const Index = () => {
   const links = [
@@ -181,9 +180,6 @@ const Index = () => {
             </a>
           </div>
         </section>
-
-        {/* Droid Simulator */}
-        <DroidSimulator />
 
         {/* Blueprint - At the bottom */}
         <section className="mb-12">
