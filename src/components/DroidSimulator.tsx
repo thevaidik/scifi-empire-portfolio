@@ -1,5 +1,6 @@
 import { useState, useCallback } from "react";
 import { ChevronUp, ChevronDown, ChevronLeft, ChevronRight, Zap, Shield, Crosshair, RotateCcw } from "lucide-react";
+import b1Droid from "@/assets/b1-battle-droid.png";
 
 type DroidAction = "idle" | "walking" | "shooting" | "shielding" | "scanning";
 
@@ -81,39 +82,43 @@ const DroidSimulator = () => {
             {/* Droid */}
             <div
               className="absolute transition-all duration-300 ease-out"
-              style={{ left: `${x}%`, top: `${y}%`, transform: `translate(-50%, -50%) rotate(${rotation}deg)` }}
+              style={{ left: `${x}%`, top: `${y}%`, transform: `translate(-50%, -50%)` }}
             >
               {/* Glow */}
-              <div className={`absolute -inset-3 rounded-full transition-all duration-300 ${
-                action === "shooting" ? "bg-red-500/30 shadow-[0_0_20px_rgba(239,68,68,0.5)]" :
-                action === "shielding" ? "bg-sw-saber/20 shadow-[0_0_20px_hsl(45_90%_55%/0.4)]" :
-                action === "scanning" ? "bg-sw-holo/20 shadow-[0_0_25px_hsl(190_80%_55%/0.4)]" :
-                "bg-sw-saber/10"
+              <div className={`absolute -inset-4 rounded-full transition-all duration-300 ${
+                action === "shooting" ? "bg-destructive/20 shadow-[0_0_30px_rgba(239,68,68,0.5)]" :
+                action === "shielding" ? "bg-primary/20 shadow-[0_0_30px_hsl(45_90%_55%/0.4)]" :
+                action === "scanning" ? "bg-accent/20 shadow-[0_0_35px_hsl(190_80%_55%/0.5)]" :
+                "bg-primary/5"
               }`} />
               
-              {/* Droid body */}
-              <svg width="32" height="32" viewBox="0 0 32 32" className="relative z-10">
-                {/* Torso */}
-                <rect x="10" y="8" width="12" height="14" rx="2" fill="none" stroke="hsl(45 90% 55%)" strokeWidth="1.5" opacity="0.9"/>
-                {/* Head */}
-                <circle cx="16" cy="5" r="4" fill="none" stroke="hsl(45 90% 55%)" strokeWidth="1.5" opacity="0.9"/>
-                {/* Eye */}
-                <circle cx="16" cy="5" r="1.5" fill={action === "scanning" ? "hsl(190 80% 55%)" : action === "shooting" ? "#ef4444" : "hsl(45 90% 55%)"} className="transition-colors duration-200"/>
-                {/* Legs */}
-                <line x1="12" y1="22" x2="10" y2="30" stroke="hsl(45 90% 55%)" strokeWidth="1.5" opacity="0.7"/>
-                <line x1="20" y1="22" x2="22" y2="30" stroke="hsl(45 90% 55%)" strokeWidth="1.5" opacity="0.7"/>
-                {/* Arm / blaster */}
-                <line x1="10" y1="12" x2="4" y2="16" stroke="hsl(45 90% 55%)" strokeWidth="1.5" opacity="0.7"/>
-                <line x1="22" y1="12" x2="28" y2="16" stroke="hsl(45 90% 55%)" strokeWidth="1.5" opacity="0.7"/>
-                {action === "shielding" && <circle cx="16" cy="14" r="14" fill="none" stroke="hsl(45 90% 55%)" strokeWidth="0.8" opacity="0.4" strokeDasharray="3 2"/>}
-              </svg>
+              {/* Realistic B1 Droid image */}
+              <img 
+                src={b1Droid} 
+                alt="B1 Battle Droid" 
+                className={`relative z-10 w-16 h-20 object-contain drop-shadow-[0_0_8px_hsl(45_90%_55%/0.4)] transition-all duration-300 ${
+                  action === "walking" ? "animate-pulse" : ""
+                } ${action === "shielding" ? "brightness-125 drop-shadow-[0_0_15px_hsl(45_90%_55%/0.6)]" : ""}
+                ${action === "scanning" ? "drop-shadow-[0_0_15px_hsl(190_80%_55%/0.6)]" : ""}`}
+                style={{ imageRendering: "auto" }}
+              />
+
+              {/* Shield effect */}
+              {action === "shielding" && (
+                <div className="absolute -inset-5 rounded-full border-2 border-primary/40 animate-pulse z-20" />
+              )}
 
               {/* Blaster bolts */}
               {action === "shooting" && (
                 <>
-                  <div className="absolute -top-8 left-1/2 w-0.5 h-4 bg-red-500 rounded-full animate-pulse" style={{transform: "translateX(-50%)"}} />
-                  <div className="absolute -top-14 left-1/2 w-0.5 h-3 bg-red-400/60 rounded-full animate-pulse" style={{transform: "translateX(-50%)", animationDelay: "0.1s"}} />
+                  <div className="absolute -top-6 left-1/2 w-1 h-5 bg-destructive rounded-full animate-pulse z-20" style={{transform: "translateX(-50%)"}} />
+                  <div className="absolute -top-14 left-1/2 w-1 h-4 bg-destructive/60 rounded-full animate-pulse z-20" style={{transform: "translateX(-50%)", animationDelay: "0.1s"}} />
                 </>
+              )}
+
+              {/* Scan ring */}
+              {action === "scanning" && (
+                <div className="absolute -inset-8 rounded-full border border-accent/50 animate-ping z-20" />
               )}
             </div>
           </div>
