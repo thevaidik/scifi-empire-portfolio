@@ -1,120 +1,123 @@
-import { useRef, useMemo, useCallback } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { useRef, useEffect } from "react";
+import { Canvas, useThree, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 
-const SentientCore = () => {
-  const coreRef = useRef<THREE.Mesh>(null);
-  const glowRef = useRef<THREE.Mesh>(null);
-  const ringRef1 = useRef<THREE.Mesh>(null);
-  const ringRef2 = useRef<THREE.Mesh>(null);
-  const ringRef3 = useRef<THREE.Mesh>(null);
-  const particlesRef = useRef<THREE.Points>(null);
-  const starsRef = useRef<THREE.Points>(null);
+const SentientCoreScene = () => {
+  const { scene } = useThree();
+  const groupRef = useRef<THREE.Group | null>(null);
+  const coreRef = useRef<THREE.Mesh | null>(null);
+  const glowRef = useRef<THREE.Mesh | null>(null);
+  const ring1Ref = useRef<THREE.Mesh | null>(null);
+  const ring2Ref = useRef<THREE.Mesh | null>(null);
+  const ring3Ref = useRef<THREE.Mesh | null>(null);
+  const particlesRef = useRef<THREE.Points | null>(null);
+  const starsRef = useRef<THREE.Points | null>(null);
 
-  const particleGeometry = useMemo(() => {
-    const geo = new THREE.BufferGeometry();
-    const positions = new Float32Array(300 * 3);
+  useEffect(() => {
+    const group = new THREE.Group();
+    groupRef.current = group;
+    scene.add(group);
+
+    // Ambient light
+    const ambient = new THREE.AmbientLight(0xffffff, 0.15);
+    group.add(ambient);
+
+    // Point lights
+    const light1 = new THREE.PointLight(0xe8a517, 3);
+    light1.position.set(0, 0, 0);
+    group.add(light1);
+
+    const light2 = new THREE.PointLight(0x3b9fd4, 1);
+    light2.position.set(2, 1, 1);
+    group.add(light2);
+
+    const light3 = new THREE.PointLight(0xe8a517, 0.8);
+    light3.position.set(-2, -1, -1);
+    group.add(light3);
+
+    // Core sphere
+    const coreGeo = new THREE.SphereGeometry(0.8, 64, 64);
+    const coreMat = new THREE.MeshStandardMaterial({
+      color: 0xe8a517,
+      emissive: 0xd4940a,
+      emissiveIntensity: 0.8,
+      roughness: 0.1,
+      metalness: 0.9,
+      transparent: true,
+      opacity: 0.85,
+    });
+    const core = new THREE.Mesh(coreGeo, coreMat);
+    coreRef.current = core;
+    group.add(core);
+
+    // Inner glow
+    const glowGeo = new THREE.SphereGeometry(0.5, 32, 32);
+    const glowMat = new THREE.MeshBasicMaterial({
+      color: 0xffd700,
+      transparent: true,
+      opacity: 0.3,
+    });
+    const glow = new THREE.Mesh(glowGeo, glowMat);
+    glowRef.current = glow;
+    group.add(glow);
+
+    // Orbital rings
+    const ring1Geo = new THREE.TorusGeometry(1.4, 0.015, 16, 100);
+    const ring1Mat = new THREE.MeshBasicMaterial({ color: 0xe8a517, transparent: true, opacity: 0.6 });
+    const ring1 = new THREE.Mesh(ring1Geo, ring1Mat);
+    ring1Ref.current = ring1;
+    group.add(ring1);
+
+    const ring2Geo = new THREE.TorusGeometry(1.7, 0.01, 16, 100);
+    const ring2Mat = new THREE.MeshBasicMaterial({ color: 0x3b9fd4, transparent: true, opacity: 0.4 });
+    const ring2 = new THREE.Mesh(ring2Geo, ring2Mat);
+    ring2Ref.current = ring2;
+    group.add(ring2);
+
+    const ring3Geo = new THREE.TorusGeometry(2.0, 0.008, 16, 100);
+    const ring3Mat = new THREE.MeshBasicMaterial({ color: 0xe8a517, transparent: true, opacity: 0.25 });
+    const ring3 = new THREE.Mesh(ring3Geo, ring3Mat);
+    ring3Ref.current = ring3;
+    group.add(ring3);
+
+    // Particles
+    const particleGeo = new THREE.BufferGeometry();
+    const pPositions = new Float32Array(300 * 3);
     for (let i = 0; i < 300; i++) {
       const theta = Math.random() * Math.PI * 2;
       const phi = Math.acos(2 * Math.random() - 1);
       const r = 1.8 + Math.random() * 1.2;
-      positions[i * 3] = r * Math.sin(phi) * Math.cos(theta);
-      positions[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
-      positions[i * 3 + 2] = r * Math.cos(phi);
+      pPositions[i * 3] = r * Math.sin(phi) * Math.cos(theta);
+      pPositions[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
+      pPositions[i * 3 + 2] = r * Math.cos(phi);
     }
-    geo.setAttribute("position", new THREE.BufferAttribute(positions, 3));
-    return geo;
-  }, []);
+    particleGeo.setAttribute("position", new THREE.BufferAttribute(pPositions, 3));
+    const particleMat = new THREE.PointsMaterial({ color: 0xe8a517, size: 0.02, transparent: true, opacity: 0.7, sizeAttenuation: true });
+    const particles = new THREE.Points(particleGeo, particleMat);
+    particlesRef.current = particles;
+    group.add(particles);
 
-  const starGeometry = useMemo(() => {
-    const geo = new THREE.BufferGeometry();
-    const positions = new Float32Array(1500 * 3);
+    // Stars
+    const starGeo = new THREE.BufferGeometry();
+    const sPositions = new Float32Array(1500 * 3);
     for (let i = 0; i < 1500; i++) {
-      positions[i * 3] = (Math.random() - 0.5) * 100;
-      positions[i * 3 + 1] = (Math.random() - 0.5) * 100;
-      positions[i * 3 + 2] = (Math.random() - 0.5) * 100;
+      sPositions[i * 3] = (Math.random() - 0.5) * 100;
+      sPositions[i * 3 + 1] = (Math.random() - 0.5) * 100;
+      sPositions[i * 3 + 2] = (Math.random() - 0.5) * 100;
     }
-    geo.setAttribute("position", new THREE.BufferAttribute(positions, 3));
-    return geo;
-  }, []);
+    starGeo.setAttribute("position", new THREE.BufferAttribute(sPositions, 3));
+    const starMat = new THREE.PointsMaterial({ color: 0xddd8c4, size: 0.15, transparent: true, opacity: 0.6, sizeAttenuation: true });
+    const stars = new THREE.Points(starGeo, starMat);
+    starsRef.current = stars;
+    group.add(stars);
 
-  const coreMaterial = useMemo(
-    () =>
-      new THREE.MeshStandardMaterial({
-        color: new THREE.Color("#e8a517"),
-        emissive: new THREE.Color("#d4940a"),
-        emissiveIntensity: 0.8,
-        roughness: 0.1,
-        metalness: 0.9,
-        transparent: true,
-        opacity: 0.85,
-      }),
-    []
-  );
-
-  const glowMaterial = useMemo(
-    () =>
-      new THREE.MeshBasicMaterial({
-        color: new THREE.Color("#ffd700"),
-        transparent: true,
-        opacity: 0.3,
-      }),
-    []
-  );
-
-  const ringMat1 = useMemo(
-    () =>
-      new THREE.MeshBasicMaterial({
-        color: new THREE.Color("#e8a517"),
-        transparent: true,
-        opacity: 0.6,
-      }),
-    []
-  );
-
-  const ringMat2 = useMemo(
-    () =>
-      new THREE.MeshBasicMaterial({
-        color: new THREE.Color("#3b9fd4"),
-        transparent: true,
-        opacity: 0.4,
-      }),
-    []
-  );
-
-  const ringMat3 = useMemo(
-    () =>
-      new THREE.MeshBasicMaterial({
-        color: new THREE.Color("#e8a517"),
-        transparent: true,
-        opacity: 0.25,
-      }),
-    []
-  );
-
-  const particleMat = useMemo(
-    () =>
-      new THREE.PointsMaterial({
-        color: new THREE.Color("#e8a517"),
-        size: 0.02,
-        transparent: true,
-        opacity: 0.7,
-        sizeAttenuation: true,
-      }),
-    []
-  );
-
-  const starMat = useMemo(
-    () =>
-      new THREE.PointsMaterial({
-        color: new THREE.Color("#ddd8c4"),
-        size: 0.15,
-        transparent: true,
-        opacity: 0.6,
-        sizeAttenuation: true,
-      }),
-    []
-  );
+    return () => {
+      scene.remove(group);
+      // Dispose geometries and materials
+      [coreGeo, glowGeo, ring1Geo, ring2Geo, ring3Geo, particleGeo, starGeo].forEach(g => g.dispose());
+      [coreMat, glowMat, ring1Mat, ring2Mat, ring3Mat, particleMat, starMat].forEach(m => m.dispose());
+    };
+  }, [scene]);
 
   useFrame((state) => {
     const t = state.clock.elapsedTime;
@@ -128,17 +131,17 @@ const SentientCore = () => {
       const gs = 1 + Math.sin(t * 2) * 0.1;
       glowRef.current.scale.setScalar(gs);
     }
-    if (ringRef1.current) {
-      ringRef1.current.rotation.x = t * 0.5;
-      ringRef1.current.rotation.z = t * 0.2;
+    if (ring1Ref.current) {
+      ring1Ref.current.rotation.x = t * 0.5;
+      ring1Ref.current.rotation.z = t * 0.2;
     }
-    if (ringRef2.current) {
-      ringRef2.current.rotation.y = t * 0.4;
-      ringRef2.current.rotation.x = Math.PI / 3 + t * 0.1;
+    if (ring2Ref.current) {
+      ring2Ref.current.rotation.y = t * 0.4;
+      ring2Ref.current.rotation.x = Math.PI / 3 + t * 0.1;
     }
-    if (ringRef3.current) {
-      ringRef3.current.rotation.z = -t * 0.3;
-      ringRef3.current.rotation.y = Math.PI / 4;
+    if (ring3Ref.current) {
+      ring3Ref.current.rotation.z = -t * 0.3;
+      ring3Ref.current.rotation.y = Math.PI / 4;
     }
     if (particlesRef.current) {
       particlesRef.current.rotation.y = t * 0.05;
@@ -148,32 +151,7 @@ const SentientCore = () => {
     }
   });
 
-  return (
-    <>
-      {/* Stars background */}
-      <points ref={starsRef} geometry={starGeometry} material={starMat} />
-
-      {/* Core */}
-      <mesh ref={coreRef} geometry={new THREE.SphereGeometry(0.8, 64, 64)} material={coreMaterial} />
-
-      {/* Inner glow */}
-      <mesh ref={glowRef} geometry={new THREE.SphereGeometry(0.5, 32, 32)} material={glowMaterial} />
-
-      {/* Orbital rings */}
-      <mesh ref={ringRef1} geometry={new THREE.TorusGeometry(1.4, 0.015, 16, 100)} material={ringMat1} />
-      <mesh ref={ringRef2} geometry={new THREE.TorusGeometry(1.7, 0.01, 16, 100)} material={ringMat2} />
-      <mesh ref={ringRef3} geometry={new THREE.TorusGeometry(2.0, 0.008, 16, 100)} material={ringMat3} />
-
-      {/* Particles */}
-      <points ref={particlesRef} geometry={particleGeometry} material={particleMat} />
-
-      {/* Lights */}
-      <ambientLight intensity={0.15} />
-      <pointLight position={[0, 0, 0]} color="#e8a517" intensity={3} />
-      <pointLight position={[2, 1, 1]} color="#3b9fd4" intensity={1} />
-      <pointLight position={[-2, -1, -1]} color="#e8a517" intensity={0.8} />
-    </>
-  );
+  return null;
 };
 
 const HeroScene3D = () => {
@@ -184,7 +162,7 @@ const HeroScene3D = () => {
         style={{ background: "transparent" }}
         gl={{ alpha: true, antialias: true }}
       >
-        <SentientCore />
+        <SentientCoreScene />
       </Canvas>
 
       {/* Overlay HUD text */}
