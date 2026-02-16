@@ -10,7 +10,8 @@ const SentientCore = () => {
   const ringRef3 = useRef<THREE.Mesh>(null);
   const particlesRef = useRef<THREE.Points>(null);
 
-  const particlePositions = useMemo(() => {
+  const particleGeometry = useMemo(() => {
+    const geo = new THREE.BufferGeometry();
     const positions = new Float32Array(300 * 3);
     for (let i = 0; i < 300; i++) {
       const theta = Math.random() * Math.PI * 2;
@@ -20,7 +21,8 @@ const SentientCore = () => {
       positions[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
       positions[i * 3 + 2] = r * Math.cos(phi);
     }
-    return positions;
+    geo.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+    return geo;
   }, []);
 
   useFrame((state) => {
@@ -107,15 +109,7 @@ const SentientCore = () => {
       </mesh>
 
       {/* Floating data particles */}
-      <points ref={particlesRef}>
-        <bufferGeometry>
-          <bufferAttribute
-            attach="attributes-position"
-            count={300}
-            array={particlePositions}
-            itemSize={3}
-          />
-        </bufferGeometry>
+      <points ref={particlesRef} geometry={particleGeometry}>
         <pointsMaterial
           color="#e8a517"
           size={0.02}
