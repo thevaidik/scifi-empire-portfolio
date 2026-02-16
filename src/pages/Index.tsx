@@ -51,17 +51,17 @@ const Index = () => {
   ];
 
   return (
-    <div className="min-h-screen space-bg text-sw-star">
+    <div className="min-h-screen space-bg text-foreground">
       {/* Ambient top tagline */}
-      <div className="fixed top-3 left-1/2 -translate-x-1/2 text-sw-steel/50 text-xs font-mono tracking-[0.2em] z-20">
+      <div className="fixed top-3 left-1/2 -translate-x-1/2 text-white/15 text-xs font-mono tracking-[0.3em] z-20">
         A long time ago in a galaxy far, far away...
       </div>
 
-      {/* Corner decorations - geometric Star Wars style */}
-      <div className="fixed top-8 left-4 text-sw-saber/15 text-2xl font-display z-20">◆</div>
-      <div className="fixed top-8 right-4 text-sw-saber/15 text-2xl font-display z-20">◆</div>
-      <div className="fixed bottom-4 left-4 text-sw-saber/15 text-2xl font-display z-20">◆</div>
-      <div className="fixed bottom-4 right-4 text-sw-saber/15 text-2xl font-display z-20">◆</div>
+      {/* Corner decorations — subtle organic dots */}
+      <div className="fixed top-8 left-4 text-white/8 text-lg z-20">○</div>
+      <div className="fixed top-8 right-4 text-white/8 text-lg z-20">○</div>
+      <div className="fixed bottom-4 left-4 text-white/8 text-lg z-20">○</div>
+      <div className="fixed bottom-4 right-4 text-white/8 text-lg z-20">○</div>
 
       <div className="relative z-10 container mx-auto px-6 py-20 max-w-3xl">
         
@@ -78,11 +78,11 @@ const Index = () => {
           <h1 className="text-5xl md:text-7xl font-display font-bold mb-5 holo-glow tracking-wider">
             VAIDIK
           </h1>
-          <p className="text-lg md:text-xl text-sw-holo font-display tracking-[0.25em] mb-5 font-light">
+          <p className="text-lg md:text-xl text-white/50 font-display tracking-[0.25em] mb-5 font-light">
             Apple Systems Developer & Maker
           </p>
-          <div className="w-40 h-px bg-gradient-to-r from-transparent via-sw-saber/40 to-transparent mx-auto my-6" />
-          <p className="text-sw-steel max-w-lg mx-auto font-body text-lg leading-relaxed tracking-wide">
+          <div className="w-40 h-px bg-gradient-to-r from-transparent via-white/15 to-transparent mx-auto my-6" />
+          <p className="text-white/40 max-w-lg mx-auto font-body text-lg leading-relaxed tracking-wide">
             iOS, macOS, visionOS developer. Building products, exploring Rust, 
             and diving into consciousness research.
           </p>
@@ -98,10 +98,10 @@ const Index = () => {
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="sw-card px-4 py-2.5 flex items-center gap-2.5 hover:scale-105 transition-transform text-sm"
+                className="sw-card px-4 py-2.5 flex items-center gap-2.5 hover:scale-105 transition-all text-sm"
               >
-                <span className="text-sw-saber">{link.icon}</span>
-                <span className="font-body font-medium tracking-wide">{link.name}</span>
+                <span className="text-white/50">{link.icon}</span>
+                <span className="font-body font-medium tracking-wide text-white/70">{link.name}</span>
               </a>
             ))}
           </div>
@@ -117,12 +117,12 @@ const Index = () => {
                 href={app.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="sw-card p-5 hover:scale-105 transition-transform block text-center scan-line-effect"
+                className="sw-card p-5 hover:scale-105 transition-all block text-center scan-line-effect"
               >
-                <h3 className="text-sw-saber font-display font-semibold text-sm mb-1.5 tracking-widest">{app.name}</h3>
-                <p className="text-sm text-sw-steel font-body leading-relaxed mb-2 tracking-wide">{app.desc}</p>
+                <h3 className="text-white/80 font-display font-semibold text-sm mb-1.5 tracking-widest">{app.name}</h3>
+                <p className="text-sm text-white/35 font-body leading-relaxed mb-2 tracking-wide">{app.desc}</p>
                 {app.isAppStore && (
-                  <div className="flex items-center justify-center gap-1.5 text-sw-holo/80 text-xs font-display tracking-[0.15em]">
+                  <div className="flex items-center justify-center gap-1.5 text-white/30 text-xs font-display tracking-[0.15em]">
                     <Apple className="w-3.5 h-3.5" />
                     <span>App Store</span>
                   </div>
@@ -135,17 +135,17 @@ const Index = () => {
         {/* Open Source */}
         <section className="mb-16">
           <h2 className="section-title">OPEN SOURCE</h2>
-          <p className="text-center text-sw-steel mb-6 font-body text-sm tracking-wide">Recent contributions to open-source projects</p>
+          <p className="text-center text-white/25 mb-6 font-body text-sm tracking-wide">Recent contributions to open-source projects</p>
           <div className="space-y-3">
             {opensource.map((item, index) => (
               <div key={index} className="sw-card p-4">
                 <div className="flex items-start justify-between gap-3 flex-wrap">
                   <div className="flex-1 min-w-0">
-                    <p className="text-sw-holo text-xs font-mono tracking-wider mb-0.5">{item.repo}</p>
-                    <h3 className="text-sw-star font-display font-semibold text-sm mb-1 tracking-wide">{item.title}</h3>
-                    <p className="text-xs text-sw-steel font-body leading-relaxed tracking-wide">{item.desc}</p>
+                    <p className="text-white/30 text-xs font-mono tracking-wider mb-0.5">{item.repo}</p>
+                    <h3 className="text-white/80 font-display font-semibold text-sm mb-1 tracking-wide">{item.title}</h3>
+                    <p className="text-xs text-white/30 font-body leading-relaxed tracking-wide">{item.desc}</p>
                   </div>
-                  <span className="px-2.5 py-0.5 text-xs rounded-sm merged-badge shrink-0">
+                  <span className="px-2.5 py-0.5 text-xs rounded-full merged-badge shrink-0">
                     {item.status}
                   </span>
                 </div>
@@ -173,36 +173,36 @@ const Index = () => {
         <section className="mb-16 text-center">
           <h2 className="section-title">LET'S COLLABORATE</h2>
           <div className="sw-card p-8 max-w-xl mx-auto scan-line-effect">
-            <p className="text-base mb-6 text-sw-steel font-body leading-relaxed tracking-wide">
+            <p className="text-base mb-6 text-white/35 font-body leading-relaxed tracking-wide">
               Building the future, one project at a time. 
               Open to collaboration on iOS/macOS projects, Rust development, 
               and innovative ideas.
             </p>
             <a
               href="mailto:vaidik50000@gmail.com"
-              className="inline-block px-6 py-2.5 sw-button rounded-md font-semibold text-xs"
+              className="inline-block px-6 py-2.5 sw-button rounded-full font-semibold text-xs"
             >
               GET IN TOUCH
             </a>
           </div>
         </section>
 
-        {/* Blueprint - At the bottom */}
+        {/* Blueprint — circular organism cell */}
         <section className="mb-12">
-          <div className="blueprint-container p-4 rounded-md max-w-sm mx-auto">
+          <div className="blueprint-container p-4 max-w-[200px] mx-auto aspect-square flex items-center justify-center">
             <img 
               src={deathStar} 
               alt="Death Star Blueprint Schematic" 
               className="w-full"
             />
           </div>
-          <p className="text-center text-sw-steel/50 mt-3 font-mono text-xs tracking-[0.15em]">
+          <p className="text-center text-white/15 mt-4 font-mono text-xs tracking-[0.2em]">
             "Do. Or do not. There is no try." — Yoda
           </p>
         </section>
 
         {/* Footer */}
-        <footer className="text-center text-sw-steel/40 text-xs py-6 border-t border-sw-saber/10">
+        <footer className="text-center text-white/15 text-xs py-6 border-t border-white/5">
           <p className="font-body tracking-wide">© 2024 Vaidik. Built with passion.</p>
         </footer>
       </div>
