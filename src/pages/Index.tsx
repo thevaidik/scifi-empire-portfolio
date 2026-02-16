@@ -1,5 +1,6 @@
 import { Github, Twitter, Youtube, Linkedin, Mail, BookOpen, Sparkles, Apple } from "lucide-react";
 import deathStar from "@/assets/death-star.png";
+import HeroScene3D from "@/components/HeroScene3D";
 
 const Index = () => {
   const links = [
@@ -64,6 +65,11 @@ const Index = () => {
 
       <div className="relative z-10 container mx-auto px-6 py-20 max-w-3xl">
         
+        {/* 3D Sentient Core */}
+        <section className="mb-12 -mx-6">
+          <HeroScene3D />
+        </section>
+
         {/* Hero */}
         <header className="text-center mb-20 animate-fade-in">
           <div className="scan-flourish mb-8">
