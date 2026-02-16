@@ -1,14 +1,15 @@
-import { useRef, useMemo } from "react";
+import { useRef, useMemo, useCallback } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Float, MeshDistortMaterial, Sphere, Stars } from "@react-three/drei";
 import * as THREE from "three";
 
 const SentientCore = () => {
   const coreRef = useRef<THREE.Mesh>(null);
+  const glowRef = useRef<THREE.Mesh>(null);
   const ringRef1 = useRef<THREE.Mesh>(null);
   const ringRef2 = useRef<THREE.Mesh>(null);
   const ringRef3 = useRef<THREE.Mesh>(null);
   const particlesRef = useRef<THREE.Points>(null);
+  const starsRef = useRef<THREE.Points>(null);
 
   const particleGeometry = useMemo(() => {
     const geo = new THREE.BufferGeometry();
@@ -25,11 +26,107 @@ const SentientCore = () => {
     return geo;
   }, []);
 
+  const starGeometry = useMemo(() => {
+    const geo = new THREE.BufferGeometry();
+    const positions = new Float32Array(1500 * 3);
+    for (let i = 0; i < 1500; i++) {
+      positions[i * 3] = (Math.random() - 0.5) * 100;
+      positions[i * 3 + 1] = (Math.random() - 0.5) * 100;
+      positions[i * 3 + 2] = (Math.random() - 0.5) * 100;
+    }
+    geo.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+    return geo;
+  }, []);
+
+  const coreMaterial = useMemo(
+    () =>
+      new THREE.MeshStandardMaterial({
+        color: new THREE.Color("#e8a517"),
+        emissive: new THREE.Color("#d4940a"),
+        emissiveIntensity: 0.8,
+        roughness: 0.1,
+        metalness: 0.9,
+        transparent: true,
+        opacity: 0.85,
+      }),
+    []
+  );
+
+  const glowMaterial = useMemo(
+    () =>
+      new THREE.MeshBasicMaterial({
+        color: new THREE.Color("#ffd700"),
+        transparent: true,
+        opacity: 0.3,
+      }),
+    []
+  );
+
+  const ringMat1 = useMemo(
+    () =>
+      new THREE.MeshBasicMaterial({
+        color: new THREE.Color("#e8a517"),
+        transparent: true,
+        opacity: 0.6,
+      }),
+    []
+  );
+
+  const ringMat2 = useMemo(
+    () =>
+      new THREE.MeshBasicMaterial({
+        color: new THREE.Color("#3b9fd4"),
+        transparent: true,
+        opacity: 0.4,
+      }),
+    []
+  );
+
+  const ringMat3 = useMemo(
+    () =>
+      new THREE.MeshBasicMaterial({
+        color: new THREE.Color("#e8a517"),
+        transparent: true,
+        opacity: 0.25,
+      }),
+    []
+  );
+
+  const particleMat = useMemo(
+    () =>
+      new THREE.PointsMaterial({
+        color: new THREE.Color("#e8a517"),
+        size: 0.02,
+        transparent: true,
+        opacity: 0.7,
+        sizeAttenuation: true,
+      }),
+    []
+  );
+
+  const starMat = useMemo(
+    () =>
+      new THREE.PointsMaterial({
+        color: new THREE.Color("#ddd8c4"),
+        size: 0.15,
+        transparent: true,
+        opacity: 0.6,
+        sizeAttenuation: true,
+      }),
+    []
+  );
+
   useFrame((state) => {
     const t = state.clock.elapsedTime;
     if (coreRef.current) {
       coreRef.current.rotation.y = t * 0.3;
       coreRef.current.rotation.x = Math.sin(t * 0.2) * 0.1;
+      const s = 1 + Math.sin(t * 1.5) * 0.05;
+      coreRef.current.scale.setScalar(s);
+    }
+    if (glowRef.current) {
+      const gs = 1 + Math.sin(t * 2) * 0.1;
+      glowRef.current.scale.setScalar(gs);
     }
     if (ringRef1.current) {
       ringRef1.current.rotation.x = t * 0.5;
@@ -46,112 +143,52 @@ const SentientCore = () => {
     if (particlesRef.current) {
       particlesRef.current.rotation.y = t * 0.05;
     }
+    if (starsRef.current) {
+      starsRef.current.rotation.y = t * 0.01;
+    }
   });
 
   return (
-    <group>
-      {/* Sentient Core Sphere */}
-      <Float speed={1.5} rotationIntensity={0.3} floatIntensity={0.5}>
-        <Sphere ref={coreRef} args={[0.8, 64, 64]}>
-          <MeshDistortMaterial
-            color="#e8a517"
-            emissive="#d4940a"
-            emissiveIntensity={0.8}
-            roughness={0.1}
-            metalness={0.9}
-            distort={0.25}
-            speed={2}
-            transparent
-            opacity={0.85}
-          />
-        </Sphere>
-      </Float>
+    <>
+      {/* Stars background */}
+      <points ref={starsRef} geometry={starGeometry} material={starMat} />
 
-      {/* Inner glow sphere */}
-      <Sphere args={[0.5, 32, 32]}>
-        <meshBasicMaterial color="#ffd700" transparent opacity={0.3} />
-      </Sphere>
+      {/* Core */}
+      <mesh ref={coreRef} geometry={new THREE.SphereGeometry(0.8, 64, 64)} material={coreMaterial} />
 
-      {/* Orbital Ring 1 */}
-      <mesh ref={ringRef1}>
-        <torusGeometry args={[1.4, 0.015, 16, 100]} />
-        <meshStandardMaterial
-          color="#e8a517"
-          emissive="#e8a517"
-          emissiveIntensity={2}
-          transparent
-          opacity={0.6}
-        />
-      </mesh>
+      {/* Inner glow */}
+      <mesh ref={glowRef} geometry={new THREE.SphereGeometry(0.5, 32, 32)} material={glowMaterial} />
 
-      {/* Orbital Ring 2 */}
-      <mesh ref={ringRef2}>
-        <torusGeometry args={[1.7, 0.01, 16, 100]} />
-        <meshStandardMaterial
-          color="#3b9fd4"
-          emissive="#3b9fd4"
-          emissiveIntensity={2}
-          transparent
-          opacity={0.4}
-        />
-      </mesh>
+      {/* Orbital rings */}
+      <mesh ref={ringRef1} geometry={new THREE.TorusGeometry(1.4, 0.015, 16, 100)} material={ringMat1} />
+      <mesh ref={ringRef2} geometry={new THREE.TorusGeometry(1.7, 0.01, 16, 100)} material={ringMat2} />
+      <mesh ref={ringRef3} geometry={new THREE.TorusGeometry(2.0, 0.008, 16, 100)} material={ringMat3} />
 
-      {/* Orbital Ring 3 */}
-      <mesh ref={ringRef3}>
-        <torusGeometry args={[2.0, 0.008, 16, 100]} />
-        <meshStandardMaterial
-          color="#e8a517"
-          emissive="#e8a517"
-          emissiveIntensity={1.5}
-          transparent
-          opacity={0.25}
-        />
-      </mesh>
+      {/* Particles */}
+      <points ref={particlesRef} geometry={particleGeometry} material={particleMat} />
 
-      {/* Floating data particles */}
-      <points ref={particlesRef} geometry={particleGeometry}>
-        <pointsMaterial
-          color="#e8a517"
-          size={0.02}
-          transparent
-          opacity={0.7}
-          sizeAttenuation
-        />
-      </points>
-
-      {/* Volumetric light beams */}
-      <pointLight position={[0, 0, 0]} color="#e8a517" intensity={3} distance={8} />
-      <pointLight position={[2, 1, 1]} color="#3b9fd4" intensity={1} distance={6} />
-      <pointLight position={[-2, -1, -1]} color="#e8a517" intensity={0.8} distance={6} />
-    </group>
+      {/* Lights */}
+      <ambientLight intensity={0.15} />
+      <pointLight position={[0, 0, 0]} color="#e8a517" intensity={3} />
+      <pointLight position={[2, 1, 1]} color="#3b9fd4" intensity={1} />
+      <pointLight position={[-2, -1, -1]} color="#e8a517" intensity={0.8} />
+    </>
   );
 };
 
 const HeroScene3D = () => {
   return (
     <div className="relative w-full h-[500px] md:h-[600px]">
-      {/* 3D Canvas */}
       <Canvas
         camera={{ position: [0, 0, 5], fov: 45 }}
         style={{ background: "transparent" }}
         gl={{ alpha: true, antialias: true }}
       >
-        <ambientLight intensity={0.15} />
-        <Stars
-          radius={50}
-          depth={50}
-          count={1500}
-          factor={3}
-          saturation={0.5}
-          fade
-          speed={0.5}
-        />
         <SentientCore />
       </Canvas>
 
       {/* Overlay HUD text */}
       <div className="absolute inset-0 pointer-events-none flex flex-col items-center justify-end pb-8">
-        {/* Protocol badges */}
         <div className="flex flex-wrap justify-center gap-2 mb-4">
           <span className="px-3 py-1 text-[10px] font-mono tracking-[0.2em] border border-sw-saber/20 bg-sw-void/80 text-sw-saber/70 rounded-sm backdrop-blur-sm">
             SENTIENT 3D CORE
@@ -168,11 +205,6 @@ const HeroScene3D = () => {
             HYPER-FUTURISTIC MCP-2099
           </span>
         </div>
-      </div>
-
-      {/* Scan line overlay */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="w-full h-px bg-gradient-to-r from-transparent via-sw-saber/20 to-transparent animate-scan-line" />
       </div>
 
       {/* Corner HUD brackets */}
