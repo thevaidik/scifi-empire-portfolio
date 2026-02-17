@@ -19,15 +19,17 @@ export default {
     },
     extend: {
       colors: {
-        sw: {
-          void: "hsl(var(--sw-void))",
-          nebula: "hsl(var(--sw-nebula))",
-          star: "hsl(var(--sw-star))",
-          saber: "hsl(var(--sw-saber))",
-          force: "hsl(var(--sw-force))",
-          holo: "hsl(var(--sw-holo))",
-          steel: "hsl(var(--sw-steel))",
-          ember: "hsl(var(--sw-ember))",
+        bio: {
+          abyss: "hsl(var(--bio-abyss))",
+          deep: "hsl(var(--bio-deep))",
+          red: "hsl(var(--bio-red))",
+          "red-glow": "hsl(var(--bio-red-glow))",
+          cyan: "hsl(var(--bio-cyan))",
+          "cyan-glow": "hsl(var(--bio-cyan-glow))",
+          teal: "hsl(var(--bio-teal))",
+          "teal-deep": "hsl(var(--bio-teal-deep))",
+          text: "hsl(var(--bio-text))",
+          "text-dim": "hsl(var(--bio-text-dim))",
         },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
