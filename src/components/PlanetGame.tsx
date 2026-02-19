@@ -75,45 +75,156 @@ const PlanetGame = ({ onBuildingProximity }: PlanetGameProps) => {
     const camera = new THREE.PerspectiveCamera(60, container.clientWidth / container.clientHeight, 0.1, 200);
 
     // Lights
-    const ambientLight = new THREE.AmbientLight(0x1a2040, 0.6);
+    const ambientLight = new THREE.AmbientLight(0x8899bb, 0.8);
     scene.add(ambientLight);
 
-    const dirLight = new THREE.DirectionalLight(0x4488cc, 0.4);
+    const dirLight = new THREE.DirectionalLight(0xffeedd, 1.2);
     dirLight.position.set(10, 15, 10);
     scene.add(dirLight);
 
-    // Planet
+    const hemiLight = new THREE.HemisphereLight(0x87ceeb, 0x3a7d44, 0.6);
+    scene.add(hemiLight);
+
+    // Planet — green grassy surface
     const planetGeo = new THREE.SphereGeometry(PLANET_RADIUS, 64, 64);
+
+    // Generate a procedural grass texture
+    const grassCanvas = document.createElement('canvas');
+    grassCanvas.width = 512;
+    grassCanvas.height = 512;
+    const gCtx = grassCanvas.getContext('2d')!;
+    // Base green
+    const gradient = gCtx.createRadialGradient(256, 256, 0, 256, 256, 360);
+    gradient.addColorStop(0, '#4a8c3f');
+    gradient.addColorStop(0.5, '#3a7d44');
+    gradient.addColorStop(1, '#2d6a30');
+    gCtx.fillStyle = gradient;
+    gCtx.fillRect(0, 0, 512, 512);
+    // Grass texture noise
+    for (let i = 0; i < 8000; i++) {
+      const x = Math.random() * 512;
+      const y = Math.random() * 512;
+      const shade = Math.random();
+      gCtx.fillStyle = shade > 0.5
+        ? `rgba(${60 + Math.random() * 40}, ${120 + Math.random() * 60}, ${40 + Math.random() * 30}, ${0.3 + Math.random() * 0.4})`
+        : `rgba(${30 + Math.random() * 30}, ${80 + Math.random() * 40}, ${20 + Math.random() * 20}, ${0.2 + Math.random() * 0.3})`;
+      gCtx.fillRect(x, y, 1 + Math.random() * 2, 1 + Math.random() * 3);
+    }
+    // Dirt patches
+    for (let i = 0; i < 15; i++) {
+      const x = Math.random() * 512;
+      const y = Math.random() * 512;
+      const r = 8 + Math.random() * 20;
+      gCtx.fillStyle = `rgba(${100 + Math.random() * 40}, ${80 + Math.random() * 30}, ${40 + Math.random() * 20}, 0.3)`;
+      gCtx.beginPath();
+      gCtx.arc(x, y, r, 0, Math.PI * 2);
+      gCtx.fill();
+    }
+
+    const grassTex = new THREE.CanvasTexture(grassCanvas);
+    grassTex.wrapS = THREE.RepeatWrapping;
+    grassTex.wrapT = THREE.RepeatWrapping;
+
     const planetMat = new THREE.MeshStandardMaterial({
-      color: 0x0a0e1a,
-      roughness: 0.8,
-      metalness: 0.2,
-      emissive: 0x061020,
-      emissiveIntensity: 0.3,
+      map: grassTex,
+      color: 0x4a8c3f,
+      roughness: 0.9,
+      metalness: 0.05,
     });
     const planet = new THREE.Mesh(planetGeo, planetMat);
     scene.add(planet);
 
-    // Planet grid lines
-    const gridMat = new THREE.LineBasicMaterial({ color: 0x00d9ff, transparent: true, opacity: 0.06 });
-    for (let i = 1; i < 8; i++) {
-      const ringGeo = new THREE.RingGeometry(
-        PLANET_RADIUS * Math.sin((i * Math.PI) / 8) - 0.01,
-        PLANET_RADIUS * Math.sin((i * Math.PI) / 8) + 0.01,
-        64
-      );
-      const ring = new THREE.Mesh(ringGeo, new THREE.MeshBasicMaterial({ color: 0x00d9ff, transparent: true, opacity: 0.04, side: THREE.DoubleSide }));
-      ring.position.y = PLANET_RADIUS * Math.cos((i * Math.PI) / 8);
-      ring.rotation.x = -Math.PI / 2;
-      planet.add(ring);
+    // Grass blades — instanced cones on the surface
+    const grassBladeGeo = new THREE.ConeGeometry(0.02, 0.15, 4);
+    const grassBladeMat = new THREE.MeshStandardMaterial({
+      color: 0x5aaa4a,
+      roughness: 0.8,
+      metalness: 0.0,
+    });
+    const grassCount = 1800;
+    const grassInstanced = new THREE.InstancedMesh(grassBladeGeo, grassBladeMat, grassCount);
+    const dummy = new THREE.Object3D();
+    for (let i = 0; i < grassCount; i++) {
+      const t = Math.random() * Math.PI * 2;
+      const p = Math.acos(2 * Math.random() - 1);
+      const surfacePos = sphericalToCartesian(t, p, PLANET_RADIUS);
+      const normal = surfacePos.clone().normalize();
+      dummy.position.copy(surfacePos.clone().add(normal.clone().multiplyScalar(0.05)));
+      dummy.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), normal);
+      // Random tilt for organic feel
+      dummy.rotateX((Math.random() - 0.5) * 0.3);
+      dummy.rotateZ((Math.random() - 0.5) * 0.3);
+      dummy.scale.set(0.6 + Math.random() * 0.8, 0.5 + Math.random() * 1.2, 0.6 + Math.random() * 0.8);
+      dummy.updateMatrix();
+      grassInstanced.setMatrixAt(i, dummy.matrix);
+      // Vary green shades
+      const greenShade = new THREE.Color().setHSL(0.28 + Math.random() * 0.08, 0.5 + Math.random() * 0.3, 0.25 + Math.random() * 0.2);
+      grassInstanced.setColorAt(i, greenShade);
+    }
+    grassInstanced.instanceColor!.needsUpdate = true;
+    scene.add(grassInstanced);
+
+    // Small rocks scattered on surface
+    const rockGeo = new THREE.DodecahedronGeometry(0.06, 0);
+    const rockMat = new THREE.MeshStandardMaterial({ color: 0x888888, roughness: 1.0 });
+    for (let i = 0; i < 40; i++) {
+      const t = Math.random() * Math.PI * 2;
+      const p = Math.acos(2 * Math.random() - 1);
+      const pos = sphericalToCartesian(t, p, PLANET_RADIUS);
+      const normal = pos.clone().normalize();
+      const rock = new THREE.Mesh(rockGeo, rockMat.clone());
+      (rock.material as THREE.MeshStandardMaterial).color.setHSL(0, 0, 0.35 + Math.random() * 0.25);
+      rock.position.copy(pos.clone().add(normal.clone().multiplyScalar(0.02)));
+      rock.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), normal);
+      rock.scale.setScalar(0.5 + Math.random() * 1.5);
+      scene.add(rock);
     }
 
-    // Planet glow
-    const glowGeo = new THREE.SphereGeometry(PLANET_RADIUS * 1.02, 32, 32);
+    // Trees — simple trunk + sphere canopy
+    const trunkGeo = new THREE.CylinderGeometry(0.03, 0.04, 0.25, 6);
+    const trunkMat = new THREE.MeshStandardMaterial({ color: 0x6b4226, roughness: 0.9 });
+    const canopyGeo = new THREE.SphereGeometry(0.15, 8, 6);
+    const canopyColors = [0x2d8c3f, 0x3a9e4a, 0x1f7a2f, 0x4aaa55];
+    for (let i = 0; i < 25; i++) {
+      const t = Math.random() * Math.PI * 2;
+      const p = Math.acos(2 * Math.random() - 1);
+      const pos = sphericalToCartesian(t, p, PLANET_RADIUS);
+      const normal = pos.clone().normalize();
+
+      // Check not too close to buildings
+      let tooClose = false;
+      for (const b of BUILDINGS) {
+        const bPos = sphericalToCartesian(b.theta, b.phi, PLANET_RADIUS);
+        if (pos.distanceTo(bPos) < 1.2) { tooClose = true; break; }
+      }
+      if (tooClose) continue;
+
+      const treeGroup = new THREE.Group();
+      treeGroup.position.copy(pos);
+      treeGroup.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), normal);
+
+      const trunk = new THREE.Mesh(trunkGeo, trunkMat);
+      trunk.position.y = 0.125;
+      treeGroup.add(trunk);
+
+      const canopyMat = new THREE.MeshStandardMaterial({
+        color: canopyColors[Math.floor(Math.random() * canopyColors.length)],
+        roughness: 0.8,
+      });
+      const canopy = new THREE.Mesh(canopyGeo, canopyMat);
+      canopy.position.y = 0.3 + Math.random() * 0.05;
+      canopy.scale.setScalar(0.7 + Math.random() * 0.6);
+      treeGroup.add(canopy);
+
+      scene.add(treeGroup);
+    }
+
+    // Atmosphere glow
+    const glowGeo = new THREE.SphereGeometry(PLANET_RADIUS * 1.03, 32, 32);
     const glowMat = new THREE.MeshBasicMaterial({
-      color: 0x00d9ff,
+      color: 0x87ceeb,
       transparent: true,
-      opacity: 0.03,
+      opacity: 0.06,
       side: THREE.BackSide,
     });
     scene.add(new THREE.Mesh(glowGeo, glowMat));
