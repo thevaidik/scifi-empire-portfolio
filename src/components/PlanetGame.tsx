@@ -15,12 +15,12 @@ interface PlanetGameProps {
 }
 
 const PLANET_RADIUS = 5;
-const CHAR_HEIGHT = 0.4;
-const CHAR_RADIUS = 0.15;
-const MOVE_SPEED = 0.018;
-const CAMERA_DISTANCE = 3;
-const CAMERA_HEIGHT = 1.5;
+const MOVE_SPEED = 0.015;
+const TURN_SPEED = 0.03;
+const CAMERA_DISTANCE = 2.8;
+const CAMERA_HEIGHT_OFFSET = 1.2;
 const PROXIMITY_THRESHOLD = 1.8;
+const DRONE_HOVER = 0.35;
 
 const BUILDINGS: Building[] = [
   { id: 'hero', name: 'HQ TOWER', theta: 0, phi: Math.PI / 3, color: 0xff0033, glowColor: 0xff3366 },
@@ -44,7 +44,11 @@ const PlanetGame = ({ onBuildingProximity }: PlanetGameProps) => {
   const keysRef = useRef<Set<string>>(new Set());
   const charThetaRef = useRef(Math.PI / 6);
   const charPhiRef = useRef(Math.PI / 2.5);
+  const headingRef = useRef(0); // heading angle on the tangent plane
   const activeBuildingRef = useRef<string | null>(null);
+  const joystickRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
+  const joystickActiveRef = useRef(false);
+  const joystickTouchIdRef = useRef<number | null>(null);
 
   const handleKeyDown = useCallback((e: KeyboardEvent) => {
     keysRef.current.add(e.key.toLowerCase());
@@ -75,32 +79,24 @@ const PlanetGame = ({ onBuildingProximity }: PlanetGameProps) => {
     const camera = new THREE.PerspectiveCamera(60, container.clientWidth / container.clientHeight, 0.1, 200);
 
     // Lights
-    const ambientLight = new THREE.AmbientLight(0x8899bb, 0.8);
-    scene.add(ambientLight);
-
+    scene.add(new THREE.AmbientLight(0x8899bb, 0.8));
     const dirLight = new THREE.DirectionalLight(0xffeedd, 1.2);
     dirLight.position.set(10, 15, 10);
     scene.add(dirLight);
+    scene.add(new THREE.HemisphereLight(0x87ceeb, 0x3a7d44, 0.6));
 
-    const hemiLight = new THREE.HemisphereLight(0x87ceeb, 0x3a7d44, 0.6);
-    scene.add(hemiLight);
-
-    // Planet — green grassy surface
+    // ====== PLANET (stationary at origin) ======
     const planetGeo = new THREE.SphereGeometry(PLANET_RADIUS, 64, 64);
-
-    // Generate a procedural grass texture
     const grassCanvas = document.createElement('canvas');
     grassCanvas.width = 512;
     grassCanvas.height = 512;
     const gCtx = grassCanvas.getContext('2d')!;
-    // Base green
     const gradient = gCtx.createRadialGradient(256, 256, 0, 256, 256, 360);
     gradient.addColorStop(0, '#4a8c3f');
     gradient.addColorStop(0.5, '#3a7d44');
     gradient.addColorStop(1, '#2d6a30');
     gCtx.fillStyle = gradient;
     gCtx.fillRect(0, 0, 512, 512);
-    // Grass texture noise
     for (let i = 0; i < 8000; i++) {
       const x = Math.random() * 512;
       const y = Math.random() * 512;
@@ -110,7 +106,6 @@ const PlanetGame = ({ onBuildingProximity }: PlanetGameProps) => {
         : `rgba(${30 + Math.random() * 30}, ${80 + Math.random() * 40}, ${20 + Math.random() * 20}, ${0.2 + Math.random() * 0.3})`;
       gCtx.fillRect(x, y, 1 + Math.random() * 2, 1 + Math.random() * 3);
     }
-    // Dirt patches
     for (let i = 0; i < 15; i++) {
       const x = Math.random() * 512;
       const y = Math.random() * 512;
@@ -120,27 +115,16 @@ const PlanetGame = ({ onBuildingProximity }: PlanetGameProps) => {
       gCtx.arc(x, y, r, 0, Math.PI * 2);
       gCtx.fill();
     }
-
     const grassTex = new THREE.CanvasTexture(grassCanvas);
     grassTex.wrapS = THREE.RepeatWrapping;
     grassTex.wrapT = THREE.RepeatWrapping;
-
-    const planetMat = new THREE.MeshStandardMaterial({
-      map: grassTex,
-      color: 0x4a8c3f,
-      roughness: 0.9,
-      metalness: 0.05,
-    });
+    const planetMat = new THREE.MeshStandardMaterial({ map: grassTex, color: 0x4a8c3f, roughness: 0.9, metalness: 0.05 });
     const planet = new THREE.Mesh(planetGeo, planetMat);
     scene.add(planet);
 
-    // Grass blades — instanced cones on the surface
+    // Grass blades
     const grassBladeGeo = new THREE.ConeGeometry(0.02, 0.15, 4);
-    const grassBladeMat = new THREE.MeshStandardMaterial({
-      color: 0x5aaa4a,
-      roughness: 0.8,
-      metalness: 0.0,
-    });
+    const grassBladeMat = new THREE.MeshStandardMaterial({ color: 0x5aaa4a, roughness: 0.8 });
     const grassCount = 1800;
     const grassInstanced = new THREE.InstancedMesh(grassBladeGeo, grassBladeMat, grassCount);
     const dummy = new THREE.Object3D();
@@ -151,20 +135,17 @@ const PlanetGame = ({ onBuildingProximity }: PlanetGameProps) => {
       const normal = surfacePos.clone().normalize();
       dummy.position.copy(surfacePos.clone().add(normal.clone().multiplyScalar(0.05)));
       dummy.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), normal);
-      // Random tilt for organic feel
       dummy.rotateX((Math.random() - 0.5) * 0.3);
       dummy.rotateZ((Math.random() - 0.5) * 0.3);
       dummy.scale.set(0.6 + Math.random() * 0.8, 0.5 + Math.random() * 1.2, 0.6 + Math.random() * 0.8);
       dummy.updateMatrix();
       grassInstanced.setMatrixAt(i, dummy.matrix);
-      // Vary green shades
-      const greenShade = new THREE.Color().setHSL(0.28 + Math.random() * 0.08, 0.5 + Math.random() * 0.3, 0.25 + Math.random() * 0.2);
-      grassInstanced.setColorAt(i, greenShade);
+      grassInstanced.setColorAt(i, new THREE.Color().setHSL(0.28 + Math.random() * 0.08, 0.5 + Math.random() * 0.3, 0.25 + Math.random() * 0.2));
     }
     grassInstanced.instanceColor!.needsUpdate = true;
     scene.add(grassInstanced);
 
-    // Small rocks scattered on surface
+    // Rocks
     const rockGeo = new THREE.DodecahedronGeometry(0.06, 0);
     const rockMat = new THREE.MeshStandardMaterial({ color: 0x888888, roughness: 1.0 });
     for (let i = 0; i < 40; i++) {
@@ -180,7 +161,7 @@ const PlanetGame = ({ onBuildingProximity }: PlanetGameProps) => {
       scene.add(rock);
     }
 
-    // Trees — simple trunk + sphere canopy
+    // Trees
     const trunkGeo = new THREE.CylinderGeometry(0.03, 0.04, 0.25, 6);
     const trunkMat = new THREE.MeshStandardMaterial({ color: 0x6b4226, roughness: 0.9 });
     const canopyGeo = new THREE.SphereGeometry(0.15, 8, 6);
@@ -190,89 +171,57 @@ const PlanetGame = ({ onBuildingProximity }: PlanetGameProps) => {
       const p = Math.acos(2 * Math.random() - 1);
       const pos = sphericalToCartesian(t, p, PLANET_RADIUS);
       const normal = pos.clone().normalize();
-
-      // Check not too close to buildings
       let tooClose = false;
       for (const b of BUILDINGS) {
         const bPos = sphericalToCartesian(b.theta, b.phi, PLANET_RADIUS);
         if (pos.distanceTo(bPos) < 1.2) { tooClose = true; break; }
       }
       if (tooClose) continue;
-
       const treeGroup = new THREE.Group();
       treeGroup.position.copy(pos);
       treeGroup.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), normal);
-
       const trunk = new THREE.Mesh(trunkGeo, trunkMat);
       trunk.position.y = 0.125;
       treeGroup.add(trunk);
-
-      const canopyMat = new THREE.MeshStandardMaterial({
-        color: canopyColors[Math.floor(Math.random() * canopyColors.length)],
-        roughness: 0.8,
-      });
+      const canopyMat = new THREE.MeshStandardMaterial({ color: canopyColors[Math.floor(Math.random() * canopyColors.length)], roughness: 0.8 });
       const canopy = new THREE.Mesh(canopyGeo, canopyMat);
       canopy.position.y = 0.3 + Math.random() * 0.05;
       canopy.scale.setScalar(0.7 + Math.random() * 0.6);
       treeGroup.add(canopy);
-
       scene.add(treeGroup);
     }
 
     // Atmosphere glow
     const glowGeo = new THREE.SphereGeometry(PLANET_RADIUS * 1.03, 32, 32);
-    const glowMat = new THREE.MeshBasicMaterial({
-      color: 0x87ceeb,
-      transparent: true,
-      opacity: 0.06,
-      side: THREE.BackSide,
-    });
+    const glowMat = new THREE.MeshBasicMaterial({ color: 0x87ceeb, transparent: true, opacity: 0.06, side: THREE.BackSide });
     scene.add(new THREE.Mesh(glowGeo, glowMat));
 
-    // Buildings
+    // ====== BUILDINGS ======
     const buildingMeshes: { mesh: THREE.Group; id: string; position: THREE.Vector3 }[] = [];
-
     BUILDINGS.forEach((b) => {
       const pos = sphericalToCartesian(b.theta, b.phi, PLANET_RADIUS);
       const up = pos.clone().normalize();
-
       const group = new THREE.Group();
       group.position.copy(pos);
+      group.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), up);
 
-      // Orient building outward
-      const quaternion = new THREE.Quaternion();
-      quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), up);
-      group.setRotationFromQuaternion(quaternion);
-
-      // Building body
       const bHeight = 0.6 + Math.random() * 0.3;
       const bWidth = 0.3 + Math.random() * 0.15;
       const bodyGeo = new THREE.BoxGeometry(bWidth, bHeight, bWidth);
       const bodyMat = new THREE.MeshStandardMaterial({
-        color: 0x111828,
-        emissive: b.color,
-        emissiveIntensity: 0.15,
-        roughness: 0.5,
-        metalness: 0.6,
-        transparent: true,
-        opacity: 0.9,
+        color: 0x111828, emissive: b.color, emissiveIntensity: 0.15,
+        roughness: 0.5, metalness: 0.6, transparent: true, opacity: 0.9,
       });
       const body = new THREE.Mesh(bodyGeo, bodyMat);
       body.position.y = bHeight / 2;
       group.add(body);
 
-      // Roof accent
       const roofGeo = new THREE.BoxGeometry(bWidth + 0.05, 0.05, bWidth + 0.05);
-      const roofMat = new THREE.MeshStandardMaterial({
-        color: b.color,
-        emissive: b.color,
-        emissiveIntensity: 0.5,
-      });
+      const roofMat = new THREE.MeshStandardMaterial({ color: b.color, emissive: b.color, emissiveIntensity: 0.5 });
       const roof = new THREE.Mesh(roofGeo, roofMat);
       roof.position.y = bHeight;
       group.add(roof);
 
-      // Window lines
       for (let w = 0; w < 3; w++) {
         const windowGeo = new THREE.BoxGeometry(bWidth * 0.6, 0.02, 0.01);
         const windowMat = new THREE.MeshBasicMaterial({ color: b.glowColor, transparent: true, opacity: 0.4 });
@@ -281,25 +230,21 @@ const PlanetGame = ({ onBuildingProximity }: PlanetGameProps) => {
         group.add(windowMesh);
       }
 
-      // Point light
       const pointLight = new THREE.PointLight(b.glowColor, 0.5, 3);
       pointLight.position.y = bHeight + 0.3;
       group.add(pointLight);
 
-      // Label sprite
+      // Label
       const canvas = document.createElement('canvas');
-      canvas.width = 256;
-      canvas.height = 64;
+      canvas.width = 256; canvas.height = 64;
       const ctx = canvas.getContext('2d')!;
-      ctx.fillStyle = 'transparent';
-      ctx.fillRect(0, 0, 256, 64);
+      ctx.clearRect(0, 0, 256, 64);
       ctx.font = 'bold 20px Orbitron, sans-serif';
       ctx.textAlign = 'center';
       ctx.fillStyle = '#00d9ff';
       ctx.shadowColor = '#00d9ff';
       ctx.shadowBlur = 10;
       ctx.fillText(b.name, 128, 40);
-
       const tex = new THREE.CanvasTexture(canvas);
       const spriteMat = new THREE.SpriteMaterial({ map: tex, transparent: true, opacity: 0.8 });
       const sprite = new THREE.Sprite(spriteMat);
@@ -311,40 +256,77 @@ const PlanetGame = ({ onBuildingProximity }: PlanetGameProps) => {
       buildingMeshes.push({ mesh: group, id: b.id, position: pos.clone() });
     });
 
-    // Character
-    const charGroup = new THREE.Group();
-    // Body capsule
-    const capsuleGeo = new THREE.CapsuleGeometry(CHAR_RADIUS, CHAR_HEIGHT, 8, 16);
-    const capsuleMat = new THREE.MeshStandardMaterial({
-      color: 0xffffff,
-      emissive: 0x00d9ff,
-      emissiveIntensity: 0.3,
-      roughness: 0.3,
-      metalness: 0.7,
+    // ====== DRONE CHARACTER ======
+    const droneGroup = new THREE.Group();
+
+    // Main body - flat disc
+    const bodyGeo = new THREE.CylinderGeometry(0.18, 0.18, 0.06, 16);
+    const bodyMat = new THREE.MeshStandardMaterial({ color: 0x222222, roughness: 0.3, metalness: 0.8 });
+    const droneBody = new THREE.Mesh(bodyGeo, bodyMat);
+    droneBody.position.y = 0;
+    droneGroup.add(droneBody);
+
+    // Top dome / camera eye
+    const domeGeo = new THREE.SphereGeometry(0.08, 12, 8, 0, Math.PI * 2, 0, Math.PI / 2);
+    const domeMat = new THREE.MeshStandardMaterial({ color: 0x00d9ff, emissive: 0x00d9ff, emissiveIntensity: 0.4, roughness: 0.1, metalness: 0.9 });
+    const dome = new THREE.Mesh(domeGeo, domeMat);
+    dome.position.y = 0.03;
+    droneGroup.add(dome);
+
+    // Front indicator (so you can see which way it faces)
+    const frontGeo = new THREE.BoxGeometry(0.04, 0.02, 0.06);
+    const frontMat = new THREE.MeshStandardMaterial({ color: 0xff0033, emissive: 0xff0033, emissiveIntensity: 0.6 });
+    const frontIndicator = new THREE.Mesh(frontGeo, frontMat);
+    frontIndicator.position.set(0, 0, 0.18);
+    droneGroup.add(frontIndicator);
+
+    // 4 arms + propellers
+    const armGeo = new THREE.BoxGeometry(0.03, 0.02, 0.2);
+    const armMat = new THREE.MeshStandardMaterial({ color: 0x333333, roughness: 0.4, metalness: 0.7 });
+    const propGeo = new THREE.BoxGeometry(0.15, 0.005, 0.02);
+    const propMat = new THREE.MeshStandardMaterial({ color: 0x666666, roughness: 0.3, metalness: 0.5 });
+
+    const propellers: THREE.Mesh[] = [];
+    const armAngles = [Math.PI / 4, (3 * Math.PI) / 4, (5 * Math.PI) / 4, (7 * Math.PI) / 4];
+    const armLength = 0.22;
+
+    armAngles.forEach((angle) => {
+      const arm = new THREE.Mesh(armGeo, armMat);
+      const ax = Math.sin(angle) * armLength * 0.5;
+      const az = Math.cos(angle) * armLength * 0.5;
+      arm.position.set(ax, 0, az);
+      arm.rotation.y = -angle;
+      droneGroup.add(arm);
+
+      // Motor hub
+      const hubGeo = new THREE.CylinderGeometry(0.02, 0.02, 0.03, 8);
+      const hubMat = new THREE.MeshStandardMaterial({ color: 0x444444, metalness: 0.8 });
+      const hub = new THREE.Mesh(hubGeo, hubMat);
+      hub.position.set(Math.sin(angle) * armLength, 0.02, Math.cos(angle) * armLength);
+      droneGroup.add(hub);
+
+      // Propeller blade
+      const prop = new THREE.Mesh(propGeo, propMat);
+      prop.position.set(Math.sin(angle) * armLength, 0.04, Math.cos(angle) * armLength);
+      droneGroup.add(prop);
+      propellers.push(prop);
     });
-    const capsule = new THREE.Mesh(capsuleGeo, capsuleMat);
-    capsule.position.y = CHAR_HEIGHT / 2 + CHAR_RADIUS;
-    charGroup.add(capsule);
 
-    // Visor
-    const visorGeo = new THREE.SphereGeometry(CHAR_RADIUS * 0.6, 8, 8, 0, Math.PI);
-    const visorMat = new THREE.MeshStandardMaterial({
-      color: 0xff0033,
-      emissive: 0xff0033,
-      emissiveIntensity: 0.5,
-      roughness: 0.1,
+    // Drone light
+    const droneLight = new THREE.PointLight(0x00d9ff, 0.5, 2.5);
+    droneLight.position.y = -0.1;
+    droneGroup.add(droneLight);
+
+    // Landing skids (small)
+    const skidGeo = new THREE.CylinderGeometry(0.008, 0.008, 0.12, 6);
+    const skidMat = new THREE.MeshStandardMaterial({ color: 0x444444 });
+    [-1, 1].forEach(side => {
+      const skid = new THREE.Mesh(skidGeo, skidMat);
+      skid.position.set(side * 0.1, -0.06, 0);
+      droneGroup.add(skid);
     });
-    const visor = new THREE.Mesh(visorGeo, visorMat);
-    visor.position.set(0, CHAR_HEIGHT / 2 + CHAR_RADIUS + 0.1, CHAR_RADIUS * 0.5);
-    visor.rotation.y = Math.PI;
-    charGroup.add(visor);
 
-    // Character glow
-    const charLight = new THREE.PointLight(0x00d9ff, 0.4, 2);
-    charLight.position.y = CHAR_HEIGHT;
-    charGroup.add(charLight);
-
-    scene.add(charGroup);
+    scene.add(droneGroup);
 
     // Starfield
     const starCount = 1500;
@@ -362,66 +344,134 @@ const PlanetGame = ({ onBuildingProximity }: PlanetGameProps) => {
     const starMat = new THREE.PointsMaterial({ color: 0xffffff, size: 0.15, transparent: true, opacity: 0.6 });
     scene.add(new THREE.Points(starGeo, starMat));
 
-    // Animation loop
+    // ====== ANIMATION LOOP ======
     const clock = new THREE.Clock();
     let animId: number;
+    const camPosSmooth = new THREE.Vector3();
+    let camInitialized = false;
 
     const animate = () => {
       animId = requestAnimationFrame(animate);
-      const dt = clock.getDelta();
       const time = clock.getElapsedTime();
 
-      // Movement
+      // --- Input ---
       const keys = keysRef.current;
-      let dTheta = 0;
-      let dPhi = 0;
-      if (keys.has('w') || keys.has('arrowup')) dPhi -= MOVE_SPEED;
-      if (keys.has('s') || keys.has('arrowdown')) dPhi += MOVE_SPEED;
-      if (keys.has('a') || keys.has('arrowleft')) dTheta -= MOVE_SPEED;
-      if (keys.has('d') || keys.has('arrowright')) dTheta += MOVE_SPEED;
+      let moveForward = 0;
+      let turnInput = 0;
 
-      charThetaRef.current += dTheta;
-      charPhiRef.current = Math.max(0.3, Math.min(Math.PI - 0.3, charPhiRef.current + dPhi));
+      // Keyboard
+      if (keys.has('w') || keys.has('arrowup')) moveForward += 1;
+      if (keys.has('s') || keys.has('arrowdown')) moveForward -= 1;
+      if (keys.has('a') || keys.has('arrowleft')) turnInput -= 1;
+      if (keys.has('d') || keys.has('arrowright')) turnInput += 1;
 
+      // Joystick (overrides if active)
+      if (joystickActiveRef.current) {
+        const jx = joystickRef.current.x;
+        const jy = joystickRef.current.y;
+        moveForward += -jy; // up on joystick = forward
+        turnInput += jx;
+      }
+
+      // Clamp
+      moveForward = Math.max(-1, Math.min(1, moveForward));
+      turnInput = Math.max(-1, Math.min(1, turnInput));
+
+      // --- Update heading ---
+      headingRef.current += turnInput * TURN_SPEED;
+
+      // --- Move character on sphere surface ---
+      if (Math.abs(moveForward) > 0.01) {
+        // Current position on sphere
+        const currentPos = sphericalToCartesian(charThetaRef.current, charPhiRef.current, PLANET_RADIUS);
+        const up = currentPos.clone().normalize();
+
+        // Compute local tangent basis at current position
+        // "east" direction (d/dTheta)
+        const east = new THREE.Vector3(
+          -Math.sin(charPhiRef.current) * Math.sin(charThetaRef.current),
+          0,
+          Math.sin(charPhiRef.current) * Math.cos(charThetaRef.current)
+        ).normalize();
+
+        // "north" direction (d/dPhi going toward pole) - we want -dPhi to go "up" on the sphere
+        const north = up.clone().cross(east).normalize();
+
+        // Heading-based forward direction on tangent plane
+        const forward = new THREE.Vector3()
+          .addScaledVector(north, Math.cos(headingRef.current))
+          .addScaledVector(east, Math.sin(headingRef.current))
+          .normalize();
+
+        // Move along forward
+        const newPos = currentPos.clone().addScaledVector(forward, moveForward * MOVE_SPEED);
+        // Re-project onto sphere
+        newPos.normalize().multiplyScalar(PLANET_RADIUS);
+
+        // Convert back to spherical coords
+        const newPhi = Math.acos(Math.max(-1, Math.min(1, newPos.y / PLANET_RADIUS)));
+        const newTheta = Math.atan2(newPos.z, newPos.x);
+
+        charThetaRef.current = newTheta;
+        charPhiRef.current = Math.max(0.15, Math.min(Math.PI - 0.15, newPhi));
+      }
+
+      // --- Position drone ---
       const charPos = sphericalToCartesian(charThetaRef.current, charPhiRef.current, PLANET_RADIUS);
       const up = charPos.clone().normalize();
 
-      // Position character on surface
-      charGroup.position.copy(charPos);
-      const charQuat = new THREE.Quaternion();
-      charQuat.setFromUnitVectors(new THREE.Vector3(0, 1, 0), up);
-      charGroup.setRotationFromQuaternion(charQuat);
+      // Hover bob
+      const hoverOffset = DRONE_HOVER + Math.sin(time * 3) * 0.03;
+      droneGroup.position.copy(charPos.clone().add(up.clone().multiplyScalar(hoverOffset)));
 
-      // Orient character facing direction
-      if (dTheta !== 0 || dPhi !== 0) {
-        const forward = sphericalToCartesian(
-          charThetaRef.current + dTheta * 5,
-          charPhiRef.current + dPhi * 5,
-          PLANET_RADIUS
-        ).sub(charPos).normalize();
+      // Orient drone: align Y to surface normal
+      const baseQuat = new THREE.Quaternion().setFromUnitVectors(new THREE.Vector3(0, 1, 0), up);
+      
+      // Apply heading rotation around the up axis
+      const headingQuat = new THREE.Quaternion().setFromAxisAngle(up, -headingRef.current);
+      droneGroup.quaternion.copy(headingQuat.multiply(baseQuat));
 
-        // Project forward onto tangent plane
-        const tangentForward = forward.sub(up.clone().multiplyScalar(forward.dot(up))).normalize();
-        if (tangentForward.length() > 0.01) {
-          const lookTarget = charPos.clone().add(tangentForward);
-          const lookMat = new THREE.Matrix4();
-          lookMat.lookAt(charPos, lookTarget, up);
-          const lookQuat = new THREE.Quaternion().setFromRotationMatrix(lookMat);
-          charGroup.quaternion.copy(lookQuat);
-        }
+      // Slight tilt when moving
+      if (Math.abs(moveForward) > 0.01 || Math.abs(turnInput) > 0.01) {
+        const tiltAngle = moveForward * 0.15;
+        const rollAngle = -turnInput * 0.1;
+        const tiltQuat = new THREE.Quaternion().setFromEuler(new THREE.Euler(tiltAngle, 0, rollAngle));
+        droneGroup.quaternion.multiply(tiltQuat);
       }
 
-      // Camera follow
-      const camOffset = up.clone().multiplyScalar(CAMERA_HEIGHT);
-      const behindDir = sphericalToCartesian(
-        charThetaRef.current - Math.PI * 0.03,
-        charPhiRef.current - 0.15,
-        PLANET_RADIUS + CAMERA_DISTANCE
-      );
-      camera.position.lerp(behindDir.add(camOffset.multiplyScalar(0.3)), 0.05);
-      camera.lookAt(charPos.clone().add(up.clone().multiplyScalar(0.5)));
+      // Spin propellers
+      propellers.forEach((prop, i) => {
+        prop.rotation.y = time * 30 + i * Math.PI / 2;
+      });
 
-      // Proximity check
+      // --- Camera: follow behind drone ---
+      // Compute "behind" direction based on heading
+      const east = new THREE.Vector3(
+        -Math.sin(charPhiRef.current) * Math.sin(charThetaRef.current),
+        0,
+        Math.sin(charPhiRef.current) * Math.cos(charThetaRef.current)
+      ).normalize();
+      const north = up.clone().cross(east).normalize();
+      const facingDir = new THREE.Vector3()
+        .addScaledVector(north, Math.cos(headingRef.current))
+        .addScaledVector(east, Math.sin(headingRef.current))
+        .normalize();
+
+      const behindDir = facingDir.clone().negate();
+      const targetCamPos = charPos.clone()
+        .add(up.clone().multiplyScalar(CAMERA_HEIGHT_OFFSET))
+        .add(behindDir.multiplyScalar(CAMERA_DISTANCE));
+
+      if (!camInitialized) {
+        camPosSmooth.copy(targetCamPos);
+        camInitialized = true;
+      } else {
+        camPosSmooth.lerp(targetCamPos, 0.08);
+      }
+      camera.position.copy(camPosSmooth);
+      camera.lookAt(charPos.clone().add(up.clone().multiplyScalar(0.3)));
+
+      // --- Proximity check ---
       let closestBuilding: string | null = null;
       let closestDist = PROXIMITY_THRESHOLD;
       for (const b of buildingMeshes) {
@@ -431,7 +481,6 @@ const PlanetGame = ({ onBuildingProximity }: PlanetGameProps) => {
           closestBuilding = b.id;
         }
       }
-
       if (closestBuilding !== activeBuildingRef.current) {
         activeBuildingRef.current = closestBuilding;
         onBuildingProximity(closestBuilding);
@@ -440,14 +489,11 @@ const PlanetGame = ({ onBuildingProximity }: PlanetGameProps) => {
       // Animate building lights
       buildingMeshes.forEach((b, i) => {
         const light = b.mesh.children.find(c => c instanceof THREE.PointLight) as THREE.PointLight;
-        if (light) {
-          light.intensity = 0.4 + Math.sin(time * 2 + i * 1.2) * 0.2;
-        }
+        if (light) light.intensity = 0.4 + Math.sin(time * 2 + i * 1.2) * 0.2;
       });
 
-      // Character glow pulse
-      charLight.intensity = 0.3 + Math.sin(time * 3) * 0.15;
-      (capsuleMat as THREE.MeshStandardMaterial).emissiveIntensity = 0.2 + Math.sin(time * 2) * 0.1;
+      // Drone glow pulse
+      droneLight.intensity = 0.4 + Math.sin(time * 3) * 0.15;
 
       renderer.render(scene, camera);
     };
@@ -471,8 +517,6 @@ const PlanetGame = ({ onBuildingProximity }: PlanetGameProps) => {
       window.removeEventListener('keydown', handleKeyDown);
       window.removeEventListener('keyup', handleKeyUp);
       window.removeEventListener('resize', handleResize);
-
-      // Dispose
       scene.traverse((obj) => {
         if (obj instanceof THREE.Mesh) {
           obj.geometry.dispose();
@@ -487,7 +531,86 @@ const PlanetGame = ({ onBuildingProximity }: PlanetGameProps) => {
     };
   }, [handleKeyDown, handleKeyUp, onBuildingProximity]);
 
-  return <div ref={containerRef} className="planet-game-canvas" />;
+  // ====== MOBILE JOYSTICK ======
+  const joystickBaseRef = useRef<HTMLDivElement>(null);
+  const joystickKnobRef = useRef<HTMLDivElement>(null);
+  const joystickCenterRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
+
+  const handleJoystickStart = useCallback((e: React.TouchEvent) => {
+    const touch = e.touches[0];
+    if (!joystickBaseRef.current) return;
+    const rect = joystickBaseRef.current.getBoundingClientRect();
+    joystickCenterRef.current = { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
+    joystickTouchIdRef.current = touch.identifier;
+    joystickActiveRef.current = true;
+  }, []);
+
+  const handleJoystickMove = useCallback((e: React.TouchEvent) => {
+    if (joystickTouchIdRef.current === null) return;
+    const touch = Array.from(e.touches).find(t => t.identifier === joystickTouchIdRef.current);
+    if (!touch) return;
+    const center = joystickCenterRef.current;
+    const maxR = 35;
+    let dx = touch.clientX - center.x;
+    let dy = touch.clientY - center.y;
+    const dist = Math.sqrt(dx * dx + dy * dy);
+    if (dist > maxR) { dx = (dx / dist) * maxR; dy = (dy / dist) * maxR; }
+    joystickRef.current = { x: dx / maxR, y: dy / maxR };
+    if (joystickKnobRef.current) {
+      joystickKnobRef.current.style.transform = `translate(${dx}px, ${dy}px)`;
+    }
+  }, []);
+
+  const handleJoystickEnd = useCallback(() => {
+    joystickActiveRef.current = false;
+    joystickTouchIdRef.current = null;
+    joystickRef.current = { x: 0, y: 0 };
+    if (joystickKnobRef.current) {
+      joystickKnobRef.current.style.transform = `translate(0px, 0px)`;
+    }
+  }, []);
+
+  return (
+    <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+      <div ref={containerRef} className="planet-game-canvas" />
+      {/* Mobile joystick */}
+      <div
+        ref={joystickBaseRef}
+        onTouchStart={handleJoystickStart}
+        onTouchMove={handleJoystickMove}
+        onTouchEnd={handleJoystickEnd}
+        onTouchCancel={handleJoystickEnd}
+        style={{
+          position: 'absolute',
+          bottom: '24px',
+          left: '24px',
+          width: '100px',
+          height: '100px',
+          borderRadius: '50%',
+          background: 'hsla(190, 100%, 50%, 0.08)',
+          border: '2px solid hsla(190, 100%, 50%, 0.2)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          touchAction: 'none',
+          zIndex: 20,
+        }}
+      >
+        <div
+          ref={joystickKnobRef}
+          style={{
+            width: '36px',
+            height: '36px',
+            borderRadius: '50%',
+            background: 'hsla(190, 100%, 50%, 0.3)',
+            border: '2px solid hsla(190, 100%, 50%, 0.5)',
+            transition: 'transform 0.05s ease-out',
+            pointerEvents: 'none',
+          }}
+        />
+      </div>
+    </div>
+  );
 };
 
 export default PlanetGame;
