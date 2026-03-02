@@ -380,22 +380,22 @@ const PlanetGame = ({ onBuildingProximity }: PlanetGameProps) => {
       // --- Update heading ---
       headingRef.current += turnInput * TURN_SPEED;
 
+      // --- Robust tangent basis (works at poles) ---
+      const getTangentBasis = (pos: THREE.Vector3) => {
+        const up = pos.clone().normalize();
+        // Pick a reference vector that isn't parallel to up
+        const ref = Math.abs(up.y) < 0.99
+          ? new THREE.Vector3(0, 1, 0)
+          : new THREE.Vector3(1, 0, 0);
+        const east = new THREE.Vector3().crossVectors(up, ref).normalize();
+        const north = new THREE.Vector3().crossVectors(east, up).normalize();
+        return { up, east, north };
+      };
+
       // --- Move character on sphere surface ---
       if (Math.abs(moveForward) > 0.01) {
-        // Current position on sphere
         const currentPos = sphericalToCartesian(charThetaRef.current, charPhiRef.current, PLANET_RADIUS);
-        const up = currentPos.clone().normalize();
-
-        // Compute local tangent basis at current position
-        // "east" direction (d/dTheta)
-        const east = new THREE.Vector3(
-          -Math.sin(charPhiRef.current) * Math.sin(charThetaRef.current),
-          0,
-          Math.sin(charPhiRef.current) * Math.cos(charThetaRef.current)
-        ).normalize();
-
-        // "north" direction (d/dPhi going toward pole) - we want -dPhi to go "up" on the sphere
-        const north = up.clone().cross(east).normalize();
+        const { east, north } = getTangentBasis(currentPos);
 
         // Heading-based forward direction on tangent plane
         const forward = new THREE.Vector3()
@@ -403,9 +403,8 @@ const PlanetGame = ({ onBuildingProximity }: PlanetGameProps) => {
           .addScaledVector(east, Math.sin(headingRef.current))
           .normalize();
 
-        // Move along forward
+        // Move along forward, re-project onto sphere
         const newPos = currentPos.clone().addScaledVector(forward, moveForward * MOVE_SPEED);
-        // Re-project onto sphere
         newPos.normalize().multiplyScalar(PLANET_RADIUS);
 
         // Convert back to spherical coords
@@ -413,7 +412,7 @@ const PlanetGame = ({ onBuildingProximity }: PlanetGameProps) => {
         const newTheta = Math.atan2(newPos.z, newPos.x);
 
         charThetaRef.current = newTheta;
-        charPhiRef.current = Math.max(0.15, Math.min(Math.PI - 0.15, newPhi));
+        charPhiRef.current = newPhi; // no clamping needed - tangent basis handles poles
       }
 
       // --- Position drone ---
@@ -444,17 +443,11 @@ const PlanetGame = ({ onBuildingProximity }: PlanetGameProps) => {
         prop.rotation.y = time * 30 + i * Math.PI / 2;
       });
 
-      // --- Camera: follow behind drone ---
-      // Compute "behind" direction based on heading
-      const east = new THREE.Vector3(
-        -Math.sin(charPhiRef.current) * Math.sin(charThetaRef.current),
-        0,
-        Math.sin(charPhiRef.current) * Math.cos(charThetaRef.current)
-      ).normalize();
-      const north = up.clone().cross(east).normalize();
+      // --- Camera: follow behind drone (tight) ---
+      const camBasis = getTangentBasis(charPos);
       const facingDir = new THREE.Vector3()
-        .addScaledVector(north, Math.cos(headingRef.current))
-        .addScaledVector(east, Math.sin(headingRef.current))
+        .addScaledVector(camBasis.north, Math.cos(headingRef.current))
+        .addScaledVector(camBasis.east, Math.sin(headingRef.current))
         .normalize();
 
       const behindDir = facingDir.clone().negate();
@@ -466,7 +459,7 @@ const PlanetGame = ({ onBuildingProximity }: PlanetGameProps) => {
         camPosSmooth.copy(targetCamPos);
         camInitialized = true;
       } else {
-        camPosSmooth.lerp(targetCamPos, 0.08);
+        camPosSmooth.lerp(targetCamPos, 0.25); // tight follow - no globe drift
       }
       camera.position.copy(camPosSmooth);
       camera.lookAt(charPos.clone().add(up.clone().multiplyScalar(0.3)));
