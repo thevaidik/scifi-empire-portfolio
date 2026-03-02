@@ -49,6 +49,7 @@ const PlanetGame = ({ onBuildingProximity }: PlanetGameProps) => {
   const joystickRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
   const joystickActiveRef = useRef(false);
   const joystickTouchIdRef = useRef<number | null>(null);
+  const prevEastRef = useRef<THREE.Vector3 | null>(null);
 
   const handleKeyDown = useCallback((e: KeyboardEvent) => {
     keysRef.current.add(e.key.toLowerCase());
@@ -380,14 +381,29 @@ const PlanetGame = ({ onBuildingProximity }: PlanetGameProps) => {
       // --- Update heading ---
       headingRef.current += turnInput * TURN_SPEED;
 
-      // --- Robust tangent basis (works at poles) ---
+      // --- Robust tangent basis (no flipping) ---
       const getTangentBasis = (pos: THREE.Vector3) => {
         const up = pos.clone().normalize();
-        // Pick a reference vector that isn't parallel to up
-        const ref = Math.abs(up.y) < 0.99
-          ? new THREE.Vector3(0, 1, 0)
-          : new THREE.Vector3(1, 0, 0);
-        const east = new THREE.Vector3().crossVectors(up, ref).normalize();
+        let east: THREE.Vector3;
+        if (prevEastRef.current) {
+          // Project previous east onto new tangent plane to maintain continuity
+          east = prevEastRef.current.clone()
+            .sub(up.clone().multiplyScalar(prevEastRef.current.dot(up)))
+            .normalize();
+          // If degenerate (at exact pole), fall back
+          if (east.lengthSq() < 0.001) {
+            const ref = Math.abs(up.y) < 0.99
+              ? new THREE.Vector3(0, 1, 0)
+              : new THREE.Vector3(1, 0, 0);
+            east = new THREE.Vector3().crossVectors(up, ref).normalize();
+          }
+        } else {
+          const ref = Math.abs(up.y) < 0.99
+            ? new THREE.Vector3(0, 1, 0)
+            : new THREE.Vector3(1, 0, 0);
+          east = new THREE.Vector3().crossVectors(up, ref).normalize();
+        }
+        prevEastRef.current = east.clone();
         const north = new THREE.Vector3().crossVectors(east, up).normalize();
         return { up, east, north };
       };
