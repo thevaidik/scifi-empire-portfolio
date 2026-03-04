@@ -5,12 +5,12 @@ interface PortfolioProps {
 }
 
 const links = [
-  { name: "GitHub", url: "https://github.com/thevaidik", icon: <Github className="w-5 h-5" /> },
-  { name: "Twitter", url: "https://twitter.com/thevaidik_", icon: <Twitter className="w-5 h-5" /> },
-  { name: "YouTube", url: "https://www.youtube.com/@thevaidik_", icon: <Youtube className="w-5 h-5" /> },
-  { name: "LinkedIn", url: "https://linkedin.com/in/vaidikxx", icon: <Linkedin className="w-5 h-5" /> },
-  { name: "Medium", url: "https://medium.com/@thevaidik", icon: <BookOpen className="w-5 h-5" /> },
-  { name: "Email", url: "mailto:vaidik50000@gmail.com", icon: <Mail className="w-5 h-5" /> },
+  { name: "GitHub", url: "https://github.com/thevaidik", icon: <Github className="w-4 h-4" /> },
+  { name: "Twitter", url: "https://twitter.com/thevaidik_", icon: <Twitter className="w-4 h-4" /> },
+  { name: "YouTube", url: "https://www.youtube.com/@thevaidik_", icon: <Youtube className="w-4 h-4" /> },
+  { name: "LinkedIn", url: "https://linkedin.com/in/vaidikxx", icon: <Linkedin className="w-4 h-4" /> },
+  { name: "Medium", url: "https://medium.com/@thevaidik", icon: <BookOpen className="w-4 h-4" /> },
+  { name: "Email", url: "mailto:vaidik50000@gmail.com", icon: <Mail className="w-4 h-4" /> },
 ];
 
 const apps = [
@@ -34,119 +34,109 @@ const interests = [
 
 const Portfolio = ({ onEnterGame }: PortfolioProps) => {
   return (
-    <div className="min-h-screen space-bg">
-      <div className="plankton-layer" />
-      <div className="relative z-10 max-w-2xl mx-auto px-6 py-16">
+    <div className="paper-bg">
+      <div className="paper-sheet">
 
         {/* Header */}
-        <header className="mb-12 text-center">
-          <h1 className="text-4xl font-display font-bold holo-glow tracking-[0.2em] mb-3">VAIDIK</h1>
-          <p className="text-sm font-display tracking-[0.25em] glow-cyan" style={{ color: 'hsl(var(--bio-cyan-glow))' }}>
-            Apple Systems Developer & Maker
-          </p>
-          <p className="text-sm font-body mt-4 max-w-md mx-auto leading-relaxed" style={{ color: 'hsl(var(--bio-text-dim))' }}>
+        <header className="mb-10 border-b-2 border-stone-800 pb-6">
+          <h1 className="paper-name">Vaidik</h1>
+          <p className="paper-subtitle">Apple Systems Developer & Maker</p>
+          <p className="paper-body mt-3">
             iOS, macOS, visionOS developer. Building products, exploring Rust, and diving into consciousness research.
           </p>
         </header>
 
         {/* Game Mode Button */}
-        <div className="flex justify-center mb-16">
+        <div className="flex justify-center mb-10">
           <button
             onClick={onEnterGame}
-            className="sw-button flex items-center gap-3 px-8 py-3 rounded-full font-display text-sm font-semibold tracking-[0.15em]"
+            className="paper-game-btn"
           >
-            <Gamepad2 className="w-5 h-5" />
-            EXPLORE IN 3D
+            <Gamepad2 className="w-4 h-4" />
+            Explore this resume in 3D →
           </button>
         </div>
 
-        {/* Divider */}
-        <div className="depth-divider" />
-
         {/* Apps */}
-        <section className="mb-12">
-          <h2 className="section-title">Apps</h2>
+        <section className="mb-10">
+          <h2 className="paper-heading">Apps</h2>
           <div className="space-y-3">
             {apps.map((app) => (
               <a key={app.name} href={app.url} target="_blank" rel="noopener noreferrer"
-                className="block sw-card-static p-4 pointer-events-auto">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h3 className="font-display font-semibold text-base tracking-widest" style={{ color: 'hsl(var(--bio-cyan-glow))' }}>{app.name}</h3>
-                    <p className="text-sm font-body mt-1" style={{ color: 'hsl(var(--bio-text-dim))' }}>{app.desc}</p>
-                  </div>
-                  {app.isAppStore && (
-                    <div className="flex items-center gap-1 text-xs" style={{ color: 'hsl(var(--bio-red) / 0.5)' }}>
-                      <Apple className="w-4 h-4" />
-                      <span>App Store</span>
-                    </div>
-                  )}
+                className="paper-item group">
+                <div>
+                  <h3 className="paper-item-title">{app.name}</h3>
+                  <p className="paper-body text-sm">{app.desc}</p>
                 </div>
+                {app.isAppStore && (
+                  <span className="paper-badge">
+                    <Apple className="w-3 h-3" /> App Store
+                  </span>
+                )}
               </a>
             ))}
           </div>
         </section>
 
-        <div className="depth-divider" />
+        <hr className="paper-hr" />
 
         {/* Open Source */}
-        <section className="mb-12">
-          <h2 className="section-title">Open Source</h2>
-          <p className="text-xs font-body mb-4 text-center" style={{ color: 'hsl(var(--bio-text-dim))' }}>Recent merged contributions</p>
-          <div className="space-y-2">
+        <section className="mb-10">
+          <h2 className="paper-heading">Open Source Contributions</h2>
+          <p className="paper-body text-sm mb-4 italic">Recent merged pull requests</p>
+          <div className="space-y-3">
             {opensource.map((item, i) => (
-              <div key={i} className="sw-card-static p-3">
-                <div className="flex items-center justify-between">
-                  <p className="text-[10px] font-mono tracking-wider" style={{ color: 'hsl(var(--bio-teal) / 0.6)' }}>{item.repo}</p>
-                  <span className="merged-badge px-2 py-0.5 rounded-full">{item.status}</span>
+              <div key={i} className="paper-item flex-col !items-start">
+                <div className="flex items-center justify-between w-full">
+                  <code className="text-xs text-stone-500">{item.repo}</code>
+                  <span className="paper-merged">✓ {item.status}</span>
                 </div>
-                <h4 className="text-sm font-display font-semibold mt-1" style={{ color: 'hsl(var(--bio-cyan-glow))' }}>{item.title}</h4>
-                <p className="text-xs font-body mt-1" style={{ color: 'hsl(var(--bio-text-dim))' }}>{item.desc}</p>
+                <h4 className="paper-item-title mt-1">{item.title}</h4>
+                <p className="paper-body text-sm">{item.desc}</p>
               </div>
             ))}
           </div>
         </section>
 
-        <div className="depth-divider" />
+        <hr className="paper-hr" />
 
         {/* Interests */}
-        <section className="mb-12">
-          <h2 className="section-title">Interests</h2>
-          <div className="flex flex-wrap justify-center gap-2">
-            {interests.map((interest, i) => (
-              <span key={interest} className="sw-tag" style={{ '--i': i } as React.CSSProperties}>
+        <section className="mb-10">
+          <h2 className="paper-heading">Interests</h2>
+          <div className="flex flex-wrap gap-2">
+            {interests.map((interest) => (
+              <span key={interest} className="paper-tag">
                 {interest}
               </span>
             ))}
           </div>
         </section>
 
-        <div className="depth-divider" />
+        <hr className="paper-hr" />
 
         {/* Connect */}
-        <section className="mb-12">
-          <h2 className="section-title">Connect</h2>
-          <div className="flex flex-wrap justify-center gap-3">
+        <section className="mb-10">
+          <h2 className="paper-heading">Connect</h2>
+          <div className="flex flex-wrap gap-3">
             {links.map((link) => (
               <a key={link.name} href={link.url} target="_blank" rel="noopener noreferrer"
-                className="sw-card-static flex items-center gap-2 px-4 py-2 pointer-events-auto hover:scale-105 transition-transform">
-                <span style={{ color: 'hsl(var(--bio-cyan) / 0.6)' }}>{link.icon}</span>
-                <span className="font-body text-sm" style={{ color: 'hsl(var(--bio-cyan-glow))' }}>{link.name}</span>
+                className="paper-link">
+                {link.icon}
+                <span>{link.name}</span>
               </a>
             ))}
           </div>
         </section>
 
-        <div className="depth-divider" />
+        <hr className="paper-hr" />
 
         {/* CTA */}
-        <section className="text-center mb-8">
-          <p className="text-sm font-body mb-4" style={{ color: 'hsl(var(--bio-text-dim))' }}>
+        <section className="text-center">
+          <p className="paper-body mb-4">
             Open to collaboration on iOS/macOS projects, Rust development, and innovative ideas.
           </p>
-          <a href="mailto:vaidik50000@gmail.com"
-            className="inline-block px-6 py-2 rounded-full font-display text-xs font-semibold tracking-[0.15em] sw-button">
-            GET IN TOUCH
+          <a href="mailto:vaidik50000@gmail.com" className="paper-game-btn inline-flex">
+            Get in touch →
           </a>
         </section>
 
