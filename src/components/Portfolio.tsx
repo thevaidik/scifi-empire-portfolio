@@ -1,4 +1,4 @@
-import { Github, Twitter, Youtube, Linkedin, Mail, BookOpen, Apple, Gamepad2 } from "lucide-react";
+import { Github, Twitter, Youtube, Linkedin, Mail, BookOpen, Gamepad2 } from "lucide-react";
 
 interface PortfolioProps {
   onEnterGame: () => void;
@@ -6,12 +6,12 @@ interface PortfolioProps {
 
 const Portfolio = ({ onEnterGame }: PortfolioProps) => {
   return (
-    <div className="min-h-screen bg-neutral-900 text-neutral-300">
+    <div className="min-h-screen bg-neutral-900 text-neutral-300" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Inter", "Helvetica Neue", sans-serif' }}>
       <div className="max-w-2xl mx-auto px-6 py-16">
 
         <header className="mb-8">
-          <h1 className="text-3xl font-bold text-white tracking-tight">Vaidik</h1>
-          <p className="text-neutral-400 mt-1">Apple Systems Developer & Maker</p>
+          <h1 className="text-3xl font-semibold text-white tracking-tight">Vaidik</h1>
+          <p className="text-neutral-400 mt-1 font-light">Apple Systems Developer & Maker</p>
           <p className="text-sm text-neutral-500 mt-3 leading-relaxed">
             iOS, macOS, visionOS developer. Building products, exploring Rust, and diving into consciousness research.
           </p>
@@ -46,21 +46,34 @@ const Portfolio = ({ onEnterGame }: PortfolioProps) => {
         <hr className="border-neutral-800 mb-8" />
 
         <section className="mb-10">
-          <h2 className="text-lg font-semibold text-white mb-2">Open Source</h2>
+          <h2 className="text-lg font-semibold text-white mb-4">Open Source</h2>
           <p className="text-xs text-neutral-500 mb-4">Recent merged contributions</p>
-          {[
-            { repo: "prav/prav-ios", title: "adding prav server and boarding" },
-            { repo: "prav/prav-ios", title: "autoDownloadSettings rewrite #1033" },
-            { repo: "monal-im/Monal", title: "Monal Onboarding #1083" },
-            { repo: "monal-im/Monal", title: "Rewrite privacy settings UI #993 #1021" },
-            { repo: "monal-im/Monal", title: "adding icons in privacy settings #1037" },
-          ].map((item, i) => (
-            <div key={i} className="py-1.5">
-              <code className="text-xs text-neutral-600">{item.repo}</code>
-              <span className="text-sm text-neutral-300 ml-2">{item.title}</span>
-              <span className="text-xs text-green-600 ml-2">MERGED</span>
-            </div>
-          ))}
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-neutral-800 text-left">
+                  <th className="pb-2 font-medium text-neutral-400 pr-4">Repo</th>
+                  <th className="pb-2 font-medium text-neutral-400 pr-4">Contribution</th>
+                  <th className="pb-2 font-medium text-neutral-400 text-right">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  { repo: "prav/prav-ios", title: "adding prav server and boarding" },
+                  { repo: "prav/prav-ios", title: "autoDownloadSettings rewrite #1033" },
+                  { repo: "monal-im/Monal", title: "Monal Onboarding #1083" },
+                  { repo: "monal-im/Monal", title: "Rewrite privacy settings UI #993 #1021" },
+                  { repo: "monal-im/Monal", title: "adding icons in privacy settings #1037" },
+                ].map((item, i) => (
+                  <tr key={i} className="border-b border-neutral-800/50">
+                    <td className="py-2.5 pr-4 font-mono text-xs text-neutral-500">{item.repo}</td>
+                    <td className="py-2.5 pr-4 text-neutral-300">{item.title}</td>
+                    <td className="py-2.5 text-right"><span className="text-xs text-green-500/80 font-medium">MERGED</span></td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </section>
 
         <hr className="border-neutral-800 mb-8" />
