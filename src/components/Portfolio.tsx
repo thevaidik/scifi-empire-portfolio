@@ -22,7 +22,7 @@ const Portfolio = ({ onEnterGame }: PortfolioProps) => {
           className="flex items-center gap-2 text-sm text-neutral-400 border border-neutral-700 px-4 py-2 rounded-md hover:bg-neutral-800 hover:text-white transition-colors mb-12"
         >
           <Gamepad2 className="w-4 h-4" />
-          Explore this resume in 3D
+          Explore this portfolio in 3D
         </button>
 
         <hr className="border-neutral-800 mb-8" />
