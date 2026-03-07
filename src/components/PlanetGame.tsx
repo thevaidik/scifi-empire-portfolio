@@ -17,8 +17,8 @@ interface PlanetGameProps {
 const PLANET_RADIUS = 5;
 const MOVE_SPEED = 0.015;
 const TURN_SPEED = 0.03;
-const CAMERA_DISTANCE = 2.8;
-const CAMERA_HEIGHT_OFFSET = 1.2;
+const CAMERA_DISTANCE = 4.0;
+const CAMERA_HEIGHT_OFFSET = 2.5;
 const PROXIMITY_THRESHOLD = 1.8;
 const DRONE_HOVER = 0.35;
 
