@@ -6,7 +6,7 @@ interface PortfolioProps {
 
 const Portfolio = ({ onEnterGame }: PortfolioProps) => {
   return (
-    <div className="min-h-screen bg-neutral-900 text-neutral-300" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Inter", "Helvetica Neue", sans-serif' }}>
+    <div className="min-h-screen bg-neutral-800 text-neutral-300" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Inter", "Helvetica Neue", sans-serif' }}>
       <div className="max-w-2xl mx-auto px-6 py-16">
 
         <header className="mb-8">
