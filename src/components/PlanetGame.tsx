@@ -475,11 +475,12 @@ const PlanetGame = ({ onBuildingProximity }: PlanetGameProps) => {
         camPosSmooth.copy(targetCamPos);
         camInitialized = true;
       } else {
-        camPosSmooth.lerp(targetCamPos, 0.25);
+        // Very tight follow (0.9) so the globe barely drifts
+        camPosSmooth.lerp(targetCamPos, 0.9);
       }
       camera.position.copy(camPosSmooth);
-      // Look at planet center so globe stays centered on screen
-      camera.lookAt(new THREE.Vector3(0, 0, 0));
+      // Look at the drone position (slightly above surface)
+      camera.lookAt(charPos.clone().add(up.clone().multiplyScalar(0.3)));
 
       // --- Proximity check ---
       let closestBuilding: string | null = null;
