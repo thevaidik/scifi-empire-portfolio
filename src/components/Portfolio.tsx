@@ -1,4 +1,5 @@
 import { Github, Twitter, Youtube, Linkedin, Mail, BookOpen, Star, ExternalLink } from "lucide-react";
+import { useEffect, useRef } from "react";
 
 const apps = [
   {
