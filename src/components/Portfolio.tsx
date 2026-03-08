@@ -1,34 +1,126 @@
-import { Github, Twitter, Youtube, Linkedin, Mail, BookOpen } from "lucide-react";
+import { Github, Twitter, Youtube, Linkedin, Mail, BookOpen, Star, ExternalLink } from "lucide-react";
+
+const apps = [
+  {
+    name: "NxtLAP",
+    subtitle: "Race Scores & Widgets",
+    desc: "F1, MotoGP, NASCAR, WEC, IMSA",
+    icon: "/images/nxtlap-icon.jpg",
+    url: "https://apps.apple.com/in/app/nxtlap-race-scores-widgets/id6754256034",
+    rating: 5.0,
+    ratingCount: 1,
+    category: "Sports",
+    price: "Free",
+  },
+  {
+    name: "Briefly",
+    subtitle: "RSS Reader & News",
+    desc: "Intuitive RSS feeds with news",
+    icon: "/images/briefly-icon.jpg",
+    url: "https://apps.apple.com/in/app/briefly-rss-reader-and-news/id6746949720",
+    rating: 5.0,
+    ratingCount: 3,
+    category: "Magazines & Newspapers",
+    price: "Free",
+  },
+];
 
 const Portfolio = () => {
   return (
-    <div className="min-h-screen bg-neutral-800 text-neutral-300" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Inter", "Helvetica Neue", sans-serif' }}>
+    <div className="min-h-screen bg-neutral-900 text-neutral-300" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Inter", "Helvetica Neue", sans-serif' }}>
       <div className="max-w-2xl mx-auto px-6 py-16">
 
-        <header className="mb-8">
-          <h1 className="text-3xl font-semibold text-white tracking-tight">Vaidik</h1>
-          <p className="text-neutral-400 mt-1 font-light">Apple Systems Developer & Maker</p>
-          <p className="text-sm text-neutral-500 mt-3 leading-relaxed">
-            iOS, macOS, visionOS developer. Building products, exploring Rust, and diving into consciousness research.
-          </p>
+        {/* Profile Header */}
+        <header className="mb-10 flex items-start gap-5">
+          <img
+            src="/lovable-uploads/6ce87993-46d4-4012-a197-3243da272842.png"
+            alt="Vaidik profile photo"
+            className="w-20 h-20 rounded-full object-cover border-2 border-neutral-700 flex-shrink-0"
+          />
+          <div>
+            <h1 className="text-3xl font-semibold text-white tracking-tight">Vaidik</h1>
+            <p className="text-neutral-400 mt-0.5 font-light">Apple Systems Developer & Maker</p>
+            <p className="text-sm text-neutral-500 mt-2 leading-relaxed">
+              iOS, macOS, visionOS developer. Building products, exploring Rust, and diving into consciousness research.
+            </p>
+            <div className="flex items-center gap-3 mt-3">
+              <a href="https://linkedin.com/in/vaidikxx" target="_blank" rel="noopener noreferrer"
+                className="flex items-center gap-1.5 text-xs text-blue-400 hover:text-blue-300 transition-colors">
+                <Linkedin className="w-3.5 h-3.5" /> LinkedIn Profile
+              </a>
+              <a href="https://github.com/thevaidik" target="_blank" rel="noopener noreferrer"
+                className="flex items-center gap-1.5 text-xs text-neutral-400 hover:text-white transition-colors">
+                <Github className="w-3.5 h-3.5" /> GitHub
+              </a>
+            </div>
+          </div>
         </header>
 
         <hr className="border-neutral-800 mb-8" />
 
+        {/* Apps Section */}
         <section className="mb-10">
-          <h2 className="text-lg font-semibold text-white mb-4">Apps</h2>
-          {[
-            { name: "NxtLap", desc: "Race Scores & Widgets", url: "https://apps.apple.com/in/app/nxtlap-race-scores-widgets/id6754256034", appStore: true },
-            { name: "Briefly", desc: "RSS Reader & News", url: "https://apps.apple.com/in/app/briefly-rss-reader-and-news/id6746949720", appStore: true },
-            { name: "nxtlap.com", desc: "Motorsport news aggregator", url: "https://nxtlap.com", appStore: false },
-          ].map((app) => (
-            <a key={app.name} href={app.url} target="_blank" rel="noopener noreferrer"
-              className="block py-2 group">
-              <span className="text-white group-hover:underline">{app.name}</span>
-              <span className="text-neutral-500 text-sm ml-2">— {app.desc}</span>
-              {app.appStore && <span className="text-neutral-600 text-xs ml-2">↗ App Store</span>}
+          <h2 className="text-lg font-semibold text-white mb-5">Apps</h2>
+          <div className="space-y-4">
+            {apps.map((app) => (
+              <a
+                key={app.name}
+                href={app.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-start gap-4 p-4 rounded-xl bg-neutral-800/50 border border-neutral-800 hover:border-neutral-700 hover:bg-neutral-800 transition-all group"
+              >
+                <img
+                  src={app.icon}
+                  alt={`${app.name} app icon`}
+                  className="w-16 h-16 rounded-2xl flex-shrink-0"
+                />
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2">
+                    <span className="text-white font-medium group-hover:underline">{app.name}</span>
+                    <ExternalLink className="w-3 h-3 text-neutral-600 group-hover:text-neutral-400 transition-colors" />
+                  </div>
+                  <p className="text-sm text-neutral-400 mt-0.5">{app.subtitle}</p>
+                  <p className="text-xs text-neutral-500 mt-1">{app.desc}</p>
+                  <div className="flex items-center gap-3 mt-2">
+                    <div className="flex items-center gap-1">
+                      {Array.from({ length: 5 }).map((_, i) => (
+                        <Star
+                          key={i}
+                          className={`w-3 h-3 ${i < Math.floor(app.rating) ? 'text-yellow-500 fill-yellow-500' : 'text-neutral-600'}`}
+                        />
+                      ))}
+                      <span className="text-xs text-neutral-500 ml-1">{app.rating} ({app.ratingCount})</span>
+                    </div>
+                    <span className="text-xs text-neutral-600">·</span>
+                    <span className="text-xs text-neutral-500">{app.category}</span>
+                    <span className="text-xs text-neutral-600">·</span>
+                    <span className="text-xs text-green-500/80">{app.price}</span>
+                  </div>
+                </div>
+              </a>
+            ))}
+
+            {/* nxtlap.com */}
+            <a
+              href="https://nxtlap.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-4 p-4 rounded-xl bg-neutral-800/50 border border-neutral-800 hover:border-neutral-700 hover:bg-neutral-800 transition-all group"
+            >
+              <div className="w-16 h-16 rounded-2xl bg-neutral-700 flex items-center justify-center flex-shrink-0">
+                <img src="/nxtlap-favicon.ico" alt="nxtlap.com" className="w-8 h-8" />
+              </div>
+              <div>
+                <div className="flex items-center gap-2">
+                  <span className="text-white font-medium group-hover:underline">nxtlap.com</span>
+                  <ExternalLink className="w-3 h-3 text-neutral-600 group-hover:text-neutral-400 transition-colors" />
+                </div>
+                <p className="text-sm text-neutral-400 mt-0.5">Motorsport news aggregator</p>
+                <p className="text-xs text-neutral-500 mt-1">Web platform for racing news & results</p>
+              </div>
             </a>
-          ))}
+          </div>
         </section>
 
         <hr className="border-neutral-800 mb-8" />
