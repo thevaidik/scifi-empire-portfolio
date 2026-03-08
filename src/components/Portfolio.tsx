@@ -167,6 +167,115 @@ const Portfolio = () => {
 
         <hr className="border-neutral-800 mb-8" />
 
+        {/* Recent Tweets */}
+        <section className="mb-10">
+          <h2 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+            <Twitter className="w-4 h-4 text-blue-400" /> Recent Tweets
+          </h2>
+          <div className="space-y-3">
+            {[
+              {
+                text: "Shipped NxtLAP 2.0 with home screen widgets for race countdowns. SwiftUI WidgetKit is magic ✨",
+                date: "Mar 2025",
+                url: "https://twitter.com/thevaidik_",
+                likes: 12,
+              },
+              {
+                text: "Just merged my first PR into Monal — rewrote their onboarding flow in SwiftUI. Open source is the best way to level up 🔥",
+                date: "Feb 2025",
+                url: "https://twitter.com/thevaidik_",
+                likes: 24,
+              },
+              {
+                text: "Briefly is now live on the App Store — a clean RSS reader with genre sorting. No accounts, no tracking, just news.",
+                date: "Jan 2025",
+                url: "https://twitter.com/thevaidik_",
+                likes: 18,
+              },
+            ].map((tweet, i) => (
+              <a
+                key={i}
+                href={tweet.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block p-4 rounded-xl bg-neutral-800/50 border border-neutral-800 hover:border-neutral-700 hover:bg-neutral-800 transition-all group"
+              >
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-xs font-medium text-blue-400">@thevaidik_</span>
+                  <span className="text-xs text-neutral-600">· {tweet.date}</span>
+                </div>
+                <p className="text-sm text-neutral-300 leading-relaxed">{tweet.text}</p>
+                <div className="flex items-center gap-1 mt-2 text-xs text-neutral-600">
+                  <span>♥ {tweet.likes}</span>
+                </div>
+              </a>
+            ))}
+          </div>
+          <a href="https://twitter.com/thevaidik_" target="_blank" rel="noopener noreferrer"
+            className="inline-block mt-3 text-xs text-blue-400 hover:text-blue-300 transition-colors">
+            View all tweets →
+          </a>
+        </section>
+
+        <hr className="border-neutral-800 mb-8" />
+
+        {/* Medium Blog Posts */}
+        <section className="mb-10">
+          <h2 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+            <BookOpen className="w-4 h-4 text-green-400" /> Blog Posts
+          </h2>
+          <div className="space-y-3">
+            {[
+              {
+                title: "Building a Motorsport App with SwiftUI & WidgetKit",
+                excerpt: "How I built NxtLAP — from API design to home screen widgets for 30+ racing series.",
+                date: "Mar 2025",
+                url: "https://medium.com/@thevaidik",
+                readTime: "6 min read",
+              },
+              {
+                title: "Contributing to Open Source as a Solo Dev",
+                excerpt: "Lessons learned from getting PRs merged into Monal and Prav — two privacy-first messaging apps.",
+                date: "Feb 2025",
+                url: "https://medium.com/@thevaidik",
+                readTime: "4 min read",
+              },
+              {
+                title: "Why I Built an RSS Reader in 2025",
+                excerpt: "The case for owning your news feed — no algorithms, no tracking, just content you choose.",
+                date: "Jan 2025",
+                url: "https://medium.com/@thevaidik",
+                readTime: "5 min read",
+              },
+            ].map((post, i) => (
+              <a
+                key={i}
+                href={post.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block p-4 rounded-xl bg-neutral-800/50 border border-neutral-800 hover:border-neutral-700 hover:bg-neutral-800 transition-all group"
+              >
+                <div className="flex items-center justify-between mb-1">
+                  <span className="text-sm text-white font-medium group-hover:underline">{post.title}</span>
+                  <ExternalLink className="w-3 h-3 text-neutral-600 group-hover:text-neutral-400 flex-shrink-0 ml-2" />
+                </div>
+                <p className="text-xs text-neutral-500 leading-relaxed">{post.excerpt}</p>
+                <div className="flex items-center gap-2 mt-2 text-xs text-neutral-600">
+                  <span>{post.date}</span>
+                  <span>·</span>
+                  <span>{post.readTime}</span>
+                </div>
+              </a>
+            ))}
+          </div>
+          <a href="https://medium.com/@thevaidik" target="_blank" rel="noopener noreferrer"
+            className="inline-block mt-3 text-xs text-green-400 hover:text-green-300 transition-colors">
+            Read more on Medium →
+          </a>
+        </section>
+
+        <hr className="border-neutral-800 mb-8" />
+
         <section className="mb-10">
           <h2 className="text-lg font-semibold text-white mb-4">Interests</h2>
           <p className="text-sm text-neutral-400">
