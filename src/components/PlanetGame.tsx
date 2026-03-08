@@ -671,8 +671,6 @@ const PlanetGame = ({ onBuildingProximity }: PlanetGameProps) => {
     // ====== ANIMATION ======
     const clock = new THREE.Clock();
     let animId: number;
-    const camPosSmooth = new THREE.Vector3(0, CAMERA_HEIGHT, CAMERA_DISTANCE);
-    let camInitialized = false;
 
     const animate = () => {
       animId = requestAnimationFrame(animate);
