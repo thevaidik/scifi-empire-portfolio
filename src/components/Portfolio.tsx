@@ -1,10 +1,6 @@
-import { Github, Twitter, Youtube, Linkedin, Mail, BookOpen, Gamepad2 } from "lucide-react";
+import { Github, Twitter, Youtube, Linkedin, Mail, BookOpen } from "lucide-react";
 
-interface PortfolioProps {
-  onEnterGame: () => void;
-}
-
-const Portfolio = ({ onEnterGame }: PortfolioProps) => {
+const Portfolio = () => {
   return (
     <div className="min-h-screen bg-neutral-800 text-neutral-300" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Inter", "Helvetica Neue", sans-serif' }}>
       <div className="max-w-2xl mx-auto px-6 py-16">
@@ -16,14 +12,6 @@ const Portfolio = ({ onEnterGame }: PortfolioProps) => {
             iOS, macOS, visionOS developer. Building products, exploring Rust, and diving into consciousness research.
           </p>
         </header>
-
-        <button
-          onClick={onEnterGame}
-          className="flex items-center gap-2 text-sm text-neutral-400 border border-neutral-700 px-4 py-2 rounded-md hover:bg-neutral-800 hover:text-white transition-colors mb-12"
-        >
-          <Gamepad2 className="w-4 h-4" />
-          Explore this portfolio in 3D
-        </button>
 
         <hr className="border-neutral-800 mb-8" />
 
