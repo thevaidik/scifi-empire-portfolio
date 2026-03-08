@@ -43,7 +43,12 @@ const Portfolio = () => {
             <p className="text-sm text-neutral-500 mt-2 leading-relaxed">
               iOS, macOS & visionOS developer shipping native Swift apps. Passionate about clean architecture, SwiftUI, and the Apple ecosystem. Currently exploring Rust and consciousness research. Open to interesting open source work in the Swift ecosystem — if you're building something cool, let's talk.
             </p>
-            <div className="flex items-center gap-3 mt-3">
+            <div className="flex items-center gap-3 mt-3 flex-wrap">
+              <a href="mailto:founders@nxtlap.com"
+                className="flex items-center gap-1.5 text-xs text-white font-medium hover:text-blue-300 transition-colors">
+                <Mail className="w-3.5 h-3.5" /> founders@nxtlap.com
+              </a>
+              <span className="text-neutral-700 text-xs">·</span>
               <a href="mailto:vaidik50000@gmail.com"
                 className="flex items-center gap-1.5 text-xs text-neutral-400 hover:text-white transition-colors">
                 <Mail className="w-3.5 h-3.5" /> vaidik50000@gmail.com
