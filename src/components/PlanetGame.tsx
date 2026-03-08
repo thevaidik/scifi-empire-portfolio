@@ -16,8 +16,8 @@ interface PlanetGameProps {
 
 const MOVE_SPEED = 0.06;
 const TURN_SPEED = 0.04;
-const CAMERA_DISTANCE = 4;
-const CAMERA_HEIGHT = 3;
+const FIRST_PERSON_HEIGHT = 0.28;
+const FIRST_PERSON_LOOK_DISTANCE = 8;
 const PROXIMITY_THRESHOLD = 2.5;
 const GROUND_SIZE = 16;
 
@@ -147,54 +147,6 @@ function createTokyoTower(height: number): THREE.Group {
   return g;
 }
 
-// ====== PLAYER CAR ======
-function createPlayerCar(): THREE.Group {
-  const car = new THREE.Group();
-  const body = new THREE.Mesh(
-    new THREE.BoxGeometry(0.4, 0.12, 0.2),
-    new THREE.MeshStandardMaterial({ color: 0xeeeeee, roughness: 0.15, metalness: 0.6 })
-  );
-  body.position.y = 0.08;
-  body.castShadow = true;
-  car.add(body);
-
-  const cabin = new THREE.Mesh(
-    new THREE.BoxGeometry(0.2, 0.1, 0.17),
-    new THREE.MeshStandardMaterial({ color: 0x88ccee, roughness: 0.05, metalness: 0.3, transparent: true, opacity: 0.6 })
-  );
-  cabin.position.set(-0.02, 0.19, 0);
-  car.add(cabin);
-
-  // 4 wheels as one instanced call would be overkill, just 4 meshes
-  const wheelGeo = new THREE.CylinderGeometry(0.04, 0.04, 0.04, 8);
-  const wheelMat = new THREE.MeshStandardMaterial({ color: 0x222222, roughness: 0.7 });
-  [[-0.12, -0.12], [-0.12, 0.12], [0.12, -0.12], [0.12, 0.12]].forEach(([x, z]) => {
-    const w = new THREE.Mesh(wheelGeo, wheelMat);
-    w.position.set(x, 0.04, z);
-    w.rotation.x = Math.PI / 2;
-    car.add(w);
-  });
-
-  // Headlights (emissive, no point light)
-  const hlGeo = new THREE.SphereGeometry(0.02, 4, 4);
-  const hlMat = new THREE.MeshBasicMaterial({ color: 0xffffcc });
-  [-1, 1].forEach(z => {
-    const hl = new THREE.Mesh(hlGeo, hlMat);
-    hl.position.set(0.21, 0.08, z * 0.07);
-    car.add(hl);
-  });
-
-  // Taillights
-  const tlMat = new THREE.MeshBasicMaterial({ color: 0xff2200 });
-  [-1, 1].forEach(z => {
-    const tl = new THREE.Mesh(new THREE.SphereGeometry(0.015, 4, 4), tlMat);
-    tl.position.set(-0.21, 0.08, z * 0.07);
-    car.add(tl);
-  });
-
-  return car;
-}
-
 const PlanetGame = ({ onBuildingProximity }: PlanetGameProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const keysRef = useRef<Set<string>>(new Set());
@@ -226,7 +178,7 @@ const PlanetGame = ({ onBuildingProximity }: PlanetGameProps) => {
     scene.background = new THREE.Color(0x0a0e1a);
     scene.fog = new THREE.Fog(0x0a0e1a, 20, 60);
 
-    const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 100);
+    const camera = new THREE.PerspectiveCamera(72, container.clientWidth / container.clientHeight, 0.05, 100);
 
     // ====== LIGHTING — only 4 lights total (huge perf gain) ======
     scene.add(new THREE.AmbientLight(0x445577, 0.5));
@@ -614,9 +566,6 @@ const PlanetGame = ({ onBuildingProximity }: PlanetGameProps) => {
     if (npcInstanced.instanceColor) npcInstanced.instanceColor.needsUpdate = true;
     scene.add(npcInstanced);
 
-    // ====== PLAYER CAR ======
-    const playerCar = createPlayerCar();
-    scene.add(playerCar);
 
     // ====== CHERRY BLOSSOM PETALS (points) ======
     const petalCount = 400;
@@ -674,8 +623,6 @@ const PlanetGame = ({ onBuildingProximity }: PlanetGameProps) => {
     // ====== ANIMATION ======
     const clock = new THREE.Clock();
     let animId: number;
-    const camPosSmooth = new THREE.Vector3(0, CAMERA_HEIGHT, CAMERA_DISTANCE);
-    let camInitialized = false;
 
     const animate = () => {
       animId = requestAnimationFrame(animate);
@@ -698,7 +645,7 @@ const PlanetGame = ({ onBuildingProximity }: PlanetGameProps) => {
       turnInput = Math.max(-1, Math.min(1, turnInput));
       headingRef.current += turnInput * TURN_SPEED;
 
-      // Move car
+      // Move player
       if (Math.abs(moveForward) > 0.01) {
         const dir = new THREE.Vector3(Math.sin(headingRef.current), 0, Math.cos(headingRef.current));
         charPosRef.current.addScaledVector(dir, moveForward * MOVE_SPEED);
@@ -709,39 +656,17 @@ const PlanetGame = ({ onBuildingProximity }: PlanetGameProps) => {
         }
       }
 
-      playerCar.position.set(charPosRef.current.x, 0.02, charPosRef.current.z);
-      playerCar.rotation.y = -headingRef.current;
-      playerCar.rotation.z = -turnInput * 0.05;
+      // ====== FIRST-PERSON CAMERA ======
+      // Camera is the player: no chase rig, no lag, no drift
+      const eyeX = charPosRef.current.x;
+      const eyeY = FIRST_PERSON_HEIGHT;
+      const eyeZ = charPosRef.current.z;
 
-      // ====== CAMERA (from scratch) ======
-      // Fixed offset behind car, no scene drift
-      // Camera sits at a fixed height and distance directly behind the car's heading
-      const behindX = -Math.sin(headingRef.current) * CAMERA_DISTANCE;
-      const behindZ = -Math.cos(headingRef.current) * CAMERA_DISTANCE;
+      const lookX = eyeX + Math.sin(headingRef.current) * FIRST_PERSON_LOOK_DISTANCE;
+      const lookZ = eyeZ + Math.cos(headingRef.current) * FIRST_PERSON_LOOK_DISTANCE;
 
-      // Target camera position: behind car + elevated
-      const targetCamX = charPosRef.current.x + behindX;
-      const targetCamY = CAMERA_HEIGHT;
-      const targetCamZ = charPosRef.current.z + behindZ;
-
-      // Smooth camera position — high lerp = snappy, no scene swimming
-      // Use separate smoothing for position vs look-at
-      if (!camInitialized) {
-        camPosSmooth.set(targetCamX, targetCamY, targetCamZ);
-        camInitialized = true;
-      } else {
-        // Position follows with high responsiveness
-        camPosSmooth.x += (targetCamX - camPosSmooth.x) * 0.12;
-        camPosSmooth.y += (targetCamY - camPosSmooth.y) * 0.12;
-        camPosSmooth.z += (targetCamZ - camPosSmooth.z) * 0.12;
-      }
-
-      camera.position.set(camPosSmooth.x, camPosSmooth.y, camPosSmooth.z);
-
-      // Look at a point slightly ahead and above the car
-      const lookAheadX = charPosRef.current.x + Math.sin(headingRef.current) * 0.5;
-      const lookAheadZ = charPosRef.current.z + Math.cos(headingRef.current) * 0.5;
-      camera.lookAt(lookAheadX, 0.2, lookAheadZ);
+      camera.position.set(eyeX, eyeY, eyeZ);
+      camera.lookAt(lookX, FIRST_PERSON_HEIGHT - 0.04, lookZ);
 
       // Trains
       [{ train: train1, speed: 0.2, offset: 0 }, { train: train2, speed: 0.15, offset: Math.PI }].forEach(({ train, speed, offset }) => {
