@@ -1,4 +1,5 @@
 import { Github, Twitter, Youtube, Linkedin, Mail, BookOpen, Star, ExternalLink } from "lucide-react";
+import { useEffect, useRef } from "react";
 
 const apps = [
   {
@@ -26,6 +27,14 @@ const apps = [
 ];
 
 const Portfolio = () => {
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://platform.twitter.com/widgets.js";
+    script.async = true;
+    document.body.appendChild(script);
+    return () => { document.body.removeChild(script); };
+  }, []);
+
   return (
     <div className="min-h-screen bg-neutral-900 text-neutral-300" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Inter", "Helvetica Neue", sans-serif' }}>
       <div className="max-w-2xl mx-auto px-6 py-16">
@@ -167,59 +176,31 @@ const Portfolio = () => {
 
         <hr className="border-neutral-800 mb-8" />
 
-        {/* Recent Tweets */}
+        {/* Recent Tweets - Embedded Timeline */}
         <section className="mb-10">
           <h2 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
             <Twitter className="w-4 h-4 text-blue-400" /> Recent Tweets
           </h2>
-          <div className="space-y-3">
-            {[
-              {
-                text: "Shipped NxtLAP 2.0 with home screen widgets for race countdowns. SwiftUI WidgetKit is magic ✨",
-                date: "Mar 2025",
-                url: "https://twitter.com/thevaidik_",
-                likes: 12,
-              },
-              {
-                text: "Just merged my first PR into Monal — rewrote their onboarding flow in SwiftUI. Open source is the best way to level up 🔥",
-                date: "Feb 2025",
-                url: "https://twitter.com/thevaidik_",
-                likes: 24,
-              },
-              {
-                text: "Briefly is now live on the App Store — a clean RSS reader with genre sorting. No accounts, no tracking, just news.",
-                date: "Jan 2025",
-                url: "https://twitter.com/thevaidik_",
-                likes: 18,
-              },
-            ].map((tweet, i) => (
-              <a
-                key={i}
-                href={tweet.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block p-4 rounded-xl bg-neutral-800/50 border border-neutral-800 hover:border-neutral-700 hover:bg-neutral-800 transition-all group"
-              >
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="text-xs font-medium text-blue-400">@thevaidik_</span>
-                  <span className="text-xs text-neutral-600">· {tweet.date}</span>
-                </div>
-                <p className="text-sm text-neutral-300 leading-relaxed">{tweet.text}</p>
-                <div className="flex items-center gap-1 mt-2 text-xs text-neutral-600">
-                  <span>♥ {tweet.likes}</span>
-                </div>
-              </a>
-            ))}
+          <div className="rounded-xl overflow-hidden border border-neutral-800">
+            <a
+              className="twitter-timeline"
+              data-theme="dark"
+              data-height="400"
+              data-chrome="noheader nofooter noborders transparent"
+              href="https://twitter.com/thevaidik_"
+            >
+              Loading tweets...
+            </a>
           </div>
           <a href="https://twitter.com/thevaidik_" target="_blank" rel="noopener noreferrer"
             className="inline-block mt-3 text-xs text-blue-400 hover:text-blue-300 transition-colors">
-            View all tweets →
+            Follow @thevaidik_ →
           </a>
         </section>
 
         <hr className="border-neutral-800 mb-8" />
 
-        {/* Medium Blog Posts */}
+        {/* Medium Blog Posts - Real */}
         <section className="mb-10">
           <h2 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
             <BookOpen className="w-4 h-4 text-green-400" /> Blog Posts
@@ -227,25 +208,16 @@ const Portfolio = () => {
           <div className="space-y-3">
             {[
               {
-                title: "Building a Motorsport App with SwiftUI & WidgetKit",
-                excerpt: "How I built NxtLAP — from API design to home screen widgets for 30+ racing series.",
-                date: "Mar 2025",
-                url: "https://medium.com/@thevaidik",
-                readTime: "6 min read",
+                title: "Google Summer Of Code (GSoC) — My experience #2 — midterm evaluations @ XMPP standards foundation",
+                date: "Jul 31, 2024",
+                url: "https://thevaidik.medium.com/google-summer-of-code-gsoc-my-experience-2-midterm-evaluations-xmpp-standards-foundation-3be8b27dc653",
+                claps: 52,
               },
               {
-                title: "Contributing to Open Source as a Solo Dev",
-                excerpt: "Lessons learned from getting PRs merged into Monal and Prav — two privacy-first messaging apps.",
-                date: "Feb 2025",
-                url: "https://medium.com/@thevaidik",
-                readTime: "4 min read",
-              },
-              {
-                title: "Why I Built an RSS Reader in 2025",
-                excerpt: "The case for owning your news feed — no algorithms, no tracking, just content you choose.",
-                date: "Jan 2025",
-                url: "https://medium.com/@thevaidik",
-                readTime: "5 min read",
+                title: "Google Summer Of Code (GSoC) — My experience #1 @ XMPP standards foundation",
+                date: "Jun 25, 2024",
+                url: "https://thevaidik.medium.com/google-summer-of-code-gsoc-my-experience-1-xmpp-standards-foundation-da781ac95560",
+                claps: 52,
               },
             ].map((post, i) => (
               <a
@@ -259,11 +231,10 @@ const Portfolio = () => {
                   <span className="text-sm text-white font-medium group-hover:underline">{post.title}</span>
                   <ExternalLink className="w-3 h-3 text-neutral-600 group-hover:text-neutral-400 flex-shrink-0 ml-2" />
                 </div>
-                <p className="text-xs text-neutral-500 leading-relaxed">{post.excerpt}</p>
                 <div className="flex items-center gap-2 mt-2 text-xs text-neutral-600">
                   <span>{post.date}</span>
                   <span>·</span>
-                  <span>{post.readTime}</span>
+                  <span>👏 {post.claps}</span>
                 </div>
               </a>
             ))}
