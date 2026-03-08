@@ -16,8 +16,8 @@ interface PlanetGameProps {
 
 const MOVE_SPEED = 0.06;
 const TURN_SPEED = 0.04;
-const CAMERA_DISTANCE = 4;
-const CAMERA_HEIGHT = 3;
+const FIRST_PERSON_HEIGHT = 0.28;
+const FIRST_PERSON_LOOK_DISTANCE = 8;
 const PROXIMITY_THRESHOLD = 2.5;
 const GROUND_SIZE = 16;
 
