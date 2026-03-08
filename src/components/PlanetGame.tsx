@@ -713,17 +713,35 @@ const PlanetGame = ({ onBuildingProximity }: PlanetGameProps) => {
       playerCar.rotation.y = -headingRef.current;
       playerCar.rotation.z = -turnInput * 0.05;
 
-      // Camera
-      const camDir = new THREE.Vector3(-Math.sin(headingRef.current), 0, -Math.cos(headingRef.current));
-      const targetCam = new THREE.Vector3(
-        charPosRef.current.x + camDir.x * CAMERA_DISTANCE,
-        CAMERA_HEIGHT,
-        charPosRef.current.z + camDir.z * CAMERA_DISTANCE
-      );
-      if (!camInitialized) { camPosSmooth.copy(targetCam); camInitialized = true; }
-      else camPosSmooth.lerp(targetCam, 0.08);
-      camera.position.copy(camPosSmooth);
-      camera.lookAt(charPosRef.current.x, 0.3, charPosRef.current.z);
+      // ====== CAMERA (from scratch) ======
+      // Fixed offset behind car, no scene drift
+      // Camera sits at a fixed height and distance directly behind the car's heading
+      const behindX = -Math.sin(headingRef.current) * CAMERA_DISTANCE;
+      const behindZ = -Math.cos(headingRef.current) * CAMERA_DISTANCE;
+
+      // Target camera position: behind car + elevated
+      const targetCamX = charPosRef.current.x + behindX;
+      const targetCamY = CAMERA_HEIGHT;
+      const targetCamZ = charPosRef.current.z + behindZ;
+
+      // Smooth camera position — high lerp = snappy, no scene swimming
+      // Use separate smoothing for position vs look-at
+      if (!camInitialized) {
+        camPosSmooth.set(targetCamX, targetCamY, targetCamZ);
+        camInitialized = true;
+      } else {
+        // Position follows with high responsiveness
+        camPosSmooth.x += (targetCamX - camPosSmooth.x) * 0.12;
+        camPosSmooth.y += (targetCamY - camPosSmooth.y) * 0.12;
+        camPosSmooth.z += (targetCamZ - camPosSmooth.z) * 0.12;
+      }
+
+      camera.position.set(camPosSmooth.x, camPosSmooth.y, camPosSmooth.z);
+
+      // Look at a point slightly ahead and above the car
+      const lookAheadX = charPosRef.current.x + Math.sin(headingRef.current) * 0.5;
+      const lookAheadZ = charPosRef.current.z + Math.cos(headingRef.current) * 0.5;
+      camera.lookAt(lookAheadX, 0.2, lookAheadZ);
 
       // Trains
       [{ train: train1, speed: 0.2, offset: 0 }, { train: train2, speed: 0.15, offset: Math.PI }].forEach(({ train, speed, offset }) => {
