@@ -4,7 +4,7 @@ const apps = [
   {
     name: "NxtLAP",
     subtitle: "Race Scores & Widgets",
-    desc: "F1, MotoGP, NASCAR, WEC, IMSA",
+    desc: "Track live results, standings, schedules, and news from 30+ racing series — F1, MotoGP, NASCAR, WEC, IMSA, IndyCar, Super GT, V8 Supercars, WRC, Formula E and more. Includes home screen widgets for quick race countdowns.",
     icon: "/images/nxtlap-icon.jpg",
     url: "https://apps.apple.com/in/app/nxtlap-race-scores-widgets/id6754256034",
     rating: 5.0,
@@ -15,7 +15,7 @@ const apps = [
   {
     name: "Briefly",
     subtitle: "RSS Reader & News",
-    desc: "Intuitive RSS feeds with news",
+    desc: "Your daily dose of curated RSS feeds and news, sorted by genre. Add custom feeds, browse by categories like Tech, Science, Business, and more. Clean design, dark mode, zero clutter.",
     icon: "/images/briefly-icon.jpg",
     url: "https://apps.apple.com/in/app/briefly-rss-reader-and-news/id6746949720",
     rating: 5.0,
@@ -41,12 +41,16 @@ const Portfolio = () => {
             <h1 className="text-3xl font-semibold text-white tracking-tight">Vaidik</h1>
             <p className="text-neutral-400 mt-0.5 font-light">Apple Systems Developer & Maker</p>
             <p className="text-sm text-neutral-500 mt-2 leading-relaxed">
-              iOS, macOS, visionOS developer. Building products, exploring Rust, and diving into consciousness research.
+              iOS, macOS & visionOS developer shipping native Swift apps. Passionate about clean architecture, SwiftUI, and the Apple ecosystem. Currently exploring Rust and consciousness research. Open to interesting open source work in the Swift ecosystem — if you're building something cool, let's talk.
             </p>
             <div className="flex items-center gap-3 mt-3">
+              <a href="mailto:vaidik50000@gmail.com"
+                className="flex items-center gap-1.5 text-xs text-neutral-400 hover:text-white transition-colors">
+                <Mail className="w-3.5 h-3.5" /> vaidik50000@gmail.com
+              </a>
               <a href="https://linkedin.com/in/vaidikxx" target="_blank" rel="noopener noreferrer"
                 className="flex items-center gap-1.5 text-xs text-blue-400 hover:text-blue-300 transition-colors">
-                <Linkedin className="w-3.5 h-3.5" /> LinkedIn Profile
+                <Linkedin className="w-3.5 h-3.5" /> LinkedIn
               </a>
               <a href="https://github.com/thevaidik" target="_blank" rel="noopener noreferrer"
                 className="flex items-center gap-1.5 text-xs text-neutral-400 hover:text-white transition-colors">
