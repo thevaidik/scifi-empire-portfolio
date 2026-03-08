@@ -4,7 +4,7 @@ const apps = [
   {
     name: "NxtLAP",
     subtitle: "Race Scores & Widgets",
-    desc: "F1, MotoGP, NASCAR, WEC, IMSA",
+    desc: "Track live results, standings, schedules, and news from 30+ racing series — F1, MotoGP, NASCAR, WEC, IMSA, IndyCar, Super GT, V8 Supercars, WRC, Formula E and more. Includes home screen widgets for quick race countdowns.",
     icon: "/images/nxtlap-icon.jpg",
     url: "https://apps.apple.com/in/app/nxtlap-race-scores-widgets/id6754256034",
     rating: 5.0,
@@ -15,7 +15,7 @@ const apps = [
   {
     name: "Briefly",
     subtitle: "RSS Reader & News",
-    desc: "Intuitive RSS feeds with news",
+    desc: "Your daily dose of curated RSS feeds and news, sorted by genre. Add custom feeds, browse by categories like Tech, Science, Business, and more. Clean design, dark mode, zero clutter.",
     icon: "/images/briefly-icon.jpg",
     url: "https://apps.apple.com/in/app/briefly-rss-reader-and-news/id6746949720",
     rating: 5.0,
