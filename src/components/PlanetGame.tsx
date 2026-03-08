@@ -614,9 +614,6 @@ const PlanetGame = ({ onBuildingProximity }: PlanetGameProps) => {
     if (npcInstanced.instanceColor) npcInstanced.instanceColor.needsUpdate = true;
     scene.add(npcInstanced);
 
-    // ====== PLAYER CAR ======
-    const playerCar = createPlayerCar();
-    scene.add(playerCar);
 
     // ====== CHERRY BLOSSOM PETALS (points) ======
     const petalCount = 400;
