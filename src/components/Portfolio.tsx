@@ -78,7 +78,10 @@ const Portfolio = () => {
 
         {/* Apps Section */}
         <section className="mb-10">
-          <h2 className="text-lg font-semibold text-white mb-5">Apps</h2>
+          <div className="flex items-center gap-3 mb-5">
+            <h2 className="text-lg font-semibold text-white">My Apps</h2>
+            <img src="/images/app-store-badge.svg" alt="Download on the App Store" className="h-8" />
+          </div>
           <div className="space-y-4">
             {apps.map((app) => (
               <a
