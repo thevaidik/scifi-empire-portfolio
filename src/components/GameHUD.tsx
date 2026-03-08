@@ -145,10 +145,10 @@ const GameHUD = ({ activeBuilding }: GameHUDProps) => {
           <div className="flex gap-0.5">
             <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd>
           </div>
-          <span className="text-[10px] font-mono" style={{ color: 'hsl(200 15% 40%)' }}>move & turn</span>
+          <span className="text-[10px] font-mono" style={{ color: 'hsl(200 15% 40%)' }}>drive & steer</span>
         </div>
         <p className="text-[10px] font-mono mt-1" style={{ color: 'hsl(190 100% 50% / 0.3)' }}>
-          joystick on mobile · approach buildings to explore
+          🚗 drive around tokyo · approach buildings to explore
         </p>
       </div>
 
