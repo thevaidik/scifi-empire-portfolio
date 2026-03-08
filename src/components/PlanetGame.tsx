@@ -226,7 +226,7 @@ const PlanetGame = ({ onBuildingProximity }: PlanetGameProps) => {
     scene.background = new THREE.Color(0x0a0e1a);
     scene.fog = new THREE.Fog(0x0a0e1a, 20, 60);
 
-    const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 100);
+    const camera = new THREE.PerspectiveCamera(72, container.clientWidth / container.clientHeight, 0.05, 100);
 
     // ====== LIGHTING — only 4 lights total (huge perf gain) ======
     scene.add(new THREE.AmbientLight(0x445577, 0.5));
