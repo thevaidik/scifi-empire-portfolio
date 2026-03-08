@@ -147,54 +147,6 @@ function createTokyoTower(height: number): THREE.Group {
   return g;
 }
 
-// ====== PLAYER CAR ======
-function createPlayerCar(): THREE.Group {
-  const car = new THREE.Group();
-  const body = new THREE.Mesh(
-    new THREE.BoxGeometry(0.4, 0.12, 0.2),
-    new THREE.MeshStandardMaterial({ color: 0xeeeeee, roughness: 0.15, metalness: 0.6 })
-  );
-  body.position.y = 0.08;
-  body.castShadow = true;
-  car.add(body);
-
-  const cabin = new THREE.Mesh(
-    new THREE.BoxGeometry(0.2, 0.1, 0.17),
-    new THREE.MeshStandardMaterial({ color: 0x88ccee, roughness: 0.05, metalness: 0.3, transparent: true, opacity: 0.6 })
-  );
-  cabin.position.set(-0.02, 0.19, 0);
-  car.add(cabin);
-
-  // 4 wheels as one instanced call would be overkill, just 4 meshes
-  const wheelGeo = new THREE.CylinderGeometry(0.04, 0.04, 0.04, 8);
-  const wheelMat = new THREE.MeshStandardMaterial({ color: 0x222222, roughness: 0.7 });
-  [[-0.12, -0.12], [-0.12, 0.12], [0.12, -0.12], [0.12, 0.12]].forEach(([x, z]) => {
-    const w = new THREE.Mesh(wheelGeo, wheelMat);
-    w.position.set(x, 0.04, z);
-    w.rotation.x = Math.PI / 2;
-    car.add(w);
-  });
-
-  // Headlights (emissive, no point light)
-  const hlGeo = new THREE.SphereGeometry(0.02, 4, 4);
-  const hlMat = new THREE.MeshBasicMaterial({ color: 0xffffcc });
-  [-1, 1].forEach(z => {
-    const hl = new THREE.Mesh(hlGeo, hlMat);
-    hl.position.set(0.21, 0.08, z * 0.07);
-    car.add(hl);
-  });
-
-  // Taillights
-  const tlMat = new THREE.MeshBasicMaterial({ color: 0xff2200 });
-  [-1, 1].forEach(z => {
-    const tl = new THREE.Mesh(new THREE.SphereGeometry(0.015, 4, 4), tlMat);
-    tl.position.set(-0.21, 0.08, z * 0.07);
-    car.add(tl);
-  });
-
-  return car;
-}
-
 const PlanetGame = ({ onBuildingProximity }: PlanetGameProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const keysRef = useRef<Set<string>>(new Set());
