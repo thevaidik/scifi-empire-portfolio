@@ -48,10 +48,15 @@ const Portfolio = () => {
           />
           <div>
             <h1 className="text-3xl font-semibold text-white tracking-tight">Vaidik</h1>
-            <p className="text-neutral-400 mt-0.5 font-light">Apple Systems Developer & Maker</p>
-            <p className="text-sm text-neutral-500 mt-2 leading-relaxed">
-              iOS, macOS & visionOS developer shipping native Swift apps. Passionate about clean architecture, SwiftUI, and the Apple ecosystem. Currently exploring Rust and consciousness research. Open to interesting open source work in the Swift ecosystem — if you're building something cool, let's talk.
-            </p>
+            <p className="text-neutral-400 mt-0.5 font-light">Independent Apple Developer</p>
+            <div className="mt-3 space-y-3 text-sm text-neutral-400 leading-relaxed">
+              <p>
+                I am an independent iOS & macOS developer, with hardware interest in robotics and UAVs — and I massively value the Swift ecosystem. My open source work has been primarily in the XMPP Standards Foundation / Jabber and similar fully encrypted chat systems and protocols.
+              </p>
+              <p>
+                I have worked on the <a href="https://monal-im.org" target="_blank" rel="noopener noreferrer" className="text-neutral-300 underline hover:text-white transition-colors">Monal</a> iOS client through the Google Summer of Code program, and have been actively contributing to <a href="https://prav.app" target="_blank" rel="noopener noreferrer" className="text-neutral-300 underline hover:text-white transition-colors">Prav — Private Messenger</a>.
+              </p>
+            </div>
             <div className="flex items-center gap-3 mt-3 flex-wrap">
               <a href="mailto:founders@nxtlap.com"
                 className="flex items-center gap-1.5 text-xs text-white font-medium hover:text-blue-300 transition-colors">
