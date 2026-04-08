@@ -42,7 +42,7 @@ const Portfolio = () => {
         {/* Profile Header */}
         <header className="mb-10">
           <h1 className="text-5xl font-bold text-white tracking-tight mb-6" style={{ fontFamily: '"Georgia", "Times New Roman", serif' }}>Vaidik</h1>
-          <div className="space-y-4 text-base text-neutral-400 leading-relaxed">
+          <div className="space-y-4 text-lg text-neutral-400 leading-relaxed">
             <p>
               I am an independent iOS & macOS developer, with hardware interest in robotics and UAVs — and I massively value the Swift ecosystem. My open source work has been primarily in the <a href="https://xmpp.org" target="_blank" rel="noopener noreferrer" className="text-neutral-300 underline hover:text-white transition-colors">XMPP Standards Foundation</a> / Jabber and similar fully encrypted chat systems and protocols.
             </p>
@@ -76,37 +76,43 @@ const Portfolio = () => {
         {/* Open Source */}
         <section className="mb-10">
           <h2 className="text-base font-semibold text-white mb-5">Open Source</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div className="space-y-3">
             {/* GSoC */}
             <a href="https://summerofcode.withgoogle.com/archive/2024/organizations/xmpp-standards-foundation"
               target="_blank" rel="noopener noreferrer"
-              className="flex flex-col items-center gap-3 p-5 rounded-xl bg-neutral-800/50 border border-neutral-800 hover:border-neutral-700 hover:bg-neutral-800 transition-all group">
-              <img src="/images/gsoc-logo.png" alt="Google Summer of Code" className="w-12 h-12" loading="lazy" />
-              <div className="text-center">
-                <span className="text-sm text-white font-medium group-hover:underline">GSoC 2024</span>
-                <p className="text-xs text-neutral-500 mt-1">XMPP Standards Foundation</p>
+              className="flex items-center gap-4 p-4 rounded-xl bg-neutral-800/50 border border-neutral-800 hover:border-neutral-700 hover:bg-neutral-800 transition-all group">
+              <img src="/images/gsoc-logo.png" alt="Google Summer of Code" className="w-14 h-14 rounded-lg flex-shrink-0" loading="lazy" />
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2">
+                  <span className="text-sm text-white font-medium group-hover:underline">Google Summer of Code 2024</span>
+                  <ExternalLink className="w-3 h-3 text-neutral-600 group-hover:text-neutral-400" />
+                </div>
+                <p className="text-xs text-neutral-500 mt-1">Contributor at XMPP Standards Foundation — Worked on Monal iOS XMPP client</p>
               </div>
-              <ExternalLink className="w-3 h-3 text-neutral-600 group-hover:text-neutral-400" />
             </a>
             {/* Prav */}
             <a href="https://prav.app" target="_blank" rel="noopener noreferrer"
-              className="flex flex-col items-center gap-3 p-5 rounded-xl bg-neutral-800/50 border border-neutral-800 hover:border-neutral-700 hover:bg-neutral-800 transition-all group">
-              <div className="w-12 h-12 rounded-full bg-green-900/30 flex items-center justify-center text-green-400 text-lg font-bold">P</div>
-              <div className="text-center">
-                <span className="text-sm text-white font-medium group-hover:underline">Prav</span>
-                <p className="text-xs text-neutral-500 mt-1">Private Messenger</p>
+              className="flex items-center gap-4 p-4 rounded-xl bg-neutral-800/50 border border-neutral-800 hover:border-neutral-700 hover:bg-neutral-800 transition-all group">
+              <div className="w-14 h-14 rounded-lg bg-green-900/30 flex items-center justify-center text-green-400 text-xl font-bold flex-shrink-0">P</div>
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2">
+                  <span className="text-sm text-white font-medium group-hover:underline">Prav — Private Messenger</span>
+                  <ExternalLink className="w-3 h-3 text-neutral-600 group-hover:text-neutral-400" />
+                </div>
+                <p className="text-xs text-neutral-500 mt-1">Active contributor — XMPP-based encrypted messaging app for iOS</p>
               </div>
-              <ExternalLink className="w-3 h-3 text-neutral-600 group-hover:text-neutral-400" />
             </a>
             {/* XMPP */}
             <a href="https://xmpp.org" target="_blank" rel="noopener noreferrer"
-              className="flex flex-col items-center gap-3 p-5 rounded-xl bg-neutral-800/50 border border-neutral-800 hover:border-neutral-700 hover:bg-neutral-800 transition-all group">
-              <img src="/images/xmpp-logo.png" alt="XMPP" className="w-12 h-12" loading="lazy" />
-              <div className="text-center">
-                <span className="text-sm text-white font-medium group-hover:underline">XMPP</span>
-                <p className="text-xs text-neutral-500 mt-1">Standards Foundation</p>
+              className="flex items-center gap-4 p-4 rounded-xl bg-neutral-800/50 border border-neutral-800 hover:border-neutral-700 hover:bg-neutral-800 transition-all group">
+              <img src="/images/xmpp-logo.png" alt="XMPP" className="w-14 h-14 rounded-lg flex-shrink-0" loading="lazy" />
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2">
+                  <span className="text-sm text-white font-medium group-hover:underline">XMPP Standards Foundation</span>
+                  <ExternalLink className="w-3 h-3 text-neutral-600 group-hover:text-neutral-400" />
+                </div>
+                <p className="text-xs text-neutral-500 mt-1">Open communication protocol — Jabber / fully encrypted chat systems</p>
               </div>
-              <ExternalLink className="w-3 h-3 text-neutral-600 group-hover:text-neutral-400" />
             </a>
           </div>
         </section>
