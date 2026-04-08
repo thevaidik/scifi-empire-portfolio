@@ -40,42 +40,34 @@ const Portfolio = () => {
       <div className="max-w-2xl mx-auto px-6 py-16">
 
         {/* Profile Header */}
-        <header className="mb-10 flex items-start gap-5">
-          <img
-            src="/lovable-uploads/6ce87993-46d4-4012-a197-3243da272842.png"
-            alt="Vaidik profile photo"
-            className="w-20 h-20 rounded-full object-cover border-2 border-neutral-700 flex-shrink-0"
-          />
-          <div>
-            <h1 className="text-3xl font-semibold text-white tracking-tight">Vaidik</h1>
-            <p className="text-neutral-400 mt-0.5 font-light">Independent Apple Developer</p>
-            <div className="mt-3 space-y-3 text-sm text-neutral-400 leading-relaxed">
-              <p>
-                I am an independent iOS & macOS developer, with hardware interest in robotics and UAVs — and I massively value the Swift ecosystem. My open source work has been primarily in the XMPP Standards Foundation / Jabber and similar fully encrypted chat systems and protocols.
-              </p>
-              <p>
-                I have worked on the <a href="https://monal-im.org" target="_blank" rel="noopener noreferrer" className="text-neutral-300 underline hover:text-white transition-colors">Monal</a> iOS client through the Google Summer of Code program, and have been actively contributing to <a href="https://prav.app" target="_blank" rel="noopener noreferrer" className="text-neutral-300 underline hover:text-white transition-colors">Prav — Private Messenger</a>.
-              </p>
-            </div>
-            <div className="flex items-center gap-3 mt-3 flex-wrap">
-              <a href="mailto:founders@nxtlap.com"
-                className="flex items-center gap-1.5 text-xs text-white font-medium hover:text-blue-300 transition-colors">
-                <Mail className="w-3.5 h-3.5" /> founders@nxtlap.com
-              </a>
-              <span className="text-neutral-700 text-xs">·</span>
-              <a href="mailto:vaidik50000@gmail.com"
-                className="flex items-center gap-1.5 text-xs text-neutral-400 hover:text-white transition-colors">
-                <Mail className="w-3.5 h-3.5" /> vaidik50000@gmail.com
-              </a>
-              <a href="https://linkedin.com/in/vaidikxx" target="_blank" rel="noopener noreferrer"
-                className="flex items-center gap-1.5 text-xs text-blue-400 hover:text-blue-300 transition-colors">
-                <Linkedin className="w-3.5 h-3.5" /> LinkedIn
-              </a>
-              <a href="https://github.com/thevaidik" target="_blank" rel="noopener noreferrer"
-                className="flex items-center gap-1.5 text-xs text-neutral-400 hover:text-white transition-colors">
-                <Github className="w-3.5 h-3.5" /> GitHub
-              </a>
-            </div>
+        <header className="mb-10">
+          <h1 className="text-3xl font-semibold text-white tracking-tight mb-4">Vaidik</h1>
+          <div className="space-y-3 text-sm text-neutral-400 leading-relaxed">
+            <p>
+              I am an independent iOS & macOS developer, with hardware interest in robotics and UAVs — and I massively value the Swift ecosystem. My open source work has been primarily in the XMPP Standards Foundation / Jabber and similar fully encrypted chat systems and protocols.
+            </p>
+            <p>
+              I have worked on the <a href="https://monal-im.org" target="_blank" rel="noopener noreferrer" className="text-neutral-300 underline hover:text-white transition-colors">Monal</a> iOS client through the Google Summer of Code program, and have been actively contributing to <a href="https://prav.app" target="_blank" rel="noopener noreferrer" className="text-neutral-300 underline hover:text-white transition-colors">Prav — Private Messenger</a>.
+            </p>
+          </div>
+          <div className="flex items-center gap-3 mt-4 flex-wrap">
+            <a href="mailto:founders@nxtlap.com"
+              className="flex items-center gap-1.5 text-xs text-white font-medium hover:text-blue-300 transition-colors">
+              <Mail className="w-3.5 h-3.5" /> founders@nxtlap.com
+            </a>
+            <span className="text-neutral-700 text-xs">·</span>
+            <a href="mailto:vaidik50000@gmail.com"
+              className="flex items-center gap-1.5 text-xs text-neutral-400 hover:text-white transition-colors">
+              <Mail className="w-3.5 h-3.5" /> vaidik50000@gmail.com
+            </a>
+            <a href="https://linkedin.com/in/vaidikxx" target="_blank" rel="noopener noreferrer"
+              className="flex items-center gap-1.5 text-xs text-blue-400 hover:text-blue-300 transition-colors">
+              <Linkedin className="w-3.5 h-3.5" /> LinkedIn
+            </a>
+            <a href="https://github.com/thevaidik" target="_blank" rel="noopener noreferrer"
+              className="flex items-center gap-1.5 text-xs text-neutral-400 hover:text-white transition-colors">
+              <Github className="w-3.5 h-3.5" /> GitHub
+            </a>
           </div>
         </header>
 
