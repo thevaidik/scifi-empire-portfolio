@@ -41,8 +41,8 @@ const Portfolio = () => {
 
         {/* Profile Header */}
         <header className="mb-10">
-          <h1 className="text-3xl font-semibold text-white tracking-tight mb-4">Vaidik</h1>
-          <div className="space-y-3 text-sm text-neutral-400 leading-relaxed">
+          <h1 className="text-5xl font-bold text-white tracking-tight mb-6" style={{ fontFamily: '"Georgia", "Times New Roman", serif' }}>Vaidik</h1>
+          <div className="space-y-4 text-base text-neutral-400 leading-relaxed">
             <p>
               I am an independent iOS & macOS developer, with hardware interest in robotics and UAVs — and I massively value the Swift ecosystem. My open source work has been primarily in the XMPP Standards Foundation / Jabber and similar fully encrypted chat systems and protocols.
             </p>
@@ -70,6 +70,27 @@ const Portfolio = () => {
             </a>
           </div>
         </header>
+
+        <hr className="border-neutral-800 mb-8" />
+
+        {/* Google Summer of Code */}
+        <section className="mb-10">
+          <div className="flex items-center gap-4 mb-4">
+            <img src="/images/gsoc-logo.png" alt="Google Summer of Code" className="w-10 h-10" />
+            <h2 className="text-lg font-semibold text-white">Google Summer of Code 2024</h2>
+          </div>
+          <p className="text-sm text-neutral-400 leading-relaxed mb-3">
+            Selected as a contributor for GSoC 2024 under the <strong className="text-neutral-300">XMPP Standards Foundation</strong>. Worked on improving the Monal iOS XMPP client — rewriting onboarding flows, privacy settings UI, and contributing core protocol features.
+          </p>
+          <a
+            href="https://summerofcode.withgoogle.com/archive/2024/organizations/xmpp-standards-foundation"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 text-sm text-blue-400 hover:text-blue-300 transition-colors"
+          >
+            View on GSoC Archive <ExternalLink className="w-3.5 h-3.5" />
+          </a>
+        </section>
 
         <hr className="border-neutral-800 mb-8" />
 
