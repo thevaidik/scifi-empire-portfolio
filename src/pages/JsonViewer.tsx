@@ -37,7 +37,7 @@ const JsonViewer = () => {
       <Toolbar />
       <div className="flex-1 flex min-h-0">
         <div className="w-1/2 flex flex-col border-r border-neutral-800 min-w-0">
-          <div className="px-3 py-1.5 bg-neutral-800/80 border-b border-neutral-800 text-xs shrink-0 text-neutral-300">
+          <div className="px-3 py-2 bg-neutral-800/80 border-b border-neutral-800 text-sm shrink-0 text-neutral-300">
             Paste JSON
           </div>
           <textarea
@@ -50,9 +50,9 @@ const JsonViewer = () => {
           />
         </div>
         <div className="w-1/2 flex flex-col min-w-0">
-          <div className="flex items-center justify-between px-3 py-1.5 bg-neutral-800/80 border-b border-neutral-800 text-xs shrink-0">
+          <div className="flex items-center justify-between px-3 py-2 bg-neutral-800/80 border-b border-neutral-800 text-sm shrink-0">
             <span className="text-neutral-300">Formatted</span>
-            <span className={`font-mono ${formatted.ok ? "text-neutral-500" : "text-rose-400"}`}>
+            <span className={`font-mono text-sm ${formatted.ok ? "text-neutral-500" : "text-rose-400"}`}>
               {raw.trim() ? (formatted.ok ? "json" : formatted.err) : ""}
             </span>
           </div>
