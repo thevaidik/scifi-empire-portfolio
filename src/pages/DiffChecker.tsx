@@ -52,14 +52,14 @@ const Pane = ({
 
   return (
     <div className="flex-1 flex flex-col min-w-0 border-r border-neutral-800 last:border-r-0">
-      <div className="flex items-center justify-between px-3 py-1.5 bg-neutral-800/80 border-b border-neutral-800 text-xs shrink-0">
+      <div className="flex items-center justify-between px-3 py-2 bg-neutral-800/80 border-b border-neutral-800 text-sm shrink-0">
         <span className="text-neutral-300">{label}</span>
         <span className="text-neutral-500 font-mono">{lang}</span>
       </div>
       <div className="relative flex-1 min-h-0">
         {showOverlay && (
           <pre
-            className="absolute inset-0 m-0 p-3 overflow-auto text-sm font-mono pointer-events-none whitespace-pre"
+            className="absolute inset-0 m-0 p-3 overflow-auto text-base font-mono pointer-events-none whitespace-pre"
             dangerouslySetInnerHTML={{ __html: highlighted }}
           />
         )}
@@ -68,7 +68,7 @@ const Pane = ({
           onChange={(e) => onChange(e.target.value)}
           placeholder="Paste content here…"
           spellCheck={false}
-          className="absolute inset-0 w-full h-full p-3 bg-neutral-950 font-mono text-sm text-neutral-200 outline-none resize-none border-0"
+          className="absolute inset-0 w-full h-full p-3 bg-neutral-950 font-mono text-base text-neutral-200 outline-none resize-none border-0"
           style={{
             color: showOverlay ? "transparent" : undefined,
             caretColor: "#fff",

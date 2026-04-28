@@ -68,11 +68,11 @@ const ApiTester = () => {
     >
       <Toolbar />
 
-      <div className="flex items-center gap-1.5 px-3 py-2 border-b border-neutral-800 shrink-0">
+      <div className="flex items-center gap-2 px-3 py-2.5 border-b border-neutral-800 shrink-0">
         <select
           value={method}
           onChange={(e) => setMethod(e.target.value)}
-          className="bg-neutral-900 border border-neutral-800 rounded-md text-sm text-neutral-200 px-2 py-1.5 outline-none"
+          className="bg-neutral-900 border border-neutral-800 rounded-md text-base text-neutral-200 px-2.5 py-2 outline-none"
         >
           {["GET", "POST", "PUT", "PATCH", "DELETE"].map((m) => (
             <option key={m} value={m}>
@@ -85,12 +85,12 @@ const ApiTester = () => {
           onChange={(e) => setUrl(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && sendRequest()}
           placeholder="https://api.example.com/endpoint"
-          className="flex-1 bg-neutral-900 border border-neutral-800 rounded-md text-sm text-neutral-200 px-2.5 py-1.5 outline-none font-mono min-w-0"
+          className="flex-1 bg-neutral-900 border border-neutral-800 rounded-md text-base text-neutral-200 px-3 py-2 outline-none font-mono min-w-0"
         />
         <button
           onClick={sendRequest}
           disabled={loading}
-          className="px-4 py-1.5 rounded-md text-sm bg-neutral-200 text-neutral-900 hover:bg-white disabled:opacity-50 transition-colors"
+          className="px-5 py-2 rounded-md text-base bg-neutral-200 text-neutral-900 hover:bg-white disabled:opacity-50 transition-colors"
         >
           {loading ? "…" : "Send"}
         </button>
@@ -99,7 +99,7 @@ const ApiTester = () => {
       <div className="flex-1 flex min-h-0">
         <div className="w-1/2 flex flex-col border-r border-neutral-800 min-w-0">
           <div className="flex flex-col min-h-0" style={{ height: "50%" }}>
-            <div className="px-3 py-1.5 bg-neutral-800/80 border-b border-neutral-800 text-xs shrink-0 text-neutral-300">
+            <div className="px-3 py-2 bg-neutral-800/80 border-b border-neutral-800 text-sm shrink-0 text-neutral-300">
               Headers <span className="text-neutral-500">(Key: Value per line)</span>
             </div>
             <textarea
@@ -107,11 +107,11 @@ const ApiTester = () => {
               onChange={(e) => setHeaders(e.target.value)}
               placeholder="Authorization: Bearer …"
               spellCheck={false}
-              className="flex-1 w-full p-3 bg-neutral-950 font-mono text-sm text-neutral-200 outline-none resize-none border-0"
+              className="flex-1 w-full p-3 bg-neutral-950 font-mono text-base text-neutral-200 outline-none resize-none border-0"
             />
           </div>
           <div className="flex flex-col min-h-0 border-t border-neutral-800" style={{ height: "50%" }}>
-            <div className="px-3 py-1.5 bg-neutral-800/80 border-b border-neutral-800 text-xs shrink-0 text-neutral-300">
+            <div className="px-3 py-2 bg-neutral-800/80 border-b border-neutral-800 text-sm shrink-0 text-neutral-300">
               Body
             </div>
             <textarea
@@ -120,15 +120,15 @@ const ApiTester = () => {
               placeholder='{"key":"value"}'
               spellCheck={false}
               disabled={method === "GET" || method === "HEAD"}
-              className="flex-1 w-full p-3 bg-neutral-950 font-mono text-sm text-neutral-200 outline-none resize-none border-0 disabled:opacity-40"
+              className="flex-1 w-full p-3 bg-neutral-950 font-mono text-base text-neutral-200 outline-none resize-none border-0 disabled:opacity-40"
             />
           </div>
         </div>
 
         <div className="w-1/2 flex flex-col min-w-0">
-          <div className="flex items-center justify-between px-3 py-1.5 bg-neutral-800/80 border-b border-neutral-800 text-xs shrink-0">
+          <div className="flex items-center justify-between px-3 py-2 bg-neutral-800/80 border-b border-neutral-800 text-sm shrink-0">
             <span className="text-neutral-300">Response</span>
-            {status && <span className="font-mono text-neutral-400">{status}</span>}
+            {status && <span className="font-mono text-sm text-neutral-400">{status}</span>}
           </div>
           <pre
             className="flex-1 m-0 p-3 overflow-auto text-base font-mono whitespace-pre-wrap text-neutral-200"
