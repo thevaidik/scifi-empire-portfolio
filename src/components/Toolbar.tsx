@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { GitCompare, Braces } from "lucide-react";
+import { GitCompare, Braces, Send } from "lucide-react";
 
 const Toolbar = () => {
   const { pathname } = useLocation();
@@ -29,6 +29,7 @@ const Toolbar = () => {
         <div className="text-neutral-700 text-xs mr-1">tools:</div>
         {item("/tools/diff", <GitCompare size={12} />, "Diff Checker")}
         {item("/tools/json", <Braces size={12} />, "JSON Viewer")}
+        {item("/tools/api", <Send size={12} />, "API Tester")}
       </div>
     </div>
   );
