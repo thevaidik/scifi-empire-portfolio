@@ -2,12 +2,14 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Analytics } from "@vercel/analytics/react";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
+import DiffChecker from "./pages/DiffChecker";
 
 const App = () => (
   <>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Index />} />
+        <Route path="/tools/diff" element={<DiffChecker />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

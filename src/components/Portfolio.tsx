@@ -1,5 +1,6 @@
 import { Github, Twitter, Youtube, Linkedin, Mail, BookOpen, Star, ExternalLink } from "lucide-react";
 import { useEffect, useRef } from "react";
+import Toolbar from "@/components/Toolbar";
 
 const apps = [
   {
@@ -37,6 +38,7 @@ const Portfolio = () => {
 
   return (
     <div className="min-h-screen bg-neutral-900 text-neutral-300" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Inter", "Helvetica Neue", sans-serif' }}>
+      <Toolbar />
       <div className="max-w-2xl mx-auto px-6 py-16">
 
         {/* Profile Header */}
