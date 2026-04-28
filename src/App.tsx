@@ -4,6 +4,7 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import DiffChecker from "./pages/DiffChecker";
 import JsonViewer from "./pages/JsonViewer";
+import ApiTester from "./pages/ApiTester";
 
 const App = () => (
   <>
@@ -12,6 +13,7 @@ const App = () => (
         <Route path="/" element={<Index />} />
         <Route path="/tools/diff" element={<DiffChecker />} />
         <Route path="/tools/json" element={<JsonViewer />} />
+        <Route path="/tools/api" element={<ApiTester />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
