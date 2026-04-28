@@ -3,6 +3,7 @@ import { Analytics } from "@vercel/analytics/react";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import DiffChecker from "./pages/DiffChecker";
+import JsonViewer from "./pages/JsonViewer";
 
 const App = () => (
   <>
@@ -10,6 +11,7 @@ const App = () => (
       <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/tools/diff" element={<DiffChecker />} />
+        <Route path="/tools/json" element={<JsonViewer />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
